@@ -1,0 +1,34 @@
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.all;
+USE IEEE.numeric_std.all;
+
+
+entity PWMgeneration_top is
+	port(
+		areset_in : in std_logic;
+		inclk0_in: in std_logic;
+		clk_out: out std_logic
+		
+		);
+end HelloWorld1_top;
+
+architecture beh of HelloWorld1_top is 
+
+component clk180k
+	port(
+	areset		: IN STD_LOGIC ;
+	inclk0		: IN STD_LOGIC ;
+	c0		: OUT STD_LOGIC 
+	);
+end component;	
+
+begin
+
+Clock: clk180k 
+	PORT MAP (
+		areset	 => areset_in,
+		inclk0	 => inclk0_in,
+		c0	 => clk_out
+	);	
+	
+end beh;

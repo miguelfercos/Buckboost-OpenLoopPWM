@@ -1,0 +1,43 @@
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.all;
+USE IEEE.numeric_std.all;
+
+entity HelloWorld1_tb is
+end HelloWorld1_tb;
+
+
+architecture TestBench of HelloWorld1_tb is
+
+ component HelloWorld1_top
+   port(
+		areset_in : in std_logic;
+		inclk0_in: in std_logic;
+		clk_out: out std_logic
+		);
+ end component;
+ 
+ signal Reset    : std_logic;
+ signal Clk      : std_logic;
+ signal Clkout	: std_logic;
+ 
+ begin  -- TestBench
+
+ UUT: HelloWorld1_top
+   port map (
+       areset_in    => Reset,
+       inclk0_in     => Clk,
+       clk_out => Clkout
+    );
+
+
+ Reset <= '0', '0' after 575 ns;
+ 
+ p_clk : PROCESS
+ BEGIN
+    clk <= '1', '0' after 20 ns;
+    wait for 40 ns;
+ END PROCESS;
+ 
+ 
+
+end TestBench;
