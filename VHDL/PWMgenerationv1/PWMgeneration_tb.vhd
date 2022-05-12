@@ -25,7 +25,7 @@ architecture TestBench of PWMgeneration_tb is
 		reset_out: out std_logic
 		);
  end component;
- 
+
  signal Reset    : std_logic;
  signal Clk      : std_logic;
  signal PWM_L1,PWM_H1, PWM_L2, PWM_H2	: std_logic;
@@ -35,37 +35,44 @@ architecture TestBench of PWMgeneration_tb is
  signal reset_btn: std_logic;
  signal set_out, reset_out: std_logic;
  signal wdg_reset:std_logic;
- 
+
  begin  -- TestBench
 
  UUT: PWMgeneration_top
    port map (
        reset    => Reset,
        clk     => Clk,
-       PWM_L1=> PWM_L1,
-		 PWM_H1=> PWM_H1,
-		 PWM_H2=> PWM_H2,
-		 PWM_L2 => PWM_L2, 
+       PWM_L1 => PWM_L1,
+		 PWM_H1 => PWM_H1,
+		 PWM_H2 => PWM_H2,
+		 PWM_L2 => PWM_L2,
 		 sel => sel,
 		 wdg_out => wdg_out,
 		 set_btn => set_btn,
 		 reset_btn => reset_btn,
 		 set_out => set_out,
 		 reset_out => reset_out,
-		 wdg_reset => wdg_reset
+		 wdg_reset => wdg_reset,
+     incduty => incduty,
+     decduty => decduty
     );
 
 
  Reset <= '0', '1' after 100 ns,'0' after 10 ms,'1' after 11 ms;
- 
+
  sel <= '0','1' after 10100 us;
  p_clk : PROCESS
  BEGIN
     clk <= '1', '0' after 10 ns;
     wait for 20 ns;
  END PROCESS;
- 
-reset_btn <= '1','0' after 1 ms, '1' after 2 ms;
+
+incduty <= '0','1'after 1 ms, '0' after 1100us, '1' after 2 ms;
+decduty <= '0','1'  after 3 ms
+reset_btn <= '1','0' after 10 ms, '1' after 20 ms;
 set_btn <= '1', '0' after 1 ms, '1' after 2 ms;
-wdg_reset <= '1', '0' after 9 ms;
+wdg_reset <= '1', '0' after 20 ms;
+
+
+
 end TestBench;

@@ -17,7 +17,9 @@ entity PWMgeneration_top is
 		reset_btn:in std_logic;
 		set_out: out std_logic;
 		reset_out: out std_logic;
-		wdg_reset:in std_logic
+		wdg_reset:in std_logic;
+		incduty:in std_logic;
+		decduty:in std_logic
 		);
 end PWMgeneration_top;
 
