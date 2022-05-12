@@ -26,8 +26,8 @@ type state_type is (idle, buck1,buck2,boost1softs,boost2softs, boost1,boost2);
 signal est_act, est_sig: state_type := idle;
 constant period : integer := 278;
 constant half_period : integer:= period/2;
-constant dutybuck : integer := 190;   --235 for vinmax=120V, 190 for vinmax=150 referred to high side switch d= 0.85 approx
-constant dutyboost : integer := 65;  --65 for vinmax=80V, 117 for vinmax=62V. referred to low side switch. d=0.20 approx
+constant dutybuck_start,dutybuck : integer := 190;   --235 for vinmax=120V, 190 for vinmax=150 referred to high side switch d= 0.85 approx
+constant dutyboost_start dutyboost: integer := 65;  --65 for vinmax=80V, 117 for vinmax=62V. referred to low side switch. d=0.20 approx
 constant softstart_duty_final: integer := 265;
 constant deadtime1_buck : integer:= 7;
 constant deadtime2_buck : integer:= 2;
@@ -37,9 +37,10 @@ signal countactual1: integer:= 0;
 signal countsig1: integer:= 0;
 signal softstart_duty_act,softstart_duty_sig: integer:=15;
 signal countwdg_act,countwdg_sig : integer:=0;
-signal countreset_act, countset_act, countset_sig, countreset_sig : integer range 0 to 500000:=0;
+signal countreset_act, countset_act, countset_sig, countreset_sig : integer range 0 to 279:=0;
 signal PWM_H1_sig, PWM_L1_sig , PWM_H2_sig, PWM_L2_sig: std_logic:='0';
 signal set_flag, reset_flag : std_logic :='0';
+signal dutybuck,dutyboost: integer range 0 to 279:=0;
 begin
 
 CLK_process: process (Clk,reset)
@@ -66,7 +67,7 @@ end if;
 end process;
 
 CLK_wdg_process : process (Clk)
-begin 
+begin
 if (wdg_reset ='0') then
 countwdg_act<=0;
 elsif (clk'event and clk='1') then
@@ -239,8 +240,8 @@ begin
 		end case;
 
 	end process;
-	
-	
+
+
 	wdg_process: process(countwdg_act)
 	begin
 	if (countwdg_act < half_period) then
@@ -248,22 +249,22 @@ begin
 	else
 		wdg_out <='0';
 	end if;
-	
+
 	if (countwdg_act >= period) then
 		countwdg_sig <= 0;
 	else
-		countwdg_sig <= countwdg_act+1;	
+		countwdg_sig <= countwdg_act+1;
 	end if;
 	end process;
 
-	
+
 	set_process: process(set_btn, countset_act)
 	begin
 		if ((set_btn)='0') then
 			set_flag <='1';
 			countset_sig <= countset_act+1;
 			set_out <= '1';
-		else 
+		else
 			if (countset_act)<500000 and set_flag ='1'then
 			set_out <='1';
 			countset_sig <= countset_act+1;
@@ -279,11 +280,11 @@ begin
 	reset_process: process(reset_btn,countreset_act)
 	begin
 		if ((reset_btn)='0') then
-		
+
 			countreset_sig <= countreset_act+1;
 			reset_out <= '1';
 			reset_flag <= '1';
-		else 
+		else
 			if (countreset_act)<500000 and reset_flag ='1' then
 			reset_out <='1';
 			countreset_sig <= countreset_act+1;
@@ -292,15 +293,68 @@ begin
 			reset_out <='0';
 			countreset_sig <= 0;
 			reset_flag <='0';
-		end if;	
+		end if;
 		end if;
 		end process;
-	
+
 CLK_set_reset_process : process (Clk)
-begin 
+begin
 if (clk'event and clk='1') then
 countset_act <= countset_sig;
 countreset_act <= countreset_sig;
 end if;
 end process;
+
+Increase_decrease_duty : process (incduty,sel)
+begin
+
+if(incduty='0') then
+dutybuck<=dutybuck_start;
+dutyboost<=dutyboost_start;
+
+elsif (incduty'event and incduty='1') then -- I want to increment
+	if (sel='0') then --buck
+		if(dutybuck > period+deadtime1_boost+deadtime2_boost) then --reached end
+			dutybuck<=dutybuck_start;
+			dutyboost<=dutyboost_start;
+		else --not reached end
+			dutybuck<=dutybuck_start;
+			dutyboost<=dutyboost+20;
+		end if;
+	else --boost
+		if(dutyboost > period+deadtime1_boost+deadtime2_boost) then --reached end
+			dutybuck<=dutybuck_start;
+			dutyboost<=dutyboost_start;
+		else --not reached end
+			dutybuck<=dutybuck_start;
+			dutyboost<=dutyboost+20;
+		end if;
+	end if;
+
+elsif (decduty'event and decduty='1') then -- I want to decrement
+
+if (sel='0') then --buck
+	if(dutybuck > period+deadtime1_boost+deadtime2_boost) then --reached end
+		dutybuck<=dutybuck_start;
+		dutyboost<=dutyboost_start;
+	else --not reached end
+		dutybuck<=dutybuck_start;
+		dutyboost<=dutyboost-20;
+	end if;
+else --boost
+	if(dutyboost > period+deadtime1_boost+deadtime2_boost) then --reached end
+		dutybuck<=dutybuck_start;
+		dutyboost<=dutyboost_start;
+	else --not reached end
+		dutybuck<=dutybuck_start;
+		dutyboost<=dutyboost-20;
+	end if;
+end if;
+end if;
+
+
+end process;
+
+
+
 end;
