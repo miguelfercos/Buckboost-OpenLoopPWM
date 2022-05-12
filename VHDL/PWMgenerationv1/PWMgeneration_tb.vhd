@@ -22,7 +22,9 @@ architecture TestBench of PWMgeneration_tb is
 		reset_btn:in std_logic;
 		set_out: out std_logic;
 		wdg_reset:in std_logic;
-		reset_out: out std_logic
+		reset_out: out std_logic;
+		incduty : in std_logic;
+		decduty : in std_logic
 		);
  end component;
 
@@ -35,6 +37,7 @@ architecture TestBench of PWMgeneration_tb is
  signal reset_btn: std_logic;
  signal set_out, reset_out: std_logic;
  signal wdg_reset:std_logic;
+ signal incduty,decduty: std_logic;
 
  begin  -- TestBench
 
@@ -68,7 +71,7 @@ architecture TestBench of PWMgeneration_tb is
  END PROCESS;
 
 incduty <= '0','1'after 1 ms, '0' after 1100us, '1' after 2 ms;
-decduty <= '0','1'  after 3 ms
+decduty <= '0','1'  after 3 ms;
 reset_btn <= '1','0' after 10 ms, '1' after 20 ms;
 set_btn <= '1', '0' after 1 ms, '1' after 2 ms;
 wdg_reset <= '1', '0' after 20 ms;

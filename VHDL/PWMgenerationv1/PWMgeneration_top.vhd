@@ -28,8 +28,8 @@ type state_type is (idle, buck1,buck2,boost1softs,boost2softs, boost1,boost2);
 signal est_act, est_sig: state_type := idle;
 constant period : integer := 278;
 constant half_period : integer:= period/2;
-constant dutybuck_start,dutybuck : integer := 190;   --235 for vinmax=120V, 190 for vinmax=150 referred to high side switch d= 0.85 approx
-constant dutyboost_start dutyboost: integer := 65;  --65 for vinmax=80V, 117 for vinmax=62V. referred to low side switch. d=0.20 approx
+constant dutybuck_start : integer := 190;   --235 for vinmax=120V, 190 for vinmax=150 referred to high side switch d= 0.85 approx
+constant dutyboost_start: integer := 65;  --65 for vinmax=80V, 117 for vinmax=62V. referred to low side switch. d=0.20 approx
 constant softstart_duty_final: integer := 265;
 constant deadtime1_buck : integer:= 7;
 constant deadtime2_buck : integer:= 2;
@@ -42,7 +42,7 @@ signal countwdg_act,countwdg_sig : integer:=0;
 signal countreset_act, countset_act, countset_sig, countreset_sig : integer range 0 to 279:=0;
 signal PWM_H1_sig, PWM_L1_sig , PWM_H2_sig, PWM_L2_sig: std_logic:='0';
 signal set_flag, reset_flag : std_logic :='0';
-signal dutybuck,dutyboost: integer range 0 to 279:=0;
+signal dutybuck,dutybuck_sig,dutyboost,dutyboost_sig: integer range 0 to 279:=0;
 begin
 
 CLK_process: process (Clk,reset)
@@ -77,7 +77,7 @@ countwdg_act <= countwdg_sig;
 end if;
 end process;
 
-state_process: process(est_act,countactual1,sel,softstart_duty_act)
+state_process: process(est_act,countactual1,sel,softstart_duty_act,dutybuck,dutyboost)
 begin
 		est_sig<=est_act;
 		countsig1<=countactual1;
@@ -307,29 +307,38 @@ countreset_act <= countreset_sig;
 end if;
 end process;
 
-Increase_decrease_duty : process (incduty,sel)
+CLK_incdec_process: process(clk)
+begin
+if (clk'event and clk='1') then
+dutyboost <= dutyboost_sig;
+dutybuck <= dutybuck_sig;
+end if;
+end process;
+
+
+Increase_decrease_duty : process (incduty,decduty,sel)
 begin
 
 if(incduty='0') then
-dutybuck<=dutybuck_start;
-dutyboost<=dutyboost_start;
+dutybuck_sig<=dutybuck_start;
+dutyboost_sig<=dutyboost_start;
 
 elsif (incduty'event and incduty='1') then -- I want to increment
 	if (sel='0') then --buck
 		if(dutybuck > period+deadtime1_boost+deadtime2_boost) then --reached end
-			dutybuck<=dutybuck_start;
-			dutyboost<=dutyboost_start;
+			dutybuck_sig<=dutybuck_start;
+			dutyboost_sig<=dutyboost_start;
 		else --not reached end
-			dutybuck<=dutybuck_start;
-			dutyboost<=dutyboost+20;
+			dutybuck_sig<=dutybuck_start;
+			dutyboost_sig<=dutyboost+20;
 		end if;
 	else --boost
 		if(dutyboost > period+deadtime1_boost+deadtime2_boost) then --reached end
-			dutybuck<=dutybuck_start;
-			dutyboost<=dutyboost_start;
+			dutybuck_sig<=dutybuck_start;
+			dutyboost_sig<=dutyboost_start;
 		else --not reached end
-			dutybuck<=dutybuck_start;
-			dutyboost<=dutyboost+20;
+			dutybuck_sig<=dutybuck_start;
+			dutyboost_sig<=dutyboost+20;
 		end if;
 	end if;
 
@@ -337,25 +346,27 @@ elsif (decduty'event and decduty='1') then -- I want to decrement
 
 if (sel='0') then --buck
 	if(dutybuck > period+deadtime1_boost+deadtime2_boost) then --reached end
-		dutybuck<=dutybuck_start;
-		dutyboost<=dutyboost_start;
+		dutybuck_sig<=dutybuck_start;
+		dutyboost_sig<=dutyboost_start;
 	else --not reached end
-		dutybuck<=dutybuck_start;
-		dutyboost<=dutyboost-20;
+		dutybuck_sig<=dutybuck_start;
+		dutyboost_sig<=dutyboost-20;
 	end if;
 else --boost
 	if(dutyboost > period+deadtime1_boost+deadtime2_boost) then --reached end
-		dutybuck<=dutybuck_start;
-		dutyboost<=dutyboost_start;
+		dutybuck_sig<=dutybuck_start;
+		dutyboost_sig<=dutyboost_start;
 	else --not reached end
-		dutybuck<=dutybuck_start;
-		dutyboost<=dutyboost-20;
+		dutybuck_sig<=dutybuck_start;
+		dutyboost_sig<=dutyboost-20;
 	end if;
 end if;
 end if;
 
 
 end process;
+
+
 
 
 
