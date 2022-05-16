@@ -34,7 +34,7 @@ ModelSim-Altera Info: # Modifying modelsim.ini
 ModelSim-Altera Info: # 
 ModelSim-Altera Info: # vcom -93 -work work {PWMgeneration_top.vho}
 ModelSim-Altera Info: # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-ModelSim-Altera Info: # Start time: 18:12:25 on Jul 12,2021
+ModelSim-Altera Info: # Start time: 17:19:58 on May 16,2022
 ModelSim-Altera Info: # vcom -reportprogress 300 -93 -work work PWMgeneration_top.vho 
 ModelSim-Altera Info: # -- Loading package STANDARD
 ModelSim-Altera Info: # -- Loading package TEXTIO
@@ -49,6 +49,163 @@ ModelSim-Altera Info: # -- Loading package dffeas_pack
 ModelSim-Altera Info: # -- Loading package altera_primitives_components
 ModelSim-Altera Info: # -- Compiling entity PWMgeneration_top
 ModelSim-Altera Info: # -- Compiling architecture structure of PWMgeneration_top
-ModelSim-Altera Info: # End time: 18:12:26 on Jul 12,2021, Elapsed time: 0:00:01
+ModelSim-Altera Info: # End time: 17:19:59 on May 16,2022, Elapsed time: 0:00:01
 ModelSim-Altera Info: # Errors: 0, Warnings: 0
+ModelSim-Altera Info: # 
+ModelSim-Altera Info: vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/watchdog.vhd}
+ModelSim-Altera Info: # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+ModelSim-Altera Info: # Start time: 17:24:25 on May 16,2022
+ModelSim-Altera Info: # vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/watchdog.vhd 
+ModelSim-Altera Info: # -- Loading package STANDARD
+ModelSim-Altera Info: # -- Loading package TEXTIO
+ModelSim-Altera Info: # -- Loading package std_logic_1164
+ModelSim-Altera Info: # -- Loading package NUMERIC_STD
+ModelSim-Altera Info: # -- Loading package std_logic_arith
+ModelSim-Altera Info: # -- Loading package STD_LOGIC_UNSIGNED
+ModelSim-Altera Info: # -- Compiling entity watchdog
+ModelSim-Altera Info: # -- Compiling architecture behavior of watchdog
+ModelSim-Altera Info: # End time: 17:24:25 on May 16,2022, Elapsed time: 0:00:00
+ModelSim-Altera Info: # Errors: 0, Warnings: 0
+ModelSim-Altera Info: vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd}
+ModelSim-Altera Info: # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+ModelSim-Altera Info: # Start time: 17:24:26 on May 16,2022
+ModelSim-Altera Info: # vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 
+ModelSim-Altera Info: # -- Loading package STANDARD
+ModelSim-Altera Info: # -- Loading package TEXTIO
+ModelSim-Altera Info: # -- Loading package std_logic_1164
+ModelSim-Altera Info: # -- Loading package NUMERIC_STD
+ModelSim-Altera Info: # -- Loading package std_logic_arith
+ModelSim-Altera Info: # -- Loading package STD_LOGIC_UNSIGNED
+ModelSim-Altera Info: # -- Compiling entity incdec_duty
+ModelSim-Altera Info: # -- Compiling architecture behavior of incdec_duty
+ModelSim-Altera Info: # End time: 17:24:26 on May 16,2022, Elapsed time: 0:00:00
+ModelSim-Altera Info: # Errors: 0, Warnings: 0
+ModelSim-Altera Info: vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM.vhd}
+ModelSim-Altera Info: # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+ModelSim-Altera Info: # Start time: 17:24:26 on May 16,2022
+ModelSim-Altera Info: # vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM.vhd 
+ModelSim-Altera Info: # -- Loading package STANDARD
+ModelSim-Altera Info: # -- Loading package TEXTIO
+ModelSim-Altera Info: # -- Loading package std_logic_1164
+ModelSim-Altera Info: # -- Loading package NUMERIC_STD
+ModelSim-Altera Info: # -- Loading package std_logic_arith
+ModelSim-Altera Info: # -- Loading package STD_LOGIC_UNSIGNED
+ModelSim-Altera Info: # -- Compiling entity PWM
+ModelSim-Altera Info: # -- Compiling architecture behavior of PWM
+ModelSim-Altera Info: # End time: 17:24:26 on May 16,2022, Elapsed time: 0:00:00
+ModelSim-Altera Info: # Errors: 0, Warnings: 0
+ModelSim-Altera Info: vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_tb.vhd}
+ModelSim-Altera Info: # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+ModelSim-Altera Info: # Start time: 17:24:26 on May 16,2022
+ModelSim-Altera Info: # vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_tb.vhd 
+ModelSim-Altera Info: # -- Loading package STANDARD
+ModelSim-Altera Info: # -- Loading package TEXTIO
+ModelSim-Altera Info: # -- Loading package std_logic_1164
+ModelSim-Altera Info: # -- Loading package NUMERIC_STD
+ModelSim-Altera Info: # -- Compiling entity PWMgeneration_tb
+ModelSim-Altera Info: # -- Compiling architecture TestBench of PWMgeneration_tb
+ModelSim-Altera Warning: # ** Warning: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_tb.vhd(73): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+ModelSim-Altera Info: # End time: 17:24:26 on May 16,2022, Elapsed time: 0:00:00
+ModelSim-Altera Info: # Errors: 0, Warnings: 1
+ModelSim-Altera Info: vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd}
+ModelSim-Altera Info: # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+ModelSim-Altera Info: # Start time: 17:24:26 on May 16,2022
+ModelSim-Altera Info: # vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd 
+ModelSim-Altera Info: # -- Loading package STANDARD
+ModelSim-Altera Info: # -- Loading package TEXTIO
+ModelSim-Altera Info: # -- Loading package std_logic_1164
+ModelSim-Altera Info: # -- Loading package NUMERIC_STD
+ModelSim-Altera Info: # -- Loading package std_logic_arith
+ModelSim-Altera Info: # -- Loading package STD_LOGIC_UNSIGNED
+ModelSim-Altera Info: # -- Compiling entity PWMgeneration_top
+ModelSim-Altera Info: # -- Compiling architecture RTL of PWMgeneration_top
+ModelSim-Altera Info: # End time: 17:24:26 on May 16,2022, Elapsed time: 0:00:00
+ModelSim-Altera Info: # Errors: 0, Warnings: 0
+ModelSim-Altera Info: vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/set_reset.vhd}
+ModelSim-Altera Info: # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+ModelSim-Altera Info: # Start time: 17:24:26 on May 16,2022
+ModelSim-Altera Info: # vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/set_reset.vhd 
+ModelSim-Altera Info: # -- Loading package STANDARD
+ModelSim-Altera Info: # -- Loading package TEXTIO
+ModelSim-Altera Info: # -- Loading package std_logic_1164
+ModelSim-Altera Info: # -- Loading package NUMERIC_STD
+ModelSim-Altera Info: # -- Loading package std_logic_arith
+ModelSim-Altera Info: # -- Loading package STD_LOGIC_UNSIGNED
+ModelSim-Altera Info: # -- Compiling entity set_reset
+ModelSim-Altera Info: # -- Compiling architecture behavior of set_reset
+ModelSim-Altera Info: # End time: 17:24:26 on May 16,2022, Elapsed time: 0:00:00
+ModelSim-Altera Info: # Errors: 0, Warnings: 0
+ModelSim-Altera Info: vsim -gui -l msim_transcript work.pwmgeneration_tb
+ModelSim-Altera Info: # vsim -gui -l msim_transcript work.pwmgeneration_tb 
+ModelSim-Altera Info: # Start time: 17:25:01 on May 16,2022
+ModelSim-Altera Info: # Loading std.standard
+ModelSim-Altera Info: # Loading std.textio(body)
+ModelSim-Altera Info: # Loading ieee.std_logic_1164(body)
+ModelSim-Altera Info: # Loading ieee.numeric_std(body)
+ModelSim-Altera Info: # Loading work.pwmgeneration_tb(testbench)
+ModelSim-Altera Info: # Loading ieee.std_logic_arith(body)
+ModelSim-Altera Info: # Loading ieee.std_logic_unsigned(body)
+ModelSim-Altera Info: # Loading work.pwmgeneration_top(rtl)
+ModelSim-Altera Info: # Loading work.pwm(behavior)
+ModelSim-Altera Info: # Loading work.set_reset(behavior)
+ModelSim-Altera Info: # Loading work.watchdog(behavior)
+ModelSim-Altera Info: # Loading work.incdec_duty(behavior)
+ModelSim-Altera Info: run
+ModelSim-Altera Warning: # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+ModelSim-Altera Info: #    Time: 0 ps  Iteration: 0  Instance: /pwmgeneration_tb/UUT/incdecdutytest
+ModelSim-Altera Warning: # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+ModelSim-Altera Info: #    Time: 0 ps  Iteration: 0  Instance: /pwmgeneration_tb/UUT/incdecdutytest
+ModelSim-Altera Info: run
+ModelSim-Altera Info: run
+ModelSim-Altera Info: run
+ModelSim-Altera Info: run
+ModelSim-Altera Info: add wave  \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/incdecdutytest/inc \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/incdecdutytest/dec \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/incdecdutytest/clk \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/incdecdutytest/sel \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/incdecdutytest/duty \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/incdecdutytest/duty_act \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/incdecdutytest/duty_sig \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/incdecdutytest/inc_prev \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/incdecdutytest/dec_prev \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/incdecdutytest/flag_inc \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/incdecdutytest/dutybuck \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/incdecdutytest/dutyboost \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/incdecdutytest/period
+ModelSim-Altera Warning: # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+ModelSim-Altera Info: #           File in use by: PC  Hostname: LAPTOP-4BJ0KFSO  ProcessID: 19312
+ModelSim-Altera Info: #           Attempting to use alternate WLF file "./wlftc71n6n".
+ModelSim-Altera Warning: # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+ModelSim-Altera Info: #           Using alternate file: ./wlftc71n6n
+ModelSim-Altera Info: restart
+ModelSim-Altera Info: # ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+ModelSim-Altera Info: run
+ModelSim-Altera Warning: # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+ModelSim-Altera Info: #    Time: 0 ps  Iteration: 0  Instance: /pwmgeneration_tb/UUT/incdecdutytest
+ModelSim-Altera Warning: # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+ModelSim-Altera Info: #    Time: 0 ps  Iteration: 0  Instance: /pwmgeneration_tb/UUT/incdecdutytest
+ModelSim-Altera Info: run
+ModelSim-Altera Info: run
+ModelSim-Altera Info: restart
+ModelSim-Altera Info: # ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+ModelSim-Altera Info: run
+ModelSim-Altera Warning: # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+ModelSim-Altera Info: #    Time: 0 ps  Iteration: 0  Instance: /pwmgeneration_tb/UUT/incdecdutytest
+ModelSim-Altera Warning: # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+ModelSim-Altera Info: #    Time: 0 ps  Iteration: 0  Instance: /pwmgeneration_tb/UUT/incdecdutytest
+ModelSim-Altera Info: add wave  \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/PWMtest/PWM_H1 \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/PWMtest/PWM_L1 \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/PWMtest/PWM_H2 \
+ModelSim-Altera Info: sim:/pwmgeneration_tb/UUT/PWMtest/PWM_L2
+ModelSim-Altera Info: restart
+ModelSim-Altera Info: # ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+ModelSim-Altera Info: run
+ModelSim-Altera Warning: # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+ModelSim-Altera Info: #    Time: 0 ps  Iteration: 0  Instance: /pwmgeneration_tb/UUT/incdecdutytest
+ModelSim-Altera Warning: # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+ModelSim-Altera Info: #    Time: 0 ps  Iteration: 0  Instance: /pwmgeneration_tb/UUT/incdecdutytest
+ModelSim-Altera Info: # End time: 17:36:04 on May 16,2022, Elapsed time: 0:11:03
+ModelSim-Altera Info: # Errors: 0, Warnings: 2
 Info: NativeLink simulation flow was successful

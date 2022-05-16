@@ -23,8 +23,8 @@ architecture TestBench of PWMgeneration_tb is
 		set_out: out std_logic;
 		wdg_reset:in std_logic;
 		reset_out: out std_logic;
-		incduty : in std_logic;
-		decduty : in std_logic
+		inc : in std_logic;
+		dec : in std_logic
 		);
  end component;
 
@@ -37,7 +37,7 @@ architecture TestBench of PWMgeneration_tb is
  signal reset_btn: std_logic;
  signal set_out, reset_out: std_logic;
  signal wdg_reset:std_logic;
- signal incduty,decduty: std_logic;
+ signal inc,dec: std_logic;
 
  begin  -- TestBench
 
@@ -56,24 +56,25 @@ architecture TestBench of PWMgeneration_tb is
 		 set_out => set_out,
 		 reset_out => reset_out,
 		 wdg_reset => wdg_reset,
-     incduty => incduty,
-     decduty => decduty
+     inc => inc,
+     dec => dec
     );
 
 
- Reset <= '0', '1' after 100 ns,'0' after 10 ms,'1' after 11 ms;
+ Reset <= '0', '1' after 100 ns;
 
- sel <= '0','1' after 10100 us;
+ sel <= '0','1' after 50100 us;
  p_clk : PROCESS
  BEGIN
     clk <= '1', '0' after 10 ns;
     wait for 20 ns;
  END PROCESS;
 
-incduty <= '0','1'after 1 ms, '0' after 1100us, '1' after 2 ms;
-decduty <= '0','1'  after 3 ms;
-reset_btn <= '1','0' after 10 ms, '1' after 20 ms;
-set_btn <= '1', '0' after 1 ms, '1' after 2 ms;
+inc <= '0','1' after 1 ms, '0' after 1100us, '1' after 2 ms , '0' after 2100 us, '1' after 2200 us; 
+dec <= '0','1'  after 3 ms,'0' after 4 ms,'1'  after 5 ms;--,'0' after 5 ms,'1'  after 6 ms,'0' after 7 ms;
+
+reset_btn <= '1';
+set_btn <= '1';
 wdg_reset <= '1', '0' after 20 ms;
 
 

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PWMgeneration_top
-Thu May 12 17:30:38 2022
+Mon May 16 17:19:28 2022
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -10,7 +10,17 @@ Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |PWMgeneration_top|PWM:PWMtest|est_act
+  9. Logic Cells Representing Combinational Loops
+ 10. General Register Statistics
+ 11. Inverted Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Post-Synthesis Netlist Statistics for Top Partition
+ 14. Elapsed Time Per Partition
+ 15. Analysis & Synthesis Messages
 
 
 
@@ -37,22 +47,22 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Failed - Thu May 12 17:30:38 2022           ;
+; Analysis & Synthesis Status        ; Successful - Mon May 16 17:19:28 2022       ;
 ; Quartus Prime Version              ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                      ; PWMgeneration_top                           ;
 ; Top-level Entity Name              ; PWMgeneration_top                           ;
 ; Family                             ; MAX 10                                      ;
-; Total logic elements               ; N/A until Partition Merge                   ;
-;     Total combinational functions  ; N/A until Partition Merge                   ;
-;     Dedicated logic registers      ; N/A until Partition Merge                   ;
-; Total registers                    ; N/A until Partition Merge                   ;
-; Total pins                         ; N/A until Partition Merge                   ;
-; Total virtual pins                 ; N/A until Partition Merge                   ;
-; Total memory bits                  ; N/A until Partition Merge                   ;
-; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                   ;
-; Total PLLs                         ; N/A until Partition Merge                   ;
-; UFM blocks                         ; N/A until Partition Merge                   ;
-; ADC blocks                         ; N/A until Partition Merge                   ;
+; Total logic elements               ; 595                                         ;
+;     Total combinational functions  ; 590                                         ;
+;     Dedicated logic registers      ; 167                                         ;
+; Total registers                    ; 167                                         ;
+; Total pins                         ; 15                                          ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 0                                           ;
+; Embedded Multiplier 9-bit elements ; 0                                           ;
+; Total PLLs                         ; 0                                           ;
+; UFM blocks                         ; 0                                           ;
+; ADC blocks                         ; 0                                           ;
 +------------------------------------+---------------------------------------------+
 
 
@@ -151,11 +161,177 @@ https://fpgasoftware.intel.com/eula.
 ; Maximum allowed            ; 4           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
+; Maximum used               ; 4           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
+;     Processors 2-4         ;   0.0%      ;
 +----------------------------+-------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                    ;
++----------------------------------+-----------------+-----------------+--------------------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                                                             ; Library ;
++----------------------------------+-----------------+-----------------+--------------------------------------------------------------------------------------------------------------------------+---------+
+; PWMgeneration_top.vhd            ; yes             ; User VHDL File  ; C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd ;         ;
+; watchdog.vhd                     ; yes             ; User VHDL File  ; C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/watchdog.vhd          ;         ;
+; set_reset.vhd                    ; yes             ; User VHDL File  ; C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/set_reset.vhd         ;         ;
+; PWM.vhd                          ; yes             ; User VHDL File  ; C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM.vhd               ;         ;
+; incdec_duty.vhd                  ; yes             ; User VHDL File  ; C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd       ;         ;
++----------------------------------+-----------------+-----------------+--------------------------------------------------------------------------------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 595       ;
+;                                             ;           ;
+; Total combinational functions               ; 590       ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 138       ;
+;     -- 3 input functions                    ; 164       ;
+;     -- <=2 input functions                  ; 288       ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 226       ;
+;     -- arithmetic mode                      ; 364       ;
+;                                             ;           ;
+; Total registers                             ; 167       ;
+;     -- Dedicated logic registers            ; 167       ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 15        ;
+;                                             ;           ;
+; Embedded Multiplier 9-bit elements          ; 0         ;
+;                                             ;           ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 167       ;
+; Total fan-out                               ; 2259      ;
+; Average fan-out                             ; 2.87      ;
++---------------------------------------------+-----------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                     ;
++---------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-----------------------------------------------+-------------------+--------------+
+; Compilation Hierarchy Node      ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                           ; Entity Name       ; Library Name ;
++---------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-----------------------------------------------+-------------------+--------------+
+; |PWMgeneration_top              ; 590 (0)             ; 167 (0)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 15   ; 0            ; 0          ; |PWMgeneration_top                            ; PWMgeneration_top ; work         ;
+;    |PWM:PWMtest|                ; 396 (396)           ; 75 (75)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |PWMgeneration_top|PWM:PWMtest                ; PWM               ; work         ;
+;    |incdec_duty:incdecdutytest| ; 98 (98)             ; 22 (22)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |PWMgeneration_top|incdec_duty:incdecdutytest ; incdec_duty       ; work         ;
+;    |set_reset:set_reset_test|   ; 50 (50)             ; 38 (38)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |PWMgeneration_top|set_reset:set_reset_test   ; set_reset         ; work         ;
+;    |watchdog:watchdog_test|     ; 46 (46)             ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |PWMgeneration_top|watchdog:watchdog_test     ; watchdog          ; work         ;
++---------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-----------------------------------------------+-------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |PWMgeneration_top|PWM:PWMtest|est_act                                                                                           ;
++---------------------+----------------+----------------+---------------------+---------------------+---------------+---------------+--------------+
+; Name                ; est_act.boost2 ; est_act.boost1 ; est_act.boost2softs ; est_act.boost1softs ; est_act.buck2 ; est_act.buck1 ; est_act.idle ;
++---------------------+----------------+----------------+---------------------+---------------------+---------------+---------------+--------------+
+; est_act.idle        ; 0              ; 0              ; 0                   ; 0                   ; 0             ; 0             ; 0            ;
+; est_act.buck1       ; 0              ; 0              ; 0                   ; 0                   ; 0             ; 1             ; 1            ;
+; est_act.buck2       ; 0              ; 0              ; 0                   ; 0                   ; 1             ; 0             ; 1            ;
+; est_act.boost1softs ; 0              ; 0              ; 0                   ; 1                   ; 0             ; 0             ; 1            ;
+; est_act.boost2softs ; 0              ; 0              ; 1                   ; 0                   ; 0             ; 0             ; 1            ;
+; est_act.boost1      ; 0              ; 1              ; 0                   ; 0                   ; 0             ; 0             ; 1            ;
+; est_act.boost2      ; 1              ; 0              ; 0                   ; 0                   ; 0             ; 0             ; 1            ;
++---------------------+----------------+----------------+---------------------+---------------------+---------------+---------------+--------------+
+
+
++------------------------------------------------------------+
+; Logic Cells Representing Combinational Loops               ;
++--------------------------------------------------------+---+
+; Logic Cell Name                                        ;   ;
++--------------------------------------------------------+---+
+; set_reset:set_reset_test|countset_sig~1                ;   ;
+; set_reset:set_reset_test|countreset_sig~1              ;   ;
+; Number of logic cells representing combinational loops ; 2 ;
++--------------------------------------------------------+---+
+Note: All cells listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 167   ;
+; Number of registers using Synchronous Clear  ; 102   ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 129   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 63    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; PWM:PWMtest|softstart_duty_act[3]      ; 7       ;
+; PWM:PWMtest|softstart_duty_act[2]      ; 7       ;
+; PWM:PWMtest|softstart_duty_act[1]      ; 8       ;
+; PWM:PWMtest|softstart_duty_act[0]      ; 8       ;
+; Total number of inverted registers = 4 ;         ;
++----------------------------------------+---------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
+; 10:1               ; 23 bits   ; 138 LEs       ; 23 LEs               ; 115 LEs                ; Yes        ; |PWMgeneration_top|PWM:PWMtest|softstart_duty_act[28]     ;
+; 10:1               ; 5 bits    ; 30 LEs        ; 10 LEs               ; 20 LEs                 ; Yes        ; |PWMgeneration_top|PWM:PWMtest|softstart_duty_act[8]      ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |PWMgeneration_top|PWM:PWMtest|countactual1[10]           ;
+; 10:1               ; 4 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |PWMgeneration_top|PWM:PWMtest|softstart_duty_act[1]      ;
+; 5:1                ; 9 bits    ; 27 LEs        ; 27 LEs               ; 0 LEs                  ; No         ; |PWMgeneration_top|incdec_duty:incdecdutytest|duty_sig[0] ;
+; 11:1               ; 2 bits    ; 14 LEs        ; 4 LEs                ; 10 LEs                 ; No         ; |PWMgeneration_top|PWM:PWMtest|Selector39                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 15                          ;
+; cycloneiii_ff         ; 167                         ;
+;     CLR               ; 34                          ;
+;     CLR SCLR          ; 32                          ;
+;     ENA CLR           ; 31                          ;
+;     ENA CLR SCLR      ; 32                          ;
+;     SCLR              ; 38                          ;
+; cycloneiii_lcell_comb ; 590                         ;
+;     arith             ; 364                         ;
+;         2 data inputs ; 231                         ;
+;         3 data inputs ; 133                         ;
+;     normal            ; 226                         ;
+;         1 data inputs ; 10                          ;
+;         2 data inputs ; 47                          ;
+;         3 data inputs ; 31                          ;
+;         4 data inputs ; 138                         ;
+;                       ;                             ;
+; Max LUT depth         ; 9.00                        ;
+; Average LUT depth     ; 5.03                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:01     ;
++----------------+--------------+
 
 
 +-------------------------------+
@@ -164,7 +340,7 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Thu May 12 17:30:27 2022
+    Info: Processing started: Mon May 16 17:19:14 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PWMgeneration -c PWMgeneration_top
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -172,58 +348,62 @@ Info (12021): Found 2 design units, including 1 entities, in source file pwmgene
     Info (12022): Found design unit 1: PWMgeneration_tb-TestBench File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_tb.vhd Line: 9
     Info (12023): Found entity 1: PWMgeneration_tb File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_tb.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file pwmgeneration_top.vhd
-    Info (12022): Found design unit 1: PWMgeneration_top-beh File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 26
+    Info (12022): Found design unit 1: PWMgeneration_top-RTL File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 26
     Info (12023): Found entity 1: PWMgeneration_top File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file watchdog.vhd
+    Info (12022): Found design unit 1: watchdog-behavior File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/watchdog.vhd Line: 14
+    Info (12023): Found entity 1: watchdog File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/watchdog.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file set_reset.vhd
+    Info (12022): Found design unit 1: set_reset-behavior File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/set_reset.vhd Line: 14
+    Info (12023): Found entity 1: set_reset File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/set_reset.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file pwm.vhd
+    Info (12022): Found design unit 1: PWM-behavior File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM.vhd Line: 19
+    Info (12023): Found entity 1: PWM File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file incdec_duty.vhd
+    Info (12022): Found design unit 1: incdec_duty-behavior File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 19
+    Info (12023): Found entity 1: incdec_duty File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 8
 Info (12127): Elaborating entity "PWMgeneration_top" for the top level hierarchy
-Warning (10492): VHDL Process Statement warning at PWMgeneration_top.vhd(73): signal "wdg_reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 73
-Warning (10492): VHDL Process Statement warning at PWMgeneration_top.vhd(270): signal "set_flag" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 270
-Warning (10631): VHDL Process Statement warning at PWMgeneration_top.vhd(263): inferring latch(es) for signal or variable "set_flag", which holds its previous value in one or more paths through the process File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 263
-Warning (10492): VHDL Process Statement warning at PWMgeneration_top.vhd(290): signal "reset_flag" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 290
-Warning (10631): VHDL Process Statement warning at PWMgeneration_top.vhd(282): inferring latch(es) for signal or variable "reset_flag", which holds its previous value in one or more paths through the process File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 282
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutyboost_sig[0] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutyboost_sig[0]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutyboost_sig[1] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutyboost_sig[1]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutyboost_sig[2] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutyboost_sig[2]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutyboost_sig[3] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutyboost_sig[3]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutyboost_sig[4] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutyboost_sig[4]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutyboost_sig[5] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutyboost_sig[5]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutyboost_sig[6] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutyboost_sig[6]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutyboost_sig[7] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutyboost_sig[7]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutyboost_sig[8] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutyboost_sig[8]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutybuck_sig[0] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutybuck_sig[0]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutybuck_sig[1] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutybuck_sig[1]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutybuck_sig[2] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutybuck_sig[2]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutybuck_sig[3] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutybuck_sig[3]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutybuck_sig[4] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutybuck_sig[4]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutybuck_sig[5] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutybuck_sig[5]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutybuck_sig[6] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutybuck_sig[6]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutybuck_sig[7] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutybuck_sig[7]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Error (10820): Netlist error at PWMgeneration_top.vhd(322): can't infer register for dutybuck_sig[8] because its behavior depends on the edges of multiple distinct clocks File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 322
-Info (10041): Inferred latch for "dutybuck_sig[8]" at PWMgeneration_top.vhd(319) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 319
-Info (10041): Inferred latch for "reset_flag" at PWMgeneration_top.vhd(282) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 282
-Info (10041): Inferred latch for "set_flag" at PWMgeneration_top.vhd(263) File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 263
-Error (10822): HDL error at PWMgeneration_top.vhd(326): couldn't implement registers for assignments on this clock edge File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 326
-Error (12153): Can't elaborate top-level user hierarchy
-Error: Quartus Prime Analysis & Synthesis was unsuccessful. 20 errors, 6 warnings
-    Error: Peak virtual memory: 4764 megabytes
-    Error: Processing ended: Thu May 12 17:30:38 2022
-    Error: Elapsed time: 00:00:11
-    Error: Total CPU time (on all processors): 00:00:26
+Info (12128): Elaborating entity "PWM" for hierarchy "PWM:PWMtest" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 74
+Info (12128): Elaborating entity "set_reset" for hierarchy "set_reset:set_reset_test" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 86
+Warning (10492): VHDL Process Statement warning at set_reset.vhd(27): signal "set_flag" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/set_reset.vhd Line: 27
+Warning (10492): VHDL Process Statement warning at set_reset.vhd(47): signal "reset_flag" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/set_reset.vhd Line: 47
+Info (12128): Elaborating entity "watchdog" for hierarchy "watchdog:watchdog_test" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 95
+Warning (10492): VHDL Process Statement warning at watchdog.vhd(22): signal "wdg_reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/watchdog.vhd Line: 22
+Info (12128): Elaborating entity "incdec_duty" for hierarchy "incdec_duty:incdecdutytest" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 102
+Warning (10492): VHDL Process Statement warning at incdec_duty.vhd(46): signal "sel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 46
+Warning (10492): VHDL Process Statement warning at incdec_duty.vhd(74): signal "flag_inc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 74
+Warning (10631): VHDL Process Statement warning at incdec_duty.vhd(65): inferring latch(es) for signal or variable "flag_inc", which holds its previous value in one or more paths through the process File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 65
+Info (13000): Registers with preset signals will power-up high File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM.vhd Line: 43
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Warning (13004): Presettable and clearable registers converted to equivalent circuits with latches. Registers power-up to an undefined state, and DEVCLRn places the registers in an undefined state.
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[7]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[7]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~1" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[6]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[6]~_emulated" and latch "incdec_duty:incdecdutytest|duty[6]~5" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[5]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[5]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~1" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[4]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[4]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~1" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[3]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[3]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~1" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[2]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[2]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~1" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[1]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[1]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~1" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[0]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[0]~_emulated" and latch "incdec_duty:incdecdutytest|duty[6]~5" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[8]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[8]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[8]~1" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[7]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[7]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[7]~5" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[6]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[6]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[6]~9" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[5]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[5]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[5]~13" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[4]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[4]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[4]~17" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[3]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[3]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[3]~21" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[2]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[2]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[2]~25" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[1]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[1]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[1]~29" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[0]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[0]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[0]~33" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 610 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 8 input pins
+    Info (21059): Implemented 7 output pins
+    Info (21061): Implemented 595 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 25 warnings
+    Info: Peak virtual memory: 4785 megabytes
+    Info: Processing ended: Mon May 16 17:19:28 2022
+    Info: Elapsed time: 00:00:14
+    Info: Total CPU time (on all processors): 00:00:31
 
 

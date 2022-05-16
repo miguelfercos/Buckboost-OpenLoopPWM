@@ -17,7 +17,7 @@
 -- PROGRAM "Quartus Prime"
 -- VERSION "Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition"
 
--- DATE "07/12/2021 18:12:16"
+-- DATE "05/16/2022 17:19:49"
 
 -- 
 -- Device: Altera 10M50DAF484C7G Package FBGA484
@@ -102,7 +102,9 @@ ENTITY 	PWMgeneration_top IS
 	reset_btn : IN std_logic;
 	set_out : BUFFER std_logic;
 	reset_out : BUFFER std_logic;
-	wdg_reset : IN std_logic
+	wdg_reset : IN std_logic;
+	inc : IN std_logic;
+	dec : IN std_logic
 	);
 END PWMgeneration_top;
 
@@ -120,6 +122,8 @@ END PWMgeneration_top;
 -- reset	=>  Location: PIN_F15,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
 -- wdg_reset	=>  Location: PIN_B14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
 -- sel	=>  Location: PIN_C10,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- inc	=>  Location: PIN_E10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- dec	=>  Location: PIN_K15,	 I/O Standard: 2.5 V,	 Current Strength: Default
 
 
 ARCHITECTURE structure OF PWMgeneration_top IS
@@ -145,6 +149,8 @@ SIGNAL ww_reset_btn : std_logic;
 SIGNAL ww_set_out : std_logic;
 SIGNAL ww_reset_out : std_logic;
 SIGNAL ww_wdg_reset : std_logic;
+SIGNAL ww_inc : std_logic;
+SIGNAL ww_dec : std_logic;
 SIGNAL \~QUARTUS_CREATED_ADC1~_CHSEL_bus\ : std_logic_vector(4 DOWNTO 0);
 SIGNAL \~QUARTUS_CREATED_ADC2~_CHSEL_bus\ : std_logic_vector(4 DOWNTO 0);
 SIGNAL \clk~inputclkctrl_INCLK_bus\ : std_logic_vector(3 DOWNTO 0);
@@ -161,722 +167,873 @@ SIGNAL \set_out~output_o\ : std_logic;
 SIGNAL \reset_out~output_o\ : std_logic;
 SIGNAL \clk~input_o\ : std_logic;
 SIGNAL \clk~inputclkctrl_outclk\ : std_logic;
-SIGNAL \countactual1[0]~33_combout\ : std_logic;
+SIGNAL \inc~input_o\ : std_logic;
 SIGNAL \reset~input_o\ : std_logic;
-SIGNAL \countactual1[2]~38\ : std_logic;
-SIGNAL \countactual1[3]~39_combout\ : std_logic;
-SIGNAL \est_act.idle~feeder_combout\ : std_logic;
-SIGNAL \est_act.idle~q\ : std_logic;
-SIGNAL \countactual1[3]~40\ : std_logic;
-SIGNAL \countactual1[4]~41_combout\ : std_logic;
-SIGNAL \countactual1[4]~42\ : std_logic;
-SIGNAL \countactual1[5]~43_combout\ : std_logic;
-SIGNAL \countactual1[5]~44\ : std_logic;
-SIGNAL \countactual1[6]~45_combout\ : std_logic;
-SIGNAL \countactual1[6]~46\ : std_logic;
-SIGNAL \countactual1[7]~47_combout\ : std_logic;
-SIGNAL \countactual1[7]~48\ : std_logic;
-SIGNAL \countactual1[8]~49_combout\ : std_logic;
-SIGNAL \countactual1[8]~50\ : std_logic;
-SIGNAL \countactual1[9]~51_combout\ : std_logic;
-SIGNAL \countactual1[9]~52\ : std_logic;
-SIGNAL \countactual1[10]~53_combout\ : std_logic;
-SIGNAL \countactual1[10]~54\ : std_logic;
-SIGNAL \countactual1[11]~55_combout\ : std_logic;
-SIGNAL \countactual1[11]~56\ : std_logic;
-SIGNAL \countactual1[12]~57_combout\ : std_logic;
-SIGNAL \countactual1[12]~58\ : std_logic;
-SIGNAL \countactual1[13]~59_combout\ : std_logic;
-SIGNAL \countactual1[13]~60\ : std_logic;
-SIGNAL \countactual1[14]~61_combout\ : std_logic;
-SIGNAL \countactual1[14]~62\ : std_logic;
-SIGNAL \countactual1[15]~63_combout\ : std_logic;
-SIGNAL \countactual1[15]~64\ : std_logic;
-SIGNAL \countactual1[16]~65_combout\ : std_logic;
-SIGNAL \countactual1[16]~66\ : std_logic;
-SIGNAL \countactual1[17]~67_combout\ : std_logic;
-SIGNAL \countactual1[17]~68\ : std_logic;
-SIGNAL \countactual1[18]~69_combout\ : std_logic;
-SIGNAL \countactual1[18]~70\ : std_logic;
-SIGNAL \countactual1[19]~71_combout\ : std_logic;
-SIGNAL \countactual1[19]~72\ : std_logic;
-SIGNAL \countactual1[20]~73_combout\ : std_logic;
-SIGNAL \countactual1[20]~74\ : std_logic;
-SIGNAL \countactual1[21]~75_combout\ : std_logic;
-SIGNAL \countactual1[21]~76\ : std_logic;
-SIGNAL \countactual1[22]~77_combout\ : std_logic;
-SIGNAL \countactual1[22]~78\ : std_logic;
-SIGNAL \countactual1[23]~79_combout\ : std_logic;
-SIGNAL \countactual1[23]~80\ : std_logic;
-SIGNAL \countactual1[24]~81_combout\ : std_logic;
-SIGNAL \countactual1[24]~82\ : std_logic;
-SIGNAL \countactual1[25]~83_combout\ : std_logic;
-SIGNAL \countactual1[25]~84\ : std_logic;
-SIGNAL \countactual1[26]~85_combout\ : std_logic;
-SIGNAL \countactual1[26]~86\ : std_logic;
-SIGNAL \countactual1[27]~87_combout\ : std_logic;
-SIGNAL \countactual1[27]~88\ : std_logic;
-SIGNAL \countactual1[28]~89_combout\ : std_logic;
-SIGNAL \countactual1[28]~90\ : std_logic;
-SIGNAL \countactual1[29]~91_combout\ : std_logic;
-SIGNAL \countactual1[29]~92\ : std_logic;
-SIGNAL \countactual1[30]~93_combout\ : std_logic;
-SIGNAL \LessThan3~5_combout\ : std_logic;
-SIGNAL \LessThan3~1_combout\ : std_logic;
-SIGNAL \LessThan3~0_combout\ : std_logic;
-SIGNAL \LessThan3~2_combout\ : std_logic;
-SIGNAL \LessThan3~3_combout\ : std_logic;
-SIGNAL \LessThan3~4_combout\ : std_logic;
-SIGNAL \LessThan3~6_combout\ : std_logic;
-SIGNAL \LessThan2~0_combout\ : std_logic;
-SIGNAL \Selector39~1_combout\ : std_logic;
-SIGNAL \Selector39~2_combout\ : std_logic;
-SIGNAL \Selector39~3_combout\ : std_logic;
-SIGNAL \Selector39~5_combout\ : std_logic;
-SIGNAL \countactual1[30]~94\ : std_logic;
-SIGNAL \countactual1[31]~95_combout\ : std_logic;
-SIGNAL \Selector39~6_combout\ : std_logic;
-SIGNAL \Selector39~4_combout\ : std_logic;
-SIGNAL \LessThan8~0_combout\ : std_logic;
-SIGNAL \Selector39~8_combout\ : std_logic;
-SIGNAL \Selector39~9_combout\ : std_logic;
-SIGNAL \Selector37~0_combout\ : std_logic;
 SIGNAL \sel~input_o\ : std_logic;
-SIGNAL \Selector36~0_combout\ : std_logic;
-SIGNAL \Add5~0_combout\ : std_logic;
-SIGNAL \Selector34~0_combout\ : std_logic;
-SIGNAL \Add5~1\ : std_logic;
-SIGNAL \Add5~2_combout\ : std_logic;
-SIGNAL \Add5~90_combout\ : std_logic;
-SIGNAL \Add5~3\ : std_logic;
-SIGNAL \Add5~4_combout\ : std_logic;
-SIGNAL \Add5~89_combout\ : std_logic;
-SIGNAL \Add5~5\ : std_logic;
-SIGNAL \Add5~6_combout\ : std_logic;
-SIGNAL \Add5~88_combout\ : std_logic;
-SIGNAL \Add5~7\ : std_logic;
-SIGNAL \Add5~8_combout\ : std_logic;
-SIGNAL \Selector30~0_combout\ : std_logic;
-SIGNAL \Add5~9\ : std_logic;
-SIGNAL \Add5~10_combout\ : std_logic;
-SIGNAL \Selector29~0_combout\ : std_logic;
-SIGNAL \Add5~11\ : std_logic;
-SIGNAL \Add5~12_combout\ : std_logic;
-SIGNAL \Add5~87_combout\ : std_logic;
-SIGNAL \Add5~13\ : std_logic;
-SIGNAL \Add5~14_combout\ : std_logic;
-SIGNAL \Selector27~0_combout\ : std_logic;
-SIGNAL \Add5~15\ : std_logic;
-SIGNAL \Add5~16_combout\ : std_logic;
-SIGNAL \Add5~86_combout\ : std_logic;
-SIGNAL \Add5~17\ : std_logic;
-SIGNAL \Add5~18_combout\ : std_logic;
-SIGNAL \Add5~85_combout\ : std_logic;
-SIGNAL \Add5~19\ : std_logic;
-SIGNAL \Add5~20_combout\ : std_logic;
-SIGNAL \Add5~84_combout\ : std_logic;
-SIGNAL \Add5~21\ : std_logic;
-SIGNAL \Add5~22_combout\ : std_logic;
-SIGNAL \Add5~83_combout\ : std_logic;
-SIGNAL \Add5~23\ : std_logic;
-SIGNAL \Add5~24_combout\ : std_logic;
-SIGNAL \Add5~82_combout\ : std_logic;
-SIGNAL \Add5~25\ : std_logic;
-SIGNAL \Add5~26_combout\ : std_logic;
-SIGNAL \Add5~81_combout\ : std_logic;
-SIGNAL \Add5~27\ : std_logic;
-SIGNAL \Add5~28_combout\ : std_logic;
-SIGNAL \Add5~80_combout\ : std_logic;
-SIGNAL \LessThan9~5_combout\ : std_logic;
-SIGNAL \Add5~29\ : std_logic;
-SIGNAL \Add5~30_combout\ : std_logic;
-SIGNAL \Add5~79_combout\ : std_logic;
-SIGNAL \Add5~31\ : std_logic;
-SIGNAL \Add5~32_combout\ : std_logic;
-SIGNAL \Add5~78_combout\ : std_logic;
-SIGNAL \Add5~33\ : std_logic;
-SIGNAL \Add5~34_combout\ : std_logic;
-SIGNAL \Add5~77_combout\ : std_logic;
-SIGNAL \Add5~35\ : std_logic;
-SIGNAL \Add5~36_combout\ : std_logic;
-SIGNAL \Add5~76_combout\ : std_logic;
-SIGNAL \Add5~37\ : std_logic;
-SIGNAL \Add5~38_combout\ : std_logic;
-SIGNAL \Add5~75_combout\ : std_logic;
-SIGNAL \Add5~39\ : std_logic;
-SIGNAL \Add5~40_combout\ : std_logic;
-SIGNAL \Add5~74_combout\ : std_logic;
-SIGNAL \Add5~41\ : std_logic;
-SIGNAL \Add5~42_combout\ : std_logic;
-SIGNAL \Add5~73_combout\ : std_logic;
-SIGNAL \Add5~43\ : std_logic;
-SIGNAL \Add5~44_combout\ : std_logic;
-SIGNAL \Add5~72_combout\ : std_logic;
-SIGNAL \LessThan9~2_combout\ : std_logic;
-SIGNAL \Add5~45\ : std_logic;
-SIGNAL \Add5~46_combout\ : std_logic;
-SIGNAL \Add5~71_combout\ : std_logic;
-SIGNAL \Add5~47\ : std_logic;
-SIGNAL \Add5~48_combout\ : std_logic;
-SIGNAL \Add5~70_combout\ : std_logic;
-SIGNAL \Add5~49\ : std_logic;
-SIGNAL \Add5~50_combout\ : std_logic;
-SIGNAL \Add5~69_combout\ : std_logic;
-SIGNAL \Add5~51\ : std_logic;
-SIGNAL \Add5~52_combout\ : std_logic;
-SIGNAL \Add5~68_combout\ : std_logic;
-SIGNAL \Add5~53\ : std_logic;
-SIGNAL \Add5~54_combout\ : std_logic;
-SIGNAL \Add5~67_combout\ : std_logic;
-SIGNAL \Add5~55\ : std_logic;
-SIGNAL \Add5~56_combout\ : std_logic;
-SIGNAL \Add5~66_combout\ : std_logic;
-SIGNAL \LessThan9~0_combout\ : std_logic;
-SIGNAL \LessThan9~1_combout\ : std_logic;
-SIGNAL \LessThan9~3_combout\ : std_logic;
-SIGNAL \LessThan9~4_combout\ : std_logic;
-SIGNAL \LessThan9~6_combout\ : std_logic;
-SIGNAL \LessThan5~0_combout\ : std_logic;
-SIGNAL \LessThan5~1_combout\ : std_logic;
-SIGNAL \LessThan5~2_combout\ : std_logic;
-SIGNAL \Selector41~2_combout\ : std_logic;
-SIGNAL \Add5~57\ : std_logic;
-SIGNAL \Add5~58_combout\ : std_logic;
-SIGNAL \Add5~65_combout\ : std_logic;
-SIGNAL \Add3~1_cout\ : std_logic;
-SIGNAL \Add3~3\ : std_logic;
-SIGNAL \Add3~5\ : std_logic;
-SIGNAL \Add3~7\ : std_logic;
-SIGNAL \Add3~9\ : std_logic;
-SIGNAL \Add3~11\ : std_logic;
-SIGNAL \Add3~13\ : std_logic;
-SIGNAL \Add3~15\ : std_logic;
-SIGNAL \Add3~17\ : std_logic;
-SIGNAL \Add3~19\ : std_logic;
-SIGNAL \Add3~21\ : std_logic;
-SIGNAL \Add3~23\ : std_logic;
-SIGNAL \Add3~25\ : std_logic;
-SIGNAL \Add3~27\ : std_logic;
-SIGNAL \Add3~29\ : std_logic;
-SIGNAL \Add3~31\ : std_logic;
-SIGNAL \Add3~33\ : std_logic;
-SIGNAL \Add3~35\ : std_logic;
-SIGNAL \Add3~37\ : std_logic;
-SIGNAL \Add3~39\ : std_logic;
-SIGNAL \Add3~41\ : std_logic;
-SIGNAL \Add3~43\ : std_logic;
-SIGNAL \Add3~45\ : std_logic;
-SIGNAL \Add3~47\ : std_logic;
-SIGNAL \Add3~49\ : std_logic;
-SIGNAL \Add3~51\ : std_logic;
-SIGNAL \Add3~53\ : std_logic;
-SIGNAL \Add3~54_combout\ : std_logic;
-SIGNAL \Add3~52_combout\ : std_logic;
-SIGNAL \Add3~50_combout\ : std_logic;
-SIGNAL \Add3~48_combout\ : std_logic;
-SIGNAL \Add3~46_combout\ : std_logic;
-SIGNAL \Add3~44_combout\ : std_logic;
-SIGNAL \Add3~42_combout\ : std_logic;
-SIGNAL \Add3~40_combout\ : std_logic;
-SIGNAL \Add3~38_combout\ : std_logic;
-SIGNAL \Add3~36_combout\ : std_logic;
-SIGNAL \Add3~34_combout\ : std_logic;
-SIGNAL \Add3~32_combout\ : std_logic;
-SIGNAL \Add3~30_combout\ : std_logic;
-SIGNAL \Add3~28_combout\ : std_logic;
-SIGNAL \Add3~26_combout\ : std_logic;
-SIGNAL \Add3~24_combout\ : std_logic;
-SIGNAL \Add3~22_combout\ : std_logic;
-SIGNAL \Add3~20_combout\ : std_logic;
-SIGNAL \Add3~18_combout\ : std_logic;
-SIGNAL \Add3~16_combout\ : std_logic;
-SIGNAL \Add3~14_combout\ : std_logic;
-SIGNAL \Add3~12_combout\ : std_logic;
-SIGNAL \Add3~10_combout\ : std_logic;
-SIGNAL \Add3~8_combout\ : std_logic;
-SIGNAL \Add3~6_combout\ : std_logic;
-SIGNAL \Add3~4_combout\ : std_logic;
-SIGNAL \Add3~2_combout\ : std_logic;
-SIGNAL \LessThan1~1_cout\ : std_logic;
-SIGNAL \LessThan1~3_cout\ : std_logic;
-SIGNAL \LessThan1~5_cout\ : std_logic;
-SIGNAL \LessThan1~7_cout\ : std_logic;
-SIGNAL \LessThan1~9_cout\ : std_logic;
-SIGNAL \LessThan1~11_cout\ : std_logic;
-SIGNAL \LessThan1~13_cout\ : std_logic;
-SIGNAL \LessThan1~15_cout\ : std_logic;
-SIGNAL \LessThan1~17_cout\ : std_logic;
-SIGNAL \LessThan1~19_cout\ : std_logic;
-SIGNAL \LessThan1~21_cout\ : std_logic;
-SIGNAL \LessThan1~23_cout\ : std_logic;
-SIGNAL \LessThan1~25_cout\ : std_logic;
-SIGNAL \LessThan1~27_cout\ : std_logic;
-SIGNAL \LessThan1~29_cout\ : std_logic;
-SIGNAL \LessThan1~31_cout\ : std_logic;
-SIGNAL \LessThan1~33_cout\ : std_logic;
-SIGNAL \LessThan1~35_cout\ : std_logic;
-SIGNAL \LessThan1~37_cout\ : std_logic;
-SIGNAL \LessThan1~39_cout\ : std_logic;
-SIGNAL \LessThan1~41_cout\ : std_logic;
-SIGNAL \LessThan1~43_cout\ : std_logic;
-SIGNAL \LessThan1~45_cout\ : std_logic;
-SIGNAL \LessThan1~47_cout\ : std_logic;
-SIGNAL \LessThan1~49_cout\ : std_logic;
-SIGNAL \LessThan1~51_cout\ : std_logic;
-SIGNAL \LessThan1~53_cout\ : std_logic;
-SIGNAL \LessThan1~55_cout\ : std_logic;
-SIGNAL \LessThan1~57_cout\ : std_logic;
-SIGNAL \LessThan1~59_cout\ : std_logic;
-SIGNAL \LessThan1~61_cout\ : std_logic;
-SIGNAL \LessThan1~62_combout\ : std_logic;
-SIGNAL \Selector36~1_combout\ : std_logic;
-SIGNAL \est_act.buck1~q\ : std_logic;
-SIGNAL \Selector37~1_combout\ : std_logic;
-SIGNAL \Selector37~2_combout\ : std_logic;
-SIGNAL \est_act.buck2~q\ : std_logic;
-SIGNAL \LessThan9~7_combout\ : std_logic;
-SIGNAL \LessThan4~0_combout\ : std_logic;
-SIGNAL \LessThan4~1_combout\ : std_logic;
-SIGNAL \softstart_duty_act[3]~3_combout\ : std_logic;
-SIGNAL \Add5~59\ : std_logic;
-SIGNAL \Add5~60_combout\ : std_logic;
-SIGNAL \Add5~64_combout\ : std_logic;
-SIGNAL \Add1~1_cout\ : std_logic;
-SIGNAL \Add1~3\ : std_logic;
-SIGNAL \Add1~5\ : std_logic;
-SIGNAL \Add1~7\ : std_logic;
-SIGNAL \Add1~9\ : std_logic;
-SIGNAL \Add1~11\ : std_logic;
-SIGNAL \Add1~13\ : std_logic;
-SIGNAL \Add1~15\ : std_logic;
-SIGNAL \Add1~17\ : std_logic;
-SIGNAL \Add1~19\ : std_logic;
-SIGNAL \Add1~21\ : std_logic;
-SIGNAL \Add1~23\ : std_logic;
-SIGNAL \Add1~25\ : std_logic;
-SIGNAL \Add1~27\ : std_logic;
-SIGNAL \Add1~29\ : std_logic;
-SIGNAL \Add1~31\ : std_logic;
-SIGNAL \Add1~33\ : std_logic;
-SIGNAL \Add1~35\ : std_logic;
-SIGNAL \Add1~37\ : std_logic;
-SIGNAL \Add1~39\ : std_logic;
-SIGNAL \Add1~41\ : std_logic;
-SIGNAL \Add1~43\ : std_logic;
-SIGNAL \Add1~45\ : std_logic;
-SIGNAL \Add1~47\ : std_logic;
-SIGNAL \Add1~49\ : std_logic;
-SIGNAL \Add1~51\ : std_logic;
-SIGNAL \Add1~53\ : std_logic;
-SIGNAL \Add1~55\ : std_logic;
-SIGNAL \Add1~57\ : std_logic;
-SIGNAL \Add1~59\ : std_logic;
-SIGNAL \Add1~60_combout\ : std_logic;
-SIGNAL \Add1~58_combout\ : std_logic;
-SIGNAL \Add1~56_combout\ : std_logic;
-SIGNAL \Add1~54_combout\ : std_logic;
-SIGNAL \Add1~52_combout\ : std_logic;
-SIGNAL \Add1~50_combout\ : std_logic;
-SIGNAL \Add1~48_combout\ : std_logic;
-SIGNAL \Add1~46_combout\ : std_logic;
-SIGNAL \Add1~44_combout\ : std_logic;
-SIGNAL \Add1~42_combout\ : std_logic;
-SIGNAL \Add1~40_combout\ : std_logic;
-SIGNAL \Add1~38_combout\ : std_logic;
-SIGNAL \Add1~36_combout\ : std_logic;
-SIGNAL \Add1~34_combout\ : std_logic;
-SIGNAL \Add1~32_combout\ : std_logic;
-SIGNAL \Add1~30_combout\ : std_logic;
-SIGNAL \Add1~28_combout\ : std_logic;
-SIGNAL \Add1~26_combout\ : std_logic;
-SIGNAL \Add1~24_combout\ : std_logic;
-SIGNAL \Add1~22_combout\ : std_logic;
-SIGNAL \Add1~20_combout\ : std_logic;
-SIGNAL \Add1~18_combout\ : std_logic;
-SIGNAL \Add1~16_combout\ : std_logic;
-SIGNAL \Add1~14_combout\ : std_logic;
-SIGNAL \Add1~12_combout\ : std_logic;
-SIGNAL \Add1~10_combout\ : std_logic;
-SIGNAL \Add1~8_combout\ : std_logic;
-SIGNAL \Add1~6_combout\ : std_logic;
-SIGNAL \Add1~4_combout\ : std_logic;
-SIGNAL \Add1~2_combout\ : std_logic;
-SIGNAL \LessThan0~1_cout\ : std_logic;
-SIGNAL \LessThan0~3_cout\ : std_logic;
-SIGNAL \LessThan0~5_cout\ : std_logic;
-SIGNAL \LessThan0~7_cout\ : std_logic;
-SIGNAL \LessThan0~9_cout\ : std_logic;
-SIGNAL \LessThan0~11_cout\ : std_logic;
-SIGNAL \LessThan0~13_cout\ : std_logic;
-SIGNAL \LessThan0~15_cout\ : std_logic;
-SIGNAL \LessThan0~17_cout\ : std_logic;
-SIGNAL \LessThan0~19_cout\ : std_logic;
-SIGNAL \LessThan0~21_cout\ : std_logic;
-SIGNAL \LessThan0~23_cout\ : std_logic;
-SIGNAL \LessThan0~25_cout\ : std_logic;
-SIGNAL \LessThan0~27_cout\ : std_logic;
-SIGNAL \LessThan0~29_cout\ : std_logic;
-SIGNAL \LessThan0~31_cout\ : std_logic;
-SIGNAL \LessThan0~33_cout\ : std_logic;
-SIGNAL \LessThan0~35_cout\ : std_logic;
-SIGNAL \LessThan0~37_cout\ : std_logic;
-SIGNAL \LessThan0~39_cout\ : std_logic;
-SIGNAL \LessThan0~41_cout\ : std_logic;
-SIGNAL \LessThan0~43_cout\ : std_logic;
-SIGNAL \LessThan0~45_cout\ : std_logic;
-SIGNAL \LessThan0~47_cout\ : std_logic;
-SIGNAL \LessThan0~49_cout\ : std_logic;
-SIGNAL \LessThan0~51_cout\ : std_logic;
-SIGNAL \LessThan0~53_cout\ : std_logic;
-SIGNAL \LessThan0~55_cout\ : std_logic;
-SIGNAL \LessThan0~57_cout\ : std_logic;
-SIGNAL \LessThan0~59_cout\ : std_logic;
-SIGNAL \LessThan0~61_cout\ : std_logic;
-SIGNAL \LessThan0~62_combout\ : std_logic;
-SIGNAL \LessThan5~4_combout\ : std_logic;
-SIGNAL \Selector38~0_combout\ : std_logic;
-SIGNAL \Selector38~1_combout\ : std_logic;
-SIGNAL \Selector38~2_combout\ : std_logic;
-SIGNAL \est_act.boost1softs~q\ : std_logic;
-SIGNAL \Selector39~7_combout\ : std_logic;
-SIGNAL \Selector39~10_combout\ : std_logic;
-SIGNAL \est_sig~9_combout\ : std_logic;
-SIGNAL \Selector39~11_combout\ : std_logic;
-SIGNAL \est_act.boost2softs~q\ : std_logic;
-SIGNAL \countactual1[8]~32_combout\ : std_logic;
-SIGNAL \countactual1[8]~97_combout\ : std_logic;
-SIGNAL \countactual1[0]~34\ : std_logic;
-SIGNAL \countactual1[1]~35_combout\ : std_logic;
-SIGNAL \countactual1[1]~36\ : std_logic;
-SIGNAL \countactual1[2]~37_combout\ : std_logic;
-SIGNAL \LessThan3~7_combout\ : std_logic;
-SIGNAL \LessThan3~8_combout\ : std_logic;
-SIGNAL \est_sig~8_combout\ : std_logic;
-SIGNAL \softstart_duty_act[3]~1_combout\ : std_logic;
-SIGNAL \est_sig~7_combout\ : std_logic;
-SIGNAL \LessThan5~3_combout\ : std_logic;
-SIGNAL \LessThan9~8_combout\ : std_logic;
-SIGNAL \softstart_duty_act[3]~0_combout\ : std_logic;
-SIGNAL \softstart_duty_act[3]~2_combout\ : std_logic;
-SIGNAL \softstart_duty_act[3]~4_combout\ : std_logic;
-SIGNAL \Add5~61\ : std_logic;
-SIGNAL \Add5~62_combout\ : std_logic;
-SIGNAL \softstart_duty_act[31]~5_combout\ : std_logic;
-SIGNAL \LessThan7~1_cout\ : std_logic;
-SIGNAL \LessThan7~3_cout\ : std_logic;
-SIGNAL \LessThan7~5_cout\ : std_logic;
-SIGNAL \LessThan7~7_cout\ : std_logic;
-SIGNAL \LessThan7~9_cout\ : std_logic;
-SIGNAL \LessThan7~11_cout\ : std_logic;
-SIGNAL \LessThan7~13_cout\ : std_logic;
-SIGNAL \LessThan7~15_cout\ : std_logic;
-SIGNAL \LessThan7~17_cout\ : std_logic;
-SIGNAL \LessThan7~19_cout\ : std_logic;
-SIGNAL \LessThan7~21_cout\ : std_logic;
-SIGNAL \LessThan7~23_cout\ : std_logic;
-SIGNAL \LessThan7~25_cout\ : std_logic;
-SIGNAL \LessThan7~27_cout\ : std_logic;
-SIGNAL \LessThan7~29_cout\ : std_logic;
-SIGNAL \LessThan7~31_cout\ : std_logic;
-SIGNAL \LessThan7~33_cout\ : std_logic;
-SIGNAL \LessThan7~35_cout\ : std_logic;
-SIGNAL \LessThan7~37_cout\ : std_logic;
-SIGNAL \LessThan7~39_cout\ : std_logic;
-SIGNAL \LessThan7~41_cout\ : std_logic;
-SIGNAL \LessThan7~43_cout\ : std_logic;
-SIGNAL \LessThan7~45_cout\ : std_logic;
-SIGNAL \LessThan7~47_cout\ : std_logic;
-SIGNAL \LessThan7~49_cout\ : std_logic;
-SIGNAL \LessThan7~51_cout\ : std_logic;
-SIGNAL \LessThan7~53_cout\ : std_logic;
-SIGNAL \LessThan7~55_cout\ : std_logic;
-SIGNAL \LessThan7~57_cout\ : std_logic;
-SIGNAL \LessThan7~59_cout\ : std_logic;
-SIGNAL \LessThan7~61_cout\ : std_logic;
-SIGNAL \LessThan7~62_combout\ : std_logic;
-SIGNAL \Add6~1\ : std_logic;
-SIGNAL \Add6~3\ : std_logic;
-SIGNAL \Add6~5\ : std_logic;
-SIGNAL \Add6~7\ : std_logic;
-SIGNAL \Add6~9\ : std_logic;
-SIGNAL \Add6~11\ : std_logic;
-SIGNAL \Add6~13\ : std_logic;
-SIGNAL \Add6~15\ : std_logic;
-SIGNAL \Add6~17\ : std_logic;
-SIGNAL \Add6~19\ : std_logic;
-SIGNAL \Add6~21\ : std_logic;
-SIGNAL \Add6~23\ : std_logic;
-SIGNAL \Add6~25\ : std_logic;
-SIGNAL \Add6~27\ : std_logic;
-SIGNAL \Add6~29\ : std_logic;
-SIGNAL \Add6~31\ : std_logic;
-SIGNAL \Add6~33\ : std_logic;
-SIGNAL \Add6~35\ : std_logic;
-SIGNAL \Add6~37\ : std_logic;
-SIGNAL \Add6~39\ : std_logic;
-SIGNAL \Add6~41\ : std_logic;
-SIGNAL \Add6~43\ : std_logic;
-SIGNAL \Add6~45\ : std_logic;
-SIGNAL \Add6~47\ : std_logic;
-SIGNAL \Add6~49\ : std_logic;
-SIGNAL \Add6~51\ : std_logic;
-SIGNAL \Add6~53\ : std_logic;
-SIGNAL \Add6~55\ : std_logic;
-SIGNAL \Add6~57\ : std_logic;
-SIGNAL \Add6~59\ : std_logic;
-SIGNAL \Add6~60_combout\ : std_logic;
-SIGNAL \Add6~58_combout\ : std_logic;
-SIGNAL \Add6~56_combout\ : std_logic;
-SIGNAL \Add6~54_combout\ : std_logic;
-SIGNAL \Add6~52_combout\ : std_logic;
-SIGNAL \Add6~50_combout\ : std_logic;
-SIGNAL \Add6~48_combout\ : std_logic;
-SIGNAL \Add6~46_combout\ : std_logic;
-SIGNAL \Add6~44_combout\ : std_logic;
-SIGNAL \Add6~42_combout\ : std_logic;
-SIGNAL \Add6~40_combout\ : std_logic;
-SIGNAL \Add6~38_combout\ : std_logic;
-SIGNAL \Add6~36_combout\ : std_logic;
-SIGNAL \Add6~34_combout\ : std_logic;
-SIGNAL \Add6~32_combout\ : std_logic;
-SIGNAL \Add6~30_combout\ : std_logic;
-SIGNAL \Add6~28_combout\ : std_logic;
-SIGNAL \Add6~26_combout\ : std_logic;
-SIGNAL \Add6~24_combout\ : std_logic;
-SIGNAL \Add6~22_combout\ : std_logic;
-SIGNAL \Add6~20_combout\ : std_logic;
-SIGNAL \Add6~18_combout\ : std_logic;
-SIGNAL \Add6~16_combout\ : std_logic;
-SIGNAL \Add6~14_combout\ : std_logic;
-SIGNAL \Add6~12_combout\ : std_logic;
-SIGNAL \Add6~10_combout\ : std_logic;
-SIGNAL \Add6~8_combout\ : std_logic;
-SIGNAL \Add6~6_combout\ : std_logic;
-SIGNAL \Add6~4_combout\ : std_logic;
-SIGNAL \Add6~2_combout\ : std_logic;
-SIGNAL \Add6~0_combout\ : std_logic;
-SIGNAL \LessThan6~1_cout\ : std_logic;
-SIGNAL \LessThan6~3_cout\ : std_logic;
-SIGNAL \LessThan6~5_cout\ : std_logic;
-SIGNAL \LessThan6~7_cout\ : std_logic;
-SIGNAL \LessThan6~9_cout\ : std_logic;
-SIGNAL \LessThan6~11_cout\ : std_logic;
-SIGNAL \LessThan6~13_cout\ : std_logic;
-SIGNAL \LessThan6~15_cout\ : std_logic;
-SIGNAL \LessThan6~17_cout\ : std_logic;
-SIGNAL \LessThan6~19_cout\ : std_logic;
-SIGNAL \LessThan6~21_cout\ : std_logic;
-SIGNAL \LessThan6~23_cout\ : std_logic;
-SIGNAL \LessThan6~25_cout\ : std_logic;
-SIGNAL \LessThan6~27_cout\ : std_logic;
-SIGNAL \LessThan6~29_cout\ : std_logic;
-SIGNAL \LessThan6~31_cout\ : std_logic;
-SIGNAL \LessThan6~33_cout\ : std_logic;
-SIGNAL \LessThan6~35_cout\ : std_logic;
-SIGNAL \LessThan6~37_cout\ : std_logic;
-SIGNAL \LessThan6~39_cout\ : std_logic;
-SIGNAL \LessThan6~41_cout\ : std_logic;
-SIGNAL \LessThan6~43_cout\ : std_logic;
-SIGNAL \LessThan6~45_cout\ : std_logic;
-SIGNAL \LessThan6~47_cout\ : std_logic;
-SIGNAL \LessThan6~49_cout\ : std_logic;
-SIGNAL \LessThan6~51_cout\ : std_logic;
-SIGNAL \LessThan6~53_cout\ : std_logic;
-SIGNAL \LessThan6~55_cout\ : std_logic;
-SIGNAL \LessThan6~57_cout\ : std_logic;
-SIGNAL \LessThan6~59_cout\ : std_logic;
-SIGNAL \LessThan6~61_cout\ : std_logic;
-SIGNAL \LessThan6~62_combout\ : std_logic;
-SIGNAL \Selector41~0_combout\ : std_logic;
-SIGNAL \Selector41~1_combout\ : std_logic;
-SIGNAL \Selector41~3_combout\ : std_logic;
-SIGNAL \est_act.boost2~q\ : std_logic;
-SIGNAL \Selector40~0_combout\ : std_logic;
-SIGNAL \Selector40~1_combout\ : std_logic;
-SIGNAL \est_act.boost1~q\ : std_logic;
-SIGNAL \LessThan2~1_combout\ : std_logic;
-SIGNAL \Selector0~0_combout\ : std_logic;
-SIGNAL \PWM_H1~reg0_q\ : std_logic;
-SIGNAL \Selector1~0_combout\ : std_logic;
-SIGNAL \PWM_L1~reg0_q\ : std_logic;
-SIGNAL \WideOr2~0_combout\ : std_logic;
-SIGNAL \Selector2~0_combout\ : std_logic;
-SIGNAL \PWM_H2~reg0_q\ : std_logic;
-SIGNAL \PWM_L2_sig~0_combout\ : std_logic;
-SIGNAL \PWM_L2~reg0_q\ : std_logic;
-SIGNAL \countwdg_act[0]~32_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act~54_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[8]~1_combout\ : std_logic;
+SIGNAL \incdecdutytest|Equal0~0_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act~60_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[2]~25_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act~61_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[1]~29_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act~62_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[0]~33_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add0~0_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~36_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~3_combout\ : std_logic;
+SIGNAL \dec~input_o\ : std_logic;
+SIGNAL \incdecdutytest|dec_prev[0]~feeder_combout\ : std_logic;
+SIGNAL \incdecdutytest|Equal1~0_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act~56_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[6]~9_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act~57_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[5]~13_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act~58_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[4]~17_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~4\ : std_logic;
+SIGNAL \incdecdutytest|Add1~6\ : std_logic;
+SIGNAL \incdecdutytest|Add1~8\ : std_logic;
+SIGNAL \incdecdutytest|Add1~9_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~30_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act~59_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[3]~21_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add0~5\ : std_logic;
+SIGNAL \incdecdutytest|Add0~6_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~31_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[3]~23_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[3]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[3]~22_combout\ : std_logic;
+SIGNAL \incdecdutytest|LessThan1~1_combout\ : std_logic;
+SIGNAL \incdecdutytest|LessThan1~2_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~10\ : std_logic;
+SIGNAL \incdecdutytest|Add1~11_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~29_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add0~7\ : std_logic;
+SIGNAL \incdecdutytest|Add0~8_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add0~18_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[4]~19_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[4]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[4]~18_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~12\ : std_logic;
+SIGNAL \incdecdutytest|Add1~13_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~27_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add0~9\ : std_logic;
+SIGNAL \incdecdutytest|Add0~10_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~28_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[5]~15_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[5]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[5]~14_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~14\ : std_logic;
+SIGNAL \incdecdutytest|Add1~15_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~25_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add0~11\ : std_logic;
+SIGNAL \incdecdutytest|Add0~12_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~26_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[6]~11_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[6]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[6]~10_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act~55_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[7]~5_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add0~13\ : std_logic;
+SIGNAL \incdecdutytest|Add0~14_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~24_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~16\ : std_logic;
+SIGNAL \incdecdutytest|Add1~17_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~23_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[7]~7_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[7]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[7]~6_combout\ : std_logic;
+SIGNAL \incdecdutytest|LessThan1~0_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~21_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~35_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[0]~35_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[0]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[0]~34_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add0~1\ : std_logic;
+SIGNAL \incdecdutytest|Add0~2_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~34_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~5_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~33_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[1]~31_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[1]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[1]~30_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add0~3\ : std_logic;
+SIGNAL \incdecdutytest|Add0~4_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add0~19_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~7_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~32_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[2]~27_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[2]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[2]~26_combout\ : std_logic;
+SIGNAL \incdecdutytest|LessThan0~0_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add0~15\ : std_logic;
+SIGNAL \incdecdutytest|Add0~16_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~2_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[8]~3_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[8]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty_act[8]~2_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~18\ : std_logic;
+SIGNAL \incdecdutytest|Add1~19_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~22_combout\ : std_logic;
+SIGNAL \incdecdutytest|Add1~37_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan5~1_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~17\ : std_logic;
+SIGNAL \PWMtest|Add5~18_combout\ : std_logic;
+SIGNAL \PWMtest|Selector25~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~19\ : std_logic;
+SIGNAL \PWMtest|Add5~20_combout\ : std_logic;
+SIGNAL \PWMtest|Selector24~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~21\ : std_logic;
+SIGNAL \PWMtest|Add5~22_combout\ : std_logic;
+SIGNAL \PWMtest|Selector23~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~23\ : std_logic;
+SIGNAL \PWMtest|Add5~24_combout\ : std_logic;
+SIGNAL \PWMtest|Selector22~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~25\ : std_logic;
+SIGNAL \PWMtest|Add5~26_combout\ : std_logic;
+SIGNAL \PWMtest|Selector21~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~27\ : std_logic;
+SIGNAL \PWMtest|Add5~28_combout\ : std_logic;
+SIGNAL \PWMtest|Selector20~0_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~5_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~29\ : std_logic;
+SIGNAL \PWMtest|Add5~30_combout\ : std_logic;
+SIGNAL \PWMtest|Selector19~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~31\ : std_logic;
+SIGNAL \PWMtest|Add5~32_combout\ : std_logic;
+SIGNAL \PWMtest|Selector18~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~33\ : std_logic;
+SIGNAL \PWMtest|Add5~34_combout\ : std_logic;
+SIGNAL \PWMtest|Selector17~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~35\ : std_logic;
+SIGNAL \PWMtest|Add5~36_combout\ : std_logic;
+SIGNAL \PWMtest|Selector16~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~37\ : std_logic;
+SIGNAL \PWMtest|Add5~38_combout\ : std_logic;
+SIGNAL \PWMtest|Selector15~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~39\ : std_logic;
+SIGNAL \PWMtest|Add5~40_combout\ : std_logic;
+SIGNAL \PWMtest|Selector14~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~41\ : std_logic;
+SIGNAL \PWMtest|Add5~42_combout\ : std_logic;
+SIGNAL \PWMtest|Selector13~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~43\ : std_logic;
+SIGNAL \PWMtest|Add5~44_combout\ : std_logic;
+SIGNAL \PWMtest|Selector12~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~45\ : std_logic;
+SIGNAL \PWMtest|Add5~46_combout\ : std_logic;
+SIGNAL \PWMtest|Selector11~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~47\ : std_logic;
+SIGNAL \PWMtest|Add5~48_combout\ : std_logic;
+SIGNAL \PWMtest|Selector10~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~49\ : std_logic;
+SIGNAL \PWMtest|Add5~50_combout\ : std_logic;
+SIGNAL \PWMtest|Selector9~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~51\ : std_logic;
+SIGNAL \PWMtest|Add5~52_combout\ : std_logic;
+SIGNAL \PWMtest|Selector8~0_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~1_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~2_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~3_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~53\ : std_logic;
+SIGNAL \PWMtest|Add5~54_combout\ : std_logic;
+SIGNAL \PWMtest|Selector7~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~55\ : std_logic;
+SIGNAL \PWMtest|Add5~56_combout\ : std_logic;
+SIGNAL \PWMtest|Selector6~0_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~0_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~4_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~6_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[6]~5_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[0]~19_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[0]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty[0]~18_combout\ : std_logic;
+SIGNAL \PWMtest|est_act.idle~feeder_combout\ : std_logic;
+SIGNAL \PWMtest|est_act.idle~q\ : std_logic;
+SIGNAL \PWMtest|Add5~0_combout\ : std_logic;
+SIGNAL \PWMtest|Selector34~0_combout\ : std_logic;
+SIGNAL \PWMtest|Selector34~1_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~1\ : std_logic;
+SIGNAL \PWMtest|Add5~2_combout\ : std_logic;
+SIGNAL \PWMtest|Selector33~0_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[7]~1_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[1]~17_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[1]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty[1]~16_combout\ : std_logic;
+SIGNAL \PWMtest|Selector33~1_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~1_cout\ : std_logic;
+SIGNAL \PWMtest|Add1~3\ : std_logic;
+SIGNAL \PWMtest|Add1~5\ : std_logic;
+SIGNAL \PWMtest|Add1~7\ : std_logic;
+SIGNAL \PWMtest|Add1~9\ : std_logic;
+SIGNAL \PWMtest|Add1~11\ : std_logic;
+SIGNAL \PWMtest|Add1~13\ : std_logic;
+SIGNAL \PWMtest|Add1~15\ : std_logic;
+SIGNAL \PWMtest|Add1~17\ : std_logic;
+SIGNAL \PWMtest|Add1~19\ : std_logic;
+SIGNAL \PWMtest|Add1~21\ : std_logic;
+SIGNAL \PWMtest|Add1~23\ : std_logic;
+SIGNAL \PWMtest|Add1~25\ : std_logic;
+SIGNAL \PWMtest|Add1~27\ : std_logic;
+SIGNAL \PWMtest|Add1~29\ : std_logic;
+SIGNAL \PWMtest|Add1~31\ : std_logic;
+SIGNAL \PWMtest|Add1~33\ : std_logic;
+SIGNAL \PWMtest|Add1~35\ : std_logic;
+SIGNAL \PWMtest|Add1~37\ : std_logic;
+SIGNAL \PWMtest|Add1~39\ : std_logic;
+SIGNAL \PWMtest|Add1~41\ : std_logic;
+SIGNAL \PWMtest|Add1~43\ : std_logic;
+SIGNAL \PWMtest|Add1~45\ : std_logic;
+SIGNAL \PWMtest|Add1~47\ : std_logic;
+SIGNAL \PWMtest|Add1~49\ : std_logic;
+SIGNAL \PWMtest|Add1~51\ : std_logic;
+SIGNAL \PWMtest|Add1~53\ : std_logic;
+SIGNAL \PWMtest|Add1~55\ : std_logic;
+SIGNAL \PWMtest|Add1~57\ : std_logic;
+SIGNAL \PWMtest|Add1~59\ : std_logic;
+SIGNAL \PWMtest|Add1~60_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[0]~33_combout\ : std_logic;
+SIGNAL \PWMtest|Selector39~1_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan3~7_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan3~8_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan3~2_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan3~0_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan3~1_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan3~3_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan3~4_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan3~5_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan3~6_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan2~0_combout\ : std_logic;
+SIGNAL \PWMtest|Selector39~2_combout\ : std_logic;
+SIGNAL \PWMtest|est_sig~7_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan3~9_combout\ : std_logic;
+SIGNAL \PWMtest|Selector39~3_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan8~0_combout\ : std_logic;
+SIGNAL \PWMtest|Selector41~1_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~1_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~3_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~5_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~7_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~9_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~11_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~13_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~15_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~17_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~19_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~21_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~23_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~25_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~27_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~29_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~31_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~33_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~35_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~37_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~39_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~41_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~43_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~45_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~47_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~49_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~51_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~53_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~55_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~57_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~59_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~61_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan7~62_combout\ : std_logic;
+SIGNAL \PWMtest|Selector41~0_combout\ : std_logic;
+SIGNAL \PWMtest|Selector41~3_combout\ : std_logic;
+SIGNAL \PWMtest|est_act.boost2~q\ : std_logic;
+SIGNAL \PWMtest|countactual1[10]~97_combout\ : std_logic;
+SIGNAL \PWMtest|Selector39~4_combout\ : std_logic;
+SIGNAL \PWMtest|Selector39~5_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[10]~98_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[0]~34\ : std_logic;
+SIGNAL \PWMtest|countactual1[1]~35_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[1]~36\ : std_logic;
+SIGNAL \PWMtest|countactual1[2]~37_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[2]~38\ : std_logic;
+SIGNAL \PWMtest|countactual1[3]~39_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[3]~40\ : std_logic;
+SIGNAL \PWMtest|countactual1[4]~41_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[4]~42\ : std_logic;
+SIGNAL \PWMtest|countactual1[5]~43_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[5]~44\ : std_logic;
+SIGNAL \PWMtest|countactual1[6]~45_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[6]~46\ : std_logic;
+SIGNAL \PWMtest|countactual1[7]~47_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[7]~48\ : std_logic;
+SIGNAL \PWMtest|countactual1[8]~49_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[8]~50\ : std_logic;
+SIGNAL \PWMtest|countactual1[9]~51_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[9]~52\ : std_logic;
+SIGNAL \PWMtest|countactual1[10]~53_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[10]~54\ : std_logic;
+SIGNAL \PWMtest|countactual1[11]~55_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[11]~56\ : std_logic;
+SIGNAL \PWMtest|countactual1[12]~57_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[12]~58\ : std_logic;
+SIGNAL \PWMtest|countactual1[13]~59_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[13]~60\ : std_logic;
+SIGNAL \PWMtest|countactual1[14]~61_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[14]~62\ : std_logic;
+SIGNAL \PWMtest|countactual1[15]~63_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[15]~64\ : std_logic;
+SIGNAL \PWMtest|countactual1[16]~65_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[16]~66\ : std_logic;
+SIGNAL \PWMtest|countactual1[17]~67_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[17]~68\ : std_logic;
+SIGNAL \PWMtest|countactual1[18]~69_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[18]~70\ : std_logic;
+SIGNAL \PWMtest|countactual1[19]~71_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[19]~72\ : std_logic;
+SIGNAL \PWMtest|countactual1[20]~73_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[20]~74\ : std_logic;
+SIGNAL \PWMtest|countactual1[21]~75_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[21]~76\ : std_logic;
+SIGNAL \PWMtest|countactual1[22]~77_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[22]~78\ : std_logic;
+SIGNAL \PWMtest|countactual1[23]~79_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[23]~80\ : std_logic;
+SIGNAL \PWMtest|countactual1[24]~81_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[24]~82\ : std_logic;
+SIGNAL \PWMtest|countactual1[25]~83_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[25]~84\ : std_logic;
+SIGNAL \PWMtest|countactual1[26]~85_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[26]~86\ : std_logic;
+SIGNAL \PWMtest|countactual1[27]~87_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[27]~88\ : std_logic;
+SIGNAL \PWMtest|countactual1[28]~89_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[28]~90\ : std_logic;
+SIGNAL \PWMtest|countactual1[29]~91_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[29]~92\ : std_logic;
+SIGNAL \PWMtest|countactual1[30]~93_combout\ : std_logic;
+SIGNAL \PWMtest|countactual1[30]~94\ : std_logic;
+SIGNAL \PWMtest|countactual1[31]~95_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~58_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~56_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~54_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~52_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~50_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~48_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~46_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~44_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~42_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~40_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~38_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~36_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~34_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~32_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~30_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~28_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~26_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~24_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~22_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~20_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~18_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~16_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~14_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~12_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~10_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~8_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~6_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~4_combout\ : std_logic;
+SIGNAL \PWMtest|Add1~2_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~1_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~3_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~5_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~7_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~9_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~11_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~13_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~15_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~17_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~19_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~21_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~23_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~25_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~27_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~29_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~31_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~33_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~35_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~37_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~39_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~41_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~43_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~45_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~47_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~49_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~51_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~53_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~55_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~57_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~59_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~61_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan0~62_combout\ : std_logic;
+SIGNAL \PWMtest|Selector38~0_combout\ : std_logic;
+SIGNAL \PWMtest|Selector38~1_combout\ : std_logic;
+SIGNAL \PWMtest|Selector38~2_combout\ : std_logic;
+SIGNAL \PWMtest|est_act.boost1softs~q\ : std_logic;
+SIGNAL \PWMtest|Selector36~0_combout\ : std_logic;
+SIGNAL \PWMtest|Selector36~1_combout\ : std_logic;
+SIGNAL \PWMtest|est_act.buck1~q\ : std_logic;
+SIGNAL \PWMtest|Selector37~1_combout\ : std_logic;
+SIGNAL \PWMtest|Selector39~6_combout\ : std_logic;
+SIGNAL \PWMtest|Selector39~7_combout\ : std_logic;
+SIGNAL \PWMtest|Selector39~8_combout\ : std_logic;
+SIGNAL \PWMtest|Selector37~0_combout\ : std_logic;
+SIGNAL \PWMtest|Selector37~2_combout\ : std_logic;
+SIGNAL \PWMtest|est_act.buck2~q\ : std_logic;
+SIGNAL \PWMtest|softstart_duty_act[1]~8_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~3\ : std_logic;
+SIGNAL \PWMtest|Add5~4_combout\ : std_logic;
+SIGNAL \PWMtest|Selector32~0_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[2]~15_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[2]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty[2]~14_combout\ : std_logic;
+SIGNAL \PWMtest|Selector32~1_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan5~0_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan5~2_combout\ : std_logic;
+SIGNAL \PWMtest|Selector41~2_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[3]~13_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[3]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty[3]~12_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~5\ : std_logic;
+SIGNAL \PWMtest|Add5~6_combout\ : std_logic;
+SIGNAL \PWMtest|Selector31~0_combout\ : std_logic;
+SIGNAL \PWMtest|Selector31~1_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~7\ : std_logic;
+SIGNAL \PWMtest|Add5~8_combout\ : std_logic;
+SIGNAL \PWMtest|Selector26~0_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[4]~11_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[4]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty[4]~10_combout\ : std_logic;
+SIGNAL \PWMtest|Selector26~1_combout\ : std_logic;
+SIGNAL \PWMtest|Selector30~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~9\ : std_logic;
+SIGNAL \PWMtest|Add5~10_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[5]~9_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[5]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty[5]~8_combout\ : std_logic;
+SIGNAL \PWMtest|Selector29~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~11\ : std_logic;
+SIGNAL \PWMtest|Add5~12_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[6]~7_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[6]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty[6]~6_combout\ : std_logic;
+SIGNAL \PWMtest|Selector28~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~13\ : std_logic;
+SIGNAL \PWMtest|Add5~14_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[7]~3_combout\ : std_logic;
+SIGNAL \incdecdutytest|duty[7]~_emulated_q\ : std_logic;
+SIGNAL \incdecdutytest|duty[7]~2_combout\ : std_logic;
+SIGNAL \PWMtest|Selector27~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~15\ : std_logic;
+SIGNAL \PWMtest|Add5~16_combout\ : std_logic;
+SIGNAL \PWMtest|Selector26~2_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~8_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~10_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~12_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~14_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~16_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~18_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~20_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~22_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan4~23_combout\ : std_logic;
+SIGNAL \PWMtest|softstart_duty_act[28]~5_combout\ : std_logic;
+SIGNAL \PWMtest|softstart_duty_act[28]~6_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~57\ : std_logic;
+SIGNAL \PWMtest|Add5~58_combout\ : std_logic;
+SIGNAL \PWMtest|Selector5~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~59\ : std_logic;
+SIGNAL \PWMtest|Add5~60_combout\ : std_logic;
+SIGNAL \PWMtest|Selector4~0_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~1_cout\ : std_logic;
+SIGNAL \PWMtest|Add3~3\ : std_logic;
+SIGNAL \PWMtest|Add3~5\ : std_logic;
+SIGNAL \PWMtest|Add3~7\ : std_logic;
+SIGNAL \PWMtest|Add3~9\ : std_logic;
+SIGNAL \PWMtest|Add3~11\ : std_logic;
+SIGNAL \PWMtest|Add3~13\ : std_logic;
+SIGNAL \PWMtest|Add3~15\ : std_logic;
+SIGNAL \PWMtest|Add3~17\ : std_logic;
+SIGNAL \PWMtest|Add3~19\ : std_logic;
+SIGNAL \PWMtest|Add3~21\ : std_logic;
+SIGNAL \PWMtest|Add3~23\ : std_logic;
+SIGNAL \PWMtest|Add3~25\ : std_logic;
+SIGNAL \PWMtest|Add3~27\ : std_logic;
+SIGNAL \PWMtest|Add3~29\ : std_logic;
+SIGNAL \PWMtest|Add3~31\ : std_logic;
+SIGNAL \PWMtest|Add3~33\ : std_logic;
+SIGNAL \PWMtest|Add3~35\ : std_logic;
+SIGNAL \PWMtest|Add3~37\ : std_logic;
+SIGNAL \PWMtest|Add3~39\ : std_logic;
+SIGNAL \PWMtest|Add3~41\ : std_logic;
+SIGNAL \PWMtest|Add3~43\ : std_logic;
+SIGNAL \PWMtest|Add3~45\ : std_logic;
+SIGNAL \PWMtest|Add3~47\ : std_logic;
+SIGNAL \PWMtest|Add3~49\ : std_logic;
+SIGNAL \PWMtest|Add3~51\ : std_logic;
+SIGNAL \PWMtest|Add3~53\ : std_logic;
+SIGNAL \PWMtest|Add3~54_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~52_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~50_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~48_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~46_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~44_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~42_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~40_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~38_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~36_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~34_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~32_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~30_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~28_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~26_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~24_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~22_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~20_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~18_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~16_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~14_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~12_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~10_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~8_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~6_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~4_combout\ : std_logic;
+SIGNAL \PWMtest|Add3~2_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~1_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~3_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~5_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~7_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~9_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~11_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~13_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~15_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~17_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~19_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~21_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~23_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~25_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~27_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~29_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~31_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~33_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~35_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~37_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~39_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~41_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~43_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~45_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~47_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~49_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~51_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~53_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~55_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~57_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~59_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~61_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan1~62_combout\ : std_logic;
+SIGNAL \PWMtest|Selector39~11_combout\ : std_logic;
+SIGNAL \PWMtest|Selector39~9_combout\ : std_logic;
+SIGNAL \PWMtest|Selector39~10_combout\ : std_logic;
+SIGNAL \PWMtest|Selector39~12_combout\ : std_logic;
+SIGNAL \PWMtest|est_act.boost2softs~q\ : std_logic;
+SIGNAL \PWMtest|countactual1[10]~32_combout\ : std_logic;
+SIGNAL \PWMtest|softstart_duty_act[1]~0_combout\ : std_logic;
+SIGNAL \PWMtest|softstart_duty_act[1]~2_combout\ : std_logic;
+SIGNAL \PWMtest|softstart_duty_act[1]~3_combout\ : std_logic;
+SIGNAL \PWMtest|softstart_duty_act[1]~1_combout\ : std_logic;
+SIGNAL \PWMtest|softstart_duty_act[1]~4_combout\ : std_logic;
+SIGNAL \PWMtest|Add5~61\ : std_logic;
+SIGNAL \PWMtest|Add5~62_combout\ : std_logic;
+SIGNAL \PWMtest|softstart_duty_act[31]~7_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~1\ : std_logic;
+SIGNAL \PWMtest|Add6~3\ : std_logic;
+SIGNAL \PWMtest|Add6~5\ : std_logic;
+SIGNAL \PWMtest|Add6~7\ : std_logic;
+SIGNAL \PWMtest|Add6~9\ : std_logic;
+SIGNAL \PWMtest|Add6~11\ : std_logic;
+SIGNAL \PWMtest|Add6~13\ : std_logic;
+SIGNAL \PWMtest|Add6~15\ : std_logic;
+SIGNAL \PWMtest|Add6~17\ : std_logic;
+SIGNAL \PWMtest|Add6~19\ : std_logic;
+SIGNAL \PWMtest|Add6~21\ : std_logic;
+SIGNAL \PWMtest|Add6~23\ : std_logic;
+SIGNAL \PWMtest|Add6~25\ : std_logic;
+SIGNAL \PWMtest|Add6~27\ : std_logic;
+SIGNAL \PWMtest|Add6~29\ : std_logic;
+SIGNAL \PWMtest|Add6~31\ : std_logic;
+SIGNAL \PWMtest|Add6~33\ : std_logic;
+SIGNAL \PWMtest|Add6~35\ : std_logic;
+SIGNAL \PWMtest|Add6~37\ : std_logic;
+SIGNAL \PWMtest|Add6~39\ : std_logic;
+SIGNAL \PWMtest|Add6~41\ : std_logic;
+SIGNAL \PWMtest|Add6~43\ : std_logic;
+SIGNAL \PWMtest|Add6~45\ : std_logic;
+SIGNAL \PWMtest|Add6~47\ : std_logic;
+SIGNAL \PWMtest|Add6~49\ : std_logic;
+SIGNAL \PWMtest|Add6~51\ : std_logic;
+SIGNAL \PWMtest|Add6~53\ : std_logic;
+SIGNAL \PWMtest|Add6~55\ : std_logic;
+SIGNAL \PWMtest|Add6~57\ : std_logic;
+SIGNAL \PWMtest|Add6~59\ : std_logic;
+SIGNAL \PWMtest|Add6~60_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~58_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~56_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~54_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~52_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~50_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~48_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~46_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~44_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~42_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~40_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~38_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~36_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~34_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~32_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~30_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~28_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~26_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~24_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~22_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~20_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~18_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~16_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~14_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~12_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~10_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~8_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~6_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~4_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~2_combout\ : std_logic;
+SIGNAL \PWMtest|Add6~0_combout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~1_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~3_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~5_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~7_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~9_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~11_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~13_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~15_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~17_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~19_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~21_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~23_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~25_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~27_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~29_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~31_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~33_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~35_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~37_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~39_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~41_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~43_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~45_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~47_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~49_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~51_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~53_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~55_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~57_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~59_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~61_cout\ : std_logic;
+SIGNAL \PWMtest|LessThan6~62_combout\ : std_logic;
+SIGNAL \PWMtest|Selector40~0_combout\ : std_logic;
+SIGNAL \PWMtest|Selector40~1_combout\ : std_logic;
+SIGNAL \PWMtest|Selector40~2_combout\ : std_logic;
+SIGNAL \PWMtest|est_act.boost1~q\ : std_logic;
+SIGNAL \PWMtest|LessThan2~1_combout\ : std_logic;
+SIGNAL \PWMtest|Selector0~0_combout\ : std_logic;
+SIGNAL \PWMtest|PWM_H1~q\ : std_logic;
+SIGNAL \PWMtest|Selector1~0_combout\ : std_logic;
+SIGNAL \PWMtest|PWM_L1~q\ : std_logic;
+SIGNAL \PWMtest|WideOr2~0_combout\ : std_logic;
+SIGNAL \PWMtest|Selector2~0_combout\ : std_logic;
+SIGNAL \PWMtest|PWM_H2~q\ : std_logic;
+SIGNAL \PWMtest|PWM_L2_sig~0_combout\ : std_logic;
+SIGNAL \PWMtest|PWM_L2~q\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[0]~32_combout\ : std_logic;
 SIGNAL \wdg_reset~input_o\ : std_logic;
-SIGNAL \LessThan11~0_combout\ : std_logic;
-SIGNAL \countwdg_act[6]~45\ : std_logic;
-SIGNAL \countwdg_act[7]~46_combout\ : std_logic;
-SIGNAL \LessThan11~1_combout\ : std_logic;
-SIGNAL \countwdg_act[7]~47\ : std_logic;
-SIGNAL \countwdg_act[8]~48_combout\ : std_logic;
-SIGNAL \countwdg_act[8]~49\ : std_logic;
-SIGNAL \countwdg_act[9]~50_combout\ : std_logic;
-SIGNAL \countwdg_act[9]~51\ : std_logic;
-SIGNAL \countwdg_act[10]~52_combout\ : std_logic;
-SIGNAL \countwdg_act[10]~53\ : std_logic;
-SIGNAL \countwdg_act[11]~54_combout\ : std_logic;
-SIGNAL \countwdg_act[11]~55\ : std_logic;
-SIGNAL \countwdg_act[12]~56_combout\ : std_logic;
-SIGNAL \countwdg_act[12]~57\ : std_logic;
-SIGNAL \countwdg_act[13]~58_combout\ : std_logic;
-SIGNAL \countwdg_act[13]~59\ : std_logic;
-SIGNAL \countwdg_act[14]~60_combout\ : std_logic;
-SIGNAL \countwdg_act[14]~61\ : std_logic;
-SIGNAL \countwdg_act[15]~62_combout\ : std_logic;
-SIGNAL \countwdg_act[15]~63\ : std_logic;
-SIGNAL \countwdg_act[16]~64_combout\ : std_logic;
-SIGNAL \LessThan10~1_combout\ : std_logic;
-SIGNAL \countwdg_act[16]~65\ : std_logic;
-SIGNAL \countwdg_act[17]~66_combout\ : std_logic;
-SIGNAL \countwdg_act[17]~67\ : std_logic;
-SIGNAL \countwdg_act[18]~68_combout\ : std_logic;
-SIGNAL \countwdg_act[18]~69\ : std_logic;
-SIGNAL \countwdg_act[19]~70_combout\ : std_logic;
-SIGNAL \countwdg_act[19]~71\ : std_logic;
-SIGNAL \countwdg_act[20]~72_combout\ : std_logic;
-SIGNAL \countwdg_act[20]~73\ : std_logic;
-SIGNAL \countwdg_act[21]~74_combout\ : std_logic;
-SIGNAL \countwdg_act[21]~75\ : std_logic;
-SIGNAL \countwdg_act[22]~76_combout\ : std_logic;
-SIGNAL \countwdg_act[22]~77\ : std_logic;
-SIGNAL \countwdg_act[23]~78_combout\ : std_logic;
-SIGNAL \countwdg_act[23]~79\ : std_logic;
-SIGNAL \countwdg_act[24]~80_combout\ : std_logic;
-SIGNAL \LessThan10~3_combout\ : std_logic;
-SIGNAL \LessThan10~2_combout\ : std_logic;
-SIGNAL \LessThan10~0_combout\ : std_logic;
-SIGNAL \LessThan10~4_combout\ : std_logic;
-SIGNAL \countwdg_act[24]~81\ : std_logic;
-SIGNAL \countwdg_act[25]~82_combout\ : std_logic;
-SIGNAL \countwdg_act[25]~83\ : std_logic;
-SIGNAL \countwdg_act[26]~84_combout\ : std_logic;
-SIGNAL \countwdg_act[26]~85\ : std_logic;
-SIGNAL \countwdg_act[27]~86_combout\ : std_logic;
-SIGNAL \countwdg_act[27]~87\ : std_logic;
-SIGNAL \countwdg_act[28]~88_combout\ : std_logic;
-SIGNAL \countwdg_act[28]~89\ : std_logic;
-SIGNAL \countwdg_act[29]~90_combout\ : std_logic;
-SIGNAL \countwdg_act[29]~91\ : std_logic;
-SIGNAL \countwdg_act[30]~92_combout\ : std_logic;
-SIGNAL \LessThan10~5_combout\ : std_logic;
-SIGNAL \LessThan10~6_combout\ : std_logic;
-SIGNAL \countwdg_act[30]~93\ : std_logic;
-SIGNAL \countwdg_act[31]~94_combout\ : std_logic;
-SIGNAL \LessThan11~2_combout\ : std_logic;
-SIGNAL \countwdg_act[0]~33\ : std_logic;
-SIGNAL \countwdg_act[1]~34_combout\ : std_logic;
-SIGNAL \countwdg_act[1]~35\ : std_logic;
-SIGNAL \countwdg_act[2]~36_combout\ : std_logic;
-SIGNAL \countwdg_act[2]~37\ : std_logic;
-SIGNAL \countwdg_act[3]~38_combout\ : std_logic;
-SIGNAL \countwdg_act[3]~39\ : std_logic;
-SIGNAL \countwdg_act[4]~40_combout\ : std_logic;
-SIGNAL \countwdg_act[4]~41\ : std_logic;
-SIGNAL \countwdg_act[5]~42_combout\ : std_logic;
-SIGNAL \countwdg_act[5]~43\ : std_logic;
-SIGNAL \countwdg_act[6]~44_combout\ : std_logic;
-SIGNAL \LessThan10~8_combout\ : std_logic;
-SIGNAL \LessThan10~7_combout\ : std_logic;
-SIGNAL \LessThan10~9_combout\ : std_logic;
-SIGNAL \LessThan10~10_combout\ : std_logic;
-SIGNAL \countset_act[0]~19_combout\ : std_logic;
-SIGNAL \countset_act[0]~20\ : std_logic;
-SIGNAL \countset_act[1]~21_combout\ : std_logic;
-SIGNAL \countset_act[1]~22\ : std_logic;
-SIGNAL \countset_act[2]~23_combout\ : std_logic;
-SIGNAL \countset_act[2]~24\ : std_logic;
-SIGNAL \countset_act[3]~25_combout\ : std_logic;
-SIGNAL \countset_act[3]~26\ : std_logic;
-SIGNAL \countset_act[4]~27_combout\ : std_logic;
-SIGNAL \countset_act[4]~28\ : std_logic;
-SIGNAL \countset_act[5]~29_combout\ : std_logic;
-SIGNAL \countset_act[5]~30\ : std_logic;
-SIGNAL \countset_act[6]~31_combout\ : std_logic;
-SIGNAL \countset_act[6]~32\ : std_logic;
-SIGNAL \countset_act[7]~33_combout\ : std_logic;
-SIGNAL \countset_act[7]~34\ : std_logic;
-SIGNAL \countset_act[8]~35_combout\ : std_logic;
-SIGNAL \countset_act[8]~36\ : std_logic;
-SIGNAL \countset_act[9]~37_combout\ : std_logic;
-SIGNAL \countset_act[9]~38\ : std_logic;
-SIGNAL \countset_act[10]~39_combout\ : std_logic;
-SIGNAL \countset_act[10]~40\ : std_logic;
-SIGNAL \countset_act[11]~41_combout\ : std_logic;
-SIGNAL \countset_act[11]~42\ : std_logic;
-SIGNAL \countset_act[12]~43_combout\ : std_logic;
-SIGNAL \countset_act[12]~44\ : std_logic;
-SIGNAL \countset_act[13]~45_combout\ : std_logic;
-SIGNAL \countset_act[13]~46\ : std_logic;
-SIGNAL \countset_act[14]~47_combout\ : std_logic;
-SIGNAL \countset_act[14]~48\ : std_logic;
-SIGNAL \countset_act[15]~49_combout\ : std_logic;
-SIGNAL \countset_act[15]~50\ : std_logic;
-SIGNAL \countset_act[16]~51_combout\ : std_logic;
-SIGNAL \countset_act[16]~52\ : std_logic;
-SIGNAL \countset_act[17]~53_combout\ : std_logic;
-SIGNAL \countset_act[17]~54\ : std_logic;
-SIGNAL \countset_act[18]~55_combout\ : std_logic;
-SIGNAL \set_process~3_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[7]~47\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[8]~48_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[8]~49\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[9]~50_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[9]~51\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[10]~52_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[10]~53\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[11]~54_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[11]~55\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[12]~56_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[12]~57\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[13]~58_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[13]~59\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[14]~60_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[14]~61\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[15]~62_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[15]~63\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[16]~64_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[16]~65\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[17]~66_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[17]~67\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[18]~68_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[18]~69\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[19]~70_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[19]~71\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[20]~72_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[20]~73\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[21]~74_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[21]~75\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[22]~76_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[22]~77\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[23]~78_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[23]~79\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[24]~80_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[24]~81\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[25]~82_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[25]~83\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[26]~84_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[26]~85\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[27]~86_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[27]~87\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[28]~88_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[28]~89\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[29]~90_combout\ : std_logic;
+SIGNAL \watchdog_test|LessThan0~5_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[29]~91\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[30]~92_combout\ : std_logic;
+SIGNAL \watchdog_test|LessThan0~3_combout\ : std_logic;
+SIGNAL \watchdog_test|LessThan0~2_combout\ : std_logic;
+SIGNAL \watchdog_test|LessThan0~0_combout\ : std_logic;
+SIGNAL \watchdog_test|LessThan0~1_combout\ : std_logic;
+SIGNAL \watchdog_test|LessThan0~4_combout\ : std_logic;
+SIGNAL \watchdog_test|LessThan0~6_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[30]~93\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[31]~94_combout\ : std_logic;
+SIGNAL \watchdog_test|LessThan1~0_combout\ : std_logic;
+SIGNAL \watchdog_test|LessThan1~1_combout\ : std_logic;
+SIGNAL \watchdog_test|LessThan1~2_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[0]~33\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[1]~34_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[1]~35\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[2]~36_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[2]~37\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[3]~38_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[3]~39\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[4]~40_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[4]~41\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[5]~42_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[5]~43\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[6]~44_combout\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[6]~45\ : std_logic;
+SIGNAL \watchdog_test|countwdg_act[7]~46_combout\ : std_logic;
+SIGNAL \watchdog_test|LessThan0~7_combout\ : std_logic;
+SIGNAL \watchdog_test|LessThan0~8_combout\ : std_logic;
+SIGNAL \watchdog_test|LessThan0~9_combout\ : std_logic;
+SIGNAL \watchdog_test|LessThan0~10_combout\ : std_logic;
 SIGNAL \set_btn~input_o\ : std_logic;
-SIGNAL \set_process~1_combout\ : std_logic;
-SIGNAL \set_process~0_combout\ : std_logic;
-SIGNAL \set_process~2_combout\ : std_logic;
-SIGNAL \set_process~4_combout\ : std_logic;
-SIGNAL \set_out~0_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[0]~19_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[0]~20\ : std_logic;
+SIGNAL \set_reset_test|countset_act[1]~21_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[1]~22\ : std_logic;
+SIGNAL \set_reset_test|countset_act[2]~23_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[2]~24\ : std_logic;
+SIGNAL \set_reset_test|countset_act[3]~25_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[3]~26\ : std_logic;
+SIGNAL \set_reset_test|countset_act[4]~27_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[4]~28\ : std_logic;
+SIGNAL \set_reset_test|countset_act[5]~29_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[5]~30\ : std_logic;
+SIGNAL \set_reset_test|countset_act[6]~31_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[6]~32\ : std_logic;
+SIGNAL \set_reset_test|countset_act[7]~33_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[7]~34\ : std_logic;
+SIGNAL \set_reset_test|countset_act[8]~35_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[8]~36\ : std_logic;
+SIGNAL \set_reset_test|countset_act[9]~37_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[9]~38\ : std_logic;
+SIGNAL \set_reset_test|countset_act[10]~39_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[10]~40\ : std_logic;
+SIGNAL \set_reset_test|countset_act[11]~41_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[11]~42\ : std_logic;
+SIGNAL \set_reset_test|countset_act[12]~43_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[12]~44\ : std_logic;
+SIGNAL \set_reset_test|countset_act[13]~45_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[13]~46\ : std_logic;
+SIGNAL \set_reset_test|countset_act[14]~47_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[14]~48\ : std_logic;
+SIGNAL \set_reset_test|countset_act[15]~49_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[15]~50\ : std_logic;
+SIGNAL \set_reset_test|countset_act[16]~51_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[16]~52\ : std_logic;
+SIGNAL \set_reset_test|countset_act[17]~53_combout\ : std_logic;
+SIGNAL \set_reset_test|countset_act[17]~54\ : std_logic;
+SIGNAL \set_reset_test|countset_act[18]~55_combout\ : std_logic;
+SIGNAL \set_reset_test|set_process~3_combout\ : std_logic;
+SIGNAL \set_reset_test|set_process~1_combout\ : std_logic;
+SIGNAL \set_reset_test|set_process~0_combout\ : std_logic;
+SIGNAL \set_reset_test|set_process~2_combout\ : std_logic;
+SIGNAL \set_reset_test|set_process~4_combout\ : std_logic;
+SIGNAL \set_reset_test|set_out~0_combout\ : std_logic;
 SIGNAL \reset_btn~input_o\ : std_logic;
-SIGNAL \countreset_act[0]~19_combout\ : std_logic;
-SIGNAL \countreset_act[0]~20\ : std_logic;
-SIGNAL \countreset_act[1]~21_combout\ : std_logic;
-SIGNAL \countreset_act[1]~22\ : std_logic;
-SIGNAL \countreset_act[2]~23_combout\ : std_logic;
-SIGNAL \countreset_act[2]~24\ : std_logic;
-SIGNAL \countreset_act[3]~25_combout\ : std_logic;
-SIGNAL \countreset_act[3]~26\ : std_logic;
-SIGNAL \countreset_act[4]~27_combout\ : std_logic;
-SIGNAL \countreset_act[4]~28\ : std_logic;
-SIGNAL \countreset_act[5]~29_combout\ : std_logic;
-SIGNAL \countreset_act[5]~30\ : std_logic;
-SIGNAL \countreset_act[6]~31_combout\ : std_logic;
-SIGNAL \countreset_act[6]~32\ : std_logic;
-SIGNAL \countreset_act[7]~33_combout\ : std_logic;
-SIGNAL \countreset_act[7]~34\ : std_logic;
-SIGNAL \countreset_act[8]~35_combout\ : std_logic;
-SIGNAL \countreset_act[8]~36\ : std_logic;
-SIGNAL \countreset_act[9]~37_combout\ : std_logic;
-SIGNAL \countreset_act[9]~38\ : std_logic;
-SIGNAL \countreset_act[10]~39_combout\ : std_logic;
-SIGNAL \countreset_act[10]~40\ : std_logic;
-SIGNAL \countreset_act[11]~41_combout\ : std_logic;
-SIGNAL \countreset_act[11]~42\ : std_logic;
-SIGNAL \countreset_act[12]~43_combout\ : std_logic;
-SIGNAL \countreset_act[12]~44\ : std_logic;
-SIGNAL \countreset_act[13]~45_combout\ : std_logic;
-SIGNAL \countreset_act[13]~46\ : std_logic;
-SIGNAL \countreset_act[14]~47_combout\ : std_logic;
-SIGNAL \reset_process~1_combout\ : std_logic;
-SIGNAL \reset_process~0_combout\ : std_logic;
-SIGNAL \reset_process~2_combout\ : std_logic;
-SIGNAL \countreset_act[14]~48\ : std_logic;
-SIGNAL \countreset_act[15]~49_combout\ : std_logic;
-SIGNAL \countreset_act[15]~50\ : std_logic;
-SIGNAL \countreset_act[16]~51_combout\ : std_logic;
-SIGNAL \countreset_act[16]~52\ : std_logic;
-SIGNAL \countreset_act[17]~53_combout\ : std_logic;
-SIGNAL \countreset_act[17]~54\ : std_logic;
-SIGNAL \countreset_act[18]~55_combout\ : std_logic;
-SIGNAL \reset_process~3_combout\ : std_logic;
-SIGNAL \reset_process~4_combout\ : std_logic;
-SIGNAL \reset_out~0_combout\ : std_logic;
-SIGNAL countwdg_act : std_logic_vector(31 DOWNTO 0);
-SIGNAL countactual1 : std_logic_vector(31 DOWNTO 0);
-SIGNAL countset_act : std_logic_vector(18 DOWNTO 0);
-SIGNAL countreset_act : std_logic_vector(18 DOWNTO 0);
-SIGNAL softstart_duty_act : std_logic_vector(31 DOWNTO 0);
-SIGNAL \ALT_INV_reset_out~0_combout\ : std_logic;
-SIGNAL \ALT_INV_set_out~0_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[0]~19_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[0]~20\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[1]~21_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[1]~22\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[2]~23_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[2]~24\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[3]~25_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[3]~26\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[4]~27_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[4]~28\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[5]~29_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[5]~30\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[6]~31_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[6]~32\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[7]~33_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[7]~34\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[8]~35_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[8]~36\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[9]~37_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[9]~38\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[10]~39_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[10]~40\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[11]~41_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[11]~42\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[12]~43_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[12]~44\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[13]~45_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[13]~46\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[14]~47_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[14]~48\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[15]~49_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[15]~50\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[16]~51_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[16]~52\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[17]~53_combout\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[17]~54\ : std_logic;
+SIGNAL \set_reset_test|countreset_act[18]~55_combout\ : std_logic;
+SIGNAL \set_reset_test|reset_process~3_combout\ : std_logic;
+SIGNAL \set_reset_test|reset_process~1_combout\ : std_logic;
+SIGNAL \set_reset_test|reset_process~0_combout\ : std_logic;
+SIGNAL \set_reset_test|reset_process~2_combout\ : std_logic;
+SIGNAL \set_reset_test|reset_process~4_combout\ : std_logic;
+SIGNAL \set_reset_test|reset_out~0_combout\ : std_logic;
+SIGNAL \incdecdutytest|dec_prev\ : std_logic_vector(1 DOWNTO 0);
+SIGNAL \PWMtest|softstart_duty_act\ : std_logic_vector(31 DOWNTO 0);
+SIGNAL \watchdog_test|countwdg_act\ : std_logic_vector(31 DOWNTO 0);
+SIGNAL \PWMtest|countactual1\ : std_logic_vector(31 DOWNTO 0);
+SIGNAL \set_reset_test|countset_act\ : std_logic_vector(18 DOWNTO 0);
+SIGNAL \incdecdutytest|inc_prev\ : std_logic_vector(1 DOWNTO 0);
+SIGNAL \set_reset_test|countreset_act\ : std_logic_vector(18 DOWNTO 0);
+SIGNAL \incdecdutytest|duty\ : std_logic_vector(8 DOWNTO 0);
+SIGNAL \set_reset_test|ALT_INV_reset_out~0_combout\ : std_logic;
+SIGNAL \set_reset_test|ALT_INV_set_out~0_combout\ : std_logic;
 
 COMPONENT hard_block
     PORT (
@@ -900,6 +1057,8 @@ ww_reset_btn <= reset_btn;
 set_out <= ww_set_out;
 reset_out <= ww_reset_out;
 ww_wdg_reset <= wdg_reset;
+ww_inc <= inc;
+ww_dec <= dec;
 ww_devoe <= devoe;
 ww_devclrn <= devclrn;
 ww_devpor <= devpor;
@@ -909,15 +1068,15 @@ ww_devpor <= devpor;
 \~QUARTUS_CREATED_ADC2~_CHSEL_bus\ <= (\~QUARTUS_CREATED_GND~I_combout\ & \~QUARTUS_CREATED_GND~I_combout\ & \~QUARTUS_CREATED_GND~I_combout\ & \~QUARTUS_CREATED_GND~I_combout\ & \~QUARTUS_CREATED_GND~I_combout\);
 
 \clk~inputclkctrl_INCLK_bus\ <= (vcc & vcc & vcc & \clk~input_o\);
-\ALT_INV_reset_out~0_combout\ <= NOT \reset_out~0_combout\;
-\ALT_INV_set_out~0_combout\ <= NOT \set_out~0_combout\;
+\set_reset_test|ALT_INV_reset_out~0_combout\ <= NOT \set_reset_test|reset_out~0_combout\;
+\set_reset_test|ALT_INV_set_out~0_combout\ <= NOT \set_reset_test|set_out~0_combout\;
 auto_generated_inst : hard_block
 PORT MAP (
 	devoe => ww_devoe,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor);
 
--- Location: LCCOMB_X44_Y45_N16
+-- Location: LCCOMB_X44_Y47_N24
 \~QUARTUS_CREATED_GND~I\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \~QUARTUS_CREATED_GND~I_combout\ = GND
@@ -938,7 +1097,7 @@ GENERIC MAP (
 	open_drain_output => "false")
 -- pragma translate_on
 PORT MAP (
-	i => \PWM_H1~reg0_q\,
+	i => \PWMtest|PWM_H1~q\,
 	devoe => ww_devoe,
 	o => \PWM_H1~output_o\);
 
@@ -950,7 +1109,7 @@ GENERIC MAP (
 	open_drain_output => "false")
 -- pragma translate_on
 PORT MAP (
-	i => \PWM_L1~reg0_q\,
+	i => \PWMtest|PWM_L1~q\,
 	devoe => ww_devoe,
 	o => \PWM_L1~output_o\);
 
@@ -962,7 +1121,7 @@ GENERIC MAP (
 	open_drain_output => "false")
 -- pragma translate_on
 PORT MAP (
-	i => \PWM_H2~reg0_q\,
+	i => \PWMtest|PWM_H2~q\,
 	devoe => ww_devoe,
 	o => \PWM_H2~output_o\);
 
@@ -974,7 +1133,7 @@ GENERIC MAP (
 	open_drain_output => "false")
 -- pragma translate_on
 PORT MAP (
-	i => \PWM_L2~reg0_q\,
+	i => \PWMtest|PWM_L2~q\,
 	devoe => ww_devoe,
 	o => \PWM_L2~output_o\);
 
@@ -986,7 +1145,7 @@ GENERIC MAP (
 	open_drain_output => "false")
 -- pragma translate_on
 PORT MAP (
-	i => \LessThan10~10_combout\,
+	i => \watchdog_test|LessThan0~10_combout\,
 	devoe => ww_devoe,
 	o => \wdg_out~output_o\);
 
@@ -998,7 +1157,7 @@ GENERIC MAP (
 	open_drain_output => "false")
 -- pragma translate_on
 PORT MAP (
-	i => \set_out~0_combout\,
+	i => \set_reset_test|set_out~0_combout\,
 	devoe => ww_devoe,
 	o => \set_out~output_o\);
 
@@ -1010,7 +1169,7 @@ GENERIC MAP (
 	open_drain_output => "false")
 -- pragma translate_on
 PORT MAP (
-	i => \reset_out~0_combout\,
+	i => \set_reset_test|reset_out~0_combout\,
 	devoe => ww_devoe,
 	o => \reset_out~output_o\);
 
@@ -1039,22 +1198,17 @@ PORT MAP (
 	devpor => ww_devpor,
 	outclk => \clk~inputclkctrl_outclk\);
 
--- Location: LCCOMB_X54_Y41_N0
-\countactual1[0]~33\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[0]~33_combout\ = countactual1(0) $ (VCC)
--- \countactual1[0]~34\ = CARRY(countactual1(0))
-
+-- Location: IOIBUF_X36_Y39_N22
+\inc~input\ : fiftyfivenm_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0011001111001100",
-	sum_lutc_input => "datac")
+	bus_hold => "false",
+	listen_to_nsleep_signal => "false",
+	simulate_z_as => "z")
 -- pragma translate_on
 PORT MAP (
-	datab => countactual1(0),
-	datad => VCC,
-	combout => \countactual1[0]~33_combout\,
-	cout => \countactual1[0]~34\);
+	i => ww_inc,
+	o => \inc~input_o\);
 
 -- Location: IOIBUF_X69_Y54_N1
 \reset~input\ : fiftyfivenm_io_ibuf
@@ -1068,57 +1222,8 @@ PORT MAP (
 	i => ww_reset,
 	o => \reset~input_o\);
 
--- Location: LCCOMB_X54_Y41_N4
-\countactual1[2]~37\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[2]~37_combout\ = (countactual1(2) & (\countactual1[1]~36\ $ (GND))) # (!countactual1(2) & (!\countactual1[1]~36\ & VCC))
--- \countactual1[2]~38\ = CARRY((countactual1(2) & !\countactual1[1]~36\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(2),
-	datad => VCC,
-	cin => \countactual1[1]~36\,
-	combout => \countactual1[2]~37_combout\,
-	cout => \countactual1[2]~38\);
-
--- Location: LCCOMB_X54_Y41_N6
-\countactual1[3]~39\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[3]~39_combout\ = (countactual1(3) & (!\countactual1[2]~38\)) # (!countactual1(3) & ((\countactual1[2]~38\) # (GND)))
--- \countactual1[3]~40\ = CARRY((!\countactual1[2]~38\) # (!countactual1(3)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(3),
-	datad => VCC,
-	cin => \countactual1[2]~38\,
-	combout => \countactual1[3]~39_combout\,
-	cout => \countactual1[3]~40\);
-
--- Location: LCCOMB_X55_Y37_N12
-\est_act.idle~feeder\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \est_act.idle~feeder_combout\ = VCC
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111111111111111",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	combout => \est_act.idle~feeder_combout\);
-
--- Location: FF_X55_Y37_N13
-\est_act.idle\ : dffeas
+-- Location: FF_X57_Y43_N1
+\incdecdutytest|inc_prev[0]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -1126,14 +1231,15 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \est_act.idle~feeder_combout\,
+	asdata => \inc~input_o\,
 	clrn => \reset~input_o\,
+	sload => VCC,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => \est_act.idle~q\);
+	q => \incdecdutytest|inc_prev\(0));
 
--- Location: FF_X54_Y41_N7
-\countactual1[3]\ : dffeas
+-- Location: FF_X57_Y43_N7
+\incdecdutytest|inc_prev[1]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -1141,1289 +1247,12 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[3]~39_combout\,
+	asdata => \incdecdutytest|inc_prev\(0),
 	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
+	sload => VCC,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countactual1(3));
-
--- Location: LCCOMB_X54_Y41_N8
-\countactual1[4]~41\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[4]~41_combout\ = (countactual1(4) & (\countactual1[3]~40\ $ (GND))) # (!countactual1(4) & (!\countactual1[3]~40\ & VCC))
--- \countactual1[4]~42\ = CARRY((countactual1(4) & !\countactual1[3]~40\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(4),
-	datad => VCC,
-	cin => \countactual1[3]~40\,
-	combout => \countactual1[4]~41_combout\,
-	cout => \countactual1[4]~42\);
-
--- Location: FF_X54_Y41_N9
-\countactual1[4]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[4]~41_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(4));
-
--- Location: LCCOMB_X54_Y41_N10
-\countactual1[5]~43\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[5]~43_combout\ = (countactual1(5) & (!\countactual1[4]~42\)) # (!countactual1(5) & ((\countactual1[4]~42\) # (GND)))
--- \countactual1[5]~44\ = CARRY((!\countactual1[4]~42\) # (!countactual1(5)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(5),
-	datad => VCC,
-	cin => \countactual1[4]~42\,
-	combout => \countactual1[5]~43_combout\,
-	cout => \countactual1[5]~44\);
-
--- Location: FF_X54_Y41_N11
-\countactual1[5]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[5]~43_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(5));
-
--- Location: LCCOMB_X54_Y41_N12
-\countactual1[6]~45\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[6]~45_combout\ = (countactual1(6) & (\countactual1[5]~44\ $ (GND))) # (!countactual1(6) & (!\countactual1[5]~44\ & VCC))
--- \countactual1[6]~46\ = CARRY((countactual1(6) & !\countactual1[5]~44\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(6),
-	datad => VCC,
-	cin => \countactual1[5]~44\,
-	combout => \countactual1[6]~45_combout\,
-	cout => \countactual1[6]~46\);
-
--- Location: FF_X54_Y41_N13
-\countactual1[6]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[6]~45_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(6));
-
--- Location: LCCOMB_X54_Y41_N14
-\countactual1[7]~47\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[7]~47_combout\ = (countactual1(7) & (!\countactual1[6]~46\)) # (!countactual1(7) & ((\countactual1[6]~46\) # (GND)))
--- \countactual1[7]~48\ = CARRY((!\countactual1[6]~46\) # (!countactual1(7)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(7),
-	datad => VCC,
-	cin => \countactual1[6]~46\,
-	combout => \countactual1[7]~47_combout\,
-	cout => \countactual1[7]~48\);
-
--- Location: FF_X54_Y41_N15
-\countactual1[7]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[7]~47_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(7));
-
--- Location: LCCOMB_X54_Y41_N16
-\countactual1[8]~49\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[8]~49_combout\ = (countactual1(8) & (\countactual1[7]~48\ $ (GND))) # (!countactual1(8) & (!\countactual1[7]~48\ & VCC))
--- \countactual1[8]~50\ = CARRY((countactual1(8) & !\countactual1[7]~48\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(8),
-	datad => VCC,
-	cin => \countactual1[7]~48\,
-	combout => \countactual1[8]~49_combout\,
-	cout => \countactual1[8]~50\);
-
--- Location: FF_X54_Y41_N17
-\countactual1[8]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[8]~49_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(8));
-
--- Location: LCCOMB_X54_Y41_N18
-\countactual1[9]~51\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[9]~51_combout\ = (countactual1(9) & (!\countactual1[8]~50\)) # (!countactual1(9) & ((\countactual1[8]~50\) # (GND)))
--- \countactual1[9]~52\ = CARRY((!\countactual1[8]~50\) # (!countactual1(9)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(9),
-	datad => VCC,
-	cin => \countactual1[8]~50\,
-	combout => \countactual1[9]~51_combout\,
-	cout => \countactual1[9]~52\);
-
--- Location: FF_X54_Y41_N19
-\countactual1[9]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[9]~51_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(9));
-
--- Location: LCCOMB_X54_Y41_N20
-\countactual1[10]~53\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[10]~53_combout\ = (countactual1(10) & (\countactual1[9]~52\ $ (GND))) # (!countactual1(10) & (!\countactual1[9]~52\ & VCC))
--- \countactual1[10]~54\ = CARRY((countactual1(10) & !\countactual1[9]~52\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(10),
-	datad => VCC,
-	cin => \countactual1[9]~52\,
-	combout => \countactual1[10]~53_combout\,
-	cout => \countactual1[10]~54\);
-
--- Location: FF_X54_Y41_N21
-\countactual1[10]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[10]~53_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(10));
-
--- Location: LCCOMB_X54_Y41_N22
-\countactual1[11]~55\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[11]~55_combout\ = (countactual1(11) & (!\countactual1[10]~54\)) # (!countactual1(11) & ((\countactual1[10]~54\) # (GND)))
--- \countactual1[11]~56\ = CARRY((!\countactual1[10]~54\) # (!countactual1(11)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(11),
-	datad => VCC,
-	cin => \countactual1[10]~54\,
-	combout => \countactual1[11]~55_combout\,
-	cout => \countactual1[11]~56\);
-
--- Location: FF_X54_Y41_N23
-\countactual1[11]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[11]~55_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(11));
-
--- Location: LCCOMB_X54_Y41_N24
-\countactual1[12]~57\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[12]~57_combout\ = (countactual1(12) & (\countactual1[11]~56\ $ (GND))) # (!countactual1(12) & (!\countactual1[11]~56\ & VCC))
--- \countactual1[12]~58\ = CARRY((countactual1(12) & !\countactual1[11]~56\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(12),
-	datad => VCC,
-	cin => \countactual1[11]~56\,
-	combout => \countactual1[12]~57_combout\,
-	cout => \countactual1[12]~58\);
-
--- Location: FF_X54_Y41_N25
-\countactual1[12]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[12]~57_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(12));
-
--- Location: LCCOMB_X54_Y41_N26
-\countactual1[13]~59\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[13]~59_combout\ = (countactual1(13) & (!\countactual1[12]~58\)) # (!countactual1(13) & ((\countactual1[12]~58\) # (GND)))
--- \countactual1[13]~60\ = CARRY((!\countactual1[12]~58\) # (!countactual1(13)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(13),
-	datad => VCC,
-	cin => \countactual1[12]~58\,
-	combout => \countactual1[13]~59_combout\,
-	cout => \countactual1[13]~60\);
-
--- Location: FF_X54_Y41_N27
-\countactual1[13]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[13]~59_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(13));
-
--- Location: LCCOMB_X54_Y41_N28
-\countactual1[14]~61\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[14]~61_combout\ = (countactual1(14) & (\countactual1[13]~60\ $ (GND))) # (!countactual1(14) & (!\countactual1[13]~60\ & VCC))
--- \countactual1[14]~62\ = CARRY((countactual1(14) & !\countactual1[13]~60\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(14),
-	datad => VCC,
-	cin => \countactual1[13]~60\,
-	combout => \countactual1[14]~61_combout\,
-	cout => \countactual1[14]~62\);
-
--- Location: FF_X54_Y41_N29
-\countactual1[14]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[14]~61_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(14));
-
--- Location: LCCOMB_X54_Y41_N30
-\countactual1[15]~63\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[15]~63_combout\ = (countactual1(15) & (!\countactual1[14]~62\)) # (!countactual1(15) & ((\countactual1[14]~62\) # (GND)))
--- \countactual1[15]~64\ = CARRY((!\countactual1[14]~62\) # (!countactual1(15)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(15),
-	datad => VCC,
-	cin => \countactual1[14]~62\,
-	combout => \countactual1[15]~63_combout\,
-	cout => \countactual1[15]~64\);
-
--- Location: FF_X54_Y41_N31
-\countactual1[15]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[15]~63_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(15));
-
--- Location: LCCOMB_X54_Y40_N0
-\countactual1[16]~65\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[16]~65_combout\ = (countactual1(16) & (\countactual1[15]~64\ $ (GND))) # (!countactual1(16) & (!\countactual1[15]~64\ & VCC))
--- \countactual1[16]~66\ = CARRY((countactual1(16) & !\countactual1[15]~64\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(16),
-	datad => VCC,
-	cin => \countactual1[15]~64\,
-	combout => \countactual1[16]~65_combout\,
-	cout => \countactual1[16]~66\);
-
--- Location: FF_X54_Y40_N1
-\countactual1[16]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[16]~65_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(16));
-
--- Location: LCCOMB_X54_Y40_N2
-\countactual1[17]~67\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[17]~67_combout\ = (countactual1(17) & (!\countactual1[16]~66\)) # (!countactual1(17) & ((\countactual1[16]~66\) # (GND)))
--- \countactual1[17]~68\ = CARRY((!\countactual1[16]~66\) # (!countactual1(17)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(17),
-	datad => VCC,
-	cin => \countactual1[16]~66\,
-	combout => \countactual1[17]~67_combout\,
-	cout => \countactual1[17]~68\);
-
--- Location: FF_X54_Y40_N3
-\countactual1[17]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[17]~67_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(17));
-
--- Location: LCCOMB_X54_Y40_N4
-\countactual1[18]~69\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[18]~69_combout\ = (countactual1(18) & (\countactual1[17]~68\ $ (GND))) # (!countactual1(18) & (!\countactual1[17]~68\ & VCC))
--- \countactual1[18]~70\ = CARRY((countactual1(18) & !\countactual1[17]~68\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(18),
-	datad => VCC,
-	cin => \countactual1[17]~68\,
-	combout => \countactual1[18]~69_combout\,
-	cout => \countactual1[18]~70\);
-
--- Location: FF_X54_Y40_N5
-\countactual1[18]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[18]~69_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(18));
-
--- Location: LCCOMB_X54_Y40_N6
-\countactual1[19]~71\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[19]~71_combout\ = (countactual1(19) & (!\countactual1[18]~70\)) # (!countactual1(19) & ((\countactual1[18]~70\) # (GND)))
--- \countactual1[19]~72\ = CARRY((!\countactual1[18]~70\) # (!countactual1(19)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(19),
-	datad => VCC,
-	cin => \countactual1[18]~70\,
-	combout => \countactual1[19]~71_combout\,
-	cout => \countactual1[19]~72\);
-
--- Location: FF_X54_Y40_N7
-\countactual1[19]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[19]~71_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(19));
-
--- Location: LCCOMB_X54_Y40_N8
-\countactual1[20]~73\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[20]~73_combout\ = (countactual1(20) & (\countactual1[19]~72\ $ (GND))) # (!countactual1(20) & (!\countactual1[19]~72\ & VCC))
--- \countactual1[20]~74\ = CARRY((countactual1(20) & !\countactual1[19]~72\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(20),
-	datad => VCC,
-	cin => \countactual1[19]~72\,
-	combout => \countactual1[20]~73_combout\,
-	cout => \countactual1[20]~74\);
-
--- Location: FF_X54_Y40_N9
-\countactual1[20]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[20]~73_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(20));
-
--- Location: LCCOMB_X54_Y40_N10
-\countactual1[21]~75\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[21]~75_combout\ = (countactual1(21) & (!\countactual1[20]~74\)) # (!countactual1(21) & ((\countactual1[20]~74\) # (GND)))
--- \countactual1[21]~76\ = CARRY((!\countactual1[20]~74\) # (!countactual1(21)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(21),
-	datad => VCC,
-	cin => \countactual1[20]~74\,
-	combout => \countactual1[21]~75_combout\,
-	cout => \countactual1[21]~76\);
-
--- Location: FF_X54_Y40_N11
-\countactual1[21]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[21]~75_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(21));
-
--- Location: LCCOMB_X54_Y40_N12
-\countactual1[22]~77\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[22]~77_combout\ = (countactual1(22) & (\countactual1[21]~76\ $ (GND))) # (!countactual1(22) & (!\countactual1[21]~76\ & VCC))
--- \countactual1[22]~78\ = CARRY((countactual1(22) & !\countactual1[21]~76\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(22),
-	datad => VCC,
-	cin => \countactual1[21]~76\,
-	combout => \countactual1[22]~77_combout\,
-	cout => \countactual1[22]~78\);
-
--- Location: FF_X54_Y40_N13
-\countactual1[22]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[22]~77_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(22));
-
--- Location: LCCOMB_X54_Y40_N14
-\countactual1[23]~79\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[23]~79_combout\ = (countactual1(23) & (!\countactual1[22]~78\)) # (!countactual1(23) & ((\countactual1[22]~78\) # (GND)))
--- \countactual1[23]~80\ = CARRY((!\countactual1[22]~78\) # (!countactual1(23)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(23),
-	datad => VCC,
-	cin => \countactual1[22]~78\,
-	combout => \countactual1[23]~79_combout\,
-	cout => \countactual1[23]~80\);
-
--- Location: FF_X54_Y40_N15
-\countactual1[23]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[23]~79_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(23));
-
--- Location: LCCOMB_X54_Y40_N16
-\countactual1[24]~81\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[24]~81_combout\ = (countactual1(24) & (\countactual1[23]~80\ $ (GND))) # (!countactual1(24) & (!\countactual1[23]~80\ & VCC))
--- \countactual1[24]~82\ = CARRY((countactual1(24) & !\countactual1[23]~80\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(24),
-	datad => VCC,
-	cin => \countactual1[23]~80\,
-	combout => \countactual1[24]~81_combout\,
-	cout => \countactual1[24]~82\);
-
--- Location: FF_X54_Y40_N17
-\countactual1[24]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[24]~81_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(24));
-
--- Location: LCCOMB_X54_Y40_N18
-\countactual1[25]~83\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[25]~83_combout\ = (countactual1(25) & (!\countactual1[24]~82\)) # (!countactual1(25) & ((\countactual1[24]~82\) # (GND)))
--- \countactual1[25]~84\ = CARRY((!\countactual1[24]~82\) # (!countactual1(25)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(25),
-	datad => VCC,
-	cin => \countactual1[24]~82\,
-	combout => \countactual1[25]~83_combout\,
-	cout => \countactual1[25]~84\);
-
--- Location: FF_X54_Y40_N19
-\countactual1[25]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[25]~83_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(25));
-
--- Location: LCCOMB_X54_Y40_N20
-\countactual1[26]~85\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[26]~85_combout\ = (countactual1(26) & (\countactual1[25]~84\ $ (GND))) # (!countactual1(26) & (!\countactual1[25]~84\ & VCC))
--- \countactual1[26]~86\ = CARRY((countactual1(26) & !\countactual1[25]~84\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(26),
-	datad => VCC,
-	cin => \countactual1[25]~84\,
-	combout => \countactual1[26]~85_combout\,
-	cout => \countactual1[26]~86\);
-
--- Location: FF_X54_Y40_N21
-\countactual1[26]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[26]~85_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(26));
-
--- Location: LCCOMB_X54_Y40_N22
-\countactual1[27]~87\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[27]~87_combout\ = (countactual1(27) & (!\countactual1[26]~86\)) # (!countactual1(27) & ((\countactual1[26]~86\) # (GND)))
--- \countactual1[27]~88\ = CARRY((!\countactual1[26]~86\) # (!countactual1(27)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(27),
-	datad => VCC,
-	cin => \countactual1[26]~86\,
-	combout => \countactual1[27]~87_combout\,
-	cout => \countactual1[27]~88\);
-
--- Location: FF_X54_Y40_N23
-\countactual1[27]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[27]~87_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(27));
-
--- Location: LCCOMB_X54_Y40_N24
-\countactual1[28]~89\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[28]~89_combout\ = (countactual1(28) & (\countactual1[27]~88\ $ (GND))) # (!countactual1(28) & (!\countactual1[27]~88\ & VCC))
--- \countactual1[28]~90\ = CARRY((countactual1(28) & !\countactual1[27]~88\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(28),
-	datad => VCC,
-	cin => \countactual1[27]~88\,
-	combout => \countactual1[28]~89_combout\,
-	cout => \countactual1[28]~90\);
-
--- Location: FF_X54_Y40_N25
-\countactual1[28]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[28]~89_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(28));
-
--- Location: LCCOMB_X54_Y40_N26
-\countactual1[29]~91\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[29]~91_combout\ = (countactual1(29) & (!\countactual1[28]~90\)) # (!countactual1(29) & ((\countactual1[28]~90\) # (GND)))
--- \countactual1[29]~92\ = CARRY((!\countactual1[28]~90\) # (!countactual1(29)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(29),
-	datad => VCC,
-	cin => \countactual1[28]~90\,
-	combout => \countactual1[29]~91_combout\,
-	cout => \countactual1[29]~92\);
-
--- Location: FF_X54_Y40_N27
-\countactual1[29]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[29]~91_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(29));
-
--- Location: LCCOMB_X54_Y40_N28
-\countactual1[30]~93\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[30]~93_combout\ = (countactual1(30) & (\countactual1[29]~92\ $ (GND))) # (!countactual1(30) & (!\countactual1[29]~92\ & VCC))
--- \countactual1[30]~94\ = CARRY((countactual1(30) & !\countactual1[29]~92\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(30),
-	datad => VCC,
-	cin => \countactual1[29]~92\,
-	combout => \countactual1[30]~93_combout\,
-	cout => \countactual1[30]~94\);
-
--- Location: FF_X54_Y40_N29
-\countactual1[30]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[30]~93_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(30));
-
--- Location: LCCOMB_X54_Y38_N0
-\LessThan3~5\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan3~5_combout\ = (!countactual1(25) & (!countactual1(27) & (!countactual1(28) & !countactual1(26))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000000001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(25),
-	datab => countactual1(27),
-	datac => countactual1(28),
-	datad => countactual1(26),
-	combout => \LessThan3~5_combout\);
-
--- Location: LCCOMB_X54_Y39_N10
-\LessThan3~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan3~1_combout\ = (!countactual1(14) & (!countactual1(15) & (!countactual1(16) & !countactual1(13))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000000001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(14),
-	datab => countactual1(15),
-	datac => countactual1(16),
-	datad => countactual1(13),
-	combout => \LessThan3~1_combout\);
-
--- Location: LCCOMB_X54_Y39_N16
-\LessThan3~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan3~0_combout\ = (!countactual1(11) & (!countactual1(12) & (!countactual1(10) & !countactual1(9))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000000001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(11),
-	datab => countactual1(12),
-	datac => countactual1(10),
-	datad => countactual1(9),
-	combout => \LessThan3~0_combout\);
-
--- Location: LCCOMB_X54_Y39_N12
-\LessThan3~2\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan3~2_combout\ = (!countactual1(19) & (!countactual1(18) & (!countactual1(17) & !countactual1(20))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000000001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(19),
-	datab => countactual1(18),
-	datac => countactual1(17),
-	datad => countactual1(20),
-	combout => \LessThan3~2_combout\);
-
--- Location: LCCOMB_X54_Y39_N6
-\LessThan3~3\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan3~3_combout\ = (!countactual1(22) & (!countactual1(23) & (!countactual1(24) & !countactual1(21))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000000001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(22),
-	datab => countactual1(23),
-	datac => countactual1(24),
-	datad => countactual1(21),
-	combout => \LessThan3~3_combout\);
-
--- Location: LCCOMB_X54_Y39_N24
-\LessThan3~4\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan3~4_combout\ = (\LessThan3~1_combout\ & (\LessThan3~0_combout\ & (\LessThan3~2_combout\ & \LessThan3~3_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1000000000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \LessThan3~1_combout\,
-	datab => \LessThan3~0_combout\,
-	datac => \LessThan3~2_combout\,
-	datad => \LessThan3~3_combout\,
-	combout => \LessThan3~4_combout\);
-
--- Location: LCCOMB_X54_Y38_N2
-\LessThan3~6\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan3~6_combout\ = (!countactual1(30) & (\LessThan3~5_combout\ & (!countactual1(29) & \LessThan3~4_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000010000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(30),
-	datab => \LessThan3~5_combout\,
-	datac => countactual1(29),
-	datad => \LessThan3~4_combout\,
-	combout => \LessThan3~6_combout\);
-
--- Location: LCCOMB_X54_Y38_N28
-\LessThan2~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan2~0_combout\ = (((!countactual1(0)) # (!countactual1(3))) # (!countactual1(1))) # (!countactual1(2))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0111111111111111",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(2),
-	datab => countactual1(1),
-	datac => countactual1(3),
-	datad => countactual1(0),
-	combout => \LessThan2~0_combout\);
-
--- Location: LCCOMB_X54_Y38_N14
-\Selector39~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector39~1_combout\ = (!countactual1(6) & (!countactual1(7) & !countactual1(5)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000010001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(6),
-	datab => countactual1(7),
-	datad => countactual1(5),
-	combout => \Selector39~1_combout\);
-
--- Location: LCCOMB_X54_Y38_N24
-\Selector39~2\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector39~2_combout\ = (\LessThan2~0_combout\ & (\Selector39~1_combout\ & !countactual1(4)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000011000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	datab => \LessThan2~0_combout\,
-	datac => \Selector39~1_combout\,
-	datad => countactual1(4),
-	combout => \Selector39~2_combout\);
-
--- Location: LCCOMB_X54_Y38_N4
-\Selector39~3\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector39~3_combout\ = (\Selector39~1_combout\ & (((!countactual1(2) & !countactual1(3))) # (!countactual1(4))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0001000011110000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(2),
-	datab => countactual1(3),
-	datac => \Selector39~1_combout\,
-	datad => countactual1(4),
-	combout => \Selector39~3_combout\);
-
--- Location: LCCOMB_X54_Y38_N26
-\Selector39~5\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector39~5_combout\ = ((\est_act.boost2~q\ & ((\Selector39~3_combout\))) # (!\est_act.boost2~q\ & (\Selector39~2_combout\))) # (!countactual1(8))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111010111011101",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(8),
-	datab => \Selector39~2_combout\,
-	datac => \Selector39~3_combout\,
-	datad => \est_act.boost2~q\,
-	combout => \Selector39~5_combout\);
-
--- Location: LCCOMB_X54_Y40_N30
-\countactual1[31]~95\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[31]~95_combout\ = countactual1(31) $ (\countactual1[30]~94\)
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(31),
-	cin => \countactual1[30]~94\,
-	combout => \countactual1[31]~95_combout\);
-
--- Location: FF_X54_Y40_N31
-\countactual1[31]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[31]~95_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(31));
-
--- Location: LCCOMB_X54_Y38_N20
-\Selector39~6\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector39~6_combout\ = (countactual1(31)) # ((\LessThan3~6_combout\ & \Selector39~5_combout\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111111111000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	datab => \LessThan3~6_combout\,
-	datac => \Selector39~5_combout\,
-	datad => countactual1(31),
-	combout => \Selector39~6_combout\);
-
--- Location: LCCOMB_X54_Y38_N30
-\Selector39~4\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector39~4_combout\ = (!countactual1(31) & ((\LessThan3~8_combout\) # (!\LessThan3~6_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000010111011",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \LessThan3~8_combout\,
-	datab => \LessThan3~6_combout\,
-	datad => countactual1(31),
-	combout => \Selector39~4_combout\);
-
--- Location: LCCOMB_X54_Y38_N22
-\LessThan8~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan8~0_combout\ = (\LessThan3~6_combout\ & ((\Selector39~3_combout\) # (!countactual1(8))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100000011001100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	datab => \LessThan3~6_combout\,
-	datac => \Selector39~3_combout\,
-	datad => countactual1(8),
-	combout => \LessThan8~0_combout\);
-
--- Location: LCCOMB_X54_Y37_N28
-\Selector39~8\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector39~8_combout\ = (\Selector39~6_combout\ & (\est_act.boost2~q\ & (!\LessThan8~0_combout\))) # (!\Selector39~6_combout\ & (((\est_act.boost2~q\ & !\LessThan8~0_combout\)) # (!\countactual1[8]~32_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000110001011101",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector39~6_combout\,
-	datab => \est_act.boost2~q\,
-	datac => \LessThan8~0_combout\,
-	datad => \countactual1[8]~32_combout\,
-	combout => \Selector39~8_combout\);
-
--- Location: LCCOMB_X54_Y37_N14
-\Selector39~9\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector39~9_combout\ = (\Selector39~8_combout\ & (\Selector39~4_combout\ & !\est_act.boost1~q\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000011000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	datab => \Selector39~8_combout\,
-	datac => \Selector39~4_combout\,
-	datad => \est_act.boost1~q\,
-	combout => \Selector39~9_combout\);
-
--- Location: LCCOMB_X55_Y37_N8
-\Selector37~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector37~0_combout\ = (!\Selector39~9_combout\ & (\est_act.buck2~q\ & \est_act.idle~q\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100010000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector39~9_combout\,
-	datab => \est_act.buck2~q\,
-	datad => \est_act.idle~q\,
-	combout => \Selector37~0_combout\);
+	q => \incdecdutytest|inc_prev\(1));
 
 -- Location: IOIBUF_X51_Y54_N29
 \sel~input\ : fiftyfivenm_io_ibuf
@@ -2437,6458 +1266,150 @@ PORT MAP (
 	i => ww_sel,
 	o => \sel~input_o\);
 
--- Location: LCCOMB_X55_Y37_N28
-\Selector36~0\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X57_Y43_N14
+\incdecdutytest|duty_act~54\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \Selector36~0_combout\ = (\est_sig~8_combout\ & (((!\sel~input_o\ & !\est_act.idle~q\)))) # (!\est_sig~8_combout\ & ((\est_act.buck2~q\) # ((!\sel~input_o\ & !\est_act.idle~q\))))
+-- \incdecdutytest|duty_act~54_combout\ = (\sel~input_o\ & \incdecdutytest|duty_act[8]~2_combout\)
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0100010001001111",
+	lut_mask => "1100110000000000",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \est_sig~8_combout\,
-	datab => \est_act.buck2~q\,
-	datac => \sel~input_o\,
-	datad => \est_act.idle~q\,
-	combout => \Selector36~0_combout\);
+	datab => \sel~input_o\,
+	datad => \incdecdutytest|duty_act[8]~2_combout\,
+	combout => \incdecdutytest|duty_act~54_combout\);
 
--- Location: LCCOMB_X59_Y41_N0
-\Add5~0\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X57_Y43_N24
+\incdecdutytest|duty_act[8]~1\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \Add5~0_combout\ = softstart_duty_act(0) $ (GND)
--- \Add5~1\ = CARRY(!softstart_duty_act(0))
+-- \incdecdutytest|duty_act[8]~1_combout\ = (\reset~input_o\ & ((\incdecdutytest|duty_act[8]~1_combout\))) # (!\reset~input_o\ & (\incdecdutytest|duty_act~54_combout\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "1010101001010101",
+	lut_mask => "1111101001010000",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => softstart_duty_act(0),
-	datad => VCC,
-	combout => \Add5~0_combout\,
-	cout => \Add5~1\);
+	dataa => \reset~input_o\,
+	datac => \incdecdutytest|duty_act~54_combout\,
+	datad => \incdecdutytest|duty_act[8]~1_combout\,
+	combout => \incdecdutytest|duty_act[8]~1_combout\);
 
--- Location: LCCOMB_X58_Y41_N2
-\Selector34~0\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X57_Y43_N6
+\incdecdutytest|Equal0~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \Selector34~0_combout\ = (!\Selector41~2_combout\ & (((\est_act.idle~q\ & !\Add5~0_combout\)) # (!\softstart_duty_act[3]~3_combout\)))
+-- \incdecdutytest|Equal0~0_combout\ = (!\incdecdutytest|inc_prev\(1) & \incdecdutytest|inc_prev\(0))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0000000000111011",
+	lut_mask => "0000111100000000",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \est_act.idle~q\,
-	datab => \softstart_duty_act[3]~3_combout\,
-	datac => \Add5~0_combout\,
-	datad => \Selector41~2_combout\,
-	combout => \Selector34~0_combout\);
-
--- Location: FF_X58_Y41_N3
-\softstart_duty_act[0]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Selector34~0_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(0));
-
--- Location: LCCOMB_X59_Y41_N2
-\Add5~2\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~2_combout\ = (softstart_duty_act(1) & ((\Add5~1\) # (GND))) # (!softstart_duty_act(1) & (!\Add5~1\))
--- \Add5~3\ = CARRY((softstart_duty_act(1)) # (!\Add5~1\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(1),
-	datad => VCC,
-	cin => \Add5~1\,
-	combout => \Add5~2_combout\,
-	cout => \Add5~3\);
-
--- Location: LCCOMB_X58_Y41_N16
-\Add5~90\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~90_combout\ = (!\Selector41~2_combout\ & (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & !\Add5~2_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector41~2_combout\,
-	datab => \softstart_duty_act[3]~3_combout\,
-	datac => \est_act.idle~q\,
-	datad => \Add5~2_combout\,
-	combout => \Add5~90_combout\);
-
--- Location: FF_X58_Y41_N17
-\softstart_duty_act[1]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~90_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(1));
-
--- Location: LCCOMB_X59_Y41_N4
-\Add5~4\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~4_combout\ = (softstart_duty_act(2) & (!\Add5~3\ & VCC)) # (!softstart_duty_act(2) & (\Add5~3\ $ (GND)))
--- \Add5~5\ = CARRY((!softstart_duty_act(2) & !\Add5~3\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101000000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(2),
-	datad => VCC,
-	cin => \Add5~3\,
-	combout => \Add5~4_combout\,
-	cout => \Add5~5\);
-
--- Location: LCCOMB_X58_Y41_N30
-\Add5~89\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~89_combout\ = (!\Selector41~2_combout\ & (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & !\Add5~4_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector41~2_combout\,
-	datab => \softstart_duty_act[3]~3_combout\,
-	datac => \est_act.idle~q\,
-	datad => \Add5~4_combout\,
-	combout => \Add5~89_combout\);
-
--- Location: FF_X58_Y41_N31
-\softstart_duty_act[2]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~89_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(2));
-
--- Location: LCCOMB_X59_Y41_N6
-\Add5~6\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~6_combout\ = (softstart_duty_act(3) & ((\Add5~5\) # (GND))) # (!softstart_duty_act(3) & (!\Add5~5\))
--- \Add5~7\ = CARRY((softstart_duty_act(3)) # (!\Add5~5\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001111001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(3),
-	datad => VCC,
-	cin => \Add5~5\,
-	combout => \Add5~6_combout\,
-	cout => \Add5~7\);
-
--- Location: LCCOMB_X60_Y40_N22
-\Add5~88\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~88_combout\ = (!\Selector41~2_combout\ & (\est_act.idle~q\ & (\softstart_duty_act[3]~3_combout\ & !\Add5~6_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector41~2_combout\,
-	datab => \est_act.idle~q\,
-	datac => \softstart_duty_act[3]~3_combout\,
-	datad => \Add5~6_combout\,
-	combout => \Add5~88_combout\);
-
--- Location: FF_X60_Y40_N23
-\softstart_duty_act[3]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~88_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(3));
-
--- Location: LCCOMB_X59_Y41_N8
-\Add5~8\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~8_combout\ = (softstart_duty_act(4) & (\Add5~7\ $ (GND))) # (!softstart_duty_act(4) & (!\Add5~7\ & VCC))
--- \Add5~9\ = CARRY((softstart_duty_act(4) & !\Add5~7\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(4),
-	datad => VCC,
-	cin => \Add5~7\,
-	combout => \Add5~8_combout\,
-	cout => \Add5~9\);
-
--- Location: LCCOMB_X60_Y40_N28
-\Selector30~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector30~0_combout\ = (!\Selector41~2_combout\ & (((\est_act.idle~q\ & \Add5~8_combout\)) # (!\softstart_duty_act[3]~3_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000110100000101",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \softstart_duty_act[3]~3_combout\,
-	datab => \est_act.idle~q\,
-	datac => \Selector41~2_combout\,
-	datad => \Add5~8_combout\,
-	combout => \Selector30~0_combout\);
-
--- Location: FF_X60_Y40_N29
-\softstart_duty_act[4]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Selector30~0_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(4));
-
--- Location: LCCOMB_X59_Y41_N10
-\Add5~10\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~10_combout\ = (softstart_duty_act(5) & (!\Add5~9\)) # (!softstart_duty_act(5) & ((\Add5~9\) # (GND)))
--- \Add5~11\ = CARRY((!\Add5~9\) # (!softstart_duty_act(5)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(5),
-	datad => VCC,
-	cin => \Add5~9\,
-	combout => \Add5~10_combout\,
-	cout => \Add5~11\);
-
--- Location: LCCOMB_X58_Y41_N12
-\Selector29~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector29~0_combout\ = (!\Selector41~2_combout\ & (((\est_act.idle~q\ & \Add5~10_combout\)) # (!\softstart_duty_act[3]~3_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000010110011",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \est_act.idle~q\,
-	datab => \softstart_duty_act[3]~3_combout\,
-	datac => \Add5~10_combout\,
-	datad => \Selector41~2_combout\,
-	combout => \Selector29~0_combout\);
-
--- Location: FF_X58_Y41_N13
-\softstart_duty_act[5]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Selector29~0_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(5));
-
--- Location: LCCOMB_X59_Y41_N12
-\Add5~12\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~12_combout\ = (softstart_duty_act(6) & (\Add5~11\ $ (GND))) # (!softstart_duty_act(6) & (!\Add5~11\ & VCC))
--- \Add5~13\ = CARRY((softstart_duty_act(6) & !\Add5~11\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(6),
-	datad => VCC,
-	cin => \Add5~11\,
-	combout => \Add5~12_combout\,
-	cout => \Add5~13\);
-
--- Location: LCCOMB_X58_Y41_N10
-\Add5~87\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~87_combout\ = (\est_act.idle~q\ & (\softstart_duty_act[3]~3_combout\ & (\Add5~12_combout\ & !\Selector41~2_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000010000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \est_act.idle~q\,
-	datab => \softstart_duty_act[3]~3_combout\,
-	datac => \Add5~12_combout\,
-	datad => \Selector41~2_combout\,
-	combout => \Add5~87_combout\);
-
--- Location: FF_X58_Y41_N11
-\softstart_duty_act[6]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~87_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(6));
-
--- Location: LCCOMB_X59_Y41_N14
-\Add5~14\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~14_combout\ = (softstart_duty_act(7) & (!\Add5~13\)) # (!softstart_duty_act(7) & ((\Add5~13\) # (GND)))
--- \Add5~15\ = CARRY((!\Add5~13\) # (!softstart_duty_act(7)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(7),
-	datad => VCC,
-	cin => \Add5~13\,
-	combout => \Add5~14_combout\,
-	cout => \Add5~15\);
-
--- Location: LCCOMB_X58_Y41_N24
-\Selector27~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector27~0_combout\ = (!\Selector41~2_combout\ & (((\est_act.idle~q\ & \Add5~14_combout\)) # (!\softstart_duty_act[3]~3_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000010110011",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \est_act.idle~q\,
-	datab => \softstart_duty_act[3]~3_combout\,
-	datac => \Add5~14_combout\,
-	datad => \Selector41~2_combout\,
-	combout => \Selector27~0_combout\);
-
--- Location: FF_X58_Y41_N25
-\softstart_duty_act[7]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Selector27~0_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(7));
-
--- Location: LCCOMB_X59_Y41_N16
-\Add5~16\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~16_combout\ = (softstart_duty_act(8) & (\Add5~15\ $ (GND))) # (!softstart_duty_act(8) & (!\Add5~15\ & VCC))
--- \Add5~17\ = CARRY((softstart_duty_act(8) & !\Add5~15\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(8),
-	datad => VCC,
-	cin => \Add5~15\,
-	combout => \Add5~16_combout\,
-	cout => \Add5~17\);
-
--- Location: LCCOMB_X58_Y41_N22
-\Add5~86\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~86_combout\ = (!\Selector41~2_combout\ & (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & \Add5~16_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100000000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector41~2_combout\,
-	datab => \softstart_duty_act[3]~3_combout\,
-	datac => \est_act.idle~q\,
-	datad => \Add5~16_combout\,
-	combout => \Add5~86_combout\);
-
--- Location: FF_X58_Y41_N23
-\softstart_duty_act[8]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~86_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(8));
-
--- Location: LCCOMB_X59_Y41_N18
-\Add5~18\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~18_combout\ = (softstart_duty_act(9) & (!\Add5~17\)) # (!softstart_duty_act(9) & ((\Add5~17\) # (GND)))
--- \Add5~19\ = CARRY((!\Add5~17\) # (!softstart_duty_act(9)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(9),
-	datad => VCC,
-	cin => \Add5~17\,
-	combout => \Add5~18_combout\,
-	cout => \Add5~19\);
-
--- Location: LCCOMB_X58_Y41_N4
-\Add5~85\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~85_combout\ = (!\Selector41~2_combout\ & (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & \Add5~18_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100000000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector41~2_combout\,
-	datab => \softstart_duty_act[3]~3_combout\,
-	datac => \est_act.idle~q\,
-	datad => \Add5~18_combout\,
-	combout => \Add5~85_combout\);
-
--- Location: FF_X58_Y41_N5
-\softstart_duty_act[9]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~85_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(9));
-
--- Location: LCCOMB_X59_Y41_N20
-\Add5~20\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~20_combout\ = (softstart_duty_act(10) & (\Add5~19\ $ (GND))) # (!softstart_duty_act(10) & (!\Add5~19\ & VCC))
--- \Add5~21\ = CARRY((softstart_duty_act(10) & !\Add5~19\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(10),
-	datad => VCC,
-	cin => \Add5~19\,
-	combout => \Add5~20_combout\,
-	cout => \Add5~21\);
-
--- Location: LCCOMB_X60_Y40_N26
-\Add5~84\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~84_combout\ = (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & (!\Selector41~2_combout\ & \Add5~20_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000100000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \softstart_duty_act[3]~3_combout\,
-	datab => \est_act.idle~q\,
-	datac => \Selector41~2_combout\,
-	datad => \Add5~20_combout\,
-	combout => \Add5~84_combout\);
-
--- Location: FF_X60_Y40_N27
-\softstart_duty_act[10]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~84_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(10));
-
--- Location: LCCOMB_X59_Y41_N22
-\Add5~22\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~22_combout\ = (softstart_duty_act(11) & (!\Add5~21\)) # (!softstart_duty_act(11) & ((\Add5~21\) # (GND)))
--- \Add5~23\ = CARRY((!\Add5~21\) # (!softstart_duty_act(11)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(11),
-	datad => VCC,
-	cin => \Add5~21\,
-	combout => \Add5~22_combout\,
-	cout => \Add5~23\);
-
--- Location: LCCOMB_X60_Y40_N8
-\Add5~83\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~83_combout\ = (!\Selector41~2_combout\ & (\Add5~22_combout\ & (\softstart_duty_act[3]~3_combout\ & \est_act.idle~q\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100000000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector41~2_combout\,
-	datab => \Add5~22_combout\,
-	datac => \softstart_duty_act[3]~3_combout\,
-	datad => \est_act.idle~q\,
-	combout => \Add5~83_combout\);
-
--- Location: FF_X60_Y40_N9
-\softstart_duty_act[11]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~83_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(11));
-
--- Location: LCCOMB_X59_Y41_N24
-\Add5~24\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~24_combout\ = (softstart_duty_act(12) & (\Add5~23\ $ (GND))) # (!softstart_duty_act(12) & (!\Add5~23\ & VCC))
--- \Add5~25\ = CARRY((softstart_duty_act(12) & !\Add5~23\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(12),
-	datad => VCC,
-	cin => \Add5~23\,
-	combout => \Add5~24_combout\,
-	cout => \Add5~25\);
-
--- Location: LCCOMB_X59_Y37_N26
-\Add5~82\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~82_combout\ = (\est_act.idle~q\ & (\softstart_duty_act[3]~3_combout\ & (\Add5~24_combout\ & !\Selector41~2_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000010000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \est_act.idle~q\,
-	datab => \softstart_duty_act[3]~3_combout\,
-	datac => \Add5~24_combout\,
-	datad => \Selector41~2_combout\,
-	combout => \Add5~82_combout\);
-
--- Location: FF_X59_Y37_N27
-\softstart_duty_act[12]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~82_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(12));
-
--- Location: LCCOMB_X59_Y41_N26
-\Add5~26\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~26_combout\ = (softstart_duty_act(13) & (!\Add5~25\)) # (!softstart_duty_act(13) & ((\Add5~25\) # (GND)))
--- \Add5~27\ = CARRY((!\Add5~25\) # (!softstart_duty_act(13)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(13),
-	datad => VCC,
-	cin => \Add5~25\,
-	combout => \Add5~26_combout\,
-	cout => \Add5~27\);
-
--- Location: LCCOMB_X60_Y40_N6
-\Add5~81\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~81_combout\ = (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & (!\Selector41~2_combout\ & \Add5~26_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000100000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \softstart_duty_act[3]~3_combout\,
-	datab => \est_act.idle~q\,
-	datac => \Selector41~2_combout\,
-	datad => \Add5~26_combout\,
-	combout => \Add5~81_combout\);
-
--- Location: FF_X60_Y40_N7
-\softstart_duty_act[13]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~81_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(13));
-
--- Location: LCCOMB_X59_Y41_N28
-\Add5~28\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~28_combout\ = (softstart_duty_act(14) & (\Add5~27\ $ (GND))) # (!softstart_duty_act(14) & (!\Add5~27\ & VCC))
--- \Add5~29\ = CARRY((softstart_duty_act(14) & !\Add5~27\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(14),
-	datad => VCC,
-	cin => \Add5~27\,
-	combout => \Add5~28_combout\,
-	cout => \Add5~29\);
-
--- Location: LCCOMB_X58_Y41_N18
-\Add5~80\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~80_combout\ = (!\Selector41~2_combout\ & (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & \Add5~28_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100000000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector41~2_combout\,
-	datab => \softstart_duty_act[3]~3_combout\,
-	datac => \est_act.idle~q\,
-	datad => \Add5~28_combout\,
-	combout => \Add5~80_combout\);
-
--- Location: FF_X58_Y41_N19
-\softstart_duty_act[14]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~80_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(14));
-
--- Location: LCCOMB_X57_Y38_N0
-\LessThan9~5\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan9~5_combout\ = (!softstart_duty_act(13) & (!softstart_duty_act(12) & (!softstart_duty_act(14) & !softstart_duty_act(11))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000000001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(13),
-	datab => softstart_duty_act(12),
-	datac => softstart_duty_act(14),
-	datad => softstart_duty_act(11),
-	combout => \LessThan9~5_combout\);
-
--- Location: LCCOMB_X59_Y41_N30
-\Add5~30\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~30_combout\ = (softstart_duty_act(15) & (!\Add5~29\)) # (!softstart_duty_act(15) & ((\Add5~29\) # (GND)))
--- \Add5~31\ = CARRY((!\Add5~29\) # (!softstart_duty_act(15)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(15),
-	datad => VCC,
-	cin => \Add5~29\,
-	combout => \Add5~30_combout\,
-	cout => \Add5~31\);
-
--- Location: LCCOMB_X58_Y41_N0
-\Add5~79\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~79_combout\ = (\est_act.idle~q\ & (\softstart_duty_act[3]~3_combout\ & (\Add5~30_combout\ & !\Selector41~2_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000010000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \est_act.idle~q\,
-	datab => \softstart_duty_act[3]~3_combout\,
-	datac => \Add5~30_combout\,
-	datad => \Selector41~2_combout\,
-	combout => \Add5~79_combout\);
-
--- Location: FF_X58_Y41_N1
-\softstart_duty_act[15]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~79_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(15));
-
--- Location: LCCOMB_X59_Y40_N0
-\Add5~32\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~32_combout\ = (softstart_duty_act(16) & (\Add5~31\ $ (GND))) # (!softstart_duty_act(16) & (!\Add5~31\ & VCC))
--- \Add5~33\ = CARRY((softstart_duty_act(16) & !\Add5~31\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(16),
-	datad => VCC,
-	cin => \Add5~31\,
-	combout => \Add5~32_combout\,
-	cout => \Add5~33\);
-
--- Location: LCCOMB_X58_Y41_N6
-\Add5~78\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~78_combout\ = (!\Selector41~2_combout\ & (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & \Add5~32_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100000000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector41~2_combout\,
-	datab => \softstart_duty_act[3]~3_combout\,
-	datac => \est_act.idle~q\,
-	datad => \Add5~32_combout\,
-	combout => \Add5~78_combout\);
-
--- Location: FF_X58_Y41_N7
-\softstart_duty_act[16]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~78_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(16));
-
--- Location: LCCOMB_X59_Y40_N2
-\Add5~34\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~34_combout\ = (softstart_duty_act(17) & (!\Add5~33\)) # (!softstart_duty_act(17) & ((\Add5~33\) # (GND)))
--- \Add5~35\ = CARRY((!\Add5~33\) # (!softstart_duty_act(17)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(17),
-	datad => VCC,
-	cin => \Add5~33\,
-	combout => \Add5~34_combout\,
-	cout => \Add5~35\);
-
--- Location: LCCOMB_X60_Y40_N20
-\Add5~77\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~77_combout\ = (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & (!\Selector41~2_combout\ & \Add5~34_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000100000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \softstart_duty_act[3]~3_combout\,
-	datab => \est_act.idle~q\,
-	datac => \Selector41~2_combout\,
-	datad => \Add5~34_combout\,
-	combout => \Add5~77_combout\);
-
--- Location: FF_X60_Y40_N21
-\softstart_duty_act[17]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~77_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(17));
-
--- Location: LCCOMB_X59_Y40_N4
-\Add5~36\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~36_combout\ = (softstart_duty_act(18) & (\Add5~35\ $ (GND))) # (!softstart_duty_act(18) & (!\Add5~35\ & VCC))
--- \Add5~37\ = CARRY((softstart_duty_act(18) & !\Add5~35\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(18),
-	datad => VCC,
-	cin => \Add5~35\,
-	combout => \Add5~36_combout\,
-	cout => \Add5~37\);
-
--- Location: LCCOMB_X58_Y41_N28
-\Add5~76\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~76_combout\ = (!\Selector41~2_combout\ & (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & \Add5~36_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100000000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector41~2_combout\,
-	datab => \softstart_duty_act[3]~3_combout\,
-	datac => \est_act.idle~q\,
-	datad => \Add5~36_combout\,
-	combout => \Add5~76_combout\);
-
--- Location: FF_X58_Y41_N29
-\softstart_duty_act[18]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~76_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(18));
-
--- Location: LCCOMB_X59_Y40_N6
-\Add5~38\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~38_combout\ = (softstart_duty_act(19) & (!\Add5~37\)) # (!softstart_duty_act(19) & ((\Add5~37\) # (GND)))
--- \Add5~39\ = CARRY((!\Add5~37\) # (!softstart_duty_act(19)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(19),
-	datad => VCC,
-	cin => \Add5~37\,
-	combout => \Add5~38_combout\,
-	cout => \Add5~39\);
-
--- Location: LCCOMB_X60_Y40_N2
-\Add5~75\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~75_combout\ = (!\Selector41~2_combout\ & (\est_act.idle~q\ & (\softstart_duty_act[3]~3_combout\ & \Add5~38_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100000000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector41~2_combout\,
-	datab => \est_act.idle~q\,
-	datac => \softstart_duty_act[3]~3_combout\,
-	datad => \Add5~38_combout\,
-	combout => \Add5~75_combout\);
-
--- Location: FF_X60_Y40_N3
-\softstart_duty_act[19]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~75_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(19));
-
--- Location: LCCOMB_X59_Y40_N8
-\Add5~40\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~40_combout\ = (softstart_duty_act(20) & (\Add5~39\ $ (GND))) # (!softstart_duty_act(20) & (!\Add5~39\ & VCC))
--- \Add5~41\ = CARRY((softstart_duty_act(20) & !\Add5~39\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(20),
-	datad => VCC,
-	cin => \Add5~39\,
-	combout => \Add5~40_combout\,
-	cout => \Add5~41\);
-
--- Location: LCCOMB_X58_Y41_N26
-\Add5~74\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~74_combout\ = (\est_act.idle~q\ & (\softstart_duty_act[3]~3_combout\ & (\Add5~40_combout\ & !\Selector41~2_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000010000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \est_act.idle~q\,
-	datab => \softstart_duty_act[3]~3_combout\,
-	datac => \Add5~40_combout\,
-	datad => \Selector41~2_combout\,
-	combout => \Add5~74_combout\);
-
--- Location: FF_X58_Y41_N27
-\softstart_duty_act[20]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~74_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(20));
-
--- Location: LCCOMB_X59_Y40_N10
-\Add5~42\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~42_combout\ = (softstart_duty_act(21) & (!\Add5~41\)) # (!softstart_duty_act(21) & ((\Add5~41\) # (GND)))
--- \Add5~43\ = CARRY((!\Add5~41\) # (!softstart_duty_act(21)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(21),
-	datad => VCC,
-	cin => \Add5~41\,
-	combout => \Add5~42_combout\,
-	cout => \Add5~43\);
-
--- Location: LCCOMB_X60_Y40_N16
-\Add5~73\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~73_combout\ = (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & (!\Selector41~2_combout\ & \Add5~42_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000100000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \softstart_duty_act[3]~3_combout\,
-	datab => \est_act.idle~q\,
-	datac => \Selector41~2_combout\,
-	datad => \Add5~42_combout\,
-	combout => \Add5~73_combout\);
-
--- Location: FF_X60_Y40_N17
-\softstart_duty_act[21]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~73_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(21));
-
--- Location: LCCOMB_X59_Y40_N12
-\Add5~44\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~44_combout\ = (softstart_duty_act(22) & (\Add5~43\ $ (GND))) # (!softstart_duty_act(22) & (!\Add5~43\ & VCC))
--- \Add5~45\ = CARRY((softstart_duty_act(22) & !\Add5~43\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(22),
-	datad => VCC,
-	cin => \Add5~43\,
-	combout => \Add5~44_combout\,
-	cout => \Add5~45\);
-
--- Location: LCCOMB_X60_Y40_N14
-\Add5~72\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~72_combout\ = (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & (!\Selector41~2_combout\ & \Add5~44_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000100000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \softstart_duty_act[3]~3_combout\,
-	datab => \est_act.idle~q\,
-	datac => \Selector41~2_combout\,
-	datad => \Add5~44_combout\,
-	combout => \Add5~72_combout\);
-
--- Location: FF_X60_Y40_N15
-\softstart_duty_act[22]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~72_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(22));
-
--- Location: LCCOMB_X56_Y40_N30
-\LessThan9~2\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan9~2_combout\ = (!softstart_duty_act(21) & (!softstart_duty_act(22) & (!softstart_duty_act(20) & !softstart_duty_act(19))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000000001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(21),
-	datab => softstart_duty_act(22),
-	datac => softstart_duty_act(20),
-	datad => softstart_duty_act(19),
-	combout => \LessThan9~2_combout\);
-
--- Location: LCCOMB_X59_Y40_N14
-\Add5~46\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~46_combout\ = (softstart_duty_act(23) & (!\Add5~45\)) # (!softstart_duty_act(23) & ((\Add5~45\) # (GND)))
--- \Add5~47\ = CARRY((!\Add5~45\) # (!softstart_duty_act(23)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(23),
-	datad => VCC,
-	cin => \Add5~45\,
-	combout => \Add5~46_combout\,
-	cout => \Add5~47\);
-
--- Location: LCCOMB_X60_Y40_N4
-\Add5~71\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~71_combout\ = (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & (!\Selector41~2_combout\ & \Add5~46_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000100000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \softstart_duty_act[3]~3_combout\,
-	datab => \est_act.idle~q\,
-	datac => \Selector41~2_combout\,
-	datad => \Add5~46_combout\,
-	combout => \Add5~71_combout\);
-
--- Location: FF_X60_Y40_N5
-\softstart_duty_act[23]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~71_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(23));
-
--- Location: LCCOMB_X59_Y40_N16
-\Add5~48\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~48_combout\ = (softstart_duty_act(24) & (\Add5~47\ $ (GND))) # (!softstart_duty_act(24) & (!\Add5~47\ & VCC))
--- \Add5~49\ = CARRY((softstart_duty_act(24) & !\Add5~47\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(24),
-	datad => VCC,
-	cin => \Add5~47\,
-	combout => \Add5~48_combout\,
-	cout => \Add5~49\);
-
--- Location: LCCOMB_X60_Y40_N18
-\Add5~70\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~70_combout\ = (!\Selector41~2_combout\ & (\est_act.idle~q\ & (\softstart_duty_act[3]~3_combout\ & \Add5~48_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100000000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector41~2_combout\,
-	datab => \est_act.idle~q\,
-	datac => \softstart_duty_act[3]~3_combout\,
-	datad => \Add5~48_combout\,
-	combout => \Add5~70_combout\);
-
--- Location: FF_X60_Y40_N19
-\softstart_duty_act[24]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~70_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(24));
-
--- Location: LCCOMB_X59_Y40_N18
-\Add5~50\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~50_combout\ = (softstart_duty_act(25) & (!\Add5~49\)) # (!softstart_duty_act(25) & ((\Add5~49\) # (GND)))
--- \Add5~51\ = CARRY((!\Add5~49\) # (!softstart_duty_act(25)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(25),
-	datad => VCC,
-	cin => \Add5~49\,
-	combout => \Add5~50_combout\,
-	cout => \Add5~51\);
-
--- Location: LCCOMB_X60_Y40_N0
-\Add5~69\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~69_combout\ = (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & (!\Selector41~2_combout\ & \Add5~50_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000100000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \softstart_duty_act[3]~3_combout\,
-	datab => \est_act.idle~q\,
-	datac => \Selector41~2_combout\,
-	datad => \Add5~50_combout\,
-	combout => \Add5~69_combout\);
-
--- Location: FF_X60_Y40_N1
-\softstart_duty_act[25]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~69_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(25));
-
--- Location: LCCOMB_X59_Y40_N20
-\Add5~52\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~52_combout\ = (softstart_duty_act(26) & (\Add5~51\ $ (GND))) # (!softstart_duty_act(26) & (!\Add5~51\ & VCC))
--- \Add5~53\ = CARRY((softstart_duty_act(26) & !\Add5~51\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(26),
-	datad => VCC,
-	cin => \Add5~51\,
-	combout => \Add5~52_combout\,
-	cout => \Add5~53\);
-
--- Location: LCCOMB_X58_Y41_N8
-\Add5~68\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~68_combout\ = (!\Selector41~2_combout\ & (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & \Add5~52_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100000000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector41~2_combout\,
-	datab => \softstart_duty_act[3]~3_combout\,
-	datac => \est_act.idle~q\,
-	datad => \Add5~52_combout\,
-	combout => \Add5~68_combout\);
-
--- Location: FF_X58_Y41_N9
-\softstart_duty_act[26]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~68_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(26));
-
--- Location: LCCOMB_X59_Y40_N22
-\Add5~54\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~54_combout\ = (softstart_duty_act(27) & (!\Add5~53\)) # (!softstart_duty_act(27) & ((\Add5~53\) # (GND)))
--- \Add5~55\ = CARRY((!\Add5~53\) # (!softstart_duty_act(27)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(27),
-	datad => VCC,
-	cin => \Add5~53\,
-	combout => \Add5~54_combout\,
-	cout => \Add5~55\);
-
--- Location: LCCOMB_X60_Y40_N30
-\Add5~67\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~67_combout\ = (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & (!\Selector41~2_combout\ & \Add5~54_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000100000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \softstart_duty_act[3]~3_combout\,
-	datab => \est_act.idle~q\,
-	datac => \Selector41~2_combout\,
-	datad => \Add5~54_combout\,
-	combout => \Add5~67_combout\);
-
--- Location: FF_X60_Y40_N31
-\softstart_duty_act[27]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~67_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(27));
-
--- Location: LCCOMB_X59_Y40_N24
-\Add5~56\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~56_combout\ = (softstart_duty_act(28) & (\Add5~55\ $ (GND))) # (!softstart_duty_act(28) & (!\Add5~55\ & VCC))
--- \Add5~57\ = CARRY((softstart_duty_act(28) & !\Add5~55\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(28),
-	datad => VCC,
-	cin => \Add5~55\,
-	combout => \Add5~56_combout\,
-	cout => \Add5~57\);
-
--- Location: LCCOMB_X60_Y40_N12
-\Add5~66\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~66_combout\ = (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & (!\Selector41~2_combout\ & \Add5~56_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000100000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \softstart_duty_act[3]~3_combout\,
-	datab => \est_act.idle~q\,
-	datac => \Selector41~2_combout\,
-	datad => \Add5~56_combout\,
-	combout => \Add5~66_combout\);
-
--- Location: FF_X60_Y40_N13
-\softstart_duty_act[28]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~66_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(28));
-
--- Location: LCCOMB_X56_Y40_N28
-\LessThan9~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan9~0_combout\ = (!softstart_duty_act(28) & (!softstart_duty_act(29) & (!softstart_duty_act(30) & !softstart_duty_act(27))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000000001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(28),
-	datab => softstart_duty_act(29),
-	datac => softstart_duty_act(30),
-	datad => softstart_duty_act(27),
-	combout => \LessThan9~0_combout\);
-
--- Location: LCCOMB_X59_Y37_N8
-\LessThan9~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan9~1_combout\ = (!softstart_duty_act(24) & (!softstart_duty_act(25) & (!softstart_duty_act(26) & !softstart_duty_act(23))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000000001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(24),
-	datab => softstart_duty_act(25),
-	datac => softstart_duty_act(26),
-	datad => softstart_duty_act(23),
-	combout => \LessThan9~1_combout\);
-
--- Location: LCCOMB_X56_Y41_N0
-\LessThan9~3\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan9~3_combout\ = (!softstart_duty_act(16) & (!softstart_duty_act(17) & (!softstart_duty_act(18) & !softstart_duty_act(15))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000000001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(16),
-	datab => softstart_duty_act(17),
-	datac => softstart_duty_act(18),
-	datad => softstart_duty_act(15),
-	combout => \LessThan9~3_combout\);
-
--- Location: LCCOMB_X56_Y41_N2
-\LessThan9~4\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan9~4_combout\ = (\LessThan9~2_combout\ & (\LessThan9~0_combout\ & (\LessThan9~1_combout\ & \LessThan9~3_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1000000000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \LessThan9~2_combout\,
-	datab => \LessThan9~0_combout\,
-	datac => \LessThan9~1_combout\,
-	datad => \LessThan9~3_combout\,
-	combout => \LessThan9~4_combout\);
-
--- Location: LCCOMB_X58_Y41_N14
-\LessThan9~6\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan9~6_combout\ = (\LessThan9~5_combout\ & (!softstart_duty_act(9) & (\LessThan9~4_combout\ & !softstart_duty_act(10))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000100000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \LessThan9~5_combout\,
-	datab => softstart_duty_act(9),
-	datac => \LessThan9~4_combout\,
-	datad => softstart_duty_act(10),
-	combout => \LessThan9~6_combout\);
-
--- Location: LCCOMB_X59_Y37_N4
-\LessThan5~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan5~0_combout\ = (!softstart_duty_act(6) & (!softstart_duty_act(5) & (!softstart_duty_act(7) & !softstart_duty_act(4))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000000001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(6),
-	datab => softstart_duty_act(5),
-	datac => softstart_duty_act(7),
-	datad => softstart_duty_act(4),
-	combout => \LessThan5~0_combout\);
-
--- Location: LCCOMB_X58_Y41_N20
-\LessThan5~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan5~1_combout\ = (softstart_duty_act(1) & (softstart_duty_act(2) & softstart_duty_act(0)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100000000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(1),
-	datac => softstart_duty_act(2),
-	datad => softstart_duty_act(0),
-	combout => \LessThan5~1_combout\);
-
--- Location: LCCOMB_X59_Y37_N22
-\LessThan5~2\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan5~2_combout\ = ((\LessThan5~0_combout\ & ((\LessThan5~1_combout\) # (softstart_duty_act(3))))) # (!softstart_duty_act(8))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1101110111010101",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(8),
-	datab => \LessThan5~0_combout\,
-	datac => \LessThan5~1_combout\,
-	datad => softstart_duty_act(3),
-	combout => \LessThan5~2_combout\);
-
--- Location: LCCOMB_X59_Y37_N2
-\Selector41~2\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector41~2_combout\ = (\est_act.boost2softs~q\ & (!softstart_duty_act(31) & ((!\LessThan5~2_combout\) # (!\LessThan9~6_combout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \LessThan9~6_combout\,
-	datab => \est_act.boost2softs~q\,
-	datac => \LessThan5~2_combout\,
-	datad => softstart_duty_act(31),
-	combout => \Selector41~2_combout\);
-
--- Location: LCCOMB_X59_Y40_N26
-\Add5~58\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~58_combout\ = (softstart_duty_act(29) & (!\Add5~57\)) # (!softstart_duty_act(29) & ((\Add5~57\) # (GND)))
--- \Add5~59\ = CARRY((!\Add5~57\) # (!softstart_duty_act(29)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(29),
-	datad => VCC,
-	cin => \Add5~57\,
-	combout => \Add5~58_combout\,
-	cout => \Add5~59\);
-
--- Location: LCCOMB_X60_Y40_N10
-\Add5~65\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~65_combout\ = (!\Selector41~2_combout\ & (\est_act.idle~q\ & (\Add5~58_combout\ & \softstart_duty_act[3]~3_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100000000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector41~2_combout\,
-	datab => \est_act.idle~q\,
-	datac => \Add5~58_combout\,
-	datad => \softstart_duty_act[3]~3_combout\,
-	combout => \Add5~65_combout\);
-
--- Location: FF_X60_Y40_N11
-\softstart_duty_act[29]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~65_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(29));
-
--- Location: LCCOMB_X56_Y41_N4
-\Add3~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~1_cout\ = CARRY(!softstart_duty_act(4))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001010101",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(4),
-	datad => VCC,
-	cout => \Add3~1_cout\);
-
--- Location: LCCOMB_X56_Y41_N6
-\Add3~2\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~2_combout\ = (softstart_duty_act(5) & ((\Add3~1_cout\) # (GND))) # (!softstart_duty_act(5) & (!\Add3~1_cout\))
--- \Add3~3\ = CARRY((softstart_duty_act(5)) # (!\Add3~1_cout\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(5),
-	datad => VCC,
-	cin => \Add3~1_cout\,
-	combout => \Add3~2_combout\,
-	cout => \Add3~3\);
-
--- Location: LCCOMB_X56_Y41_N8
-\Add3~4\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~4_combout\ = (softstart_duty_act(6) & (!\Add3~3\ & VCC)) # (!softstart_duty_act(6) & (\Add3~3\ $ (GND)))
--- \Add3~5\ = CARRY((!softstart_duty_act(6) & !\Add3~3\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(6),
-	datad => VCC,
-	cin => \Add3~3\,
-	combout => \Add3~4_combout\,
-	cout => \Add3~5\);
-
--- Location: LCCOMB_X56_Y41_N10
-\Add3~6\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~6_combout\ = (softstart_duty_act(7) & ((\Add3~5\) # (GND))) # (!softstart_duty_act(7) & (!\Add3~5\))
--- \Add3~7\ = CARRY((softstart_duty_act(7)) # (!\Add3~5\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001111001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(7),
-	datad => VCC,
-	cin => \Add3~5\,
-	combout => \Add3~6_combout\,
-	cout => \Add3~7\);
-
--- Location: LCCOMB_X56_Y41_N12
-\Add3~8\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~8_combout\ = (softstart_duty_act(8) & (\Add3~7\ $ (GND))) # (!softstart_duty_act(8) & ((GND) # (!\Add3~7\)))
--- \Add3~9\ = CARRY((!\Add3~7\) # (!softstart_duty_act(8)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010101011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(8),
-	datad => VCC,
-	cin => \Add3~7\,
-	combout => \Add3~8_combout\,
-	cout => \Add3~9\);
-
--- Location: LCCOMB_X56_Y41_N14
-\Add3~10\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~10_combout\ = (softstart_duty_act(9) & ((\Add3~9\) # (GND))) # (!softstart_duty_act(9) & (!\Add3~9\))
--- \Add3~11\ = CARRY((softstart_duty_act(9)) # (!\Add3~9\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(9),
-	datad => VCC,
-	cin => \Add3~9\,
-	combout => \Add3~10_combout\,
-	cout => \Add3~11\);
-
--- Location: LCCOMB_X56_Y41_N16
-\Add3~12\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~12_combout\ = (softstart_duty_act(10) & (!\Add3~11\ & VCC)) # (!softstart_duty_act(10) & (\Add3~11\ $ (GND)))
--- \Add3~13\ = CARRY((!softstart_duty_act(10) & !\Add3~11\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101000000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(10),
-	datad => VCC,
-	cin => \Add3~11\,
-	combout => \Add3~12_combout\,
-	cout => \Add3~13\);
-
--- Location: LCCOMB_X56_Y41_N18
-\Add3~14\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~14_combout\ = (softstart_duty_act(11) & ((\Add3~13\) # (GND))) # (!softstart_duty_act(11) & (!\Add3~13\))
--- \Add3~15\ = CARRY((softstart_duty_act(11)) # (!\Add3~13\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001111001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(11),
-	datad => VCC,
-	cin => \Add3~13\,
-	combout => \Add3~14_combout\,
-	cout => \Add3~15\);
-
--- Location: LCCOMB_X56_Y41_N20
-\Add3~16\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~16_combout\ = (softstart_duty_act(12) & (!\Add3~15\ & VCC)) # (!softstart_duty_act(12) & (\Add3~15\ $ (GND)))
--- \Add3~17\ = CARRY((!softstart_duty_act(12) & !\Add3~15\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(12),
-	datad => VCC,
-	cin => \Add3~15\,
-	combout => \Add3~16_combout\,
-	cout => \Add3~17\);
-
--- Location: LCCOMB_X56_Y41_N22
-\Add3~18\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~18_combout\ = (softstart_duty_act(13) & ((\Add3~17\) # (GND))) # (!softstart_duty_act(13) & (!\Add3~17\))
--- \Add3~19\ = CARRY((softstart_duty_act(13)) # (!\Add3~17\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001111001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(13),
-	datad => VCC,
-	cin => \Add3~17\,
-	combout => \Add3~18_combout\,
-	cout => \Add3~19\);
-
--- Location: LCCOMB_X56_Y41_N24
-\Add3~20\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~20_combout\ = (softstart_duty_act(14) & (!\Add3~19\ & VCC)) # (!softstart_duty_act(14) & (\Add3~19\ $ (GND)))
--- \Add3~21\ = CARRY((!softstart_duty_act(14) & !\Add3~19\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101000000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(14),
-	datad => VCC,
-	cin => \Add3~19\,
-	combout => \Add3~20_combout\,
-	cout => \Add3~21\);
-
--- Location: LCCOMB_X56_Y41_N26
-\Add3~22\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~22_combout\ = (softstart_duty_act(15) & ((\Add3~21\) # (GND))) # (!softstart_duty_act(15) & (!\Add3~21\))
--- \Add3~23\ = CARRY((softstart_duty_act(15)) # (!\Add3~21\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(15),
-	datad => VCC,
-	cin => \Add3~21\,
-	combout => \Add3~22_combout\,
-	cout => \Add3~23\);
-
--- Location: LCCOMB_X56_Y41_N28
-\Add3~24\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~24_combout\ = (softstart_duty_act(16) & (!\Add3~23\ & VCC)) # (!softstart_duty_act(16) & (\Add3~23\ $ (GND)))
--- \Add3~25\ = CARRY((!softstart_duty_act(16) & !\Add3~23\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101000000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(16),
-	datad => VCC,
-	cin => \Add3~23\,
-	combout => \Add3~24_combout\,
-	cout => \Add3~25\);
-
--- Location: LCCOMB_X56_Y41_N30
-\Add3~26\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~26_combout\ = (softstart_duty_act(17) & ((\Add3~25\) # (GND))) # (!softstart_duty_act(17) & (!\Add3~25\))
--- \Add3~27\ = CARRY((softstart_duty_act(17)) # (!\Add3~25\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001111001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(17),
-	datad => VCC,
-	cin => \Add3~25\,
-	combout => \Add3~26_combout\,
-	cout => \Add3~27\);
-
--- Location: LCCOMB_X56_Y40_N0
-\Add3~28\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~28_combout\ = (softstart_duty_act(18) & (!\Add3~27\ & VCC)) # (!softstart_duty_act(18) & (\Add3~27\ $ (GND)))
--- \Add3~29\ = CARRY((!softstart_duty_act(18) & !\Add3~27\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(18),
-	datad => VCC,
-	cin => \Add3~27\,
-	combout => \Add3~28_combout\,
-	cout => \Add3~29\);
-
--- Location: LCCOMB_X56_Y40_N2
-\Add3~30\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~30_combout\ = (softstart_duty_act(19) & ((\Add3~29\) # (GND))) # (!softstart_duty_act(19) & (!\Add3~29\))
--- \Add3~31\ = CARRY((softstart_duty_act(19)) # (!\Add3~29\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(19),
-	datad => VCC,
-	cin => \Add3~29\,
-	combout => \Add3~30_combout\,
-	cout => \Add3~31\);
-
--- Location: LCCOMB_X56_Y40_N4
-\Add3~32\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~32_combout\ = (softstart_duty_act(20) & (!\Add3~31\ & VCC)) # (!softstart_duty_act(20) & (\Add3~31\ $ (GND)))
--- \Add3~33\ = CARRY((!softstart_duty_act(20) & !\Add3~31\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101000000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(20),
-	datad => VCC,
-	cin => \Add3~31\,
-	combout => \Add3~32_combout\,
-	cout => \Add3~33\);
-
--- Location: LCCOMB_X56_Y40_N6
-\Add3~34\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~34_combout\ = (softstart_duty_act(21) & ((\Add3~33\) # (GND))) # (!softstart_duty_act(21) & (!\Add3~33\))
--- \Add3~35\ = CARRY((softstart_duty_act(21)) # (!\Add3~33\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(21),
-	datad => VCC,
-	cin => \Add3~33\,
-	combout => \Add3~34_combout\,
-	cout => \Add3~35\);
-
--- Location: LCCOMB_X56_Y40_N8
-\Add3~36\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~36_combout\ = (softstart_duty_act(22) & (!\Add3~35\ & VCC)) # (!softstart_duty_act(22) & (\Add3~35\ $ (GND)))
--- \Add3~37\ = CARRY((!softstart_duty_act(22) & !\Add3~35\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(22),
-	datad => VCC,
-	cin => \Add3~35\,
-	combout => \Add3~36_combout\,
-	cout => \Add3~37\);
-
--- Location: LCCOMB_X56_Y40_N10
-\Add3~38\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~38_combout\ = (softstart_duty_act(23) & ((\Add3~37\) # (GND))) # (!softstart_duty_act(23) & (!\Add3~37\))
--- \Add3~39\ = CARRY((softstart_duty_act(23)) # (!\Add3~37\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(23),
-	datad => VCC,
-	cin => \Add3~37\,
-	combout => \Add3~38_combout\,
-	cout => \Add3~39\);
-
--- Location: LCCOMB_X56_Y40_N12
-\Add3~40\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~40_combout\ = (softstart_duty_act(24) & (!\Add3~39\ & VCC)) # (!softstart_duty_act(24) & (\Add3~39\ $ (GND)))
--- \Add3~41\ = CARRY((!softstart_duty_act(24) & !\Add3~39\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(24),
-	datad => VCC,
-	cin => \Add3~39\,
-	combout => \Add3~40_combout\,
-	cout => \Add3~41\);
-
--- Location: LCCOMB_X56_Y40_N14
-\Add3~42\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~42_combout\ = (softstart_duty_act(25) & ((\Add3~41\) # (GND))) # (!softstart_duty_act(25) & (!\Add3~41\))
--- \Add3~43\ = CARRY((softstart_duty_act(25)) # (!\Add3~41\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001111001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(25),
-	datad => VCC,
-	cin => \Add3~41\,
-	combout => \Add3~42_combout\,
-	cout => \Add3~43\);
-
--- Location: LCCOMB_X56_Y40_N16
-\Add3~44\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~44_combout\ = (softstart_duty_act(26) & (!\Add3~43\ & VCC)) # (!softstart_duty_act(26) & (\Add3~43\ $ (GND)))
--- \Add3~45\ = CARRY((!softstart_duty_act(26) & !\Add3~43\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(26),
-	datad => VCC,
-	cin => \Add3~43\,
-	combout => \Add3~44_combout\,
-	cout => \Add3~45\);
-
--- Location: LCCOMB_X56_Y40_N18
-\Add3~46\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~46_combout\ = (softstart_duty_act(27) & ((\Add3~45\) # (GND))) # (!softstart_duty_act(27) & (!\Add3~45\))
--- \Add3~47\ = CARRY((softstart_duty_act(27)) # (!\Add3~45\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001111001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(27),
-	datad => VCC,
-	cin => \Add3~45\,
-	combout => \Add3~46_combout\,
-	cout => \Add3~47\);
-
--- Location: LCCOMB_X56_Y40_N20
-\Add3~48\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~48_combout\ = (softstart_duty_act(28) & (!\Add3~47\ & VCC)) # (!softstart_duty_act(28) & (\Add3~47\ $ (GND)))
--- \Add3~49\ = CARRY((!softstart_duty_act(28) & !\Add3~47\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101000000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(28),
-	datad => VCC,
-	cin => \Add3~47\,
-	combout => \Add3~48_combout\,
-	cout => \Add3~49\);
-
--- Location: LCCOMB_X56_Y40_N22
-\Add3~50\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~50_combout\ = (softstart_duty_act(29) & ((\Add3~49\) # (GND))) # (!softstart_duty_act(29) & (!\Add3~49\))
--- \Add3~51\ = CARRY((softstart_duty_act(29)) # (!\Add3~49\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001111001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(29),
-	datad => VCC,
-	cin => \Add3~49\,
-	combout => \Add3~50_combout\,
-	cout => \Add3~51\);
-
--- Location: LCCOMB_X56_Y40_N24
-\Add3~52\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~52_combout\ = (softstart_duty_act(30) & (!\Add3~51\ & VCC)) # (!softstart_duty_act(30) & (\Add3~51\ $ (GND)))
--- \Add3~53\ = CARRY((!softstart_duty_act(30) & !\Add3~51\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101000000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(30),
-	datad => VCC,
-	cin => \Add3~51\,
-	combout => \Add3~52_combout\,
-	cout => \Add3~53\);
-
--- Location: LCCOMB_X56_Y40_N26
-\Add3~54\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add3~54_combout\ = softstart_duty_act(31) $ (!\Add3~53\)
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001111000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(31),
-	cin => \Add3~53\,
-	combout => \Add3~54_combout\);
-
--- Location: LCCOMB_X55_Y41_N0
-\LessThan1~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~1_cout\ = CARRY((softstart_duty_act(0) & !countactual1(0)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000100010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(0),
-	datab => countactual1(0),
-	datad => VCC,
-	cout => \LessThan1~1_cout\);
-
--- Location: LCCOMB_X55_Y41_N2
-\LessThan1~3\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~3_cout\ = CARRY((softstart_duty_act(1) & (countactual1(1) & !\LessThan1~1_cout\)) # (!softstart_duty_act(1) & ((countactual1(1)) # (!\LessThan1~1_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(1),
-	datab => countactual1(1),
-	datad => VCC,
-	cin => \LessThan1~1_cout\,
-	cout => \LessThan1~3_cout\);
-
--- Location: LCCOMB_X55_Y41_N4
-\LessThan1~5\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~5_cout\ = CARRY((softstart_duty_act(2) & ((!\LessThan1~3_cout\) # (!countactual1(2)))) # (!softstart_duty_act(2) & (!countactual1(2) & !\LessThan1~3_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(2),
-	datab => countactual1(2),
-	datad => VCC,
-	cin => \LessThan1~3_cout\,
-	cout => \LessThan1~5_cout\);
-
--- Location: LCCOMB_X55_Y41_N6
-\LessThan1~7\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~7_cout\ = CARRY((softstart_duty_act(3) & (countactual1(3) & !\LessThan1~5_cout\)) # (!softstart_duty_act(3) & ((countactual1(3)) # (!\LessThan1~5_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(3),
-	datab => countactual1(3),
-	datad => VCC,
-	cin => \LessThan1~5_cout\,
-	cout => \LessThan1~7_cout\);
-
--- Location: LCCOMB_X55_Y41_N8
-\LessThan1~9\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~9_cout\ = CARRY((countactual1(4) & (softstart_duty_act(4) & !\LessThan1~7_cout\)) # (!countactual1(4) & ((softstart_duty_act(4)) # (!\LessThan1~7_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(4),
-	datab => softstart_duty_act(4),
-	datad => VCC,
-	cin => \LessThan1~7_cout\,
-	cout => \LessThan1~9_cout\);
-
--- Location: LCCOMB_X55_Y41_N10
-\LessThan1~11\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~11_cout\ = CARRY((\Add3~2_combout\ & (countactual1(5) & !\LessThan1~9_cout\)) # (!\Add3~2_combout\ & ((countactual1(5)) # (!\LessThan1~9_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add3~2_combout\,
-	datab => countactual1(5),
-	datad => VCC,
-	cin => \LessThan1~9_cout\,
-	cout => \LessThan1~11_cout\);
-
--- Location: LCCOMB_X55_Y41_N12
-\LessThan1~13\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~13_cout\ = CARRY((countactual1(6) & (\Add3~4_combout\ & !\LessThan1~11_cout\)) # (!countactual1(6) & ((\Add3~4_combout\) # (!\LessThan1~11_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(6),
-	datab => \Add3~4_combout\,
-	datad => VCC,
-	cin => \LessThan1~11_cout\,
-	cout => \LessThan1~13_cout\);
-
--- Location: LCCOMB_X55_Y41_N14
-\LessThan1~15\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~15_cout\ = CARRY((countactual1(7) & ((!\LessThan1~13_cout\) # (!\Add3~6_combout\))) # (!countactual1(7) & (!\Add3~6_combout\ & !\LessThan1~13_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(7),
-	datab => \Add3~6_combout\,
-	datad => VCC,
-	cin => \LessThan1~13_cout\,
-	cout => \LessThan1~15_cout\);
-
--- Location: LCCOMB_X55_Y41_N16
-\LessThan1~17\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~17_cout\ = CARRY((countactual1(8) & (\Add3~8_combout\ & !\LessThan1~15_cout\)) # (!countactual1(8) & ((\Add3~8_combout\) # (!\LessThan1~15_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(8),
-	datab => \Add3~8_combout\,
-	datad => VCC,
-	cin => \LessThan1~15_cout\,
-	cout => \LessThan1~17_cout\);
-
--- Location: LCCOMB_X55_Y41_N18
-\LessThan1~19\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~19_cout\ = CARRY((countactual1(9) & ((!\LessThan1~17_cout\) # (!\Add3~10_combout\))) # (!countactual1(9) & (!\Add3~10_combout\ & !\LessThan1~17_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(9),
-	datab => \Add3~10_combout\,
-	datad => VCC,
-	cin => \LessThan1~17_cout\,
-	cout => \LessThan1~19_cout\);
-
--- Location: LCCOMB_X55_Y41_N20
-\LessThan1~21\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~21_cout\ = CARRY((countactual1(10) & (\Add3~12_combout\ & !\LessThan1~19_cout\)) # (!countactual1(10) & ((\Add3~12_combout\) # (!\LessThan1~19_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(10),
-	datab => \Add3~12_combout\,
-	datad => VCC,
-	cin => \LessThan1~19_cout\,
-	cout => \LessThan1~21_cout\);
-
--- Location: LCCOMB_X55_Y41_N22
-\LessThan1~23\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~23_cout\ = CARRY((countactual1(11) & ((!\LessThan1~21_cout\) # (!\Add3~14_combout\))) # (!countactual1(11) & (!\Add3~14_combout\ & !\LessThan1~21_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(11),
-	datab => \Add3~14_combout\,
-	datad => VCC,
-	cin => \LessThan1~21_cout\,
-	cout => \LessThan1~23_cout\);
-
--- Location: LCCOMB_X55_Y41_N24
-\LessThan1~25\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~25_cout\ = CARRY((countactual1(12) & (\Add3~16_combout\ & !\LessThan1~23_cout\)) # (!countactual1(12) & ((\Add3~16_combout\) # (!\LessThan1~23_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(12),
-	datab => \Add3~16_combout\,
-	datad => VCC,
-	cin => \LessThan1~23_cout\,
-	cout => \LessThan1~25_cout\);
-
--- Location: LCCOMB_X55_Y41_N26
-\LessThan1~27\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~27_cout\ = CARRY((countactual1(13) & ((!\LessThan1~25_cout\) # (!\Add3~18_combout\))) # (!countactual1(13) & (!\Add3~18_combout\ & !\LessThan1~25_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(13),
-	datab => \Add3~18_combout\,
-	datad => VCC,
-	cin => \LessThan1~25_cout\,
-	cout => \LessThan1~27_cout\);
-
--- Location: LCCOMB_X55_Y41_N28
-\LessThan1~29\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~29_cout\ = CARRY((countactual1(14) & (\Add3~20_combout\ & !\LessThan1~27_cout\)) # (!countactual1(14) & ((\Add3~20_combout\) # (!\LessThan1~27_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(14),
-	datab => \Add3~20_combout\,
-	datad => VCC,
-	cin => \LessThan1~27_cout\,
-	cout => \LessThan1~29_cout\);
-
--- Location: LCCOMB_X55_Y41_N30
-\LessThan1~31\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~31_cout\ = CARRY((countactual1(15) & ((!\LessThan1~29_cout\) # (!\Add3~22_combout\))) # (!countactual1(15) & (!\Add3~22_combout\ & !\LessThan1~29_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(15),
-	datab => \Add3~22_combout\,
-	datad => VCC,
-	cin => \LessThan1~29_cout\,
-	cout => \LessThan1~31_cout\);
-
--- Location: LCCOMB_X55_Y40_N0
-\LessThan1~33\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~33_cout\ = CARRY((\Add3~24_combout\ & ((!\LessThan1~31_cout\) # (!countactual1(16)))) # (!\Add3~24_combout\ & (!countactual1(16) & !\LessThan1~31_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add3~24_combout\,
-	datab => countactual1(16),
-	datad => VCC,
-	cin => \LessThan1~31_cout\,
-	cout => \LessThan1~33_cout\);
-
--- Location: LCCOMB_X55_Y40_N2
-\LessThan1~35\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~35_cout\ = CARRY((countactual1(17) & ((!\LessThan1~33_cout\) # (!\Add3~26_combout\))) # (!countactual1(17) & (!\Add3~26_combout\ & !\LessThan1~33_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(17),
-	datab => \Add3~26_combout\,
-	datad => VCC,
-	cin => \LessThan1~33_cout\,
-	cout => \LessThan1~35_cout\);
-
--- Location: LCCOMB_X55_Y40_N4
-\LessThan1~37\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~37_cout\ = CARRY((countactual1(18) & (\Add3~28_combout\ & !\LessThan1~35_cout\)) # (!countactual1(18) & ((\Add3~28_combout\) # (!\LessThan1~35_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(18),
-	datab => \Add3~28_combout\,
-	datad => VCC,
-	cin => \LessThan1~35_cout\,
-	cout => \LessThan1~37_cout\);
-
--- Location: LCCOMB_X55_Y40_N6
-\LessThan1~39\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~39_cout\ = CARRY((\Add3~30_combout\ & (countactual1(19) & !\LessThan1~37_cout\)) # (!\Add3~30_combout\ & ((countactual1(19)) # (!\LessThan1~37_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add3~30_combout\,
-	datab => countactual1(19),
-	datad => VCC,
-	cin => \LessThan1~37_cout\,
-	cout => \LessThan1~39_cout\);
-
--- Location: LCCOMB_X55_Y40_N8
-\LessThan1~41\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~41_cout\ = CARRY((countactual1(20) & (\Add3~32_combout\ & !\LessThan1~39_cout\)) # (!countactual1(20) & ((\Add3~32_combout\) # (!\LessThan1~39_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(20),
-	datab => \Add3~32_combout\,
-	datad => VCC,
-	cin => \LessThan1~39_cout\,
-	cout => \LessThan1~41_cout\);
-
--- Location: LCCOMB_X55_Y40_N10
-\LessThan1~43\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~43_cout\ = CARRY((\Add3~34_combout\ & (countactual1(21) & !\LessThan1~41_cout\)) # (!\Add3~34_combout\ & ((countactual1(21)) # (!\LessThan1~41_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add3~34_combout\,
-	datab => countactual1(21),
-	datad => VCC,
-	cin => \LessThan1~41_cout\,
-	cout => \LessThan1~43_cout\);
-
--- Location: LCCOMB_X55_Y40_N12
-\LessThan1~45\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~45_cout\ = CARRY((countactual1(22) & (\Add3~36_combout\ & !\LessThan1~43_cout\)) # (!countactual1(22) & ((\Add3~36_combout\) # (!\LessThan1~43_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(22),
-	datab => \Add3~36_combout\,
-	datad => VCC,
-	cin => \LessThan1~43_cout\,
-	cout => \LessThan1~45_cout\);
-
--- Location: LCCOMB_X55_Y40_N14
-\LessThan1~47\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~47_cout\ = CARRY((countactual1(23) & ((!\LessThan1~45_cout\) # (!\Add3~38_combout\))) # (!countactual1(23) & (!\Add3~38_combout\ & !\LessThan1~45_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(23),
-	datab => \Add3~38_combout\,
-	datad => VCC,
-	cin => \LessThan1~45_cout\,
-	cout => \LessThan1~47_cout\);
-
--- Location: LCCOMB_X55_Y40_N16
-\LessThan1~49\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~49_cout\ = CARRY((countactual1(24) & (\Add3~40_combout\ & !\LessThan1~47_cout\)) # (!countactual1(24) & ((\Add3~40_combout\) # (!\LessThan1~47_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(24),
-	datab => \Add3~40_combout\,
-	datad => VCC,
-	cin => \LessThan1~47_cout\,
-	cout => \LessThan1~49_cout\);
-
--- Location: LCCOMB_X55_Y40_N18
-\LessThan1~51\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~51_cout\ = CARRY((countactual1(25) & ((!\LessThan1~49_cout\) # (!\Add3~42_combout\))) # (!countactual1(25) & (!\Add3~42_combout\ & !\LessThan1~49_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(25),
-	datab => \Add3~42_combout\,
-	datad => VCC,
-	cin => \LessThan1~49_cout\,
-	cout => \LessThan1~51_cout\);
-
--- Location: LCCOMB_X55_Y40_N20
-\LessThan1~53\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~53_cout\ = CARRY((\Add3~44_combout\ & ((!\LessThan1~51_cout\) # (!countactual1(26)))) # (!\Add3~44_combout\ & (!countactual1(26) & !\LessThan1~51_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add3~44_combout\,
-	datab => countactual1(26),
-	datad => VCC,
-	cin => \LessThan1~51_cout\,
-	cout => \LessThan1~53_cout\);
-
--- Location: LCCOMB_X55_Y40_N22
-\LessThan1~55\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~55_cout\ = CARRY((countactual1(27) & ((!\LessThan1~53_cout\) # (!\Add3~46_combout\))) # (!countactual1(27) & (!\Add3~46_combout\ & !\LessThan1~53_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(27),
-	datab => \Add3~46_combout\,
-	datad => VCC,
-	cin => \LessThan1~53_cout\,
-	cout => \LessThan1~55_cout\);
-
--- Location: LCCOMB_X55_Y40_N24
-\LessThan1~57\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~57_cout\ = CARRY((\Add3~48_combout\ & ((!\LessThan1~55_cout\) # (!countactual1(28)))) # (!\Add3~48_combout\ & (!countactual1(28) & !\LessThan1~55_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add3~48_combout\,
-	datab => countactual1(28),
-	datad => VCC,
-	cin => \LessThan1~55_cout\,
-	cout => \LessThan1~57_cout\);
-
--- Location: LCCOMB_X55_Y40_N26
-\LessThan1~59\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~59_cout\ = CARRY((countactual1(29) & ((!\LessThan1~57_cout\) # (!\Add3~50_combout\))) # (!countactual1(29) & (!\Add3~50_combout\ & !\LessThan1~57_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(29),
-	datab => \Add3~50_combout\,
-	datad => VCC,
-	cin => \LessThan1~57_cout\,
-	cout => \LessThan1~59_cout\);
-
--- Location: LCCOMB_X55_Y40_N28
-\LessThan1~61\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~61_cout\ = CARRY((\Add3~52_combout\ & ((!\LessThan1~59_cout\) # (!countactual1(30)))) # (!\Add3~52_combout\ & (!countactual1(30) & !\LessThan1~59_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add3~52_combout\,
-	datab => countactual1(30),
-	datad => VCC,
-	cin => \LessThan1~59_cout\,
-	cout => \LessThan1~61_cout\);
-
--- Location: LCCOMB_X55_Y40_N30
-\LessThan1~62\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan1~62_combout\ = (countactual1(31) & ((\LessThan1~61_cout\) # (!\Add3~54_combout\))) # (!countactual1(31) & (\LessThan1~61_cout\ & !\Add3~54_combout\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100000011111100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(31),
-	datad => \Add3~54_combout\,
-	cin => \LessThan1~61_cout\,
-	combout => \LessThan1~62_combout\);
-
--- Location: LCCOMB_X55_Y37_N16
-\Selector36~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector36~1_combout\ = (\Selector36~0_combout\) # ((\est_act.buck1~q\ & ((\LessThan0~62_combout\) # (\LessThan1~62_combout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111110011101100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \LessThan0~62_combout\,
-	datab => \Selector36~0_combout\,
-	datac => \est_act.buck1~q\,
-	datad => \LessThan1~62_combout\,
-	combout => \Selector36~1_combout\);
-
--- Location: FF_X55_Y37_N17
-\est_act.buck1\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Selector36~1_combout\,
-	clrn => \reset~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \est_act.buck1~q\);
-
--- Location: LCCOMB_X55_Y37_N10
-\Selector37~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector37~1_combout\ = (\est_act.buck1~q\ & (!\LessThan0~62_combout\ & !\LessThan1~62_combout\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000001100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	datab => \est_act.buck1~q\,
-	datac => \LessThan0~62_combout\,
-	datad => \LessThan1~62_combout\,
-	combout => \Selector37~1_combout\);
-
--- Location: LCCOMB_X55_Y37_N2
-\Selector37~2\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector37~2_combout\ = (\Selector39~7_combout\ & ((\Selector37~1_combout\) # ((!\Selector41~0_combout\ & \Selector37~0_combout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010101000100000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector39~7_combout\,
-	datab => \Selector41~0_combout\,
-	datac => \Selector37~0_combout\,
-	datad => \Selector37~1_combout\,
-	combout => \Selector37~2_combout\);
-
--- Location: FF_X55_Y37_N3
-\est_act.buck2\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Selector37~2_combout\,
-	clrn => \reset~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \est_act.buck2~q\);
-
--- Location: LCCOMB_X59_Y37_N28
-\LessThan9~7\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan9~7_combout\ = (\LessThan9~6_combout\ & !softstart_duty_act(8))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000101000001010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \LessThan9~6_combout\,
-	datac => softstart_duty_act(8),
-	combout => \LessThan9~7_combout\);
-
--- Location: LCCOMB_X59_Y37_N20
-\LessThan4~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan4~0_combout\ = (softstart_duty_act(2)) # (((softstart_duty_act(3)) # (!softstart_duty_act(4))) # (!softstart_duty_act(5)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111101111111111",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(2),
-	datab => softstart_duty_act(5),
-	datac => softstart_duty_act(3),
-	datad => softstart_duty_act(4),
-	combout => \LessThan4~0_combout\);
-
--- Location: LCCOMB_X59_Y37_N30
-\LessThan4~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan4~1_combout\ = ((!softstart_duty_act(6) & ((softstart_duty_act(1)) # (\LessThan4~0_combout\)))) # (!softstart_duty_act(7))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101111101001111",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(6),
-	datab => softstart_duty_act(1),
-	datac => softstart_duty_act(7),
-	datad => \LessThan4~0_combout\,
-	combout => \LessThan4~1_combout\);
-
--- Location: LCCOMB_X59_Y37_N16
-\softstart_duty_act[3]~3\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \softstart_duty_act[3]~3_combout\ = ((softstart_duty_act(31)) # ((\LessThan9~7_combout\ & \LessThan4~1_combout\))) # (!\est_act.buck2~q\)
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111111111010101",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \est_act.buck2~q\,
-	datab => \LessThan9~7_combout\,
-	datac => \LessThan4~1_combout\,
-	datad => softstart_duty_act(31),
-	combout => \softstart_duty_act[3]~3_combout\);
-
--- Location: LCCOMB_X59_Y40_N28
-\Add5~60\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~60_combout\ = (softstart_duty_act(30) & (\Add5~59\ $ (GND))) # (!softstart_duty_act(30) & (!\Add5~59\ & VCC))
--- \Add5~61\ = CARRY((softstart_duty_act(30) & !\Add5~59\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(30),
-	datad => VCC,
-	cin => \Add5~59\,
-	combout => \Add5~60_combout\,
-	cout => \Add5~61\);
-
--- Location: LCCOMB_X60_Y40_N24
-\Add5~64\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~64_combout\ = (\softstart_duty_act[3]~3_combout\ & (\est_act.idle~q\ & (!\Selector41~2_combout\ & \Add5~60_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000100000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \softstart_duty_act[3]~3_combout\,
-	datab => \est_act.idle~q\,
-	datac => \Selector41~2_combout\,
-	datad => \Add5~60_combout\,
-	combout => \Add5~64_combout\);
-
--- Location: FF_X60_Y40_N25
-\softstart_duty_act[30]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Add5~64_combout\,
-	clrn => \reset~input_o\,
-	ena => \softstart_duty_act[3]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(30));
-
--- Location: LCCOMB_X57_Y38_N2
-\Add1~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~1_cout\ = CARRY(softstart_duty_act(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000010101010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(1),
-	datad => VCC,
-	cout => \Add1~1_cout\);
-
--- Location: LCCOMB_X57_Y38_N4
-\Add1~2\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~2_combout\ = (softstart_duty_act(2) & (\Add1~1_cout\ & VCC)) # (!softstart_duty_act(2) & (!\Add1~1_cout\))
--- \Add1~3\ = CARRY((!softstart_duty_act(2) & !\Add1~1_cout\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(2),
-	datad => VCC,
-	cin => \Add1~1_cout\,
-	combout => \Add1~2_combout\,
-	cout => \Add1~3\);
-
--- Location: LCCOMB_X57_Y38_N6
-\Add1~4\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~4_combout\ = (softstart_duty_act(3) & ((GND) # (!\Add1~3\))) # (!softstart_duty_act(3) & (\Add1~3\ $ (GND)))
--- \Add1~5\ = CARRY((softstart_duty_act(3)) # (!\Add1~3\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101010101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(3),
-	datad => VCC,
-	cin => \Add1~3\,
-	combout => \Add1~4_combout\,
-	cout => \Add1~5\);
-
--- Location: LCCOMB_X57_Y38_N8
-\Add1~6\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~6_combout\ = (softstart_duty_act(4) & ((\Add1~5\) # (GND))) # (!softstart_duty_act(4) & (!\Add1~5\))
--- \Add1~7\ = CARRY((softstart_duty_act(4)) # (!\Add1~5\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(4),
-	datad => VCC,
-	cin => \Add1~5\,
-	combout => \Add1~6_combout\,
-	cout => \Add1~7\);
-
--- Location: LCCOMB_X57_Y38_N10
-\Add1~8\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~8_combout\ = (softstart_duty_act(5) & (!\Add1~7\ & VCC)) # (!softstart_duty_act(5) & (\Add1~7\ $ (GND)))
--- \Add1~9\ = CARRY((!softstart_duty_act(5) & !\Add1~7\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(5),
-	datad => VCC,
-	cin => \Add1~7\,
-	combout => \Add1~8_combout\,
-	cout => \Add1~9\);
-
--- Location: LCCOMB_X57_Y38_N12
-\Add1~10\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~10_combout\ = (softstart_duty_act(6) & ((\Add1~9\) # (GND))) # (!softstart_duty_act(6) & (!\Add1~9\))
--- \Add1~11\ = CARRY((softstart_duty_act(6)) # (!\Add1~9\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(6),
-	datad => VCC,
-	cin => \Add1~9\,
-	combout => \Add1~10_combout\,
-	cout => \Add1~11\);
-
--- Location: LCCOMB_X57_Y38_N14
-\Add1~12\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~12_combout\ = (softstart_duty_act(7) & (!\Add1~11\ & VCC)) # (!softstart_duty_act(7) & (\Add1~11\ $ (GND)))
--- \Add1~13\ = CARRY((!softstart_duty_act(7) & !\Add1~11\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(7),
-	datad => VCC,
-	cin => \Add1~11\,
-	combout => \Add1~12_combout\,
-	cout => \Add1~13\);
-
--- Location: LCCOMB_X57_Y38_N16
-\Add1~14\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~14_combout\ = (softstart_duty_act(8) & (!\Add1~13\)) # (!softstart_duty_act(8) & (\Add1~13\ & VCC))
--- \Add1~15\ = CARRY((softstart_duty_act(8) & !\Add1~13\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(8),
-	datad => VCC,
-	cin => \Add1~13\,
-	combout => \Add1~14_combout\,
-	cout => \Add1~15\);
-
--- Location: LCCOMB_X57_Y38_N18
-\Add1~16\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~16_combout\ = (softstart_duty_act(9) & (!\Add1~15\ & VCC)) # (!softstart_duty_act(9) & (\Add1~15\ $ (GND)))
--- \Add1~17\ = CARRY((!softstart_duty_act(9) & !\Add1~15\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101000000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(9),
-	datad => VCC,
-	cin => \Add1~15\,
-	combout => \Add1~16_combout\,
-	cout => \Add1~17\);
-
--- Location: LCCOMB_X57_Y38_N20
-\Add1~18\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~18_combout\ = (softstart_duty_act(10) & ((\Add1~17\) # (GND))) # (!softstart_duty_act(10) & (!\Add1~17\))
--- \Add1~19\ = CARRY((softstart_duty_act(10)) # (!\Add1~17\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001111001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(10),
-	datad => VCC,
-	cin => \Add1~17\,
-	combout => \Add1~18_combout\,
-	cout => \Add1~19\);
-
--- Location: LCCOMB_X57_Y38_N22
-\Add1~20\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~20_combout\ = (softstart_duty_act(11) & (!\Add1~19\ & VCC)) # (!softstart_duty_act(11) & (\Add1~19\ $ (GND)))
--- \Add1~21\ = CARRY((!softstart_duty_act(11) & !\Add1~19\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(11),
-	datad => VCC,
-	cin => \Add1~19\,
-	combout => \Add1~20_combout\,
-	cout => \Add1~21\);
-
--- Location: LCCOMB_X57_Y38_N24
-\Add1~22\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~22_combout\ = (softstart_duty_act(12) & ((\Add1~21\) # (GND))) # (!softstart_duty_act(12) & (!\Add1~21\))
--- \Add1~23\ = CARRY((softstart_duty_act(12)) # (!\Add1~21\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001111001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(12),
-	datad => VCC,
-	cin => \Add1~21\,
-	combout => \Add1~22_combout\,
-	cout => \Add1~23\);
-
--- Location: LCCOMB_X57_Y38_N26
-\Add1~24\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~24_combout\ = (softstart_duty_act(13) & (!\Add1~23\ & VCC)) # (!softstart_duty_act(13) & (\Add1~23\ $ (GND)))
--- \Add1~25\ = CARRY((!softstart_duty_act(13) & !\Add1~23\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101000000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(13),
-	datad => VCC,
-	cin => \Add1~23\,
-	combout => \Add1~24_combout\,
-	cout => \Add1~25\);
-
--- Location: LCCOMB_X57_Y38_N28
-\Add1~26\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~26_combout\ = (softstart_duty_act(14) & ((\Add1~25\) # (GND))) # (!softstart_duty_act(14) & (!\Add1~25\))
--- \Add1~27\ = CARRY((softstart_duty_act(14)) # (!\Add1~25\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(14),
-	datad => VCC,
-	cin => \Add1~25\,
-	combout => \Add1~26_combout\,
-	cout => \Add1~27\);
-
--- Location: LCCOMB_X57_Y38_N30
-\Add1~28\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~28_combout\ = (softstart_duty_act(15) & (!\Add1~27\ & VCC)) # (!softstart_duty_act(15) & (\Add1~27\ $ (GND)))
--- \Add1~29\ = CARRY((!softstart_duty_act(15) & !\Add1~27\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(15),
-	datad => VCC,
-	cin => \Add1~27\,
-	combout => \Add1~28_combout\,
-	cout => \Add1~29\);
-
--- Location: LCCOMB_X57_Y37_N0
-\Add1~30\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~30_combout\ = (softstart_duty_act(16) & ((\Add1~29\) # (GND))) # (!softstart_duty_act(16) & (!\Add1~29\))
--- \Add1~31\ = CARRY((softstart_duty_act(16)) # (!\Add1~29\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(16),
-	datad => VCC,
-	cin => \Add1~29\,
-	combout => \Add1~30_combout\,
-	cout => \Add1~31\);
-
--- Location: LCCOMB_X57_Y37_N2
-\Add1~32\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~32_combout\ = (softstart_duty_act(17) & (!\Add1~31\ & VCC)) # (!softstart_duty_act(17) & (\Add1~31\ $ (GND)))
--- \Add1~33\ = CARRY((!softstart_duty_act(17) & !\Add1~31\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101000000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(17),
-	datad => VCC,
-	cin => \Add1~31\,
-	combout => \Add1~32_combout\,
-	cout => \Add1~33\);
-
--- Location: LCCOMB_X57_Y37_N4
-\Add1~34\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~34_combout\ = (softstart_duty_act(18) & ((\Add1~33\) # (GND))) # (!softstart_duty_act(18) & (!\Add1~33\))
--- \Add1~35\ = CARRY((softstart_duty_act(18)) # (!\Add1~33\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001111001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(18),
-	datad => VCC,
-	cin => \Add1~33\,
-	combout => \Add1~34_combout\,
-	cout => \Add1~35\);
-
--- Location: LCCOMB_X57_Y37_N6
-\Add1~36\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~36_combout\ = (softstart_duty_act(19) & (!\Add1~35\ & VCC)) # (!softstart_duty_act(19) & (\Add1~35\ $ (GND)))
--- \Add1~37\ = CARRY((!softstart_duty_act(19) & !\Add1~35\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101000000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(19),
-	datad => VCC,
-	cin => \Add1~35\,
-	combout => \Add1~36_combout\,
-	cout => \Add1~37\);
-
--- Location: LCCOMB_X57_Y37_N8
-\Add1~38\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~38_combout\ = (softstart_duty_act(20) & ((\Add1~37\) # (GND))) # (!softstart_duty_act(20) & (!\Add1~37\))
--- \Add1~39\ = CARRY((softstart_duty_act(20)) # (!\Add1~37\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(20),
-	datad => VCC,
-	cin => \Add1~37\,
-	combout => \Add1~38_combout\,
-	cout => \Add1~39\);
-
--- Location: LCCOMB_X57_Y37_N10
-\Add1~40\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~40_combout\ = (softstart_duty_act(21) & (!\Add1~39\ & VCC)) # (!softstart_duty_act(21) & (\Add1~39\ $ (GND)))
--- \Add1~41\ = CARRY((!softstart_duty_act(21) & !\Add1~39\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(21),
-	datad => VCC,
-	cin => \Add1~39\,
-	combout => \Add1~40_combout\,
-	cout => \Add1~41\);
-
--- Location: LCCOMB_X57_Y37_N12
-\Add1~42\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~42_combout\ = (softstart_duty_act(22) & ((\Add1~41\) # (GND))) # (!softstart_duty_act(22) & (!\Add1~41\))
--- \Add1~43\ = CARRY((softstart_duty_act(22)) # (!\Add1~41\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001111001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(22),
-	datad => VCC,
-	cin => \Add1~41\,
-	combout => \Add1~42_combout\,
-	cout => \Add1~43\);
-
--- Location: LCCOMB_X57_Y37_N14
-\Add1~44\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~44_combout\ = (softstart_duty_act(23) & (!\Add1~43\ & VCC)) # (!softstart_duty_act(23) & (\Add1~43\ $ (GND)))
--- \Add1~45\ = CARRY((!softstart_duty_act(23) & !\Add1~43\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(23),
-	datad => VCC,
-	cin => \Add1~43\,
-	combout => \Add1~44_combout\,
-	cout => \Add1~45\);
-
--- Location: LCCOMB_X57_Y37_N16
-\Add1~46\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~46_combout\ = (softstart_duty_act(24) & ((\Add1~45\) # (GND))) # (!softstart_duty_act(24) & (!\Add1~45\))
--- \Add1~47\ = CARRY((softstart_duty_act(24)) # (!\Add1~45\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(24),
-	datad => VCC,
-	cin => \Add1~45\,
-	combout => \Add1~46_combout\,
-	cout => \Add1~47\);
-
--- Location: LCCOMB_X57_Y37_N18
-\Add1~48\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~48_combout\ = (softstart_duty_act(25) & (!\Add1~47\ & VCC)) # (!softstart_duty_act(25) & (\Add1~47\ $ (GND)))
--- \Add1~49\ = CARRY((!softstart_duty_act(25) & !\Add1~47\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101000000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(25),
-	datad => VCC,
-	cin => \Add1~47\,
-	combout => \Add1~48_combout\,
-	cout => \Add1~49\);
-
--- Location: LCCOMB_X57_Y37_N20
-\Add1~50\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~50_combout\ = (softstart_duty_act(26) & ((\Add1~49\) # (GND))) # (!softstart_duty_act(26) & (!\Add1~49\))
--- \Add1~51\ = CARRY((softstart_duty_act(26)) # (!\Add1~49\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001111001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(26),
-	datad => VCC,
-	cin => \Add1~49\,
-	combout => \Add1~50_combout\,
-	cout => \Add1~51\);
-
--- Location: LCCOMB_X57_Y37_N22
-\Add1~52\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~52_combout\ = (softstart_duty_act(27) & (!\Add1~51\ & VCC)) # (!softstart_duty_act(27) & (\Add1~51\ $ (GND)))
--- \Add1~53\ = CARRY((!softstart_duty_act(27) & !\Add1~51\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(27),
-	datad => VCC,
-	cin => \Add1~51\,
-	combout => \Add1~52_combout\,
-	cout => \Add1~53\);
-
--- Location: LCCOMB_X57_Y37_N24
-\Add1~54\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~54_combout\ = (softstart_duty_act(28) & ((\Add1~53\) # (GND))) # (!softstart_duty_act(28) & (!\Add1~53\))
--- \Add1~55\ = CARRY((softstart_duty_act(28)) # (!\Add1~53\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001111001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(28),
-	datad => VCC,
-	cin => \Add1~53\,
-	combout => \Add1~54_combout\,
-	cout => \Add1~55\);
-
--- Location: LCCOMB_X57_Y37_N26
-\Add1~56\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~56_combout\ = (softstart_duty_act(29) & (!\Add1~55\ & VCC)) # (!softstart_duty_act(29) & (\Add1~55\ $ (GND)))
--- \Add1~57\ = CARRY((!softstart_duty_act(29) & !\Add1~55\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(29),
-	datad => VCC,
-	cin => \Add1~55\,
-	combout => \Add1~56_combout\,
-	cout => \Add1~57\);
-
--- Location: LCCOMB_X57_Y37_N28
-\Add1~58\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~58_combout\ = (softstart_duty_act(30) & ((\Add1~57\) # (GND))) # (!softstart_duty_act(30) & (!\Add1~57\))
--- \Add1~59\ = CARRY((softstart_duty_act(30)) # (!\Add1~57\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(30),
-	datad => VCC,
-	cin => \Add1~57\,
-	combout => \Add1~58_combout\,
-	cout => \Add1~59\);
-
--- Location: LCCOMB_X57_Y37_N30
-\Add1~60\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add1~60_combout\ = \Add1~59\ $ (softstart_duty_act(31))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000111111110000",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datad => softstart_duty_act(31),
-	cin => \Add1~59\,
-	combout => \Add1~60_combout\);
-
--- Location: LCCOMB_X56_Y38_N0
-\LessThan0~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~1_cout\ = CARRY((softstart_duty_act(0) & !countactual1(0)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000100010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(0),
-	datab => countactual1(0),
-	datad => VCC,
-	cout => \LessThan0~1_cout\);
-
--- Location: LCCOMB_X56_Y38_N2
-\LessThan0~3\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~3_cout\ = CARRY((softstart_duty_act(1) & ((countactual1(1)) # (!\LessThan0~1_cout\))) # (!softstart_duty_act(1) & (countactual1(1) & !\LessThan0~1_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000010001110",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(1),
-	datab => countactual1(1),
-	datad => VCC,
-	cin => \LessThan0~1_cout\,
-	cout => \LessThan0~3_cout\);
-
--- Location: LCCOMB_X56_Y38_N4
-\LessThan0~5\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~5_cout\ = CARRY((\Add1~2_combout\ & ((!\LessThan0~3_cout\) # (!countactual1(2)))) # (!\Add1~2_combout\ & (!countactual1(2) & !\LessThan0~3_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add1~2_combout\,
-	datab => countactual1(2),
-	datad => VCC,
-	cin => \LessThan0~3_cout\,
-	cout => \LessThan0~5_cout\);
-
--- Location: LCCOMB_X56_Y38_N6
-\LessThan0~7\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~7_cout\ = CARRY((\Add1~4_combout\ & (countactual1(3) & !\LessThan0~5_cout\)) # (!\Add1~4_combout\ & ((countactual1(3)) # (!\LessThan0~5_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add1~4_combout\,
-	datab => countactual1(3),
-	datad => VCC,
-	cin => \LessThan0~5_cout\,
-	cout => \LessThan0~7_cout\);
-
--- Location: LCCOMB_X56_Y38_N8
-\LessThan0~9\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~9_cout\ = CARRY((countactual1(4) & (\Add1~6_combout\ & !\LessThan0~7_cout\)) # (!countactual1(4) & ((\Add1~6_combout\) # (!\LessThan0~7_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(4),
-	datab => \Add1~6_combout\,
-	datad => VCC,
-	cin => \LessThan0~7_cout\,
-	cout => \LessThan0~9_cout\);
-
--- Location: LCCOMB_X56_Y38_N10
-\LessThan0~11\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~11_cout\ = CARRY((countactual1(5) & ((!\LessThan0~9_cout\) # (!\Add1~8_combout\))) # (!countactual1(5) & (!\Add1~8_combout\ & !\LessThan0~9_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(5),
-	datab => \Add1~8_combout\,
-	datad => VCC,
-	cin => \LessThan0~9_cout\,
-	cout => \LessThan0~11_cout\);
-
--- Location: LCCOMB_X56_Y38_N12
-\LessThan0~13\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~13_cout\ = CARRY((countactual1(6) & (\Add1~10_combout\ & !\LessThan0~11_cout\)) # (!countactual1(6) & ((\Add1~10_combout\) # (!\LessThan0~11_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(6),
-	datab => \Add1~10_combout\,
-	datad => VCC,
-	cin => \LessThan0~11_cout\,
-	cout => \LessThan0~13_cout\);
-
--- Location: LCCOMB_X56_Y38_N14
-\LessThan0~15\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~15_cout\ = CARRY((countactual1(7) & ((!\LessThan0~13_cout\) # (!\Add1~12_combout\))) # (!countactual1(7) & (!\Add1~12_combout\ & !\LessThan0~13_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(7),
-	datab => \Add1~12_combout\,
-	datad => VCC,
-	cin => \LessThan0~13_cout\,
-	cout => \LessThan0~15_cout\);
-
--- Location: LCCOMB_X56_Y38_N16
-\LessThan0~17\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~17_cout\ = CARRY((countactual1(8) & (\Add1~14_combout\ & !\LessThan0~15_cout\)) # (!countactual1(8) & ((\Add1~14_combout\) # (!\LessThan0~15_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(8),
-	datab => \Add1~14_combout\,
-	datad => VCC,
-	cin => \LessThan0~15_cout\,
-	cout => \LessThan0~17_cout\);
-
--- Location: LCCOMB_X56_Y38_N18
-\LessThan0~19\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~19_cout\ = CARRY((countactual1(9) & ((!\LessThan0~17_cout\) # (!\Add1~16_combout\))) # (!countactual1(9) & (!\Add1~16_combout\ & !\LessThan0~17_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(9),
-	datab => \Add1~16_combout\,
-	datad => VCC,
-	cin => \LessThan0~17_cout\,
-	cout => \LessThan0~19_cout\);
-
--- Location: LCCOMB_X56_Y38_N20
-\LessThan0~21\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~21_cout\ = CARRY((\Add1~18_combout\ & ((!\LessThan0~19_cout\) # (!countactual1(10)))) # (!\Add1~18_combout\ & (!countactual1(10) & !\LessThan0~19_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add1~18_combout\,
-	datab => countactual1(10),
-	datad => VCC,
-	cin => \LessThan0~19_cout\,
-	cout => \LessThan0~21_cout\);
-
--- Location: LCCOMB_X56_Y38_N22
-\LessThan0~23\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~23_cout\ = CARRY((countactual1(11) & ((!\LessThan0~21_cout\) # (!\Add1~20_combout\))) # (!countactual1(11) & (!\Add1~20_combout\ & !\LessThan0~21_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(11),
-	datab => \Add1~20_combout\,
-	datad => VCC,
-	cin => \LessThan0~21_cout\,
-	cout => \LessThan0~23_cout\);
-
--- Location: LCCOMB_X56_Y38_N24
-\LessThan0~25\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~25_cout\ = CARRY((countactual1(12) & (\Add1~22_combout\ & !\LessThan0~23_cout\)) # (!countactual1(12) & ((\Add1~22_combout\) # (!\LessThan0~23_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(12),
-	datab => \Add1~22_combout\,
-	datad => VCC,
-	cin => \LessThan0~23_cout\,
-	cout => \LessThan0~25_cout\);
-
--- Location: LCCOMB_X56_Y38_N26
-\LessThan0~27\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~27_cout\ = CARRY((countactual1(13) & ((!\LessThan0~25_cout\) # (!\Add1~24_combout\))) # (!countactual1(13) & (!\Add1~24_combout\ & !\LessThan0~25_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(13),
-	datab => \Add1~24_combout\,
-	datad => VCC,
-	cin => \LessThan0~25_cout\,
-	cout => \LessThan0~27_cout\);
-
--- Location: LCCOMB_X56_Y38_N28
-\LessThan0~29\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~29_cout\ = CARRY((\Add1~26_combout\ & ((!\LessThan0~27_cout\) # (!countactual1(14)))) # (!\Add1~26_combout\ & (!countactual1(14) & !\LessThan0~27_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add1~26_combout\,
-	datab => countactual1(14),
-	datad => VCC,
-	cin => \LessThan0~27_cout\,
-	cout => \LessThan0~29_cout\);
-
--- Location: LCCOMB_X56_Y38_N30
-\LessThan0~31\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~31_cout\ = CARRY((\Add1~28_combout\ & (countactual1(15) & !\LessThan0~29_cout\)) # (!\Add1~28_combout\ & ((countactual1(15)) # (!\LessThan0~29_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add1~28_combout\,
-	datab => countactual1(15),
-	datad => VCC,
-	cin => \LessThan0~29_cout\,
-	cout => \LessThan0~31_cout\);
-
--- Location: LCCOMB_X56_Y37_N0
-\LessThan0~33\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~33_cout\ = CARRY((countactual1(16) & (\Add1~30_combout\ & !\LessThan0~31_cout\)) # (!countactual1(16) & ((\Add1~30_combout\) # (!\LessThan0~31_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(16),
-	datab => \Add1~30_combout\,
-	datad => VCC,
-	cin => \LessThan0~31_cout\,
-	cout => \LessThan0~33_cout\);
-
--- Location: LCCOMB_X56_Y37_N2
-\LessThan0~35\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~35_cout\ = CARRY((\Add1~32_combout\ & (countactual1(17) & !\LessThan0~33_cout\)) # (!\Add1~32_combout\ & ((countactual1(17)) # (!\LessThan0~33_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add1~32_combout\,
-	datab => countactual1(17),
-	datad => VCC,
-	cin => \LessThan0~33_cout\,
-	cout => \LessThan0~35_cout\);
-
--- Location: LCCOMB_X56_Y37_N4
-\LessThan0~37\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~37_cout\ = CARRY((\Add1~34_combout\ & ((!\LessThan0~35_cout\) # (!countactual1(18)))) # (!\Add1~34_combout\ & (!countactual1(18) & !\LessThan0~35_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add1~34_combout\,
-	datab => countactual1(18),
-	datad => VCC,
-	cin => \LessThan0~35_cout\,
-	cout => \LessThan0~37_cout\);
-
--- Location: LCCOMB_X56_Y37_N6
-\LessThan0~39\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~39_cout\ = CARRY((\Add1~36_combout\ & (countactual1(19) & !\LessThan0~37_cout\)) # (!\Add1~36_combout\ & ((countactual1(19)) # (!\LessThan0~37_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add1~36_combout\,
-	datab => countactual1(19),
-	datad => VCC,
-	cin => \LessThan0~37_cout\,
-	cout => \LessThan0~39_cout\);
-
--- Location: LCCOMB_X56_Y37_N8
-\LessThan0~41\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~41_cout\ = CARRY((countactual1(20) & (\Add1~38_combout\ & !\LessThan0~39_cout\)) # (!countactual1(20) & ((\Add1~38_combout\) # (!\LessThan0~39_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(20),
-	datab => \Add1~38_combout\,
-	datad => VCC,
-	cin => \LessThan0~39_cout\,
-	cout => \LessThan0~41_cout\);
-
--- Location: LCCOMB_X56_Y37_N10
-\LessThan0~43\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~43_cout\ = CARRY((countactual1(21) & ((!\LessThan0~41_cout\) # (!\Add1~40_combout\))) # (!countactual1(21) & (!\Add1~40_combout\ & !\LessThan0~41_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(21),
-	datab => \Add1~40_combout\,
-	datad => VCC,
-	cin => \LessThan0~41_cout\,
-	cout => \LessThan0~43_cout\);
-
--- Location: LCCOMB_X56_Y37_N12
-\LessThan0~45\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~45_cout\ = CARRY((countactual1(22) & (\Add1~42_combout\ & !\LessThan0~43_cout\)) # (!countactual1(22) & ((\Add1~42_combout\) # (!\LessThan0~43_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(22),
-	datab => \Add1~42_combout\,
-	datad => VCC,
-	cin => \LessThan0~43_cout\,
-	cout => \LessThan0~45_cout\);
-
--- Location: LCCOMB_X56_Y37_N14
-\LessThan0~47\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~47_cout\ = CARRY((countactual1(23) & ((!\LessThan0~45_cout\) # (!\Add1~44_combout\))) # (!countactual1(23) & (!\Add1~44_combout\ & !\LessThan0~45_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(23),
-	datab => \Add1~44_combout\,
-	datad => VCC,
-	cin => \LessThan0~45_cout\,
-	cout => \LessThan0~47_cout\);
-
--- Location: LCCOMB_X56_Y37_N16
-\LessThan0~49\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~49_cout\ = CARRY((countactual1(24) & (\Add1~46_combout\ & !\LessThan0~47_cout\)) # (!countactual1(24) & ((\Add1~46_combout\) # (!\LessThan0~47_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(24),
-	datab => \Add1~46_combout\,
-	datad => VCC,
-	cin => \LessThan0~47_cout\,
-	cout => \LessThan0~49_cout\);
-
--- Location: LCCOMB_X56_Y37_N18
-\LessThan0~51\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~51_cout\ = CARRY((countactual1(25) & ((!\LessThan0~49_cout\) # (!\Add1~48_combout\))) # (!countactual1(25) & (!\Add1~48_combout\ & !\LessThan0~49_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(25),
-	datab => \Add1~48_combout\,
-	datad => VCC,
-	cin => \LessThan0~49_cout\,
-	cout => \LessThan0~51_cout\);
-
--- Location: LCCOMB_X56_Y37_N20
-\LessThan0~53\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~53_cout\ = CARRY((\Add1~50_combout\ & ((!\LessThan0~51_cout\) # (!countactual1(26)))) # (!\Add1~50_combout\ & (!countactual1(26) & !\LessThan0~51_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add1~50_combout\,
-	datab => countactual1(26),
-	datad => VCC,
-	cin => \LessThan0~51_cout\,
-	cout => \LessThan0~53_cout\);
-
--- Location: LCCOMB_X56_Y37_N22
-\LessThan0~55\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~55_cout\ = CARRY((countactual1(27) & ((!\LessThan0~53_cout\) # (!\Add1~52_combout\))) # (!countactual1(27) & (!\Add1~52_combout\ & !\LessThan0~53_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(27),
-	datab => \Add1~52_combout\,
-	datad => VCC,
-	cin => \LessThan0~53_cout\,
-	cout => \LessThan0~55_cout\);
-
--- Location: LCCOMB_X56_Y37_N24
-\LessThan0~57\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~57_cout\ = CARRY((countactual1(28) & (\Add1~54_combout\ & !\LessThan0~55_cout\)) # (!countactual1(28) & ((\Add1~54_combout\) # (!\LessThan0~55_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(28),
-	datab => \Add1~54_combout\,
-	datad => VCC,
-	cin => \LessThan0~55_cout\,
-	cout => \LessThan0~57_cout\);
-
--- Location: LCCOMB_X56_Y37_N26
-\LessThan0~59\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~59_cout\ = CARRY((countactual1(29) & ((!\LessThan0~57_cout\) # (!\Add1~56_combout\))) # (!countactual1(29) & (!\Add1~56_combout\ & !\LessThan0~57_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(29),
-	datab => \Add1~56_combout\,
-	datad => VCC,
-	cin => \LessThan0~57_cout\,
-	cout => \LessThan0~59_cout\);
-
--- Location: LCCOMB_X56_Y37_N28
-\LessThan0~61\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~61_cout\ = CARRY((countactual1(30) & (\Add1~58_combout\ & !\LessThan0~59_cout\)) # (!countactual1(30) & ((\Add1~58_combout\) # (!\LessThan0~59_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(30),
-	datab => \Add1~58_combout\,
-	datad => VCC,
-	cin => \LessThan0~59_cout\,
-	cout => \LessThan0~61_cout\);
-
--- Location: LCCOMB_X56_Y37_N30
-\LessThan0~62\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan0~62_combout\ = (\Add1~60_combout\ & (countactual1(31) & \LessThan0~61_cout\)) # (!\Add1~60_combout\ & ((countactual1(31)) # (\LessThan0~61_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1101010011010100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add1~60_combout\,
-	datab => countactual1(31),
-	cin => \LessThan0~61_cout\,
-	combout => \LessThan0~62_combout\);
-
--- Location: LCCOMB_X59_Y37_N10
-\LessThan5~4\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan5~4_combout\ = (softstart_duty_act(31)) # ((\LessThan9~6_combout\ & \LessThan5~2_combout\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111111110100000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \LessThan9~6_combout\,
-	datac => \LessThan5~2_combout\,
-	datad => softstart_duty_act(31),
-	combout => \LessThan5~4_combout\);
-
--- Location: LCCOMB_X59_Y37_N12
-\Selector38~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector38~0_combout\ = (\LessThan5~4_combout\ & (!\est_sig~8_combout\ & \est_act.boost2softs~q\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0010001000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \LessThan5~4_combout\,
-	datab => \est_sig~8_combout\,
-	datad => \est_act.boost2softs~q\,
-	combout => \Selector38~0_combout\);
-
--- Location: LCCOMB_X55_Y37_N22
-\Selector38~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector38~1_combout\ = (\Selector38~0_combout\) # ((!\est_act.idle~q\ & \sel~input_o\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111111101010000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \est_act.idle~q\,
-	datac => \sel~input_o\,
-	datad => \Selector38~0_combout\,
-	combout => \Selector38~1_combout\);
-
--- Location: LCCOMB_X55_Y37_N26
-\Selector38~2\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector38~2_combout\ = (\Selector38~1_combout\) # ((\est_act.boost1softs~q\ & ((\LessThan0~62_combout\) # (\LessThan1~62_combout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111110011101100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \LessThan0~62_combout\,
-	datab => \Selector38~1_combout\,
-	datac => \est_act.boost1softs~q\,
-	datad => \LessThan1~62_combout\,
-	combout => \Selector38~2_combout\);
-
--- Location: FF_X55_Y37_N27
-\est_act.boost1softs\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Selector38~2_combout\,
-	clrn => \reset~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \est_act.boost1softs~q\);
-
--- Location: LCCOMB_X55_Y37_N30
-\Selector39~7\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector39~7_combout\ = ((\LessThan0~62_combout\) # (\LessThan1~62_combout\)) # (!\est_act.boost1softs~q\)
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111111111110101",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \est_act.boost1softs~q\,
-	datac => \LessThan0~62_combout\,
-	datad => \LessThan1~62_combout\,
-	combout => \Selector39~7_combout\);
-
--- Location: LCCOMB_X55_Y37_N14
-\Selector39~10\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector39~10_combout\ = (!\Selector39~9_combout\ & (\est_act.boost2softs~q\ & \est_act.idle~q\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100010000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector39~9_combout\,
-	datab => \est_act.boost2softs~q\,
-	datad => \est_act.idle~q\,
-	combout => \Selector39~10_combout\);
-
--- Location: LCCOMB_X55_Y37_N4
-\est_sig~9\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \est_sig~9_combout\ = (\est_act.buck1~q\ & (!\LessThan0~62_combout\ & !\LessThan1~62_combout\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000001100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	datab => \est_act.buck1~q\,
-	datac => \LessThan0~62_combout\,
-	datad => \LessThan1~62_combout\,
-	combout => \est_sig~9_combout\);
-
--- Location: LCCOMB_X55_Y37_N20
-\Selector39~11\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector39~11_combout\ = ((!\Selector41~0_combout\ & (\Selector39~10_combout\ & !\est_sig~9_combout\))) # (!\Selector39~7_combout\)
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101010101110101",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector39~7_combout\,
-	datab => \Selector41~0_combout\,
-	datac => \Selector39~10_combout\,
-	datad => \est_sig~9_combout\,
-	combout => \Selector39~11_combout\);
-
--- Location: FF_X55_Y37_N21
-\est_act.boost2softs\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Selector39~11_combout\,
-	clrn => \reset~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \est_act.boost2softs~q\);
-
--- Location: LCCOMB_X55_Y37_N6
-\countactual1[8]~32\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[8]~32_combout\ = (!\est_act.boost2softs~q\ & !\est_act.buck2~q\)
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000110011",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	datab => \est_act.boost2softs~q\,
-	datad => \est_act.buck2~q\,
-	combout => \countactual1[8]~32_combout\);
-
--- Location: LCCOMB_X54_Y37_N2
-\countactual1[8]~97\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[8]~97_combout\ = (!\Selector39~6_combout\ & (\Selector39~4_combout\ & ((\est_act.boost2~q\) # (!\countactual1[8]~32_combout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100000001010000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \Selector39~6_combout\,
-	datab => \est_act.boost2~q\,
-	datac => \Selector39~4_combout\,
-	datad => \countactual1[8]~32_combout\,
-	combout => \countactual1[8]~97_combout\);
-
--- Location: FF_X54_Y41_N1
-\countactual1[0]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[0]~33_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(0));
-
--- Location: LCCOMB_X54_Y41_N2
-\countactual1[1]~35\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countactual1[1]~35_combout\ = (countactual1(1) & (!\countactual1[0]~34\)) # (!countactual1(1) & ((\countactual1[0]~34\) # (GND)))
--- \countactual1[1]~36\ = CARRY((!\countactual1[0]~34\) # (!countactual1(1)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countactual1(1),
-	datad => VCC,
-	cin => \countactual1[0]~34\,
-	combout => \countactual1[1]~35_combout\,
-	cout => \countactual1[1]~36\);
-
--- Location: FF_X54_Y41_N3
-\countactual1[1]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[1]~35_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(1));
-
--- Location: FF_X54_Y41_N5
-\countactual1[2]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countactual1[2]~37_combout\,
-	clrn => \reset~input_o\,
-	sclr => \countactual1[8]~97_combout\,
-	ena => \est_act.idle~q\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countactual1(2));
-
--- Location: LCCOMB_X54_Y38_N16
-\LessThan3~7\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan3~7_combout\ = ((!countactual1(3) & ((!countactual1(1)) # (!countactual1(2))))) # (!countactual1(4))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0001001111111111",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(2),
-	datab => countactual1(3),
-	datac => countactual1(1),
-	datad => countactual1(4),
-	combout => \LessThan3~7_combout\);
-
--- Location: LCCOMB_X54_Y38_N10
-\LessThan3~8\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan3~8_combout\ = (countactual1(8) & ((!\Selector39~1_combout\) # (!\LessThan3~7_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011111100000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	datab => \LessThan3~7_combout\,
-	datac => \Selector39~1_combout\,
-	datad => countactual1(8),
-	combout => \LessThan3~8_combout\);
-
--- Location: LCCOMB_X54_Y38_N8
-\est_sig~8\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \est_sig~8_combout\ = (countactual1(31)) # ((\LessThan3~6_combout\ & ((\Selector39~2_combout\) # (!\LessThan3~8_combout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111111111000100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \LessThan3~8_combout\,
-	datab => \LessThan3~6_combout\,
-	datac => \Selector39~2_combout\,
-	datad => countactual1(31),
-	combout => \est_sig~8_combout\);
-
--- Location: LCCOMB_X55_Y37_N24
-\softstart_duty_act[3]~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \softstart_duty_act[3]~1_combout\ = (\est_act.boost1softs~q\) # ((\est_act.boost1~q\) # (\est_act.buck1~q\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111111111111010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \est_act.boost1softs~q\,
-	datac => \est_act.boost1~q\,
-	datad => \est_act.buck1~q\,
-	combout => \softstart_duty_act[3]~1_combout\);
-
--- Location: LCCOMB_X54_Y38_N12
-\est_sig~7\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \est_sig~7_combout\ = (countactual1(31)) # ((\LessThan3~6_combout\ & ((\Selector39~3_combout\) # (!\LessThan3~8_combout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111111111000100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \LessThan3~8_combout\,
-	datab => \LessThan3~6_combout\,
-	datac => \Selector39~3_combout\,
-	datad => countactual1(31),
-	combout => \est_sig~7_combout\);
-
--- Location: LCCOMB_X59_Y37_N14
-\LessThan5~3\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan5~3_combout\ = (softstart_duty_act(3) & (!softstart_duty_act(5) & (\LessThan5~1_combout\ & !softstart_duty_act(4))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000100000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(3),
-	datab => softstart_duty_act(5),
-	datac => \LessThan5~1_combout\,
-	datad => softstart_duty_act(4),
-	combout => \LessThan5~3_combout\);
-
--- Location: LCCOMB_X59_Y37_N24
-\LessThan9~8\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan9~8_combout\ = (!softstart_duty_act(7) & (\LessThan9~7_combout\ & ((\LessThan5~3_combout\) # (!softstart_duty_act(6)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000110100000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(6),
-	datab => \LessThan5~3_combout\,
-	datac => softstart_duty_act(7),
-	datad => \LessThan9~7_combout\,
-	combout => \LessThan9~8_combout\);
-
--- Location: LCCOMB_X54_Y37_N16
-\softstart_duty_act[3]~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \softstart_duty_act[3]~0_combout\ = (\est_act.boost2~q\ & ((\est_sig~7_combout\) # ((!softstart_duty_act(31) & !\LessThan9~8_combout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100000011000100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(31),
-	datab => \est_act.boost2~q\,
-	datac => \est_sig~7_combout\,
-	datad => \LessThan9~8_combout\,
-	combout => \softstart_duty_act[3]~0_combout\);
-
--- Location: LCCOMB_X55_Y37_N18
-\softstart_duty_act[3]~2\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \softstart_duty_act[3]~2_combout\ = (!\softstart_duty_act[3]~1_combout\ & (!\softstart_duty_act[3]~0_combout\ & ((\countactual1[8]~32_combout\) # (!\est_sig~8_combout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000001100000001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \est_sig~8_combout\,
-	datab => \softstart_duty_act[3]~1_combout\,
-	datac => \softstart_duty_act[3]~0_combout\,
-	datad => \countactual1[8]~32_combout\,
-	combout => \softstart_duty_act[3]~2_combout\);
-
--- Location: LCCOMB_X59_Y37_N18
-\softstart_duty_act[3]~4\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \softstart_duty_act[3]~4_combout\ = (((!\LessThan5~4_combout\ & \est_act.boost2softs~q\)) # (!\softstart_duty_act[3]~3_combout\)) # (!\est_act.idle~q\)
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100111111111111",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \LessThan5~4_combout\,
-	datab => \est_act.boost2softs~q\,
-	datac => \est_act.idle~q\,
-	datad => \softstart_duty_act[3]~3_combout\,
-	combout => \softstart_duty_act[3]~4_combout\);
-
--- Location: LCCOMB_X59_Y40_N30
-\Add5~62\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add5~62_combout\ = softstart_duty_act(31) $ (\Add5~61\)
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(31),
-	cin => \Add5~61\,
-	combout => \Add5~62_combout\);
-
--- Location: LCCOMB_X59_Y37_N0
-\softstart_duty_act[31]~5\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \softstart_duty_act[31]~5_combout\ = (\softstart_duty_act[3]~2_combout\ & (!\softstart_duty_act[3]~4_combout\ & ((\Add5~62_combout\)))) # (!\softstart_duty_act[3]~2_combout\ & (((softstart_duty_act(31)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0111001001010000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \softstart_duty_act[3]~2_combout\,
-	datab => \softstart_duty_act[3]~4_combout\,
-	datac => softstart_duty_act(31),
-	datad => \Add5~62_combout\,
-	combout => \softstart_duty_act[31]~5_combout\);
-
--- Location: FF_X59_Y37_N1
-\softstart_duty_act[31]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \softstart_duty_act[31]~5_combout\,
-	clrn => \reset~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => softstart_duty_act(31));
-
--- Location: LCCOMB_X55_Y39_N0
-\LessThan7~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~1_cout\ = CARRY((!softstart_duty_act(0) & !countactual1(0)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000010001",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(0),
-	datab => countactual1(0),
-	datad => VCC,
-	cout => \LessThan7~1_cout\);
-
--- Location: LCCOMB_X55_Y39_N2
-\LessThan7~3\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~3_cout\ = CARRY((softstart_duty_act(1) & ((countactual1(1)) # (!\LessThan7~1_cout\))) # (!softstart_duty_act(1) & (countactual1(1) & !\LessThan7~1_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000010001110",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(1),
-	datab => countactual1(1),
-	datad => VCC,
-	cin => \LessThan7~1_cout\,
-	cout => \LessThan7~3_cout\);
-
--- Location: LCCOMB_X55_Y39_N4
-\LessThan7~5\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~5_cout\ = CARRY((softstart_duty_act(2) & (!countactual1(2) & !\LessThan7~3_cout\)) # (!softstart_duty_act(2) & ((!\LessThan7~3_cout\) # (!countactual1(2)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000010111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(2),
-	datab => countactual1(2),
-	datad => VCC,
-	cin => \LessThan7~3_cout\,
-	cout => \LessThan7~5_cout\);
-
--- Location: LCCOMB_X55_Y39_N6
-\LessThan7~7\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~7_cout\ = CARRY((softstart_duty_act(3) & ((countactual1(3)) # (!\LessThan7~5_cout\))) # (!softstart_duty_act(3) & (countactual1(3) & !\LessThan7~5_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000010001110",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(3),
-	datab => countactual1(3),
-	datad => VCC,
-	cin => \LessThan7~5_cout\,
-	cout => \LessThan7~7_cout\);
-
--- Location: LCCOMB_X55_Y39_N8
-\LessThan7~9\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~9_cout\ = CARRY((countactual1(4) & (softstart_duty_act(4) & !\LessThan7~7_cout\)) # (!countactual1(4) & ((softstart_duty_act(4)) # (!\LessThan7~7_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(4),
-	datab => softstart_duty_act(4),
-	datad => VCC,
-	cin => \LessThan7~7_cout\,
-	cout => \LessThan7~9_cout\);
-
--- Location: LCCOMB_X55_Y39_N10
-\LessThan7~11\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~11_cout\ = CARRY((countactual1(5) & ((!\LessThan7~9_cout\) # (!softstart_duty_act(5)))) # (!countactual1(5) & (!softstart_duty_act(5) & !\LessThan7~9_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(5),
-	datab => softstart_duty_act(5),
-	datad => VCC,
-	cin => \LessThan7~9_cout\,
-	cout => \LessThan7~11_cout\);
-
--- Location: LCCOMB_X55_Y39_N12
-\LessThan7~13\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~13_cout\ = CARRY((countactual1(6) & (softstart_duty_act(6) & !\LessThan7~11_cout\)) # (!countactual1(6) & ((softstart_duty_act(6)) # (!\LessThan7~11_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(6),
-	datab => softstart_duty_act(6),
-	datad => VCC,
-	cin => \LessThan7~11_cout\,
-	cout => \LessThan7~13_cout\);
-
--- Location: LCCOMB_X55_Y39_N14
-\LessThan7~15\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~15_cout\ = CARRY((countactual1(7) & ((!\LessThan7~13_cout\) # (!softstart_duty_act(7)))) # (!countactual1(7) & (!softstart_duty_act(7) & !\LessThan7~13_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(7),
-	datab => softstart_duty_act(7),
-	datad => VCC,
-	cin => \LessThan7~13_cout\,
-	cout => \LessThan7~15_cout\);
-
--- Location: LCCOMB_X55_Y39_N16
-\LessThan7~17\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~17_cout\ = CARRY((countactual1(8) & (softstart_duty_act(8) & !\LessThan7~15_cout\)) # (!countactual1(8) & ((softstart_duty_act(8)) # (!\LessThan7~15_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(8),
-	datab => softstart_duty_act(8),
-	datad => VCC,
-	cin => \LessThan7~15_cout\,
-	cout => \LessThan7~17_cout\);
-
--- Location: LCCOMB_X55_Y39_N18
-\LessThan7~19\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~19_cout\ = CARRY((countactual1(9) & ((!\LessThan7~17_cout\) # (!softstart_duty_act(9)))) # (!countactual1(9) & (!softstart_duty_act(9) & !\LessThan7~17_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(9),
-	datab => softstart_duty_act(9),
-	datad => VCC,
-	cin => \LessThan7~17_cout\,
-	cout => \LessThan7~19_cout\);
-
--- Location: LCCOMB_X55_Y39_N20
-\LessThan7~21\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~21_cout\ = CARRY((softstart_duty_act(10) & ((!\LessThan7~19_cout\) # (!countactual1(10)))) # (!softstart_duty_act(10) & (!countactual1(10) & !\LessThan7~19_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(10),
-	datab => countactual1(10),
-	datad => VCC,
-	cin => \LessThan7~19_cout\,
-	cout => \LessThan7~21_cout\);
-
--- Location: LCCOMB_X55_Y39_N22
-\LessThan7~23\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~23_cout\ = CARRY((countactual1(11) & ((!\LessThan7~21_cout\) # (!softstart_duty_act(11)))) # (!countactual1(11) & (!softstart_duty_act(11) & !\LessThan7~21_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(11),
-	datab => softstart_duty_act(11),
-	datad => VCC,
-	cin => \LessThan7~21_cout\,
-	cout => \LessThan7~23_cout\);
-
--- Location: LCCOMB_X55_Y39_N24
-\LessThan7~25\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~25_cout\ = CARRY((countactual1(12) & (softstart_duty_act(12) & !\LessThan7~23_cout\)) # (!countactual1(12) & ((softstart_duty_act(12)) # (!\LessThan7~23_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(12),
-	datab => softstart_duty_act(12),
-	datad => VCC,
-	cin => \LessThan7~23_cout\,
-	cout => \LessThan7~25_cout\);
-
--- Location: LCCOMB_X55_Y39_N26
-\LessThan7~27\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~27_cout\ = CARRY((softstart_duty_act(13) & (countactual1(13) & !\LessThan7~25_cout\)) # (!softstart_duty_act(13) & ((countactual1(13)) # (!\LessThan7~25_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(13),
-	datab => countactual1(13),
-	datad => VCC,
-	cin => \LessThan7~25_cout\,
-	cout => \LessThan7~27_cout\);
-
--- Location: LCCOMB_X55_Y39_N28
-\LessThan7~29\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~29_cout\ = CARRY((countactual1(14) & (softstart_duty_act(14) & !\LessThan7~27_cout\)) # (!countactual1(14) & ((softstart_duty_act(14)) # (!\LessThan7~27_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(14),
-	datab => softstart_duty_act(14),
-	datad => VCC,
-	cin => \LessThan7~27_cout\,
-	cout => \LessThan7~29_cout\);
-
--- Location: LCCOMB_X55_Y39_N30
-\LessThan7~31\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~31_cout\ = CARRY((countactual1(15) & ((!\LessThan7~29_cout\) # (!softstart_duty_act(15)))) # (!countactual1(15) & (!softstart_duty_act(15) & !\LessThan7~29_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(15),
-	datab => softstart_duty_act(15),
-	datad => VCC,
-	cin => \LessThan7~29_cout\,
-	cout => \LessThan7~31_cout\);
-
--- Location: LCCOMB_X55_Y38_N0
-\LessThan7~33\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~33_cout\ = CARRY((softstart_duty_act(16) & ((!\LessThan7~31_cout\) # (!countactual1(16)))) # (!softstart_duty_act(16) & (!countactual1(16) & !\LessThan7~31_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(16),
-	datab => countactual1(16),
-	datad => VCC,
-	cin => \LessThan7~31_cout\,
-	cout => \LessThan7~33_cout\);
-
--- Location: LCCOMB_X55_Y38_N2
-\LessThan7~35\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~35_cout\ = CARRY((softstart_duty_act(17) & (countactual1(17) & !\LessThan7~33_cout\)) # (!softstart_duty_act(17) & ((countactual1(17)) # (!\LessThan7~33_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(17),
-	datab => countactual1(17),
-	datad => VCC,
-	cin => \LessThan7~33_cout\,
-	cout => \LessThan7~35_cout\);
-
--- Location: LCCOMB_X55_Y38_N4
-\LessThan7~37\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~37_cout\ = CARRY((countactual1(18) & (softstart_duty_act(18) & !\LessThan7~35_cout\)) # (!countactual1(18) & ((softstart_duty_act(18)) # (!\LessThan7~35_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(18),
-	datab => softstart_duty_act(18),
-	datad => VCC,
-	cin => \LessThan7~35_cout\,
-	cout => \LessThan7~37_cout\);
-
--- Location: LCCOMB_X55_Y38_N6
-\LessThan7~39\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~39_cout\ = CARRY((countactual1(19) & ((!\LessThan7~37_cout\) # (!softstart_duty_act(19)))) # (!countactual1(19) & (!softstart_duty_act(19) & !\LessThan7~37_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(19),
-	datab => softstart_duty_act(19),
-	datad => VCC,
-	cin => \LessThan7~37_cout\,
-	cout => \LessThan7~39_cout\);
-
--- Location: LCCOMB_X55_Y38_N8
-\LessThan7~41\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~41_cout\ = CARRY((softstart_duty_act(20) & ((!\LessThan7~39_cout\) # (!countactual1(20)))) # (!softstart_duty_act(20) & (!countactual1(20) & !\LessThan7~39_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(20),
-	datab => countactual1(20),
-	datad => VCC,
-	cin => \LessThan7~39_cout\,
-	cout => \LessThan7~41_cout\);
-
--- Location: LCCOMB_X55_Y38_N10
-\LessThan7~43\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~43_cout\ = CARRY((countactual1(21) & ((!\LessThan7~41_cout\) # (!softstart_duty_act(21)))) # (!countactual1(21) & (!softstart_duty_act(21) & !\LessThan7~41_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(21),
-	datab => softstart_duty_act(21),
-	datad => VCC,
-	cin => \LessThan7~41_cout\,
-	cout => \LessThan7~43_cout\);
-
--- Location: LCCOMB_X55_Y38_N12
-\LessThan7~45\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~45_cout\ = CARRY((softstart_duty_act(22) & ((!\LessThan7~43_cout\) # (!countactual1(22)))) # (!softstart_duty_act(22) & (!countactual1(22) & !\LessThan7~43_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(22),
-	datab => countactual1(22),
-	datad => VCC,
-	cin => \LessThan7~43_cout\,
-	cout => \LessThan7~45_cout\);
-
--- Location: LCCOMB_X55_Y38_N14
-\LessThan7~47\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~47_cout\ = CARRY((countactual1(23) & ((!\LessThan7~45_cout\) # (!softstart_duty_act(23)))) # (!countactual1(23) & (!softstart_duty_act(23) & !\LessThan7~45_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(23),
-	datab => softstart_duty_act(23),
-	datad => VCC,
-	cin => \LessThan7~45_cout\,
-	cout => \LessThan7~47_cout\);
-
--- Location: LCCOMB_X55_Y38_N16
-\LessThan7~49\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~49_cout\ = CARRY((countactual1(24) & (softstart_duty_act(24) & !\LessThan7~47_cout\)) # (!countactual1(24) & ((softstart_duty_act(24)) # (!\LessThan7~47_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(24),
-	datab => softstart_duty_act(24),
-	datad => VCC,
-	cin => \LessThan7~47_cout\,
-	cout => \LessThan7~49_cout\);
-
--- Location: LCCOMB_X55_Y38_N18
-\LessThan7~51\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~51_cout\ = CARRY((countactual1(25) & ((!\LessThan7~49_cout\) # (!softstart_duty_act(25)))) # (!countactual1(25) & (!softstart_duty_act(25) & !\LessThan7~49_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(25),
-	datab => softstart_duty_act(25),
-	datad => VCC,
-	cin => \LessThan7~49_cout\,
-	cout => \LessThan7~51_cout\);
-
--- Location: LCCOMB_X55_Y38_N20
-\LessThan7~53\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~53_cout\ = CARRY((countactual1(26) & (softstart_duty_act(26) & !\LessThan7~51_cout\)) # (!countactual1(26) & ((softstart_duty_act(26)) # (!\LessThan7~51_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(26),
-	datab => softstart_duty_act(26),
-	datad => VCC,
-	cin => \LessThan7~51_cout\,
-	cout => \LessThan7~53_cout\);
-
--- Location: LCCOMB_X55_Y38_N22
-\LessThan7~55\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~55_cout\ = CARRY((countactual1(27) & ((!\LessThan7~53_cout\) # (!softstart_duty_act(27)))) # (!countactual1(27) & (!softstart_duty_act(27) & !\LessThan7~53_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(27),
-	datab => softstart_duty_act(27),
-	datad => VCC,
-	cin => \LessThan7~53_cout\,
-	cout => \LessThan7~55_cout\);
-
--- Location: LCCOMB_X55_Y38_N24
-\LessThan7~57\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~57_cout\ = CARRY((countactual1(28) & (softstart_duty_act(28) & !\LessThan7~55_cout\)) # (!countactual1(28) & ((softstart_duty_act(28)) # (!\LessThan7~55_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(28),
-	datab => softstart_duty_act(28),
-	datad => VCC,
-	cin => \LessThan7~55_cout\,
-	cout => \LessThan7~57_cout\);
-
--- Location: LCCOMB_X55_Y38_N26
-\LessThan7~59\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~59_cout\ = CARRY((softstart_duty_act(29) & (countactual1(29) & !\LessThan7~57_cout\)) # (!softstart_duty_act(29) & ((countactual1(29)) # (!\LessThan7~57_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(29),
-	datab => countactual1(29),
-	datad => VCC,
-	cin => \LessThan7~57_cout\,
-	cout => \LessThan7~59_cout\);
-
--- Location: LCCOMB_X55_Y38_N28
-\LessThan7~61\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~61_cout\ = CARRY((countactual1(30) & (softstart_duty_act(30) & !\LessThan7~59_cout\)) # (!countactual1(30) & ((softstart_duty_act(30)) # (!\LessThan7~59_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(30),
-	datab => softstart_duty_act(30),
-	datad => VCC,
-	cin => \LessThan7~59_cout\,
-	cout => \LessThan7~61_cout\);
-
--- Location: LCCOMB_X55_Y38_N30
-\LessThan7~62\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan7~62_combout\ = (softstart_duty_act(31) & (\LessThan7~61_cout\ & countactual1(31))) # (!softstart_duty_act(31) & ((\LessThan7~61_cout\) # (countactual1(31))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111001100110000",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(31),
-	datad => countactual1(31),
-	cin => \LessThan7~61_cout\,
-	combout => \LessThan7~62_combout\);
-
--- Location: LCCOMB_X58_Y40_N2
-\Add6~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~0_combout\ = (softstart_duty_act(1) & (!softstart_duty_act(0) & VCC)) # (!softstart_duty_act(1) & (softstart_duty_act(0) $ (GND)))
--- \Add6~1\ = CARRY((!softstart_duty_act(1) & !softstart_duty_act(0)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0110011000010001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(1),
-	datab => softstart_duty_act(0),
-	datad => VCC,
-	combout => \Add6~0_combout\,
-	cout => \Add6~1\);
-
--- Location: LCCOMB_X58_Y40_N4
-\Add6~2\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~2_combout\ = (softstart_duty_act(2) & ((\Add6~1\) # (GND))) # (!softstart_duty_act(2) & (!\Add6~1\))
--- \Add6~3\ = CARRY((softstart_duty_act(2)) # (!\Add6~1\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(2),
-	datad => VCC,
-	cin => \Add6~1\,
-	combout => \Add6~2_combout\,
-	cout => \Add6~3\);
-
--- Location: LCCOMB_X58_Y40_N6
-\Add6~4\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~4_combout\ = (softstart_duty_act(3) & (\Add6~3\ $ (GND))) # (!softstart_duty_act(3) & ((GND) # (!\Add6~3\)))
--- \Add6~5\ = CARRY((!\Add6~3\) # (!softstart_duty_act(3)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(3),
-	datad => VCC,
-	cin => \Add6~3\,
-	combout => \Add6~4_combout\,
-	cout => \Add6~5\);
-
--- Location: LCCOMB_X58_Y40_N8
-\Add6~6\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~6_combout\ = (softstart_duty_act(4) & (\Add6~5\ & VCC)) # (!softstart_duty_act(4) & (!\Add6~5\))
--- \Add6~7\ = CARRY((!softstart_duty_act(4) & !\Add6~5\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(4),
-	datad => VCC,
-	cin => \Add6~5\,
-	combout => \Add6~6_combout\,
-	cout => \Add6~7\);
-
--- Location: LCCOMB_X58_Y40_N10
-\Add6~8\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~8_combout\ = (softstart_duty_act(5) & ((GND) # (!\Add6~7\))) # (!softstart_duty_act(5) & (\Add6~7\ $ (GND)))
--- \Add6~9\ = CARRY((softstart_duty_act(5)) # (!\Add6~7\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101010101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(5),
-	datad => VCC,
-	cin => \Add6~7\,
-	combout => \Add6~8_combout\,
-	cout => \Add6~9\);
-
--- Location: LCCOMB_X58_Y40_N12
-\Add6~10\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~10_combout\ = (softstart_duty_act(6) & (\Add6~9\ & VCC)) # (!softstart_duty_act(6) & (!\Add6~9\))
--- \Add6~11\ = CARRY((!softstart_duty_act(6) & !\Add6~9\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(6),
-	datad => VCC,
-	cin => \Add6~9\,
-	combout => \Add6~10_combout\,
-	cout => \Add6~11\);
-
--- Location: LCCOMB_X58_Y40_N14
-\Add6~12\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~12_combout\ = (softstart_duty_act(7) & ((GND) # (!\Add6~11\))) # (!softstart_duty_act(7) & (\Add6~11\ $ (GND)))
--- \Add6~13\ = CARRY((softstart_duty_act(7)) # (!\Add6~11\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110011001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(7),
-	datad => VCC,
-	cin => \Add6~11\,
-	combout => \Add6~12_combout\,
-	cout => \Add6~13\);
-
--- Location: LCCOMB_X58_Y40_N16
-\Add6~14\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~14_combout\ = (softstart_duty_act(8) & (\Add6~13\ & VCC)) # (!softstart_duty_act(8) & (!\Add6~13\))
--- \Add6~15\ = CARRY((!softstart_duty_act(8) & !\Add6~13\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(8),
-	datad => VCC,
-	cin => \Add6~13\,
-	combout => \Add6~14_combout\,
-	cout => \Add6~15\);
-
--- Location: LCCOMB_X58_Y40_N18
-\Add6~16\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~16_combout\ = (softstart_duty_act(9) & ((GND) # (!\Add6~15\))) # (!softstart_duty_act(9) & (\Add6~15\ $ (GND)))
--- \Add6~17\ = CARRY((softstart_duty_act(9)) # (!\Add6~15\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101010101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(9),
-	datad => VCC,
-	cin => \Add6~15\,
-	combout => \Add6~16_combout\,
-	cout => \Add6~17\);
-
--- Location: LCCOMB_X58_Y40_N20
-\Add6~18\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~18_combout\ = (softstart_duty_act(10) & (\Add6~17\ & VCC)) # (!softstart_duty_act(10) & (!\Add6~17\))
--- \Add6~19\ = CARRY((!softstart_duty_act(10) & !\Add6~17\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(10),
-	datad => VCC,
-	cin => \Add6~17\,
-	combout => \Add6~18_combout\,
-	cout => \Add6~19\);
-
--- Location: LCCOMB_X58_Y40_N22
-\Add6~20\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~20_combout\ = (softstart_duty_act(11) & ((GND) # (!\Add6~19\))) # (!softstart_duty_act(11) & (\Add6~19\ $ (GND)))
--- \Add6~21\ = CARRY((softstart_duty_act(11)) # (!\Add6~19\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110011001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(11),
-	datad => VCC,
-	cin => \Add6~19\,
-	combout => \Add6~20_combout\,
-	cout => \Add6~21\);
-
--- Location: LCCOMB_X58_Y40_N24
-\Add6~22\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~22_combout\ = (softstart_duty_act(12) & (\Add6~21\ & VCC)) # (!softstart_duty_act(12) & (!\Add6~21\))
--- \Add6~23\ = CARRY((!softstart_duty_act(12) & !\Add6~21\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(12),
-	datad => VCC,
-	cin => \Add6~21\,
-	combout => \Add6~22_combout\,
-	cout => \Add6~23\);
-
--- Location: LCCOMB_X58_Y40_N26
-\Add6~24\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~24_combout\ = (softstart_duty_act(13) & ((GND) # (!\Add6~23\))) # (!softstart_duty_act(13) & (\Add6~23\ $ (GND)))
--- \Add6~25\ = CARRY((softstart_duty_act(13)) # (!\Add6~23\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101010101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(13),
-	datad => VCC,
-	cin => \Add6~23\,
-	combout => \Add6~24_combout\,
-	cout => \Add6~25\);
-
--- Location: LCCOMB_X58_Y40_N28
-\Add6~26\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~26_combout\ = (softstart_duty_act(14) & (\Add6~25\ & VCC)) # (!softstart_duty_act(14) & (!\Add6~25\))
--- \Add6~27\ = CARRY((!softstart_duty_act(14) & !\Add6~25\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(14),
-	datad => VCC,
-	cin => \Add6~25\,
-	combout => \Add6~26_combout\,
-	cout => \Add6~27\);
-
--- Location: LCCOMB_X58_Y40_N30
-\Add6~28\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~28_combout\ = (softstart_duty_act(15) & ((GND) # (!\Add6~27\))) # (!softstart_duty_act(15) & (\Add6~27\ $ (GND)))
--- \Add6~29\ = CARRY((softstart_duty_act(15)) # (!\Add6~27\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101010101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(15),
-	datad => VCC,
-	cin => \Add6~27\,
-	combout => \Add6~28_combout\,
-	cout => \Add6~29\);
-
--- Location: LCCOMB_X58_Y39_N0
-\Add6~30\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~30_combout\ = (softstart_duty_act(16) & (\Add6~29\ & VCC)) # (!softstart_duty_act(16) & (!\Add6~29\))
--- \Add6~31\ = CARRY((!softstart_duty_act(16) & !\Add6~29\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(16),
-	datad => VCC,
-	cin => \Add6~29\,
-	combout => \Add6~30_combout\,
-	cout => \Add6~31\);
-
--- Location: LCCOMB_X58_Y39_N2
-\Add6~32\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~32_combout\ = (softstart_duty_act(17) & ((GND) # (!\Add6~31\))) # (!softstart_duty_act(17) & (\Add6~31\ $ (GND)))
--- \Add6~33\ = CARRY((softstart_duty_act(17)) # (!\Add6~31\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101010101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(17),
-	datad => VCC,
-	cin => \Add6~31\,
-	combout => \Add6~32_combout\,
-	cout => \Add6~33\);
-
--- Location: LCCOMB_X58_Y39_N4
-\Add6~34\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~34_combout\ = (softstart_duty_act(18) & (\Add6~33\ & VCC)) # (!softstart_duty_act(18) & (!\Add6~33\))
--- \Add6~35\ = CARRY((!softstart_duty_act(18) & !\Add6~33\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(18),
-	datad => VCC,
-	cin => \Add6~33\,
-	combout => \Add6~34_combout\,
-	cout => \Add6~35\);
-
--- Location: LCCOMB_X58_Y39_N6
-\Add6~36\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~36_combout\ = (softstart_duty_act(19) & ((GND) # (!\Add6~35\))) # (!softstart_duty_act(19) & (\Add6~35\ $ (GND)))
--- \Add6~37\ = CARRY((softstart_duty_act(19)) # (!\Add6~35\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101010101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(19),
-	datad => VCC,
-	cin => \Add6~35\,
-	combout => \Add6~36_combout\,
-	cout => \Add6~37\);
-
--- Location: LCCOMB_X58_Y39_N8
-\Add6~38\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~38_combout\ = (softstart_duty_act(20) & (\Add6~37\ & VCC)) # (!softstart_duty_act(20) & (!\Add6~37\))
--- \Add6~39\ = CARRY((!softstart_duty_act(20) & !\Add6~37\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(20),
-	datad => VCC,
-	cin => \Add6~37\,
-	combout => \Add6~38_combout\,
-	cout => \Add6~39\);
-
--- Location: LCCOMB_X58_Y39_N10
-\Add6~40\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~40_combout\ = (softstart_duty_act(21) & ((GND) # (!\Add6~39\))) # (!softstart_duty_act(21) & (\Add6~39\ $ (GND)))
--- \Add6~41\ = CARRY((softstart_duty_act(21)) # (!\Add6~39\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110011001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(21),
-	datad => VCC,
-	cin => \Add6~39\,
-	combout => \Add6~40_combout\,
-	cout => \Add6~41\);
-
--- Location: LCCOMB_X58_Y39_N12
-\Add6~42\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~42_combout\ = (softstart_duty_act(22) & (\Add6~41\ & VCC)) # (!softstart_duty_act(22) & (!\Add6~41\))
--- \Add6~43\ = CARRY((!softstart_duty_act(22) & !\Add6~41\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(22),
-	datad => VCC,
-	cin => \Add6~41\,
-	combout => \Add6~42_combout\,
-	cout => \Add6~43\);
-
--- Location: LCCOMB_X58_Y39_N14
-\Add6~44\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~44_combout\ = (softstart_duty_act(23) & ((GND) # (!\Add6~43\))) # (!softstart_duty_act(23) & (\Add6~43\ $ (GND)))
--- \Add6~45\ = CARRY((softstart_duty_act(23)) # (!\Add6~43\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110011001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(23),
-	datad => VCC,
-	cin => \Add6~43\,
-	combout => \Add6~44_combout\,
-	cout => \Add6~45\);
-
--- Location: LCCOMB_X58_Y39_N16
-\Add6~46\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~46_combout\ = (softstart_duty_act(24) & (\Add6~45\ & VCC)) # (!softstart_duty_act(24) & (!\Add6~45\))
--- \Add6~47\ = CARRY((!softstart_duty_act(24) & !\Add6~45\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(24),
-	datad => VCC,
-	cin => \Add6~45\,
-	combout => \Add6~46_combout\,
-	cout => \Add6~47\);
-
--- Location: LCCOMB_X58_Y39_N18
-\Add6~48\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~48_combout\ = (softstart_duty_act(25) & ((GND) # (!\Add6~47\))) # (!softstart_duty_act(25) & (\Add6~47\ $ (GND)))
--- \Add6~49\ = CARRY((softstart_duty_act(25)) # (!\Add6~47\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101010101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(25),
-	datad => VCC,
-	cin => \Add6~47\,
-	combout => \Add6~48_combout\,
-	cout => \Add6~49\);
-
--- Location: LCCOMB_X58_Y39_N20
-\Add6~50\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~50_combout\ = (softstart_duty_act(26) & (\Add6~49\ & VCC)) # (!softstart_duty_act(26) & (!\Add6~49\))
--- \Add6~51\ = CARRY((!softstart_duty_act(26) & !\Add6~49\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(26),
-	datad => VCC,
-	cin => \Add6~49\,
-	combout => \Add6~50_combout\,
-	cout => \Add6~51\);
-
--- Location: LCCOMB_X58_Y39_N22
-\Add6~52\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~52_combout\ = (softstart_duty_act(27) & ((GND) # (!\Add6~51\))) # (!softstart_duty_act(27) & (\Add6~51\ $ (GND)))
--- \Add6~53\ = CARRY((softstart_duty_act(27)) # (!\Add6~51\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101010101111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(27),
-	datad => VCC,
-	cin => \Add6~51\,
-	combout => \Add6~52_combout\,
-	cout => \Add6~53\);
-
--- Location: LCCOMB_X58_Y39_N24
-\Add6~54\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~54_combout\ = (softstart_duty_act(28) & (\Add6~53\ & VCC)) # (!softstart_duty_act(28) & (!\Add6~53\))
--- \Add6~55\ = CARRY((!softstart_duty_act(28) & !\Add6~53\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100000011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(28),
-	datad => VCC,
-	cin => \Add6~53\,
-	combout => \Add6~54_combout\,
-	cout => \Add6~55\);
-
--- Location: LCCOMB_X58_Y39_N26
-\Add6~56\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~56_combout\ = (softstart_duty_act(29) & ((GND) # (!\Add6~55\))) # (!softstart_duty_act(29) & (\Add6~55\ $ (GND)))
--- \Add6~57\ = CARRY((softstart_duty_act(29)) # (!\Add6~55\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110011001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => softstart_duty_act(29),
-	datad => VCC,
-	cin => \Add6~55\,
-	combout => \Add6~56_combout\,
-	cout => \Add6~57\);
-
--- Location: LCCOMB_X58_Y39_N28
-\Add6~58\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~58_combout\ = (softstart_duty_act(30) & (\Add6~57\ & VCC)) # (!softstart_duty_act(30) & (!\Add6~57\))
--- \Add6~59\ = CARRY((!softstart_duty_act(30) & !\Add6~57\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100000101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(30),
-	datad => VCC,
-	cin => \Add6~57\,
-	combout => \Add6~58_combout\,
-	cout => \Add6~59\);
-
--- Location: LCCOMB_X58_Y39_N30
-\Add6~60\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Add6~60_combout\ = \Add6~59\ $ (softstart_duty_act(31))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000111111110000",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datad => softstart_duty_act(31),
-	cin => \Add6~59\,
-	combout => \Add6~60_combout\);
-
--- Location: LCCOMB_X57_Y40_N0
-\LessThan6~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~1_cout\ = CARRY((softstart_duty_act(0) & !countactual1(0)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000100010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => softstart_duty_act(0),
-	datab => countactual1(0),
-	datad => VCC,
-	cout => \LessThan6~1_cout\);
-
--- Location: LCCOMB_X57_Y40_N2
-\LessThan6~3\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~3_cout\ = CARRY((\Add6~0_combout\ & (countactual1(1) & !\LessThan6~1_cout\)) # (!\Add6~0_combout\ & ((countactual1(1)) # (!\LessThan6~1_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add6~0_combout\,
-	datab => countactual1(1),
-	datad => VCC,
-	cin => \LessThan6~1_cout\,
-	cout => \LessThan6~3_cout\);
-
--- Location: LCCOMB_X57_Y40_N4
-\LessThan6~5\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~5_cout\ = CARRY((\Add6~2_combout\ & ((!\LessThan6~3_cout\) # (!countactual1(2)))) # (!\Add6~2_combout\ & (!countactual1(2) & !\LessThan6~3_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add6~2_combout\,
-	datab => countactual1(2),
-	datad => VCC,
-	cin => \LessThan6~3_cout\,
-	cout => \LessThan6~5_cout\);
-
--- Location: LCCOMB_X57_Y40_N6
-\LessThan6~7\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~7_cout\ = CARRY((\Add6~4_combout\ & (countactual1(3) & !\LessThan6~5_cout\)) # (!\Add6~4_combout\ & ((countactual1(3)) # (!\LessThan6~5_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add6~4_combout\,
-	datab => countactual1(3),
-	datad => VCC,
-	cin => \LessThan6~5_cout\,
-	cout => \LessThan6~7_cout\);
-
--- Location: LCCOMB_X57_Y40_N8
-\LessThan6~9\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~9_cout\ = CARRY((countactual1(4) & (\Add6~6_combout\ & !\LessThan6~7_cout\)) # (!countactual1(4) & ((\Add6~6_combout\) # (!\LessThan6~7_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(4),
-	datab => \Add6~6_combout\,
-	datad => VCC,
-	cin => \LessThan6~7_cout\,
-	cout => \LessThan6~9_cout\);
-
--- Location: LCCOMB_X57_Y40_N10
-\LessThan6~11\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~11_cout\ = CARRY((countactual1(5) & ((!\LessThan6~9_cout\) # (!\Add6~8_combout\))) # (!countactual1(5) & (!\Add6~8_combout\ & !\LessThan6~9_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(5),
-	datab => \Add6~8_combout\,
-	datad => VCC,
-	cin => \LessThan6~9_cout\,
-	cout => \LessThan6~11_cout\);
-
--- Location: LCCOMB_X57_Y40_N12
-\LessThan6~13\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~13_cout\ = CARRY((countactual1(6) & (\Add6~10_combout\ & !\LessThan6~11_cout\)) # (!countactual1(6) & ((\Add6~10_combout\) # (!\LessThan6~11_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(6),
-	datab => \Add6~10_combout\,
-	datad => VCC,
-	cin => \LessThan6~11_cout\,
-	cout => \LessThan6~13_cout\);
-
--- Location: LCCOMB_X57_Y40_N14
-\LessThan6~15\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~15_cout\ = CARRY((\Add6~12_combout\ & (countactual1(7) & !\LessThan6~13_cout\)) # (!\Add6~12_combout\ & ((countactual1(7)) # (!\LessThan6~13_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add6~12_combout\,
-	datab => countactual1(7),
-	datad => VCC,
-	cin => \LessThan6~13_cout\,
-	cout => \LessThan6~15_cout\);
-
--- Location: LCCOMB_X57_Y40_N16
-\LessThan6~17\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~17_cout\ = CARRY((\Add6~14_combout\ & ((!\LessThan6~15_cout\) # (!countactual1(8)))) # (!\Add6~14_combout\ & (!countactual1(8) & !\LessThan6~15_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add6~14_combout\,
-	datab => countactual1(8),
-	datad => VCC,
-	cin => \LessThan6~15_cout\,
-	cout => \LessThan6~17_cout\);
-
--- Location: LCCOMB_X57_Y40_N18
-\LessThan6~19\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~19_cout\ = CARRY((countactual1(9) & ((!\LessThan6~17_cout\) # (!\Add6~16_combout\))) # (!countactual1(9) & (!\Add6~16_combout\ & !\LessThan6~17_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(9),
-	datab => \Add6~16_combout\,
-	datad => VCC,
-	cin => \LessThan6~17_cout\,
-	cout => \LessThan6~19_cout\);
-
--- Location: LCCOMB_X57_Y40_N20
-\LessThan6~21\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~21_cout\ = CARRY((\Add6~18_combout\ & ((!\LessThan6~19_cout\) # (!countactual1(10)))) # (!\Add6~18_combout\ & (!countactual1(10) & !\LessThan6~19_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add6~18_combout\,
-	datab => countactual1(10),
-	datad => VCC,
-	cin => \LessThan6~19_cout\,
-	cout => \LessThan6~21_cout\);
-
--- Location: LCCOMB_X57_Y40_N22
-\LessThan6~23\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~23_cout\ = CARRY((countactual1(11) & ((!\LessThan6~21_cout\) # (!\Add6~20_combout\))) # (!countactual1(11) & (!\Add6~20_combout\ & !\LessThan6~21_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(11),
-	datab => \Add6~20_combout\,
-	datad => VCC,
-	cin => \LessThan6~21_cout\,
-	cout => \LessThan6~23_cout\);
-
--- Location: LCCOMB_X57_Y40_N24
-\LessThan6~25\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~25_cout\ = CARRY((countactual1(12) & (\Add6~22_combout\ & !\LessThan6~23_cout\)) # (!countactual1(12) & ((\Add6~22_combout\) # (!\LessThan6~23_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(12),
-	datab => \Add6~22_combout\,
-	datad => VCC,
-	cin => \LessThan6~23_cout\,
-	cout => \LessThan6~25_cout\);
+	datac => \incdecdutytest|inc_prev\(1),
+	datad => \incdecdutytest|inc_prev\(0),
+	combout => \incdecdutytest|Equal0~0_combout\);
 
 -- Location: LCCOMB_X57_Y40_N26
-\LessThan6~27\ : fiftyfivenm_lcell_comb
+\incdecdutytest|duty_act~60\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \LessThan6~27_cout\ = CARRY((countactual1(13) & ((!\LessThan6~25_cout\) # (!\Add6~24_combout\))) # (!countactual1(13) & (!\Add6~24_combout\ & !\LessThan6~25_cout\)))
+-- \incdecdutytest|duty_act~60_combout\ = (\incdecdutytest|duty_act[2]~26_combout\) # (!\sel~input_o\)
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(13),
-	datab => \Add6~24_combout\,
-	datad => VCC,
-	cin => \LessThan6~25_cout\,
-	cout => \LessThan6~27_cout\);
-
--- Location: LCCOMB_X57_Y40_N28
-\LessThan6~29\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~29_cout\ = CARRY((countactual1(14) & (\Add6~26_combout\ & !\LessThan6~27_cout\)) # (!countactual1(14) & ((\Add6~26_combout\) # (!\LessThan6~27_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(14),
-	datab => \Add6~26_combout\,
-	datad => VCC,
-	cin => \LessThan6~27_cout\,
-	cout => \LessThan6~29_cout\);
-
--- Location: LCCOMB_X57_Y40_N30
-\LessThan6~31\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~31_cout\ = CARRY((\Add6~28_combout\ & (countactual1(15) & !\LessThan6~29_cout\)) # (!\Add6~28_combout\ & ((countactual1(15)) # (!\LessThan6~29_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add6~28_combout\,
-	datab => countactual1(15),
-	datad => VCC,
-	cin => \LessThan6~29_cout\,
-	cout => \LessThan6~31_cout\);
-
--- Location: LCCOMB_X57_Y39_N0
-\LessThan6~33\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~33_cout\ = CARRY((countactual1(16) & (\Add6~30_combout\ & !\LessThan6~31_cout\)) # (!countactual1(16) & ((\Add6~30_combout\) # (!\LessThan6~31_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(16),
-	datab => \Add6~30_combout\,
-	datad => VCC,
-	cin => \LessThan6~31_cout\,
-	cout => \LessThan6~33_cout\);
-
--- Location: LCCOMB_X57_Y39_N2
-\LessThan6~35\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~35_cout\ = CARRY((\Add6~32_combout\ & (countactual1(17) & !\LessThan6~33_cout\)) # (!\Add6~32_combout\ & ((countactual1(17)) # (!\LessThan6~33_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add6~32_combout\,
-	datab => countactual1(17),
-	datad => VCC,
-	cin => \LessThan6~33_cout\,
-	cout => \LessThan6~35_cout\);
-
--- Location: LCCOMB_X57_Y39_N4
-\LessThan6~37\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~37_cout\ = CARRY((\Add6~34_combout\ & ((!\LessThan6~35_cout\) # (!countactual1(18)))) # (!\Add6~34_combout\ & (!countactual1(18) & !\LessThan6~35_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add6~34_combout\,
-	datab => countactual1(18),
-	datad => VCC,
-	cin => \LessThan6~35_cout\,
-	cout => \LessThan6~37_cout\);
-
--- Location: LCCOMB_X57_Y39_N6
-\LessThan6~39\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~39_cout\ = CARRY((\Add6~36_combout\ & (countactual1(19) & !\LessThan6~37_cout\)) # (!\Add6~36_combout\ & ((countactual1(19)) # (!\LessThan6~37_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add6~36_combout\,
-	datab => countactual1(19),
-	datad => VCC,
-	cin => \LessThan6~37_cout\,
-	cout => \LessThan6~39_cout\);
-
--- Location: LCCOMB_X57_Y39_N8
-\LessThan6~41\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~41_cout\ = CARRY((countactual1(20) & (\Add6~38_combout\ & !\LessThan6~39_cout\)) # (!countactual1(20) & ((\Add6~38_combout\) # (!\LessThan6~39_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(20),
-	datab => \Add6~38_combout\,
-	datad => VCC,
-	cin => \LessThan6~39_cout\,
-	cout => \LessThan6~41_cout\);
-
--- Location: LCCOMB_X57_Y39_N10
-\LessThan6~43\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~43_cout\ = CARRY((countactual1(21) & ((!\LessThan6~41_cout\) # (!\Add6~40_combout\))) # (!countactual1(21) & (!\Add6~40_combout\ & !\LessThan6~41_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(21),
-	datab => \Add6~40_combout\,
-	datad => VCC,
-	cin => \LessThan6~41_cout\,
-	cout => \LessThan6~43_cout\);
-
--- Location: LCCOMB_X57_Y39_N12
-\LessThan6~45\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~45_cout\ = CARRY((countactual1(22) & (\Add6~42_combout\ & !\LessThan6~43_cout\)) # (!countactual1(22) & ((\Add6~42_combout\) # (!\LessThan6~43_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(22),
-	datab => \Add6~42_combout\,
-	datad => VCC,
-	cin => \LessThan6~43_cout\,
-	cout => \LessThan6~45_cout\);
-
--- Location: LCCOMB_X57_Y39_N14
-\LessThan6~47\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~47_cout\ = CARRY((countactual1(23) & ((!\LessThan6~45_cout\) # (!\Add6~44_combout\))) # (!countactual1(23) & (!\Add6~44_combout\ & !\LessThan6~45_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(23),
-	datab => \Add6~44_combout\,
-	datad => VCC,
-	cin => \LessThan6~45_cout\,
-	cout => \LessThan6~47_cout\);
-
--- Location: LCCOMB_X57_Y39_N16
-\LessThan6~49\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~49_cout\ = CARRY((countactual1(24) & (\Add6~46_combout\ & !\LessThan6~47_cout\)) # (!countactual1(24) & ((\Add6~46_combout\) # (!\LessThan6~47_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(24),
-	datab => \Add6~46_combout\,
-	datad => VCC,
-	cin => \LessThan6~47_cout\,
-	cout => \LessThan6~49_cout\);
-
--- Location: LCCOMB_X57_Y39_N18
-\LessThan6~51\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~51_cout\ = CARRY((countactual1(25) & ((!\LessThan6~49_cout\) # (!\Add6~48_combout\))) # (!countactual1(25) & (!\Add6~48_combout\ & !\LessThan6~49_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(25),
-	datab => \Add6~48_combout\,
-	datad => VCC,
-	cin => \LessThan6~49_cout\,
-	cout => \LessThan6~51_cout\);
-
--- Location: LCCOMB_X57_Y39_N20
-\LessThan6~53\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~53_cout\ = CARRY((countactual1(26) & (\Add6~50_combout\ & !\LessThan6~51_cout\)) # (!countactual1(26) & ((\Add6~50_combout\) # (!\LessThan6~51_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(26),
-	datab => \Add6~50_combout\,
-	datad => VCC,
-	cin => \LessThan6~51_cout\,
-	cout => \LessThan6~53_cout\);
-
--- Location: LCCOMB_X57_Y39_N22
-\LessThan6~55\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~55_cout\ = CARRY((countactual1(27) & ((!\LessThan6~53_cout\) # (!\Add6~52_combout\))) # (!countactual1(27) & (!\Add6~52_combout\ & !\LessThan6~53_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(27),
-	datab => \Add6~52_combout\,
-	datad => VCC,
-	cin => \LessThan6~53_cout\,
-	cout => \LessThan6~55_cout\);
-
--- Location: LCCOMB_X57_Y39_N24
-\LessThan6~57\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~57_cout\ = CARRY((\Add6~54_combout\ & ((!\LessThan6~55_cout\) # (!countactual1(28)))) # (!\Add6~54_combout\ & (!countactual1(28) & !\LessThan6~55_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add6~54_combout\,
-	datab => countactual1(28),
-	datad => VCC,
-	cin => \LessThan6~55_cout\,
-	cout => \LessThan6~57_cout\);
-
--- Location: LCCOMB_X57_Y39_N26
-\LessThan6~59\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~59_cout\ = CARRY((countactual1(29) & ((!\LessThan6~57_cout\) # (!\Add6~56_combout\))) # (!countactual1(29) & (!\Add6~56_combout\ & !\LessThan6~57_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000101011",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(29),
-	datab => \Add6~56_combout\,
-	datad => VCC,
-	cin => \LessThan6~57_cout\,
-	cout => \LessThan6~59_cout\);
-
--- Location: LCCOMB_X57_Y39_N28
-\LessThan6~61\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~61_cout\ = CARRY((countactual1(30) & (\Add6~58_combout\ & !\LessThan6~59_cout\)) # (!countactual1(30) & ((\Add6~58_combout\) # (!\LessThan6~59_cout\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000001001101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countactual1(30),
-	datab => \Add6~58_combout\,
-	datad => VCC,
-	cin => \LessThan6~59_cout\,
-	cout => \LessThan6~61_cout\);
-
--- Location: LCCOMB_X57_Y39_N30
-\LessThan6~62\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan6~62_combout\ = (\Add6~60_combout\ & (countactual1(31) & \LessThan6~61_cout\)) # (!\Add6~60_combout\ & ((countactual1(31)) # (\LessThan6~61_cout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1101010011010100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \Add6~60_combout\,
-	datab => countactual1(31),
-	cin => \LessThan6~61_cout\,
-	combout => \LessThan6~62_combout\);
-
--- Location: LCCOMB_X54_Y37_N22
-\Selector41~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector41~0_combout\ = (\est_act.boost1~q\ & (!\LessThan7~62_combout\ & !\LessThan6~62_combout\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000001010",
+	lut_mask => "1111010111110101",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \est_act.boost1~q\,
-	datac => \LessThan7~62_combout\,
-	datad => \LessThan6~62_combout\,
-	combout => \Selector41~0_combout\);
+	dataa => \sel~input_o\,
+	datac => \incdecdutytest|duty_act[2]~26_combout\,
+	combout => \incdecdutytest|duty_act~60_combout\);
 
--- Location: LCCOMB_X54_Y37_N8
-\Selector41~1\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X57_Y40_N16
+\incdecdutytest|duty_act[2]~25\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \Selector41~1_combout\ = (\est_act.boost2~q\ & ((\LessThan8~0_combout\) # (!\Selector39~4_combout\)))
+-- \incdecdutytest|duty_act[2]~25_combout\ = (\reset~input_o\ & ((\incdecdutytest|duty_act[2]~25_combout\))) # (!\reset~input_o\ & (\incdecdutytest|duty_act~60_combout\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "1010111100000000",
+	lut_mask => "1111101001010000",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \LessThan8~0_combout\,
-	datac => \Selector39~4_combout\,
-	datad => \est_act.boost2~q\,
-	combout => \Selector41~1_combout\);
+	dataa => \reset~input_o\,
+	datac => \incdecdutytest|duty_act~60_combout\,
+	datad => \incdecdutytest|duty_act[2]~25_combout\,
+	combout => \incdecdutytest|duty_act[2]~25_combout\);
 
--- Location: LCCOMB_X54_Y37_N0
-\Selector41~3\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X58_Y41_N30
+\incdecdutytest|duty_act~61\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \Selector41~3_combout\ = (\Selector41~0_combout\) # ((\Selector41~1_combout\) # ((!\est_sig~8_combout\ & \Selector41~2_combout\)))
+-- \incdecdutytest|duty_act~61_combout\ = (\incdecdutytest|duty_act[1]~30_combout\) # (!\sel~input_o\)
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "1111101111111010",
+	lut_mask => "1111001111110011",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \Selector41~0_combout\,
-	datab => \est_sig~8_combout\,
-	datac => \Selector41~1_combout\,
-	datad => \Selector41~2_combout\,
-	combout => \Selector41~3_combout\);
+	datab => \sel~input_o\,
+	datac => \incdecdutytest|duty_act[1]~30_combout\,
+	combout => \incdecdutytest|duty_act~61_combout\);
 
--- Location: FF_X54_Y37_N1
-\est_act.boost2\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Selector41~3_combout\,
-	clrn => \reset~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \est_act.boost2~q\);
-
--- Location: LCCOMB_X54_Y37_N12
-\Selector40~0\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X58_Y41_N2
+\incdecdutytest|duty_act[1]~29\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \Selector40~0_combout\ = (\est_act.boost2~q\ & !\est_sig~7_combout\)
+-- \incdecdutytest|duty_act[1]~29_combout\ = (\reset~input_o\ & ((\incdecdutytest|duty_act[1]~29_combout\))) # (!\reset~input_o\ & (\incdecdutytest|duty_act~61_combout\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0000110000001100",
+	lut_mask => "1111101001010000",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	datab => \est_act.boost2~q\,
-	datac => \est_sig~7_combout\,
-	combout => \Selector40~0_combout\);
+	dataa => \reset~input_o\,
+	datac => \incdecdutytest|duty_act~61_combout\,
+	datad => \incdecdutytest|duty_act[1]~29_combout\,
+	combout => \incdecdutytest|duty_act[1]~29_combout\);
 
--- Location: LCCOMB_X54_Y37_N6
-\Selector40~1\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X57_Y38_N26
+\incdecdutytest|duty_act~62\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \Selector40~1_combout\ = (\Selector40~0_combout\) # ((\est_act.boost1~q\ & ((\LessThan7~62_combout\) # (\LessThan6~62_combout\))))
+-- \incdecdutytest|duty_act~62_combout\ = (\sel~input_o\ & \incdecdutytest|duty_act[0]~34_combout\)
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "1111101011101010",
+	lut_mask => "1010000010100000",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \Selector40~0_combout\,
-	datab => \LessThan7~62_combout\,
-	datac => \est_act.boost1~q\,
-	datad => \LessThan6~62_combout\,
-	combout => \Selector40~1_combout\);
+	dataa => \sel~input_o\,
+	datac => \incdecdutytest|duty_act[0]~34_combout\,
+	combout => \incdecdutytest|duty_act~62_combout\);
 
--- Location: FF_X54_Y37_N7
-\est_act.boost1\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Selector40~1_combout\,
-	clrn => \reset~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \est_act.boost1~q\);
-
--- Location: LCCOMB_X54_Y38_N18
-\LessThan2~1\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X57_Y38_N16
+\incdecdutytest|duty_act[0]~33\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \LessThan2~1_combout\ = (countactual1(31)) # ((\LessThan3~6_combout\ & ((\Selector39~2_combout\) # (!countactual1(8)))))
+-- \incdecdutytest|duty_act[0]~33_combout\ = (\reset~input_o\ & ((\incdecdutytest|duty_act[0]~33_combout\))) # (!\reset~input_o\ & (\incdecdutytest|duty_act~62_combout\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "1111111111000100",
+	lut_mask => "1111101000001010",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => countactual1(8),
-	datab => \LessThan3~6_combout\,
-	datac => \Selector39~2_combout\,
-	datad => countactual1(31),
-	combout => \LessThan2~1_combout\);
+	dataa => \incdecdutytest|duty_act~62_combout\,
+	datac => \reset~input_o\,
+	datad => \incdecdutytest|duty_act[0]~33_combout\,
+	combout => \incdecdutytest|duty_act[0]~33_combout\);
 
--- Location: LCCOMB_X54_Y37_N24
-\Selector0~0\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X57_Y42_N10
+\incdecdutytest|Add0~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \Selector0~0_combout\ = (\est_act.boost1~q\) # ((\est_act.boost2~q\) # ((\LessThan2~1_combout\ & !\countactual1[8]~32_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1110111011111110",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \est_act.boost1~q\,
-	datab => \est_act.boost2~q\,
-	datac => \LessThan2~1_combout\,
-	datad => \countactual1[8]~32_combout\,
-	combout => \Selector0~0_combout\);
-
--- Location: FF_X54_Y37_N25
-\PWM_H1~reg0\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Selector0~0_combout\,
-	clrn => \reset~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \PWM_H1~reg0_q\);
-
--- Location: LCCOMB_X55_Y37_N0
-\Selector1~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector1~0_combout\ = (\LessThan0~62_combout\ & ((\est_act.boost1softs~q\) # (\est_act.buck1~q\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111000010100000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \est_act.boost1softs~q\,
-	datac => \LessThan0~62_combout\,
-	datad => \est_act.buck1~q\,
-	combout => \Selector1~0_combout\);
-
--- Location: FF_X55_Y37_N1
-\PWM_L1~reg0\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Selector1~0_combout\,
-	clrn => \reset~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \PWM_L1~reg0_q\);
-
--- Location: LCCOMB_X54_Y37_N10
-\WideOr2~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \WideOr2~0_combout\ = (!\est_act.boost1~q\ & (!\est_act.boost2~q\ & \est_act.idle~q\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0001000000010000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \est_act.boost1~q\,
-	datab => \est_act.boost2~q\,
-	datac => \est_act.idle~q\,
-	combout => \WideOr2~0_combout\);
-
--- Location: LCCOMB_X54_Y37_N18
-\Selector2~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \Selector2~0_combout\ = (\WideOr2~0_combout\) # ((\est_act.boost2~q\ & ((\LessThan8~0_combout\) # (countactual1(31)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1110111011101010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \WideOr2~0_combout\,
-	datab => \est_act.boost2~q\,
-	datac => \LessThan8~0_combout\,
-	datad => countactual1(31),
-	combout => \Selector2~0_combout\);
-
--- Location: FF_X54_Y37_N19
-\PWM_H2~reg0\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \Selector2~0_combout\,
-	clrn => \reset~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \PWM_H2~reg0_q\);
-
--- Location: LCCOMB_X54_Y37_N20
-\PWM_L2_sig~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \PWM_L2_sig~0_combout\ = (\est_act.boost1~q\ & \LessThan6~62_combout\)
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010101000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \est_act.boost1~q\,
-	datad => \LessThan6~62_combout\,
-	combout => \PWM_L2_sig~0_combout\);
-
--- Location: FF_X54_Y37_N21
-\PWM_L2~reg0\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \PWM_L2_sig~0_combout\,
-	clrn => \reset~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \PWM_L2~reg0_q\);
-
--- Location: LCCOMB_X52_Y52_N0
-\countwdg_act[0]~32\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[0]~32_combout\ = countwdg_act(0) $ (VCC)
--- \countwdg_act[0]~33\ = CARRY(countwdg_act(0))
+-- \incdecdutytest|Add0~0_combout\ = \incdecdutytest|duty_act[0]~34_combout\ $ (VCC)
+-- \incdecdutytest|Add0~1\ = CARRY(\incdecdutytest|duty_act[0]~34_combout\)
 
 -- pragma translate_off
 GENERIC MAP (
@@ -8896,10 +1417,9869 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	datab => countwdg_act(0),
+	datab => \incdecdutytest|duty_act[0]~34_combout\,
 	datad => VCC,
-	combout => \countwdg_act[0]~32_combout\,
-	cout => \countwdg_act[0]~33\);
+	combout => \incdecdutytest|Add0~0_combout\,
+	cout => \incdecdutytest|Add0~1\);
+
+-- Location: LCCOMB_X57_Y43_N10
+\incdecdutytest|Add1~36\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~36_combout\ = (\incdecdutytest|Equal0~0_combout\ & (\incdecdutytest|Add0~0_combout\ & ((!\incdecdutytest|duty_act[8]~2_combout\) # (!\incdecdutytest|LessThan0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0100000011000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|LessThan0~0_combout\,
+	datab => \incdecdutytest|Equal0~0_combout\,
+	datac => \incdecdutytest|Add0~0_combout\,
+	datad => \incdecdutytest|duty_act[8]~2_combout\,
+	combout => \incdecdutytest|Add1~36_combout\);
+
+-- Location: LCCOMB_X57_Y41_N6
+\incdecdutytest|Add1~3\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~3_combout\ = \incdecdutytest|duty_act[0]~34_combout\ $ (VCC)
+-- \incdecdutytest|Add1~4\ = CARRY(\incdecdutytest|duty_act[0]~34_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010110101010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[0]~34_combout\,
+	datad => VCC,
+	combout => \incdecdutytest|Add1~3_combout\,
+	cout => \incdecdutytest|Add1~4\);
+
+-- Location: IOIBUF_X78_Y41_N15
+\dec~input\ : fiftyfivenm_io_ibuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	listen_to_nsleep_signal => "false",
+	simulate_z_as => "z")
+-- pragma translate_on
+PORT MAP (
+	i => ww_dec,
+	o => \dec~input_o\);
+
+-- Location: LCCOMB_X58_Y41_N8
+\incdecdutytest|dec_prev[0]~feeder\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|dec_prev[0]~feeder_combout\ = \dec~input_o\
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datad => \dec~input_o\,
+	combout => \incdecdutytest|dec_prev[0]~feeder_combout\);
+
+-- Location: FF_X58_Y41_N9
+\incdecdutytest|dec_prev[0]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|dec_prev[0]~feeder_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|dec_prev\(0));
+
+-- Location: FF_X58_Y41_N11
+\incdecdutytest|dec_prev[1]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	asdata => \incdecdutytest|dec_prev\(0),
+	clrn => \reset~input_o\,
+	sload => VCC,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|dec_prev\(1));
+
+-- Location: LCCOMB_X58_Y41_N10
+\incdecdutytest|Equal1~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Equal1~0_combout\ = (\incdecdutytest|dec_prev\(0) & !\incdecdutytest|dec_prev\(1))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000110000001100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \incdecdutytest|dec_prev\(0),
+	datac => \incdecdutytest|dec_prev\(1),
+	combout => \incdecdutytest|Equal1~0_combout\);
+
+-- Location: LCCOMB_X57_Y38_N8
+\incdecdutytest|duty_act~56\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act~56_combout\ = (\sel~input_o\ & \incdecdutytest|duty_act[6]~10_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010101000000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \sel~input_o\,
+	datad => \incdecdutytest|duty_act[6]~10_combout\,
+	combout => \incdecdutytest|duty_act~56_combout\);
+
+-- Location: LCCOMB_X57_Y38_N6
+\incdecdutytest|duty_act[6]~9\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[6]~9_combout\ = (\reset~input_o\ & ((\incdecdutytest|duty_act[6]~9_combout\))) # (!\reset~input_o\ & (\incdecdutytest|duty_act~56_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111110000001100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \incdecdutytest|duty_act~56_combout\,
+	datac => \reset~input_o\,
+	datad => \incdecdutytest|duty_act[6]~9_combout\,
+	combout => \incdecdutytest|duty_act[6]~9_combout\);
+
+-- Location: LCCOMB_X57_Y40_N8
+\incdecdutytest|duty_act~57\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act~57_combout\ = (\incdecdutytest|duty_act[5]~14_combout\) # (!\sel~input_o\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111100001111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \sel~input_o\,
+	datad => \incdecdutytest|duty_act[5]~14_combout\,
+	combout => \incdecdutytest|duty_act~57_combout\);
+
+-- Location: LCCOMB_X57_Y40_N22
+\incdecdutytest|duty_act[5]~13\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[5]~13_combout\ = (\reset~input_o\ & ((\incdecdutytest|duty_act[5]~13_combout\))) # (!\reset~input_o\ & (\incdecdutytest|duty_act~57_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1110010011100100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \reset~input_o\,
+	datab => \incdecdutytest|duty_act~57_combout\,
+	datac => \incdecdutytest|duty_act[5]~13_combout\,
+	combout => \incdecdutytest|duty_act[5]~13_combout\);
+
+-- Location: LCCOMB_X56_Y38_N10
+\incdecdutytest|duty_act~58\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act~58_combout\ = (\incdecdutytest|duty_act[4]~18_combout\) # (!\sel~input_o\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111010111110101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \sel~input_o\,
+	datac => \incdecdutytest|duty_act[4]~18_combout\,
+	combout => \incdecdutytest|duty_act~58_combout\);
+
+-- Location: LCCOMB_X56_Y38_N6
+\incdecdutytest|duty_act[4]~17\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[4]~17_combout\ = (\reset~input_o\ & ((\incdecdutytest|duty_act[4]~17_combout\))) # (!\reset~input_o\ & (\incdecdutytest|duty_act~58_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111101000001010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act~58_combout\,
+	datac => \reset~input_o\,
+	datad => \incdecdutytest|duty_act[4]~17_combout\,
+	combout => \incdecdutytest|duty_act[4]~17_combout\);
+
+-- Location: LCCOMB_X57_Y41_N8
+\incdecdutytest|Add1~5\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~5_combout\ = (\incdecdutytest|duty_act[1]~30_combout\ & (\incdecdutytest|Add1~4\ & VCC)) # (!\incdecdutytest|duty_act[1]~30_combout\ & (!\incdecdutytest|Add1~4\))
+-- \incdecdutytest|Add1~6\ = CARRY((!\incdecdutytest|duty_act[1]~30_combout\ & !\incdecdutytest|Add1~4\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \incdecdutytest|duty_act[1]~30_combout\,
+	datad => VCC,
+	cin => \incdecdutytest|Add1~4\,
+	combout => \incdecdutytest|Add1~5_combout\,
+	cout => \incdecdutytest|Add1~6\);
+
+-- Location: LCCOMB_X57_Y41_N10
+\incdecdutytest|Add1~7\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~7_combout\ = (\incdecdutytest|duty_act[2]~26_combout\ & (\incdecdutytest|Add1~6\ $ (GND))) # (!\incdecdutytest|duty_act[2]~26_combout\ & (!\incdecdutytest|Add1~6\ & VCC))
+-- \incdecdutytest|Add1~8\ = CARRY((\incdecdutytest|duty_act[2]~26_combout\ & !\incdecdutytest|Add1~6\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \incdecdutytest|duty_act[2]~26_combout\,
+	datad => VCC,
+	cin => \incdecdutytest|Add1~6\,
+	combout => \incdecdutytest|Add1~7_combout\,
+	cout => \incdecdutytest|Add1~8\);
+
+-- Location: LCCOMB_X57_Y41_N12
+\incdecdutytest|Add1~9\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~9_combout\ = (\incdecdutytest|duty_act[3]~22_combout\ & (\incdecdutytest|Add1~8\ & VCC)) # (!\incdecdutytest|duty_act[3]~22_combout\ & (!\incdecdutytest|Add1~8\))
+-- \incdecdutytest|Add1~10\ = CARRY((!\incdecdutytest|duty_act[3]~22_combout\ & !\incdecdutytest|Add1~8\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[3]~22_combout\,
+	datad => VCC,
+	cin => \incdecdutytest|Add1~8\,
+	combout => \incdecdutytest|Add1~9_combout\,
+	cout => \incdecdutytest|Add1~10\);
+
+-- Location: LCCOMB_X57_Y41_N2
+\incdecdutytest|Add1~30\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~30_combout\ = (\incdecdutytest|Add1~21_combout\ & ((\incdecdutytest|Add1~9_combout\) # ((!\incdecdutytest|Equal1~0_combout\ & \incdecdutytest|duty_act[3]~22_combout\)))) # (!\incdecdutytest|Add1~21_combout\ & 
+-- (!\incdecdutytest|Equal1~0_combout\ & (\incdecdutytest|duty_act[3]~22_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1011101000110000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Add1~21_combout\,
+	datab => \incdecdutytest|Equal1~0_combout\,
+	datac => \incdecdutytest|duty_act[3]~22_combout\,
+	datad => \incdecdutytest|Add1~9_combout\,
+	combout => \incdecdutytest|Add1~30_combout\);
+
+-- Location: LCCOMB_X58_Y41_N28
+\incdecdutytest|duty_act~59\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act~59_combout\ = (\incdecdutytest|duty_act[3]~22_combout\) # (!\sel~input_o\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111100001111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \sel~input_o\,
+	datad => \incdecdutytest|duty_act[3]~22_combout\,
+	combout => \incdecdutytest|duty_act~59_combout\);
+
+-- Location: LCCOMB_X58_Y41_N0
+\incdecdutytest|duty_act[3]~21\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[3]~21_combout\ = (\reset~input_o\ & ((\incdecdutytest|duty_act[3]~21_combout\))) # (!\reset~input_o\ & (\incdecdutytest|duty_act~59_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1110111001000100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \reset~input_o\,
+	datab => \incdecdutytest|duty_act~59_combout\,
+	datad => \incdecdutytest|duty_act[3]~21_combout\,
+	combout => \incdecdutytest|duty_act[3]~21_combout\);
+
+-- Location: LCCOMB_X57_Y42_N14
+\incdecdutytest|Add0~4\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add0~4_combout\ = (\incdecdutytest|duty_act[2]~26_combout\ & ((GND) # (!\incdecdutytest|Add0~3\))) # (!\incdecdutytest|duty_act[2]~26_combout\ & (\incdecdutytest|Add0~3\ $ (GND)))
+-- \incdecdutytest|Add0~5\ = CARRY((\incdecdutytest|duty_act[2]~26_combout\) # (!\incdecdutytest|Add0~3\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101010101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[2]~26_combout\,
+	datad => VCC,
+	cin => \incdecdutytest|Add0~3\,
+	combout => \incdecdutytest|Add0~4_combout\,
+	cout => \incdecdutytest|Add0~5\);
+
+-- Location: LCCOMB_X57_Y42_N16
+\incdecdutytest|Add0~6\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add0~6_combout\ = (\incdecdutytest|duty_act[3]~22_combout\ & (!\incdecdutytest|Add0~5\)) # (!\incdecdutytest|duty_act[3]~22_combout\ & ((\incdecdutytest|Add0~5\) # (GND)))
+-- \incdecdutytest|Add0~7\ = CARRY((!\incdecdutytest|Add0~5\) # (!\incdecdutytest|duty_act[3]~22_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[3]~22_combout\,
+	datad => VCC,
+	cin => \incdecdutytest|Add0~5\,
+	combout => \incdecdutytest|Add0~6_combout\,
+	cout => \incdecdutytest|Add0~7\);
+
+-- Location: LCCOMB_X57_Y43_N12
+\incdecdutytest|Add1~31\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~31_combout\ = (\incdecdutytest|Add0~6_combout\ & (\incdecdutytest|Equal0~0_combout\ & ((!\incdecdutytest|duty_act[8]~2_combout\) # (!\incdecdutytest|LessThan0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0100000011000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|LessThan0~0_combout\,
+	datab => \incdecdutytest|Add0~6_combout\,
+	datac => \incdecdutytest|Equal0~0_combout\,
+	datad => \incdecdutytest|duty_act[8]~2_combout\,
+	combout => \incdecdutytest|Add1~31_combout\);
+
+-- Location: LCCOMB_X58_Y41_N20
+\incdecdutytest|duty_act[3]~23\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[3]~23_combout\ = \incdecdutytest|duty_act[3]~21_combout\ $ (((\incdecdutytest|Add1~31_combout\) # ((\incdecdutytest|Add1~30_combout\ & !\incdecdutytest|Equal0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000110110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Add1~30_combout\,
+	datab => \incdecdutytest|duty_act[3]~21_combout\,
+	datac => \incdecdutytest|Add1~31_combout\,
+	datad => \incdecdutytest|Equal0~0_combout\,
+	combout => \incdecdutytest|duty_act[3]~23_combout\);
+
+-- Location: FF_X58_Y41_N21
+\incdecdutytest|duty_act[3]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty_act[3]~23_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty_act[3]~_emulated_q\);
+
+-- Location: LCCOMB_X58_Y41_N22
+\incdecdutytest|duty_act[3]~22\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[3]~22_combout\ = (\reset~input_o\ & (\incdecdutytest|duty_act[3]~_emulated_q\ $ ((\incdecdutytest|duty_act[3]~21_combout\)))) # (!\reset~input_o\ & (((\incdecdutytest|duty_act~59_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0111110100101000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \reset~input_o\,
+	datab => \incdecdutytest|duty_act[3]~_emulated_q\,
+	datac => \incdecdutytest|duty_act[3]~21_combout\,
+	datad => \incdecdutytest|duty_act~59_combout\,
+	combout => \incdecdutytest|duty_act[3]~22_combout\);
+
+-- Location: LCCOMB_X57_Y42_N4
+\incdecdutytest|LessThan1~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|LessThan1~1_combout\ = ((!\incdecdutytest|duty_act[2]~26_combout\ & (!\incdecdutytest|duty_act[0]~34_combout\ & !\incdecdutytest|duty_act[1]~30_combout\))) # (!\incdecdutytest|duty_act[3]~22_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000111111111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[2]~26_combout\,
+	datab => \incdecdutytest|duty_act[0]~34_combout\,
+	datac => \incdecdutytest|duty_act[1]~30_combout\,
+	datad => \incdecdutytest|duty_act[3]~22_combout\,
+	combout => \incdecdutytest|LessThan1~1_combout\);
+
+-- Location: LCCOMB_X57_Y42_N0
+\incdecdutytest|LessThan1~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|LessThan1~2_combout\ = (\incdecdutytest|LessThan1~1_combout\ & (\incdecdutytest|LessThan1~0_combout\ & !\incdecdutytest|duty_act[8]~2_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000011000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \incdecdutytest|LessThan1~1_combout\,
+	datac => \incdecdutytest|LessThan1~0_combout\,
+	datad => \incdecdutytest|duty_act[8]~2_combout\,
+	combout => \incdecdutytest|LessThan1~2_combout\);
+
+-- Location: LCCOMB_X57_Y41_N14
+\incdecdutytest|Add1~11\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~11_combout\ = (\incdecdutytest|duty_act[4]~18_combout\ & ((GND) # (!\incdecdutytest|Add1~10\))) # (!\incdecdutytest|duty_act[4]~18_combout\ & (\incdecdutytest|Add1~10\ $ (GND)))
+-- \incdecdutytest|Add1~12\ = CARRY((\incdecdutytest|duty_act[4]~18_combout\) # (!\incdecdutytest|Add1~10\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101010101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[4]~18_combout\,
+	datad => VCC,
+	cin => \incdecdutytest|Add1~10\,
+	combout => \incdecdutytest|Add1~11_combout\,
+	cout => \incdecdutytest|Add1~12\);
+
+-- Location: LCCOMB_X57_Y42_N28
+\incdecdutytest|Add1~29\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~29_combout\ = (\incdecdutytest|Equal1~0_combout\ & (((\incdecdutytest|LessThan1~2_combout\) # (\incdecdutytest|Add1~11_combout\)))) # (!\incdecdutytest|Equal1~0_combout\ & (\incdecdutytest|duty_act[4]~18_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111110010101010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[4]~18_combout\,
+	datab => \incdecdutytest|LessThan1~2_combout\,
+	datac => \incdecdutytest|Add1~11_combout\,
+	datad => \incdecdutytest|Equal1~0_combout\,
+	combout => \incdecdutytest|Add1~29_combout\);
+
+-- Location: LCCOMB_X57_Y42_N18
+\incdecdutytest|Add0~8\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add0~8_combout\ = (\incdecdutytest|duty_act[4]~18_combout\ & (\incdecdutytest|Add0~7\ $ (GND))) # (!\incdecdutytest|duty_act[4]~18_combout\ & (!\incdecdutytest|Add0~7\ & VCC))
+-- \incdecdutytest|Add0~9\ = CARRY((\incdecdutytest|duty_act[4]~18_combout\ & !\incdecdutytest|Add0~7\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[4]~18_combout\,
+	datad => VCC,
+	cin => \incdecdutytest|Add0~7\,
+	combout => \incdecdutytest|Add0~8_combout\,
+	cout => \incdecdutytest|Add0~9\);
+
+-- Location: LCCOMB_X57_Y43_N18
+\incdecdutytest|Add0~18\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add0~18_combout\ = (\incdecdutytest|Add0~8_combout\) # ((\incdecdutytest|LessThan0~0_combout\ & \incdecdutytest|duty_act[8]~2_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111101011110000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|LessThan0~0_combout\,
+	datac => \incdecdutytest|Add0~8_combout\,
+	datad => \incdecdutytest|duty_act[8]~2_combout\,
+	combout => \incdecdutytest|Add0~18_combout\);
+
+-- Location: LCCOMB_X56_Y38_N20
+\incdecdutytest|duty_act[4]~19\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[4]~19_combout\ = \incdecdutytest|duty_act[4]~17_combout\ $ (((\incdecdutytest|Equal0~0_combout\ & ((\incdecdutytest|Add0~18_combout\))) # (!\incdecdutytest|Equal0~0_combout\ & (\incdecdutytest|Add1~29_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101011010100110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[4]~17_combout\,
+	datab => \incdecdutytest|Add1~29_combout\,
+	datac => \incdecdutytest|Equal0~0_combout\,
+	datad => \incdecdutytest|Add0~18_combout\,
+	combout => \incdecdutytest|duty_act[4]~19_combout\);
+
+-- Location: FF_X56_Y38_N21
+\incdecdutytest|duty_act[4]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty_act[4]~19_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty_act[4]~_emulated_q\);
+
+-- Location: LCCOMB_X56_Y38_N14
+\incdecdutytest|duty_act[4]~18\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[4]~18_combout\ = (\reset~input_o\ & (\incdecdutytest|duty_act[4]~17_combout\ $ ((\incdecdutytest|duty_act[4]~_emulated_q\)))) # (!\reset~input_o\ & (((\incdecdutytest|duty_act~58_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0110111101100000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[4]~17_combout\,
+	datab => \incdecdutytest|duty_act[4]~_emulated_q\,
+	datac => \reset~input_o\,
+	datad => \incdecdutytest|duty_act~58_combout\,
+	combout => \incdecdutytest|duty_act[4]~18_combout\);
+
+-- Location: LCCOMB_X57_Y41_N16
+\incdecdutytest|Add1~13\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~13_combout\ = (\incdecdutytest|duty_act[5]~14_combout\ & (\incdecdutytest|Add1~12\ & VCC)) # (!\incdecdutytest|duty_act[5]~14_combout\ & (!\incdecdutytest|Add1~12\))
+-- \incdecdutytest|Add1~14\ = CARRY((!\incdecdutytest|duty_act[5]~14_combout\ & !\incdecdutytest|Add1~12\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \incdecdutytest|duty_act[5]~14_combout\,
+	datad => VCC,
+	cin => \incdecdutytest|Add1~12\,
+	combout => \incdecdutytest|Add1~13_combout\,
+	cout => \incdecdutytest|Add1~14\);
+
+-- Location: LCCOMB_X57_Y41_N24
+\incdecdutytest|Add1~27\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~27_combout\ = (\incdecdutytest|Equal1~0_combout\ & (((\incdecdutytest|Add1~21_combout\ & \incdecdutytest|Add1~13_combout\)))) # (!\incdecdutytest|Equal1~0_combout\ & ((\incdecdutytest|duty_act[5]~14_combout\) # 
+-- ((\incdecdutytest|Add1~21_combout\ & \incdecdutytest|Add1~13_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111010001000100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Equal1~0_combout\,
+	datab => \incdecdutytest|duty_act[5]~14_combout\,
+	datac => \incdecdutytest|Add1~21_combout\,
+	datad => \incdecdutytest|Add1~13_combout\,
+	combout => \incdecdutytest|Add1~27_combout\);
+
+-- Location: LCCOMB_X57_Y42_N20
+\incdecdutytest|Add0~10\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add0~10_combout\ = (\incdecdutytest|duty_act[5]~14_combout\ & (!\incdecdutytest|Add0~9\)) # (!\incdecdutytest|duty_act[5]~14_combout\ & ((\incdecdutytest|Add0~9\) # (GND)))
+-- \incdecdutytest|Add0~11\ = CARRY((!\incdecdutytest|Add0~9\) # (!\incdecdutytest|duty_act[5]~14_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[5]~14_combout\,
+	datad => VCC,
+	cin => \incdecdutytest|Add0~9\,
+	combout => \incdecdutytest|Add0~10_combout\,
+	cout => \incdecdutytest|Add0~11\);
+
+-- Location: LCCOMB_X57_Y43_N26
+\incdecdutytest|Add1~28\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~28_combout\ = (\incdecdutytest|Equal0~0_combout\ & (\incdecdutytest|Add0~10_combout\ & ((!\incdecdutytest|duty_act[8]~2_combout\) # (!\incdecdutytest|LessThan0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0100000011000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|LessThan0~0_combout\,
+	datab => \incdecdutytest|Equal0~0_combout\,
+	datac => \incdecdutytest|Add0~10_combout\,
+	datad => \incdecdutytest|duty_act[8]~2_combout\,
+	combout => \incdecdutytest|Add1~28_combout\);
+
+-- Location: LCCOMB_X57_Y40_N0
+\incdecdutytest|duty_act[5]~15\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[5]~15_combout\ = \incdecdutytest|duty_act[5]~13_combout\ $ (((\incdecdutytest|Add1~28_combout\) # ((\incdecdutytest|Add1~27_combout\ & !\incdecdutytest|Equal0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010110100110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[5]~13_combout\,
+	datab => \incdecdutytest|Add1~27_combout\,
+	datac => \incdecdutytest|Equal0~0_combout\,
+	datad => \incdecdutytest|Add1~28_combout\,
+	combout => \incdecdutytest|duty_act[5]~15_combout\);
+
+-- Location: FF_X57_Y40_N1
+\incdecdutytest|duty_act[5]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty_act[5]~15_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty_act[5]~_emulated_q\);
+
+-- Location: LCCOMB_X57_Y40_N10
+\incdecdutytest|duty_act[5]~14\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[5]~14_combout\ = (\reset~input_o\ & (\incdecdutytest|duty_act[5]~_emulated_q\ $ (((\incdecdutytest|duty_act[5]~13_combout\))))) # (!\reset~input_o\ & (((\incdecdutytest|duty_act~57_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0111001011011000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \reset~input_o\,
+	datab => \incdecdutytest|duty_act[5]~_emulated_q\,
+	datac => \incdecdutytest|duty_act~57_combout\,
+	datad => \incdecdutytest|duty_act[5]~13_combout\,
+	combout => \incdecdutytest|duty_act[5]~14_combout\);
+
+-- Location: LCCOMB_X57_Y41_N18
+\incdecdutytest|Add1~15\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~15_combout\ = (\incdecdutytest|duty_act[6]~10_combout\ & ((GND) # (!\incdecdutytest|Add1~14\))) # (!\incdecdutytest|duty_act[6]~10_combout\ & (\incdecdutytest|Add1~14\ $ (GND)))
+-- \incdecdutytest|Add1~16\ = CARRY((\incdecdutytest|duty_act[6]~10_combout\) # (!\incdecdutytest|Add1~14\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101010101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[6]~10_combout\,
+	datad => VCC,
+	cin => \incdecdutytest|Add1~14\,
+	combout => \incdecdutytest|Add1~15_combout\,
+	cout => \incdecdutytest|Add1~16\);
+
+-- Location: LCCOMB_X57_Y41_N28
+\incdecdutytest|Add1~25\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~25_combout\ = (\incdecdutytest|duty_act[6]~10_combout\ & (((\incdecdutytest|Add1~15_combout\ & \incdecdutytest|Add1~21_combout\)) # (!\incdecdutytest|Equal1~0_combout\))) # (!\incdecdutytest|duty_act[6]~10_combout\ & 
+-- (\incdecdutytest|Add1~15_combout\ & (\incdecdutytest|Add1~21_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100000011101010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[6]~10_combout\,
+	datab => \incdecdutytest|Add1~15_combout\,
+	datac => \incdecdutytest|Add1~21_combout\,
+	datad => \incdecdutytest|Equal1~0_combout\,
+	combout => \incdecdutytest|Add1~25_combout\);
+
+-- Location: LCCOMB_X57_Y42_N22
+\incdecdutytest|Add0~12\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add0~12_combout\ = (\incdecdutytest|duty_act[6]~10_combout\ & (\incdecdutytest|Add0~11\ $ (GND))) # (!\incdecdutytest|duty_act[6]~10_combout\ & (!\incdecdutytest|Add0~11\ & VCC))
+-- \incdecdutytest|Add0~13\ = CARRY((\incdecdutytest|duty_act[6]~10_combout\ & !\incdecdutytest|Add0~11\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[6]~10_combout\,
+	datad => VCC,
+	cin => \incdecdutytest|Add0~11\,
+	combout => \incdecdutytest|Add0~12_combout\,
+	cout => \incdecdutytest|Add0~13\);
+
+-- Location: LCCOMB_X57_Y43_N4
+\incdecdutytest|Add1~26\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~26_combout\ = (\incdecdutytest|Equal0~0_combout\ & (\incdecdutytest|Add0~12_combout\ & ((!\incdecdutytest|duty_act[8]~2_combout\) # (!\incdecdutytest|LessThan0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0100000011000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|LessThan0~0_combout\,
+	datab => \incdecdutytest|Equal0~0_combout\,
+	datac => \incdecdutytest|Add0~12_combout\,
+	datad => \incdecdutytest|duty_act[8]~2_combout\,
+	combout => \incdecdutytest|Add1~26_combout\);
+
+-- Location: LCCOMB_X57_Y38_N24
+\incdecdutytest|duty_act[6]~11\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[6]~11_combout\ = \incdecdutytest|duty_act[6]~9_combout\ $ (((\incdecdutytest|Add1~26_combout\) # ((\incdecdutytest|Add1~25_combout\ & !\incdecdutytest|Equal0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001010110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[6]~9_combout\,
+	datab => \incdecdutytest|Add1~25_combout\,
+	datac => \incdecdutytest|Add1~26_combout\,
+	datad => \incdecdutytest|Equal0~0_combout\,
+	combout => \incdecdutytest|duty_act[6]~11_combout\);
+
+-- Location: FF_X57_Y38_N25
+\incdecdutytest|duty_act[6]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty_act[6]~11_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty_act[6]~_emulated_q\);
+
+-- Location: LCCOMB_X57_Y38_N18
+\incdecdutytest|duty_act[6]~10\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[6]~10_combout\ = (\reset~input_o\ & (\incdecdutytest|duty_act[6]~9_combout\ $ (((\incdecdutytest|duty_act[6]~_emulated_q\))))) # (!\reset~input_o\ & (((\incdecdutytest|duty_act~56_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0111010010111000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[6]~9_combout\,
+	datab => \reset~input_o\,
+	datac => \incdecdutytest|duty_act~56_combout\,
+	datad => \incdecdutytest|duty_act[6]~_emulated_q\,
+	combout => \incdecdutytest|duty_act[6]~10_combout\);
+
+-- Location: LCCOMB_X56_Y38_N16
+\incdecdutytest|duty_act~55\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act~55_combout\ = (\incdecdutytest|duty_act[7]~6_combout\) # (!\sel~input_o\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111100001111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \sel~input_o\,
+	datad => \incdecdutytest|duty_act[7]~6_combout\,
+	combout => \incdecdutytest|duty_act~55_combout\);
+
+-- Location: LCCOMB_X56_Y38_N28
+\incdecdutytest|duty_act[7]~5\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[7]~5_combout\ = (\reset~input_o\ & ((\incdecdutytest|duty_act[7]~5_combout\))) # (!\reset~input_o\ & (\incdecdutytest|duty_act~55_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111110000001100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \incdecdutytest|duty_act~55_combout\,
+	datac => \reset~input_o\,
+	datad => \incdecdutytest|duty_act[7]~5_combout\,
+	combout => \incdecdutytest|duty_act[7]~5_combout\);
+
+-- Location: LCCOMB_X57_Y42_N24
+\incdecdutytest|Add0~14\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add0~14_combout\ = (\incdecdutytest|duty_act[7]~6_combout\ & (!\incdecdutytest|Add0~13\)) # (!\incdecdutytest|duty_act[7]~6_combout\ & ((\incdecdutytest|Add0~13\) # (GND)))
+-- \incdecdutytest|Add0~15\ = CARRY((!\incdecdutytest|Add0~13\) # (!\incdecdutytest|duty_act[7]~6_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[7]~6_combout\,
+	datad => VCC,
+	cin => \incdecdutytest|Add0~13\,
+	combout => \incdecdutytest|Add0~14_combout\,
+	cout => \incdecdutytest|Add0~15\);
+
+-- Location: LCCOMB_X57_Y43_N28
+\incdecdutytest|Add1~24\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~24_combout\ = (\incdecdutytest|Equal0~0_combout\ & (\incdecdutytest|Add0~14_combout\ & ((!\incdecdutytest|duty_act[8]~2_combout\) # (!\incdecdutytest|LessThan0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0100000011000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|LessThan0~0_combout\,
+	datab => \incdecdutytest|Equal0~0_combout\,
+	datac => \incdecdutytest|Add0~14_combout\,
+	datad => \incdecdutytest|duty_act[8]~2_combout\,
+	combout => \incdecdutytest|Add1~24_combout\);
+
+-- Location: LCCOMB_X57_Y41_N20
+\incdecdutytest|Add1~17\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~17_combout\ = (\incdecdutytest|duty_act[7]~6_combout\ & (\incdecdutytest|Add1~16\ & VCC)) # (!\incdecdutytest|duty_act[7]~6_combout\ & (!\incdecdutytest|Add1~16\))
+-- \incdecdutytest|Add1~18\ = CARRY((!\incdecdutytest|duty_act[7]~6_combout\ & !\incdecdutytest|Add1~16\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[7]~6_combout\,
+	datad => VCC,
+	cin => \incdecdutytest|Add1~16\,
+	combout => \incdecdutytest|Add1~17_combout\,
+	cout => \incdecdutytest|Add1~18\);
+
+-- Location: LCCOMB_X57_Y41_N26
+\incdecdutytest|Add1~23\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~23_combout\ = (\incdecdutytest|duty_act[7]~6_combout\ & (((\incdecdutytest|Add1~17_combout\ & \incdecdutytest|Add1~21_combout\)) # (!\incdecdutytest|Equal1~0_combout\))) # (!\incdecdutytest|duty_act[7]~6_combout\ & 
+-- (\incdecdutytest|Add1~17_combout\ & (\incdecdutytest|Add1~21_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100000011101010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[7]~6_combout\,
+	datab => \incdecdutytest|Add1~17_combout\,
+	datac => \incdecdutytest|Add1~21_combout\,
+	datad => \incdecdutytest|Equal1~0_combout\,
+	combout => \incdecdutytest|Add1~23_combout\);
+
+-- Location: LCCOMB_X56_Y38_N0
+\incdecdutytest|duty_act[7]~7\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[7]~7_combout\ = \incdecdutytest|duty_act[7]~5_combout\ $ (((\incdecdutytest|Add1~24_combout\) # ((\incdecdutytest|Add1~23_combout\ & !\incdecdutytest|Equal0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101000110101110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Add1~24_combout\,
+	datab => \incdecdutytest|Add1~23_combout\,
+	datac => \incdecdutytest|Equal0~0_combout\,
+	datad => \incdecdutytest|duty_act[7]~5_combout\,
+	combout => \incdecdutytest|duty_act[7]~7_combout\);
+
+-- Location: FF_X56_Y38_N1
+\incdecdutytest|duty_act[7]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty_act[7]~7_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty_act[7]~_emulated_q\);
+
+-- Location: LCCOMB_X56_Y38_N2
+\incdecdutytest|duty_act[7]~6\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[7]~6_combout\ = (\reset~input_o\ & (\incdecdutytest|duty_act[7]~5_combout\ $ ((\incdecdutytest|duty_act[7]~_emulated_q\)))) # (!\reset~input_o\ & (((\incdecdutytest|duty_act~55_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0110111101100000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[7]~5_combout\,
+	datab => \incdecdutytest|duty_act[7]~_emulated_q\,
+	datac => \reset~input_o\,
+	datad => \incdecdutytest|duty_act~55_combout\,
+	combout => \incdecdutytest|duty_act[7]~6_combout\);
+
+-- Location: LCCOMB_X57_Y42_N8
+\incdecdutytest|LessThan1~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|LessThan1~0_combout\ = (!\incdecdutytest|duty_act[6]~10_combout\ & (!\incdecdutytest|duty_act[4]~18_combout\ & (!\incdecdutytest|duty_act[5]~14_combout\ & !\incdecdutytest|duty_act[7]~6_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[6]~10_combout\,
+	datab => \incdecdutytest|duty_act[4]~18_combout\,
+	datac => \incdecdutytest|duty_act[5]~14_combout\,
+	datad => \incdecdutytest|duty_act[7]~6_combout\,
+	combout => \incdecdutytest|LessThan1~0_combout\);
+
+-- Location: LCCOMB_X57_Y42_N30
+\incdecdutytest|Add1~21\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~21_combout\ = (\incdecdutytest|Equal1~0_combout\ & ((\incdecdutytest|duty_act[8]~2_combout\) # ((!\incdecdutytest|LessThan1~1_combout\) # (!\incdecdutytest|LessThan1~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000101010101010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Equal1~0_combout\,
+	datab => \incdecdutytest|duty_act[8]~2_combout\,
+	datac => \incdecdutytest|LessThan1~0_combout\,
+	datad => \incdecdutytest|LessThan1~1_combout\,
+	combout => \incdecdutytest|Add1~21_combout\);
+
+-- Location: LCCOMB_X57_Y41_N30
+\incdecdutytest|Add1~35\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~35_combout\ = (\incdecdutytest|duty_act[0]~34_combout\ & (((\incdecdutytest|Add1~3_combout\ & \incdecdutytest|Add1~21_combout\)) # (!\incdecdutytest|Equal1~0_combout\))) # (!\incdecdutytest|duty_act[0]~34_combout\ & 
+-- (\incdecdutytest|Add1~3_combout\ & (\incdecdutytest|Add1~21_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100000011101010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[0]~34_combout\,
+	datab => \incdecdutytest|Add1~3_combout\,
+	datac => \incdecdutytest|Add1~21_combout\,
+	datad => \incdecdutytest|Equal1~0_combout\,
+	combout => \incdecdutytest|Add1~35_combout\);
+
+-- Location: LCCOMB_X57_Y38_N20
+\incdecdutytest|duty_act[0]~35\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[0]~35_combout\ = \incdecdutytest|duty_act[0]~33_combout\ $ (((\incdecdutytest|Add1~36_combout\) # ((\incdecdutytest|Add1~35_combout\ & !\incdecdutytest|Equal0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101000011110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Add1~36_combout\,
+	datab => \incdecdutytest|Add1~35_combout\,
+	datac => \incdecdutytest|duty_act[0]~33_combout\,
+	datad => \incdecdutytest|Equal0~0_combout\,
+	combout => \incdecdutytest|duty_act[0]~35_combout\);
+
+-- Location: FF_X57_Y38_N21
+\incdecdutytest|duty_act[0]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty_act[0]~35_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty_act[0]~_emulated_q\);
+
+-- Location: LCCOMB_X57_Y38_N22
+\incdecdutytest|duty_act[0]~34\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[0]~34_combout\ = (\reset~input_o\ & (\incdecdutytest|duty_act[0]~33_combout\ $ (((\incdecdutytest|duty_act[0]~_emulated_q\))))) # (!\reset~input_o\ & (((\incdecdutytest|duty_act~62_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0111010010111000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[0]~33_combout\,
+	datab => \reset~input_o\,
+	datac => \incdecdutytest|duty_act~62_combout\,
+	datad => \incdecdutytest|duty_act[0]~_emulated_q\,
+	combout => \incdecdutytest|duty_act[0]~34_combout\);
+
+-- Location: LCCOMB_X57_Y42_N12
+\incdecdutytest|Add0~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add0~2_combout\ = (\incdecdutytest|duty_act[1]~30_combout\ & (!\incdecdutytest|Add0~1\)) # (!\incdecdutytest|duty_act[1]~30_combout\ & ((\incdecdutytest|Add0~1\) # (GND)))
+-- \incdecdutytest|Add0~3\ = CARRY((!\incdecdutytest|Add0~1\) # (!\incdecdutytest|duty_act[1]~30_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \incdecdutytest|duty_act[1]~30_combout\,
+	datad => VCC,
+	cin => \incdecdutytest|Add0~1\,
+	combout => \incdecdutytest|Add0~2_combout\,
+	cout => \incdecdutytest|Add0~3\);
+
+-- Location: LCCOMB_X57_Y43_N8
+\incdecdutytest|Add1~34\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~34_combout\ = (\incdecdutytest|Equal0~0_combout\ & (\incdecdutytest|Add0~2_combout\ & ((!\incdecdutytest|duty_act[8]~2_combout\) # (!\incdecdutytest|LessThan0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0100000011000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|LessThan0~0_combout\,
+	datab => \incdecdutytest|Equal0~0_combout\,
+	datac => \incdecdutytest|Add0~2_combout\,
+	datad => \incdecdutytest|duty_act[8]~2_combout\,
+	combout => \incdecdutytest|Add1~34_combout\);
+
+-- Location: LCCOMB_X57_Y41_N4
+\incdecdutytest|Add1~33\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~33_combout\ = (\incdecdutytest|Equal1~0_combout\ & (\incdecdutytest|Add1~5_combout\ & (\incdecdutytest|Add1~21_combout\))) # (!\incdecdutytest|Equal1~0_combout\ & ((\incdecdutytest|duty_act[1]~30_combout\) # 
+-- ((\incdecdutytest|Add1~5_combout\ & \incdecdutytest|Add1~21_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1101010111000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Equal1~0_combout\,
+	datab => \incdecdutytest|Add1~5_combout\,
+	datac => \incdecdutytest|Add1~21_combout\,
+	datad => \incdecdutytest|duty_act[1]~30_combout\,
+	combout => \incdecdutytest|Add1~33_combout\);
+
+-- Location: LCCOMB_X58_Y41_N24
+\incdecdutytest|duty_act[1]~31\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[1]~31_combout\ = \incdecdutytest|duty_act[1]~29_combout\ $ (((\incdecdutytest|Add1~34_combout\) # ((\incdecdutytest|Add1~33_combout\ & !\incdecdutytest|Equal0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0110011000110110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Add1~34_combout\,
+	datab => \incdecdutytest|duty_act[1]~29_combout\,
+	datac => \incdecdutytest|Add1~33_combout\,
+	datad => \incdecdutytest|Equal0~0_combout\,
+	combout => \incdecdutytest|duty_act[1]~31_combout\);
+
+-- Location: FF_X58_Y41_N25
+\incdecdutytest|duty_act[1]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty_act[1]~31_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty_act[1]~_emulated_q\);
+
+-- Location: LCCOMB_X58_Y41_N26
+\incdecdutytest|duty_act[1]~30\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[1]~30_combout\ = (\reset~input_o\ & (\incdecdutytest|duty_act[1]~29_combout\ $ (((\incdecdutytest|duty_act[1]~_emulated_q\))))) # (!\reset~input_o\ & (((\incdecdutytest|duty_act~61_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0111001011011000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \reset~input_o\,
+	datab => \incdecdutytest|duty_act[1]~29_combout\,
+	datac => \incdecdutytest|duty_act~61_combout\,
+	datad => \incdecdutytest|duty_act[1]~_emulated_q\,
+	combout => \incdecdutytest|duty_act[1]~30_combout\);
+
+-- Location: LCCOMB_X57_Y43_N20
+\incdecdutytest|Add0~19\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add0~19_combout\ = (\incdecdutytest|Add0~4_combout\) # ((\incdecdutytest|duty_act[8]~2_combout\ & \incdecdutytest|LessThan0~0_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1110111010101010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Add0~4_combout\,
+	datab => \incdecdutytest|duty_act[8]~2_combout\,
+	datad => \incdecdutytest|LessThan0~0_combout\,
+	combout => \incdecdutytest|Add0~19_combout\);
+
+-- Location: LCCOMB_X57_Y42_N6
+\incdecdutytest|Add1~32\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~32_combout\ = (\incdecdutytest|Equal1~0_combout\ & (((\incdecdutytest|LessThan1~2_combout\) # (\incdecdutytest|Add1~7_combout\)))) # (!\incdecdutytest|Equal1~0_combout\ & (\incdecdutytest|duty_act[2]~26_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111110010101010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[2]~26_combout\,
+	datab => \incdecdutytest|LessThan1~2_combout\,
+	datac => \incdecdutytest|Add1~7_combout\,
+	datad => \incdecdutytest|Equal1~0_combout\,
+	combout => \incdecdutytest|Add1~32_combout\);
+
+-- Location: LCCOMB_X57_Y40_N20
+\incdecdutytest|duty_act[2]~27\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[2]~27_combout\ = \incdecdutytest|duty_act[2]~25_combout\ $ (((\incdecdutytest|Equal0~0_combout\ & (\incdecdutytest|Add0~19_combout\)) # (!\incdecdutytest|Equal0~0_combout\ & ((\incdecdutytest|Add1~32_combout\)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0110001101101100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Add0~19_combout\,
+	datab => \incdecdutytest|duty_act[2]~25_combout\,
+	datac => \incdecdutytest|Equal0~0_combout\,
+	datad => \incdecdutytest|Add1~32_combout\,
+	combout => \incdecdutytest|duty_act[2]~27_combout\);
+
+-- Location: FF_X57_Y40_N21
+\incdecdutytest|duty_act[2]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty_act[2]~27_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty_act[2]~_emulated_q\);
+
+-- Location: LCCOMB_X57_Y40_N14
+\incdecdutytest|duty_act[2]~26\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[2]~26_combout\ = (\reset~input_o\ & (\incdecdutytest|duty_act[2]~25_combout\ $ (((\incdecdutytest|duty_act[2]~_emulated_q\))))) # (!\reset~input_o\ & (((\incdecdutytest|duty_act~60_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0111001011011000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \reset~input_o\,
+	datab => \incdecdutytest|duty_act[2]~25_combout\,
+	datac => \incdecdutytest|duty_act~60_combout\,
+	datad => \incdecdutytest|duty_act[2]~_emulated_q\,
+	combout => \incdecdutytest|duty_act[2]~26_combout\);
+
+-- Location: LCCOMB_X57_Y42_N2
+\incdecdutytest|LessThan0~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|LessThan0~0_combout\ = ((\incdecdutytest|duty_act[2]~26_combout\ & (\incdecdutytest|duty_act[1]~30_combout\ & \incdecdutytest|duty_act[3]~22_combout\))) # (!\incdecdutytest|LessThan1~0_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000111100001111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty_act[2]~26_combout\,
+	datab => \incdecdutytest|duty_act[1]~30_combout\,
+	datac => \incdecdutytest|LessThan1~0_combout\,
+	datad => \incdecdutytest|duty_act[3]~22_combout\,
+	combout => \incdecdutytest|LessThan0~0_combout\);
+
+-- Location: LCCOMB_X57_Y42_N26
+\incdecdutytest|Add0~16\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add0~16_combout\ = \incdecdutytest|Add0~15\ $ (!\incdecdutytest|duty_act[8]~2_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111000000001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datad => \incdecdutytest|duty_act[8]~2_combout\,
+	cin => \incdecdutytest|Add0~15\,
+	combout => \incdecdutytest|Add0~16_combout\);
+
+-- Location: LCCOMB_X57_Y43_N22
+\incdecdutytest|Add1~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~2_combout\ = (\incdecdutytest|Equal0~0_combout\ & (\incdecdutytest|Add0~16_combout\ & ((!\incdecdutytest|duty_act[8]~2_combout\) # (!\incdecdutytest|LessThan0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0100000011000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|LessThan0~0_combout\,
+	datab => \incdecdutytest|Equal0~0_combout\,
+	datac => \incdecdutytest|Add0~16_combout\,
+	datad => \incdecdutytest|duty_act[8]~2_combout\,
+	combout => \incdecdutytest|Add1~2_combout\);
+
+-- Location: LCCOMB_X57_Y43_N2
+\incdecdutytest|duty_act[8]~3\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[8]~3_combout\ = \incdecdutytest|duty_act[8]~1_combout\ $ (((\incdecdutytest|Add1~2_combout\) # ((!\incdecdutytest|Equal0~0_combout\ & \incdecdutytest|Add1~22_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000101111110100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Equal0~0_combout\,
+	datab => \incdecdutytest|Add1~22_combout\,
+	datac => \incdecdutytest|Add1~2_combout\,
+	datad => \incdecdutytest|duty_act[8]~1_combout\,
+	combout => \incdecdutytest|duty_act[8]~3_combout\);
+
+-- Location: FF_X57_Y43_N3
+\incdecdutytest|duty_act[8]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty_act[8]~3_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty_act[8]~_emulated_q\);
+
+-- Location: LCCOMB_X57_Y43_N16
+\incdecdutytest|duty_act[8]~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty_act[8]~2_combout\ = (\reset~input_o\ & (\incdecdutytest|duty_act[8]~1_combout\ $ (((\incdecdutytest|duty_act[8]~_emulated_q\))))) # (!\reset~input_o\ & (((\incdecdutytest|duty_act~54_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0111001011011000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \reset~input_o\,
+	datab => \incdecdutytest|duty_act[8]~1_combout\,
+	datac => \incdecdutytest|duty_act~54_combout\,
+	datad => \incdecdutytest|duty_act[8]~_emulated_q\,
+	combout => \incdecdutytest|duty_act[8]~2_combout\);
+
+-- Location: LCCOMB_X57_Y41_N22
+\incdecdutytest|Add1~19\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~19_combout\ = \incdecdutytest|Add1~18\ $ (\incdecdutytest|duty_act[8]~2_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111111110000",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datad => \incdecdutytest|duty_act[8]~2_combout\,
+	cin => \incdecdutytest|Add1~18\,
+	combout => \incdecdutytest|Add1~19_combout\);
+
+-- Location: LCCOMB_X57_Y41_N0
+\incdecdutytest|Add1~22\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~22_combout\ = (\incdecdutytest|Add1~19_combout\ & ((\incdecdutytest|Add1~21_combout\) # ((\incdecdutytest|duty_act[8]~2_combout\ & !\incdecdutytest|Equal1~0_combout\)))) # (!\incdecdutytest|Add1~19_combout\ & 
+-- (\incdecdutytest|duty_act[8]~2_combout\ & ((!\incdecdutytest|Equal1~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010000011101100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Add1~19_combout\,
+	datab => \incdecdutytest|duty_act[8]~2_combout\,
+	datac => \incdecdutytest|Add1~21_combout\,
+	datad => \incdecdutytest|Equal1~0_combout\,
+	combout => \incdecdutytest|Add1~22_combout\);
+
+-- Location: LCCOMB_X57_Y43_N30
+\incdecdutytest|Add1~37\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|Add1~37_combout\ = (\incdecdutytest|Add1~2_combout\) # ((\incdecdutytest|Add1~22_combout\ & ((\incdecdutytest|inc_prev\(1)) # (!\incdecdutytest|inc_prev\(0)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111100011111100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|inc_prev\(1),
+	datab => \incdecdutytest|Add1~22_combout\,
+	datac => \incdecdutytest|Add1~2_combout\,
+	datad => \incdecdutytest|inc_prev\(0),
+	combout => \incdecdutytest|Add1~37_combout\);
+
+-- Location: FF_X57_Y43_N31
+\incdecdutytest|duty[8]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|Add1~37_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty\(8));
+
+-- Location: LCCOMB_X51_Y33_N0
+\PWMtest|LessThan5~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan5~1_combout\ = (!\PWMtest|softstart_duty_act\(4) & (!\PWMtest|softstart_duty_act\(7) & (!\PWMtest|softstart_duty_act\(6) & !\PWMtest|softstart_duty_act\(5))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(4),
+	datab => \PWMtest|softstart_duty_act\(7),
+	datac => \PWMtest|softstart_duty_act\(6),
+	datad => \PWMtest|softstart_duty_act\(5),
+	combout => \PWMtest|LessThan5~1_combout\);
+
+-- Location: LCCOMB_X54_Y34_N16
+\PWMtest|Add5~16\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~16_combout\ = (\PWMtest|softstart_duty_act\(8) & (\PWMtest|Add5~15\ $ (GND))) # (!\PWMtest|softstart_duty_act\(8) & (!\PWMtest|Add5~15\ & VCC))
+-- \PWMtest|Add5~17\ = CARRY((\PWMtest|softstart_duty_act\(8) & !\PWMtest|Add5~15\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(8),
+	datad => VCC,
+	cin => \PWMtest|Add5~15\,
+	combout => \PWMtest|Add5~16_combout\,
+	cout => \PWMtest|Add5~17\);
+
+-- Location: LCCOMB_X54_Y34_N18
+\PWMtest|Add5~18\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~18_combout\ = (\PWMtest|softstart_duty_act\(9) & (!\PWMtest|Add5~17\)) # (!\PWMtest|softstart_duty_act\(9) & ((\PWMtest|Add5~17\) # (GND)))
+-- \PWMtest|Add5~19\ = CARRY((!\PWMtest|Add5~17\) # (!\PWMtest|softstart_duty_act\(9)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(9),
+	datad => VCC,
+	cin => \PWMtest|Add5~17\,
+	combout => \PWMtest|Add5~18_combout\,
+	cout => \PWMtest|Add5~19\);
+
+-- Location: LCCOMB_X55_Y33_N18
+\PWMtest|Selector25~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector25~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~18_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011000000110000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datac => \PWMtest|Add5~18_combout\,
+	combout => \PWMtest|Selector25~0_combout\);
+
+-- Location: FF_X55_Y33_N19
+\PWMtest|softstart_duty_act[9]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector25~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(9));
+
+-- Location: LCCOMB_X54_Y34_N20
+\PWMtest|Add5~20\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~20_combout\ = (\PWMtest|softstart_duty_act\(10) & (\PWMtest|Add5~19\ $ (GND))) # (!\PWMtest|softstart_duty_act\(10) & (!\PWMtest|Add5~19\ & VCC))
+-- \PWMtest|Add5~21\ = CARRY((\PWMtest|softstart_duty_act\(10) & !\PWMtest|Add5~19\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(10),
+	datad => VCC,
+	cin => \PWMtest|Add5~19\,
+	combout => \PWMtest|Add5~20_combout\,
+	cout => \PWMtest|Add5~21\);
+
+-- Location: LCCOMB_X54_Y32_N10
+\PWMtest|Selector24~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector24~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~20_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datad => \PWMtest|Add5~20_combout\,
+	combout => \PWMtest|Selector24~0_combout\);
+
+-- Location: FF_X54_Y32_N11
+\PWMtest|softstart_duty_act[10]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector24~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(10));
+
+-- Location: LCCOMB_X54_Y34_N22
+\PWMtest|Add5~22\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~22_combout\ = (\PWMtest|softstart_duty_act\(11) & (!\PWMtest|Add5~21\)) # (!\PWMtest|softstart_duty_act\(11) & ((\PWMtest|Add5~21\) # (GND)))
+-- \PWMtest|Add5~23\ = CARRY((!\PWMtest|Add5~21\) # (!\PWMtest|softstart_duty_act\(11)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(11),
+	datad => VCC,
+	cin => \PWMtest|Add5~21\,
+	combout => \PWMtest|Add5~22_combout\,
+	cout => \PWMtest|Add5~23\);
+
+-- Location: LCCOMB_X52_Y34_N22
+\PWMtest|Selector23~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector23~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~22_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011000000110000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datac => \PWMtest|Add5~22_combout\,
+	combout => \PWMtest|Selector23~0_combout\);
+
+-- Location: FF_X52_Y34_N23
+\PWMtest|softstart_duty_act[11]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector23~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(11));
+
+-- Location: LCCOMB_X54_Y34_N24
+\PWMtest|Add5~24\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~24_combout\ = (\PWMtest|softstart_duty_act\(12) & (\PWMtest|Add5~23\ $ (GND))) # (!\PWMtest|softstart_duty_act\(12) & (!\PWMtest|Add5~23\ & VCC))
+-- \PWMtest|Add5~25\ = CARRY((\PWMtest|softstart_duty_act\(12) & !\PWMtest|Add5~23\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(12),
+	datad => VCC,
+	cin => \PWMtest|Add5~23\,
+	combout => \PWMtest|Add5~24_combout\,
+	cout => \PWMtest|Add5~25\);
+
+-- Location: LCCOMB_X54_Y32_N0
+\PWMtest|Selector22~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector22~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~24_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101000001010000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datac => \PWMtest|Add5~24_combout\,
+	combout => \PWMtest|Selector22~0_combout\);
+
+-- Location: FF_X54_Y32_N1
+\PWMtest|softstart_duty_act[12]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector22~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(12));
+
+-- Location: LCCOMB_X54_Y34_N26
+\PWMtest|Add5~26\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~26_combout\ = (\PWMtest|softstart_duty_act\(13) & (!\PWMtest|Add5~25\)) # (!\PWMtest|softstart_duty_act\(13) & ((\PWMtest|Add5~25\) # (GND)))
+-- \PWMtest|Add5~27\ = CARRY((!\PWMtest|Add5~25\) # (!\PWMtest|softstart_duty_act\(13)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(13),
+	datad => VCC,
+	cin => \PWMtest|Add5~25\,
+	combout => \PWMtest|Add5~26_combout\,
+	cout => \PWMtest|Add5~27\);
+
+-- Location: LCCOMB_X54_Y32_N22
+\PWMtest|Selector21~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector21~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~26_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datad => \PWMtest|Add5~26_combout\,
+	combout => \PWMtest|Selector21~0_combout\);
+
+-- Location: FF_X54_Y32_N23
+\PWMtest|softstart_duty_act[13]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector21~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(13));
+
+-- Location: LCCOMB_X54_Y34_N28
+\PWMtest|Add5~28\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~28_combout\ = (\PWMtest|softstart_duty_act\(14) & (\PWMtest|Add5~27\ $ (GND))) # (!\PWMtest|softstart_duty_act\(14) & (!\PWMtest|Add5~27\ & VCC))
+-- \PWMtest|Add5~29\ = CARRY((\PWMtest|softstart_duty_act\(14) & !\PWMtest|Add5~27\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(14),
+	datad => VCC,
+	cin => \PWMtest|Add5~27\,
+	combout => \PWMtest|Add5~28_combout\,
+	cout => \PWMtest|Add5~29\);
+
+-- Location: LCCOMB_X54_Y32_N4
+\PWMtest|Selector20~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector20~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~28_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datad => \PWMtest|Add5~28_combout\,
+	combout => \PWMtest|Selector20~0_combout\);
+
+-- Location: FF_X54_Y32_N5
+\PWMtest|softstart_duty_act[14]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector20~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(14));
+
+-- Location: LCCOMB_X52_Y34_N24
+\PWMtest|LessThan4~5\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~5_combout\ = (!\PWMtest|softstart_duty_act\(14) & (!\PWMtest|softstart_duty_act\(13) & (!\PWMtest|softstart_duty_act\(11) & !\PWMtest|softstart_duty_act\(12))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(14),
+	datab => \PWMtest|softstart_duty_act\(13),
+	datac => \PWMtest|softstart_duty_act\(11),
+	datad => \PWMtest|softstart_duty_act\(12),
+	combout => \PWMtest|LessThan4~5_combout\);
+
+-- Location: LCCOMB_X54_Y34_N30
+\PWMtest|Add5~30\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~30_combout\ = (\PWMtest|softstart_duty_act\(15) & (!\PWMtest|Add5~29\)) # (!\PWMtest|softstart_duty_act\(15) & ((\PWMtest|Add5~29\) # (GND)))
+-- \PWMtest|Add5~31\ = CARRY((!\PWMtest|Add5~29\) # (!\PWMtest|softstart_duty_act\(15)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(15),
+	datad => VCC,
+	cin => \PWMtest|Add5~29\,
+	combout => \PWMtest|Add5~30_combout\,
+	cout => \PWMtest|Add5~31\);
+
+-- Location: LCCOMB_X54_Y32_N2
+\PWMtest|Selector19~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector19~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~30_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datad => \PWMtest|Add5~30_combout\,
+	combout => \PWMtest|Selector19~0_combout\);
+
+-- Location: FF_X54_Y32_N3
+\PWMtest|softstart_duty_act[15]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector19~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(15));
+
+-- Location: LCCOMB_X54_Y33_N0
+\PWMtest|Add5~32\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~32_combout\ = (\PWMtest|softstart_duty_act\(16) & (\PWMtest|Add5~31\ $ (GND))) # (!\PWMtest|softstart_duty_act\(16) & (!\PWMtest|Add5~31\ & VCC))
+-- \PWMtest|Add5~33\ = CARRY((\PWMtest|softstart_duty_act\(16) & !\PWMtest|Add5~31\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(16),
+	datad => VCC,
+	cin => \PWMtest|Add5~31\,
+	combout => \PWMtest|Add5~32_combout\,
+	cout => \PWMtest|Add5~33\);
+
+-- Location: LCCOMB_X55_Y33_N8
+\PWMtest|Selector18~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector18~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~32_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011000000110000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datac => \PWMtest|Add5~32_combout\,
+	combout => \PWMtest|Selector18~0_combout\);
+
+-- Location: FF_X55_Y33_N9
+\PWMtest|softstart_duty_act[16]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector18~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(16));
+
+-- Location: LCCOMB_X54_Y33_N2
+\PWMtest|Add5~34\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~34_combout\ = (\PWMtest|softstart_duty_act\(17) & (!\PWMtest|Add5~33\)) # (!\PWMtest|softstart_duty_act\(17) & ((\PWMtest|Add5~33\) # (GND)))
+-- \PWMtest|Add5~35\ = CARRY((!\PWMtest|Add5~33\) # (!\PWMtest|softstart_duty_act\(17)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(17),
+	datad => VCC,
+	cin => \PWMtest|Add5~33\,
+	combout => \PWMtest|Add5~34_combout\,
+	cout => \PWMtest|Add5~35\);
+
+-- Location: LCCOMB_X55_Y33_N30
+\PWMtest|Selector17~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector17~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~34_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datad => \PWMtest|Add5~34_combout\,
+	combout => \PWMtest|Selector17~0_combout\);
+
+-- Location: FF_X55_Y33_N31
+\PWMtest|softstart_duty_act[17]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector17~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(17));
+
+-- Location: LCCOMB_X54_Y33_N4
+\PWMtest|Add5~36\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~36_combout\ = (\PWMtest|softstart_duty_act\(18) & (\PWMtest|Add5~35\ $ (GND))) # (!\PWMtest|softstart_duty_act\(18) & (!\PWMtest|Add5~35\ & VCC))
+-- \PWMtest|Add5~37\ = CARRY((\PWMtest|softstart_duty_act\(18) & !\PWMtest|Add5~35\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(18),
+	datad => VCC,
+	cin => \PWMtest|Add5~35\,
+	combout => \PWMtest|Add5~36_combout\,
+	cout => \PWMtest|Add5~37\);
+
+-- Location: LCCOMB_X55_Y33_N12
+\PWMtest|Selector16~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector16~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~36_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011000000110000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datac => \PWMtest|Add5~36_combout\,
+	combout => \PWMtest|Selector16~0_combout\);
+
+-- Location: FF_X55_Y33_N13
+\PWMtest|softstart_duty_act[18]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector16~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(18));
+
+-- Location: LCCOMB_X54_Y33_N6
+\PWMtest|Add5~38\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~38_combout\ = (\PWMtest|softstart_duty_act\(19) & (!\PWMtest|Add5~37\)) # (!\PWMtest|softstart_duty_act\(19) & ((\PWMtest|Add5~37\) # (GND)))
+-- \PWMtest|Add5~39\ = CARRY((!\PWMtest|Add5~37\) # (!\PWMtest|softstart_duty_act\(19)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(19),
+	datad => VCC,
+	cin => \PWMtest|Add5~37\,
+	combout => \PWMtest|Add5~38_combout\,
+	cout => \PWMtest|Add5~39\);
+
+-- Location: LCCOMB_X55_Y33_N26
+\PWMtest|Selector15~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector15~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~38_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011000000110000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datac => \PWMtest|Add5~38_combout\,
+	combout => \PWMtest|Selector15~0_combout\);
+
+-- Location: FF_X55_Y33_N27
+\PWMtest|softstart_duty_act[19]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector15~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(19));
+
+-- Location: LCCOMB_X54_Y33_N8
+\PWMtest|Add5~40\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~40_combout\ = (\PWMtest|softstart_duty_act\(20) & (\PWMtest|Add5~39\ $ (GND))) # (!\PWMtest|softstart_duty_act\(20) & (!\PWMtest|Add5~39\ & VCC))
+-- \PWMtest|Add5~41\ = CARRY((\PWMtest|softstart_duty_act\(20) & !\PWMtest|Add5~39\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(20),
+	datad => VCC,
+	cin => \PWMtest|Add5~39\,
+	combout => \PWMtest|Add5~40_combout\,
+	cout => \PWMtest|Add5~41\);
+
+-- Location: LCCOMB_X54_Y32_N24
+\PWMtest|Selector14~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector14~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~40_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datad => \PWMtest|Add5~40_combout\,
+	combout => \PWMtest|Selector14~0_combout\);
+
+-- Location: FF_X54_Y32_N25
+\PWMtest|softstart_duty_act[20]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector14~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(20));
+
+-- Location: LCCOMB_X54_Y33_N10
+\PWMtest|Add5~42\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~42_combout\ = (\PWMtest|softstart_duty_act\(21) & (!\PWMtest|Add5~41\)) # (!\PWMtest|softstart_duty_act\(21) & ((\PWMtest|Add5~41\) # (GND)))
+-- \PWMtest|Add5~43\ = CARRY((!\PWMtest|Add5~41\) # (!\PWMtest|softstart_duty_act\(21)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(21),
+	datad => VCC,
+	cin => \PWMtest|Add5~41\,
+	combout => \PWMtest|Add5~42_combout\,
+	cout => \PWMtest|Add5~43\);
+
+-- Location: LCCOMB_X54_Y32_N14
+\PWMtest|Selector13~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector13~0_combout\ = (\PWMtest|Add5~42_combout\ & !\PWMtest|softstart_duty_act[28]~6_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000101000001010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add5~42_combout\,
+	datac => \PWMtest|softstart_duty_act[28]~6_combout\,
+	combout => \PWMtest|Selector13~0_combout\);
+
+-- Location: FF_X54_Y32_N15
+\PWMtest|softstart_duty_act[21]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector13~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(21));
+
+-- Location: LCCOMB_X54_Y33_N12
+\PWMtest|Add5~44\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~44_combout\ = (\PWMtest|softstart_duty_act\(22) & (\PWMtest|Add5~43\ $ (GND))) # (!\PWMtest|softstart_duty_act\(22) & (!\PWMtest|Add5~43\ & VCC))
+-- \PWMtest|Add5~45\ = CARRY((\PWMtest|softstart_duty_act\(22) & !\PWMtest|Add5~43\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(22),
+	datad => VCC,
+	cin => \PWMtest|Add5~43\,
+	combout => \PWMtest|Add5~44_combout\,
+	cout => \PWMtest|Add5~45\);
+
+-- Location: LCCOMB_X55_Y33_N0
+\PWMtest|Selector12~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector12~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~44_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datad => \PWMtest|Add5~44_combout\,
+	combout => \PWMtest|Selector12~0_combout\);
+
+-- Location: FF_X55_Y33_N1
+\PWMtest|softstart_duty_act[22]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector12~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(22));
+
+-- Location: LCCOMB_X54_Y33_N14
+\PWMtest|Add5~46\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~46_combout\ = (\PWMtest|softstart_duty_act\(23) & (!\PWMtest|Add5~45\)) # (!\PWMtest|softstart_duty_act\(23) & ((\PWMtest|Add5~45\) # (GND)))
+-- \PWMtest|Add5~47\ = CARRY((!\PWMtest|Add5~45\) # (!\PWMtest|softstart_duty_act\(23)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(23),
+	datad => VCC,
+	cin => \PWMtest|Add5~45\,
+	combout => \PWMtest|Add5~46_combout\,
+	cout => \PWMtest|Add5~47\);
+
+-- Location: LCCOMB_X54_Y32_N12
+\PWMtest|Selector11~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector11~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~46_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datad => \PWMtest|Add5~46_combout\,
+	combout => \PWMtest|Selector11~0_combout\);
+
+-- Location: FF_X54_Y32_N13
+\PWMtest|softstart_duty_act[23]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector11~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(23));
+
+-- Location: LCCOMB_X54_Y33_N16
+\PWMtest|Add5~48\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~48_combout\ = (\PWMtest|softstart_duty_act\(24) & (\PWMtest|Add5~47\ $ (GND))) # (!\PWMtest|softstart_duty_act\(24) & (!\PWMtest|Add5~47\ & VCC))
+-- \PWMtest|Add5~49\ = CARRY((\PWMtest|softstart_duty_act\(24) & !\PWMtest|Add5~47\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(24),
+	datad => VCC,
+	cin => \PWMtest|Add5~47\,
+	combout => \PWMtest|Add5~48_combout\,
+	cout => \PWMtest|Add5~49\);
+
+-- Location: LCCOMB_X55_Y33_N22
+\PWMtest|Selector10~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector10~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~48_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011000000110000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datac => \PWMtest|Add5~48_combout\,
+	combout => \PWMtest|Selector10~0_combout\);
+
+-- Location: FF_X55_Y33_N23
+\PWMtest|softstart_duty_act[24]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector10~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(24));
+
+-- Location: LCCOMB_X54_Y33_N18
+\PWMtest|Add5~50\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~50_combout\ = (\PWMtest|softstart_duty_act\(25) & (!\PWMtest|Add5~49\)) # (!\PWMtest|softstart_duty_act\(25) & ((\PWMtest|Add5~49\) # (GND)))
+-- \PWMtest|Add5~51\ = CARRY((!\PWMtest|Add5~49\) # (!\PWMtest|softstart_duty_act\(25)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(25),
+	datad => VCC,
+	cin => \PWMtest|Add5~49\,
+	combout => \PWMtest|Add5~50_combout\,
+	cout => \PWMtest|Add5~51\);
+
+-- Location: LCCOMB_X55_Y33_N20
+\PWMtest|Selector9~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector9~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~50_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datad => \PWMtest|Add5~50_combout\,
+	combout => \PWMtest|Selector9~0_combout\);
+
+-- Location: FF_X55_Y33_N21
+\PWMtest|softstart_duty_act[25]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector9~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(25));
+
+-- Location: LCCOMB_X54_Y33_N20
+\PWMtest|Add5~52\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~52_combout\ = (\PWMtest|softstart_duty_act\(26) & (\PWMtest|Add5~51\ $ (GND))) # (!\PWMtest|softstart_duty_act\(26) & (!\PWMtest|Add5~51\ & VCC))
+-- \PWMtest|Add5~53\ = CARRY((\PWMtest|softstart_duty_act\(26) & !\PWMtest|Add5~51\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(26),
+	datad => VCC,
+	cin => \PWMtest|Add5~51\,
+	combout => \PWMtest|Add5~52_combout\,
+	cout => \PWMtest|Add5~53\);
+
+-- Location: LCCOMB_X55_Y33_N10
+\PWMtest|Selector8~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector8~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~52_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datad => \PWMtest|Add5~52_combout\,
+	combout => \PWMtest|Selector8~0_combout\);
+
+-- Location: FF_X55_Y33_N11
+\PWMtest|softstart_duty_act[26]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector8~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(26));
+
+-- Location: LCCOMB_X54_Y32_N30
+\PWMtest|LessThan4~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~1_combout\ = (!\PWMtest|softstart_duty_act\(25) & (!\PWMtest|softstart_duty_act\(23) & (!\PWMtest|softstart_duty_act\(24) & !\PWMtest|softstart_duty_act\(26))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(25),
+	datab => \PWMtest|softstart_duty_act\(23),
+	datac => \PWMtest|softstart_duty_act\(24),
+	datad => \PWMtest|softstart_duty_act\(26),
+	combout => \PWMtest|LessThan4~1_combout\);
+
+-- Location: LCCOMB_X54_Y32_N16
+\PWMtest|LessThan4~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~2_combout\ = (!\PWMtest|softstart_duty_act\(21) & (!\PWMtest|softstart_duty_act\(19) & (!\PWMtest|softstart_duty_act\(22) & !\PWMtest|softstart_duty_act\(20))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(21),
+	datab => \PWMtest|softstart_duty_act\(19),
+	datac => \PWMtest|softstart_duty_act\(22),
+	datad => \PWMtest|softstart_duty_act\(20),
+	combout => \PWMtest|LessThan4~2_combout\);
+
+-- Location: LCCOMB_X52_Y32_N16
+\PWMtest|LessThan4~3\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~3_combout\ = (!\PWMtest|softstart_duty_act\(16) & (!\PWMtest|softstart_duty_act\(18) & (!\PWMtest|softstart_duty_act\(15) & !\PWMtest|softstart_duty_act\(17))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(16),
+	datab => \PWMtest|softstart_duty_act\(18),
+	datac => \PWMtest|softstart_duty_act\(15),
+	datad => \PWMtest|softstart_duty_act\(17),
+	combout => \PWMtest|LessThan4~3_combout\);
+
+-- Location: LCCOMB_X54_Y33_N22
+\PWMtest|Add5~54\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~54_combout\ = (\PWMtest|softstart_duty_act\(27) & (!\PWMtest|Add5~53\)) # (!\PWMtest|softstart_duty_act\(27) & ((\PWMtest|Add5~53\) # (GND)))
+-- \PWMtest|Add5~55\ = CARRY((!\PWMtest|Add5~53\) # (!\PWMtest|softstart_duty_act\(27)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(27),
+	datad => VCC,
+	cin => \PWMtest|Add5~53\,
+	combout => \PWMtest|Add5~54_combout\,
+	cout => \PWMtest|Add5~55\);
+
+-- Location: LCCOMB_X55_Y33_N16
+\PWMtest|Selector7~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector7~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~54_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datad => \PWMtest|Add5~54_combout\,
+	combout => \PWMtest|Selector7~0_combout\);
+
+-- Location: FF_X55_Y33_N17
+\PWMtest|softstart_duty_act[27]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector7~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(27));
+
+-- Location: LCCOMB_X54_Y33_N24
+\PWMtest|Add5~56\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~56_combout\ = (\PWMtest|softstart_duty_act\(28) & (\PWMtest|Add5~55\ $ (GND))) # (!\PWMtest|softstart_duty_act\(28) & (!\PWMtest|Add5~55\ & VCC))
+-- \PWMtest|Add5~57\ = CARRY((\PWMtest|softstart_duty_act\(28) & !\PWMtest|Add5~55\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(28),
+	datad => VCC,
+	cin => \PWMtest|Add5~55\,
+	combout => \PWMtest|Add5~56_combout\,
+	cout => \PWMtest|Add5~57\);
+
+-- Location: LCCOMB_X55_Y33_N14
+\PWMtest|Selector6~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector6~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~56_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datad => \PWMtest|Add5~56_combout\,
+	combout => \PWMtest|Selector6~0_combout\);
+
+-- Location: FF_X55_Y33_N15
+\PWMtest|softstart_duty_act[28]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector6~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(28));
+
+-- Location: LCCOMB_X54_Y32_N20
+\PWMtest|LessThan4~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~0_combout\ = (!\PWMtest|softstart_duty_act\(29) & (!\PWMtest|softstart_duty_act\(27) & (!\PWMtest|softstart_duty_act\(30) & !\PWMtest|softstart_duty_act\(28))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(29),
+	datab => \PWMtest|softstart_duty_act\(27),
+	datac => \PWMtest|softstart_duty_act\(30),
+	datad => \PWMtest|softstart_duty_act\(28),
+	combout => \PWMtest|LessThan4~0_combout\);
+
+-- Location: LCCOMB_X54_Y32_N26
+\PWMtest|LessThan4~4\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~4_combout\ = (\PWMtest|LessThan4~1_combout\ & (\PWMtest|LessThan4~2_combout\ & (\PWMtest|LessThan4~3_combout\ & \PWMtest|LessThan4~0_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000000000000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|LessThan4~1_combout\,
+	datab => \PWMtest|LessThan4~2_combout\,
+	datac => \PWMtest|LessThan4~3_combout\,
+	datad => \PWMtest|LessThan4~0_combout\,
+	combout => \PWMtest|LessThan4~4_combout\);
+
+-- Location: LCCOMB_X52_Y34_N2
+\PWMtest|LessThan4~6\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~6_combout\ = (!\PWMtest|softstart_duty_act\(10) & (\PWMtest|LessThan4~5_combout\ & (!\PWMtest|softstart_duty_act\(9) & \PWMtest|LessThan4~4_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000010000000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(10),
+	datab => \PWMtest|LessThan4~5_combout\,
+	datac => \PWMtest|softstart_duty_act\(9),
+	datad => \PWMtest|LessThan4~4_combout\,
+	combout => \PWMtest|LessThan4~6_combout\);
+
+-- Location: LCCOMB_X57_Y38_N28
+\incdecdutytest|duty[6]~5\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[6]~5_combout\ = (\reset~input_o\ & ((\incdecdutytest|duty[6]~5_combout\))) # (!\reset~input_o\ & (\sel~input_o\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111101000001010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \sel~input_o\,
+	datac => \reset~input_o\,
+	datad => \incdecdutytest|duty[6]~5_combout\,
+	combout => \incdecdutytest|duty[6]~5_combout\);
+
+-- Location: LCCOMB_X57_Y38_N12
+\incdecdutytest|duty[0]~19\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[0]~19_combout\ = \incdecdutytest|duty[6]~5_combout\ $ (((\incdecdutytest|Add1~36_combout\) # ((\incdecdutytest|Add1~35_combout\ & !\incdecdutytest|Equal0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101000011110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Add1~36_combout\,
+	datab => \incdecdutytest|Add1~35_combout\,
+	datac => \incdecdutytest|duty[6]~5_combout\,
+	datad => \incdecdutytest|Equal0~0_combout\,
+	combout => \incdecdutytest|duty[0]~19_combout\);
+
+-- Location: FF_X57_Y38_N13
+\incdecdutytest|duty[0]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty[0]~19_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty[0]~_emulated_q\);
+
+-- Location: LCCOMB_X57_Y38_N30
+\incdecdutytest|duty[0]~18\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[0]~18_combout\ = (\reset~input_o\ & ((\incdecdutytest|duty[6]~5_combout\ $ (\incdecdutytest|duty[0]~_emulated_q\)))) # (!\reset~input_o\ & (\sel~input_o\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011101011001010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \sel~input_o\,
+	datab => \incdecdutytest|duty[6]~5_combout\,
+	datac => \reset~input_o\,
+	datad => \incdecdutytest|duty[0]~_emulated_q\,
+	combout => \incdecdutytest|duty[0]~18_combout\);
+
+-- Location: LCCOMB_X55_Y35_N8
+\PWMtest|est_act.idle~feeder\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|est_act.idle~feeder_combout\ = VCC
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111111111111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	combout => \PWMtest|est_act.idle~feeder_combout\);
+
+-- Location: FF_X55_Y35_N9
+\PWMtest|est_act.idle\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|est_act.idle~feeder_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|est_act.idle~q\);
+
+-- Location: LCCOMB_X54_Y34_N0
+\PWMtest|Add5~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~0_combout\ = \PWMtest|softstart_duty_act\(0) $ (GND)
+-- \PWMtest|Add5~1\ = CARRY(!\PWMtest|softstart_duty_act\(0))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100110000110011",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(0),
+	datad => VCC,
+	combout => \PWMtest|Add5~0_combout\,
+	cout => \PWMtest|Add5~1\);
+
+-- Location: LCCOMB_X55_Y35_N10
+\PWMtest|Selector34~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector34~0_combout\ = (\PWMtest|Add5~0_combout\) # (!\PWMtest|est_act.idle~q\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111001111110011",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|est_act.idle~q\,
+	datac => \PWMtest|Add5~0_combout\,
+	combout => \PWMtest|Selector34~0_combout\);
+
+-- Location: LCCOMB_X55_Y35_N6
+\PWMtest|Selector34~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector34~1_combout\ = (!\PWMtest|Selector41~2_combout\ & ((\PWMtest|softstart_duty_act[1]~8_combout\ & ((!\PWMtest|Selector34~0_combout\))) # (!\PWMtest|softstart_duty_act[1]~8_combout\ & (!\incdecdutytest|duty[0]~18_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000101010001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Selector41~2_combout\,
+	datab => \incdecdutytest|duty[0]~18_combout\,
+	datac => \PWMtest|softstart_duty_act[1]~8_combout\,
+	datad => \PWMtest|Selector34~0_combout\,
+	combout => \PWMtest|Selector34~1_combout\);
+
+-- Location: FF_X55_Y35_N7
+\PWMtest|softstart_duty_act[0]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector34~1_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(0));
+
+-- Location: LCCOMB_X54_Y34_N2
+\PWMtest|Add5~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~2_combout\ = (\PWMtest|softstart_duty_act\(1) & ((\PWMtest|Add5~1\) # (GND))) # (!\PWMtest|softstart_duty_act\(1) & (!\PWMtest|Add5~1\))
+-- \PWMtest|Add5~3\ = CARRY((\PWMtest|softstart_duty_act\(1)) # (!\PWMtest|Add5~1\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001111001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(1),
+	datad => VCC,
+	cin => \PWMtest|Add5~1\,
+	combout => \PWMtest|Add5~2_combout\,
+	cout => \PWMtest|Add5~3\);
+
+-- Location: LCCOMB_X55_Y35_N16
+\PWMtest|Selector33~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector33~0_combout\ = (\PWMtest|Add5~2_combout\) # (!\PWMtest|est_act.idle~q\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010111110101111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add5~2_combout\,
+	datac => \PWMtest|est_act.idle~q\,
+	combout => \PWMtest|Selector33~0_combout\);
+
+-- Location: LCCOMB_X57_Y40_N28
+\incdecdutytest|duty[7]~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[7]~1_combout\ = (\reset~input_o\ & ((\incdecdutytest|duty[7]~1_combout\))) # (!\reset~input_o\ & (!\sel~input_o\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010111100000101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \reset~input_o\,
+	datac => \sel~input_o\,
+	datad => \incdecdutytest|duty[7]~1_combout\,
+	combout => \incdecdutytest|duty[7]~1_combout\);
+
+-- Location: LCCOMB_X58_Y41_N16
+\incdecdutytest|duty[1]~17\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[1]~17_combout\ = \incdecdutytest|duty[7]~1_combout\ $ (((\incdecdutytest|Add1~34_combout\) # ((\incdecdutytest|Add1~33_combout\ & !\incdecdutytest|Equal0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0110011000110110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Add1~34_combout\,
+	datab => \incdecdutytest|duty[7]~1_combout\,
+	datac => \incdecdutytest|Add1~33_combout\,
+	datad => \incdecdutytest|Equal0~0_combout\,
+	combout => \incdecdutytest|duty[1]~17_combout\);
+
+-- Location: FF_X58_Y41_N17
+\incdecdutytest|duty[1]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty[1]~17_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty[1]~_emulated_q\);
+
+-- Location: LCCOMB_X58_Y41_N18
+\incdecdutytest|duty[1]~16\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[1]~16_combout\ = (\reset~input_o\ & (\incdecdutytest|duty[7]~1_combout\ $ (((\incdecdutytest|duty[1]~_emulated_q\))))) # (!\reset~input_o\ & (((!\sel~input_o\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0010011110001101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \reset~input_o\,
+	datab => \incdecdutytest|duty[7]~1_combout\,
+	datac => \sel~input_o\,
+	datad => \incdecdutytest|duty[1]~_emulated_q\,
+	combout => \incdecdutytest|duty[1]~16_combout\);
+
+-- Location: LCCOMB_X55_Y35_N4
+\PWMtest|Selector33~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector33~1_combout\ = (!\PWMtest|Selector41~2_combout\ & ((\PWMtest|softstart_duty_act[1]~8_combout\ & (!\PWMtest|Selector33~0_combout\)) # (!\PWMtest|softstart_duty_act[1]~8_combout\ & ((!\incdecdutytest|duty[1]~16_combout\)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000001000000111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act[1]~8_combout\,
+	datab => \PWMtest|Selector33~0_combout\,
+	datac => \PWMtest|Selector41~2_combout\,
+	datad => \incdecdutytest|duty[1]~16_combout\,
+	combout => \PWMtest|Selector33~1_combout\);
+
+-- Location: FF_X55_Y35_N5
+\PWMtest|softstart_duty_act[1]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector33~1_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(1));
+
+-- Location: LCCOMB_X51_Y31_N2
+\PWMtest|Add1~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~1_cout\ = CARRY(\PWMtest|softstart_duty_act\(1))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000010101010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(1),
+	datad => VCC,
+	cout => \PWMtest|Add1~1_cout\);
+
+-- Location: LCCOMB_X51_Y31_N4
+\PWMtest|Add1~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~2_combout\ = (\PWMtest|softstart_duty_act\(2) & (\PWMtest|Add1~1_cout\ & VCC)) # (!\PWMtest|softstart_duty_act\(2) & (!\PWMtest|Add1~1_cout\))
+-- \PWMtest|Add1~3\ = CARRY((!\PWMtest|softstart_duty_act\(2) & !\PWMtest|Add1~1_cout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(2),
+	datad => VCC,
+	cin => \PWMtest|Add1~1_cout\,
+	combout => \PWMtest|Add1~2_combout\,
+	cout => \PWMtest|Add1~3\);
+
+-- Location: LCCOMB_X51_Y31_N6
+\PWMtest|Add1~4\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~4_combout\ = (\PWMtest|softstart_duty_act\(3) & ((GND) # (!\PWMtest|Add1~3\))) # (!\PWMtest|softstart_duty_act\(3) & (\PWMtest|Add1~3\ $ (GND)))
+-- \PWMtest|Add1~5\ = CARRY((\PWMtest|softstart_duty_act\(3)) # (!\PWMtest|Add1~3\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110011001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(3),
+	datad => VCC,
+	cin => \PWMtest|Add1~3\,
+	combout => \PWMtest|Add1~4_combout\,
+	cout => \PWMtest|Add1~5\);
+
+-- Location: LCCOMB_X51_Y31_N8
+\PWMtest|Add1~6\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~6_combout\ = (\PWMtest|softstart_duty_act\(4) & ((\PWMtest|Add1~5\) # (GND))) # (!\PWMtest|softstart_duty_act\(4) & (!\PWMtest|Add1~5\))
+-- \PWMtest|Add1~7\ = CARRY((\PWMtest|softstart_duty_act\(4)) # (!\PWMtest|Add1~5\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001111001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(4),
+	datad => VCC,
+	cin => \PWMtest|Add1~5\,
+	combout => \PWMtest|Add1~6_combout\,
+	cout => \PWMtest|Add1~7\);
+
+-- Location: LCCOMB_X51_Y31_N10
+\PWMtest|Add1~8\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~8_combout\ = (\PWMtest|softstart_duty_act\(5) & (!\PWMtest|Add1~7\ & VCC)) # (!\PWMtest|softstart_duty_act\(5) & (\PWMtest|Add1~7\ $ (GND)))
+-- \PWMtest|Add1~9\ = CARRY((!\PWMtest|softstart_duty_act\(5) & !\PWMtest|Add1~7\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(5),
+	datad => VCC,
+	cin => \PWMtest|Add1~7\,
+	combout => \PWMtest|Add1~8_combout\,
+	cout => \PWMtest|Add1~9\);
+
+-- Location: LCCOMB_X51_Y31_N12
+\PWMtest|Add1~10\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~10_combout\ = (\PWMtest|softstart_duty_act\(6) & ((\PWMtest|Add1~9\) # (GND))) # (!\PWMtest|softstart_duty_act\(6) & (!\PWMtest|Add1~9\))
+-- \PWMtest|Add1~11\ = CARRY((\PWMtest|softstart_duty_act\(6)) # (!\PWMtest|Add1~9\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(6),
+	datad => VCC,
+	cin => \PWMtest|Add1~9\,
+	combout => \PWMtest|Add1~10_combout\,
+	cout => \PWMtest|Add1~11\);
+
+-- Location: LCCOMB_X51_Y31_N14
+\PWMtest|Add1~12\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~12_combout\ = (\PWMtest|softstart_duty_act\(7) & (!\PWMtest|Add1~11\ & VCC)) # (!\PWMtest|softstart_duty_act\(7) & (\PWMtest|Add1~11\ $ (GND)))
+-- \PWMtest|Add1~13\ = CARRY((!\PWMtest|softstart_duty_act\(7) & !\PWMtest|Add1~11\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(7),
+	datad => VCC,
+	cin => \PWMtest|Add1~11\,
+	combout => \PWMtest|Add1~12_combout\,
+	cout => \PWMtest|Add1~13\);
+
+-- Location: LCCOMB_X51_Y31_N16
+\PWMtest|Add1~14\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~14_combout\ = (\PWMtest|softstart_duty_act\(8) & (!\PWMtest|Add1~13\)) # (!\PWMtest|softstart_duty_act\(8) & (\PWMtest|Add1~13\ & VCC))
+-- \PWMtest|Add1~15\ = CARRY((\PWMtest|softstart_duty_act\(8) & !\PWMtest|Add1~13\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(8),
+	datad => VCC,
+	cin => \PWMtest|Add1~13\,
+	combout => \PWMtest|Add1~14_combout\,
+	cout => \PWMtest|Add1~15\);
+
+-- Location: LCCOMB_X51_Y31_N18
+\PWMtest|Add1~16\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~16_combout\ = (\PWMtest|softstart_duty_act\(9) & (!\PWMtest|Add1~15\ & VCC)) # (!\PWMtest|softstart_duty_act\(9) & (\PWMtest|Add1~15\ $ (GND)))
+-- \PWMtest|Add1~17\ = CARRY((!\PWMtest|softstart_duty_act\(9) & !\PWMtest|Add1~15\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(9),
+	datad => VCC,
+	cin => \PWMtest|Add1~15\,
+	combout => \PWMtest|Add1~16_combout\,
+	cout => \PWMtest|Add1~17\);
+
+-- Location: LCCOMB_X51_Y31_N20
+\PWMtest|Add1~18\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~18_combout\ = (\PWMtest|softstart_duty_act\(10) & ((\PWMtest|Add1~17\) # (GND))) # (!\PWMtest|softstart_duty_act\(10) & (!\PWMtest|Add1~17\))
+-- \PWMtest|Add1~19\ = CARRY((\PWMtest|softstart_duty_act\(10)) # (!\PWMtest|Add1~17\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(10),
+	datad => VCC,
+	cin => \PWMtest|Add1~17\,
+	combout => \PWMtest|Add1~18_combout\,
+	cout => \PWMtest|Add1~19\);
+
+-- Location: LCCOMB_X51_Y31_N22
+\PWMtest|Add1~20\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~20_combout\ = (\PWMtest|softstart_duty_act\(11) & (!\PWMtest|Add1~19\ & VCC)) # (!\PWMtest|softstart_duty_act\(11) & (\PWMtest|Add1~19\ $ (GND)))
+-- \PWMtest|Add1~21\ = CARRY((!\PWMtest|softstart_duty_act\(11) & !\PWMtest|Add1~19\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(11),
+	datad => VCC,
+	cin => \PWMtest|Add1~19\,
+	combout => \PWMtest|Add1~20_combout\,
+	cout => \PWMtest|Add1~21\);
+
+-- Location: LCCOMB_X51_Y31_N24
+\PWMtest|Add1~22\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~22_combout\ = (\PWMtest|softstart_duty_act\(12) & ((\PWMtest|Add1~21\) # (GND))) # (!\PWMtest|softstart_duty_act\(12) & (!\PWMtest|Add1~21\))
+-- \PWMtest|Add1~23\ = CARRY((\PWMtest|softstart_duty_act\(12)) # (!\PWMtest|Add1~21\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(12),
+	datad => VCC,
+	cin => \PWMtest|Add1~21\,
+	combout => \PWMtest|Add1~22_combout\,
+	cout => \PWMtest|Add1~23\);
+
+-- Location: LCCOMB_X51_Y31_N26
+\PWMtest|Add1~24\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~24_combout\ = (\PWMtest|softstart_duty_act\(13) & (!\PWMtest|Add1~23\ & VCC)) # (!\PWMtest|softstart_duty_act\(13) & (\PWMtest|Add1~23\ $ (GND)))
+-- \PWMtest|Add1~25\ = CARRY((!\PWMtest|softstart_duty_act\(13) & !\PWMtest|Add1~23\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101000000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(13),
+	datad => VCC,
+	cin => \PWMtest|Add1~23\,
+	combout => \PWMtest|Add1~24_combout\,
+	cout => \PWMtest|Add1~25\);
+
+-- Location: LCCOMB_X51_Y31_N28
+\PWMtest|Add1~26\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~26_combout\ = (\PWMtest|softstart_duty_act\(14) & ((\PWMtest|Add1~25\) # (GND))) # (!\PWMtest|softstart_duty_act\(14) & (!\PWMtest|Add1~25\))
+-- \PWMtest|Add1~27\ = CARRY((\PWMtest|softstart_duty_act\(14)) # (!\PWMtest|Add1~25\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001111001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(14),
+	datad => VCC,
+	cin => \PWMtest|Add1~25\,
+	combout => \PWMtest|Add1~26_combout\,
+	cout => \PWMtest|Add1~27\);
+
+-- Location: LCCOMB_X51_Y31_N30
+\PWMtest|Add1~28\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~28_combout\ = (\PWMtest|softstart_duty_act\(15) & (!\PWMtest|Add1~27\ & VCC)) # (!\PWMtest|softstart_duty_act\(15) & (\PWMtest|Add1~27\ $ (GND)))
+-- \PWMtest|Add1~29\ = CARRY((!\PWMtest|softstart_duty_act\(15) & !\PWMtest|Add1~27\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101000000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(15),
+	datad => VCC,
+	cin => \PWMtest|Add1~27\,
+	combout => \PWMtest|Add1~28_combout\,
+	cout => \PWMtest|Add1~29\);
+
+-- Location: LCCOMB_X51_Y30_N0
+\PWMtest|Add1~30\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~30_combout\ = (\PWMtest|softstart_duty_act\(16) & ((\PWMtest|Add1~29\) # (GND))) # (!\PWMtest|softstart_duty_act\(16) & (!\PWMtest|Add1~29\))
+-- \PWMtest|Add1~31\ = CARRY((\PWMtest|softstart_duty_act\(16)) # (!\PWMtest|Add1~29\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001111001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(16),
+	datad => VCC,
+	cin => \PWMtest|Add1~29\,
+	combout => \PWMtest|Add1~30_combout\,
+	cout => \PWMtest|Add1~31\);
+
+-- Location: LCCOMB_X51_Y30_N2
+\PWMtest|Add1~32\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~32_combout\ = (\PWMtest|softstart_duty_act\(17) & (!\PWMtest|Add1~31\ & VCC)) # (!\PWMtest|softstart_duty_act\(17) & (\PWMtest|Add1~31\ $ (GND)))
+-- \PWMtest|Add1~33\ = CARRY((!\PWMtest|softstart_duty_act\(17) & !\PWMtest|Add1~31\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(17),
+	datad => VCC,
+	cin => \PWMtest|Add1~31\,
+	combout => \PWMtest|Add1~32_combout\,
+	cout => \PWMtest|Add1~33\);
+
+-- Location: LCCOMB_X51_Y30_N4
+\PWMtest|Add1~34\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~34_combout\ = (\PWMtest|softstart_duty_act\(18) & ((\PWMtest|Add1~33\) # (GND))) # (!\PWMtest|softstart_duty_act\(18) & (!\PWMtest|Add1~33\))
+-- \PWMtest|Add1~35\ = CARRY((\PWMtest|softstart_duty_act\(18)) # (!\PWMtest|Add1~33\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(18),
+	datad => VCC,
+	cin => \PWMtest|Add1~33\,
+	combout => \PWMtest|Add1~34_combout\,
+	cout => \PWMtest|Add1~35\);
+
+-- Location: LCCOMB_X51_Y30_N6
+\PWMtest|Add1~36\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~36_combout\ = (\PWMtest|softstart_duty_act\(19) & (!\PWMtest|Add1~35\ & VCC)) # (!\PWMtest|softstart_duty_act\(19) & (\PWMtest|Add1~35\ $ (GND)))
+-- \PWMtest|Add1~37\ = CARRY((!\PWMtest|softstart_duty_act\(19) & !\PWMtest|Add1~35\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101000000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(19),
+	datad => VCC,
+	cin => \PWMtest|Add1~35\,
+	combout => \PWMtest|Add1~36_combout\,
+	cout => \PWMtest|Add1~37\);
+
+-- Location: LCCOMB_X51_Y30_N8
+\PWMtest|Add1~38\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~38_combout\ = (\PWMtest|softstart_duty_act\(20) & ((\PWMtest|Add1~37\) # (GND))) # (!\PWMtest|softstart_duty_act\(20) & (!\PWMtest|Add1~37\))
+-- \PWMtest|Add1~39\ = CARRY((\PWMtest|softstart_duty_act\(20)) # (!\PWMtest|Add1~37\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(20),
+	datad => VCC,
+	cin => \PWMtest|Add1~37\,
+	combout => \PWMtest|Add1~38_combout\,
+	cout => \PWMtest|Add1~39\);
+
+-- Location: LCCOMB_X51_Y30_N10
+\PWMtest|Add1~40\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~40_combout\ = (\PWMtest|softstart_duty_act\(21) & (!\PWMtest|Add1~39\ & VCC)) # (!\PWMtest|softstart_duty_act\(21) & (\PWMtest|Add1~39\ $ (GND)))
+-- \PWMtest|Add1~41\ = CARRY((!\PWMtest|softstart_duty_act\(21) & !\PWMtest|Add1~39\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(21),
+	datad => VCC,
+	cin => \PWMtest|Add1~39\,
+	combout => \PWMtest|Add1~40_combout\,
+	cout => \PWMtest|Add1~41\);
+
+-- Location: LCCOMB_X51_Y30_N12
+\PWMtest|Add1~42\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~42_combout\ = (\PWMtest|softstart_duty_act\(22) & ((\PWMtest|Add1~41\) # (GND))) # (!\PWMtest|softstart_duty_act\(22) & (!\PWMtest|Add1~41\))
+-- \PWMtest|Add1~43\ = CARRY((\PWMtest|softstart_duty_act\(22)) # (!\PWMtest|Add1~41\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001111001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(22),
+	datad => VCC,
+	cin => \PWMtest|Add1~41\,
+	combout => \PWMtest|Add1~42_combout\,
+	cout => \PWMtest|Add1~43\);
+
+-- Location: LCCOMB_X51_Y30_N14
+\PWMtest|Add1~44\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~44_combout\ = (\PWMtest|softstart_duty_act\(23) & (!\PWMtest|Add1~43\ & VCC)) # (!\PWMtest|softstart_duty_act\(23) & (\PWMtest|Add1~43\ $ (GND)))
+-- \PWMtest|Add1~45\ = CARRY((!\PWMtest|softstart_duty_act\(23) & !\PWMtest|Add1~43\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101000000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(23),
+	datad => VCC,
+	cin => \PWMtest|Add1~43\,
+	combout => \PWMtest|Add1~44_combout\,
+	cout => \PWMtest|Add1~45\);
+
+-- Location: LCCOMB_X51_Y30_N16
+\PWMtest|Add1~46\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~46_combout\ = (\PWMtest|softstart_duty_act\(24) & ((\PWMtest|Add1~45\) # (GND))) # (!\PWMtest|softstart_duty_act\(24) & (!\PWMtest|Add1~45\))
+-- \PWMtest|Add1~47\ = CARRY((\PWMtest|softstart_duty_act\(24)) # (!\PWMtest|Add1~45\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(24),
+	datad => VCC,
+	cin => \PWMtest|Add1~45\,
+	combout => \PWMtest|Add1~46_combout\,
+	cout => \PWMtest|Add1~47\);
+
+-- Location: LCCOMB_X51_Y30_N18
+\PWMtest|Add1~48\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~48_combout\ = (\PWMtest|softstart_duty_act\(25) & (!\PWMtest|Add1~47\ & VCC)) # (!\PWMtest|softstart_duty_act\(25) & (\PWMtest|Add1~47\ $ (GND)))
+-- \PWMtest|Add1~49\ = CARRY((!\PWMtest|softstart_duty_act\(25) & !\PWMtest|Add1~47\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101000000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(25),
+	datad => VCC,
+	cin => \PWMtest|Add1~47\,
+	combout => \PWMtest|Add1~48_combout\,
+	cout => \PWMtest|Add1~49\);
+
+-- Location: LCCOMB_X51_Y30_N20
+\PWMtest|Add1~50\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~50_combout\ = (\PWMtest|softstart_duty_act\(26) & ((\PWMtest|Add1~49\) # (GND))) # (!\PWMtest|softstart_duty_act\(26) & (!\PWMtest|Add1~49\))
+-- \PWMtest|Add1~51\ = CARRY((\PWMtest|softstart_duty_act\(26)) # (!\PWMtest|Add1~49\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001111001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(26),
+	datad => VCC,
+	cin => \PWMtest|Add1~49\,
+	combout => \PWMtest|Add1~50_combout\,
+	cout => \PWMtest|Add1~51\);
+
+-- Location: LCCOMB_X51_Y30_N22
+\PWMtest|Add1~52\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~52_combout\ = (\PWMtest|softstart_duty_act\(27) & (!\PWMtest|Add1~51\ & VCC)) # (!\PWMtest|softstart_duty_act\(27) & (\PWMtest|Add1~51\ $ (GND)))
+-- \PWMtest|Add1~53\ = CARRY((!\PWMtest|softstart_duty_act\(27) & !\PWMtest|Add1~51\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101000000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(27),
+	datad => VCC,
+	cin => \PWMtest|Add1~51\,
+	combout => \PWMtest|Add1~52_combout\,
+	cout => \PWMtest|Add1~53\);
+
+-- Location: LCCOMB_X51_Y30_N24
+\PWMtest|Add1~54\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~54_combout\ = (\PWMtest|softstart_duty_act\(28) & ((\PWMtest|Add1~53\) # (GND))) # (!\PWMtest|softstart_duty_act\(28) & (!\PWMtest|Add1~53\))
+-- \PWMtest|Add1~55\ = CARRY((\PWMtest|softstart_duty_act\(28)) # (!\PWMtest|Add1~53\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001111001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(28),
+	datad => VCC,
+	cin => \PWMtest|Add1~53\,
+	combout => \PWMtest|Add1~54_combout\,
+	cout => \PWMtest|Add1~55\);
+
+-- Location: LCCOMB_X51_Y30_N26
+\PWMtest|Add1~56\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~56_combout\ = (\PWMtest|softstart_duty_act\(29) & (!\PWMtest|Add1~55\ & VCC)) # (!\PWMtest|softstart_duty_act\(29) & (\PWMtest|Add1~55\ $ (GND)))
+-- \PWMtest|Add1~57\ = CARRY((!\PWMtest|softstart_duty_act\(29) & !\PWMtest|Add1~55\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101000000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(29),
+	datad => VCC,
+	cin => \PWMtest|Add1~55\,
+	combout => \PWMtest|Add1~56_combout\,
+	cout => \PWMtest|Add1~57\);
+
+-- Location: LCCOMB_X51_Y30_N28
+\PWMtest|Add1~58\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~58_combout\ = (\PWMtest|softstart_duty_act\(30) & ((\PWMtest|Add1~57\) # (GND))) # (!\PWMtest|softstart_duty_act\(30) & (!\PWMtest|Add1~57\))
+-- \PWMtest|Add1~59\ = CARRY((\PWMtest|softstart_duty_act\(30)) # (!\PWMtest|Add1~57\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(30),
+	datad => VCC,
+	cin => \PWMtest|Add1~57\,
+	combout => \PWMtest|Add1~58_combout\,
+	cout => \PWMtest|Add1~59\);
+
+-- Location: LCCOMB_X51_Y30_N30
+\PWMtest|Add1~60\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add1~60_combout\ = \PWMtest|Add1~59\ $ (\PWMtest|softstart_duty_act\(31))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111111110000",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datad => \PWMtest|softstart_duty_act\(31),
+	cin => \PWMtest|Add1~59\,
+	combout => \PWMtest|Add1~60_combout\);
+
+-- Location: LCCOMB_X49_Y33_N0
+\PWMtest|countactual1[0]~33\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[0]~33_combout\ = \PWMtest|countactual1\(0) $ (VCC)
+-- \PWMtest|countactual1[0]~34\ = CARRY(\PWMtest|countactual1\(0))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011001111001100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(0),
+	datad => VCC,
+	combout => \PWMtest|countactual1[0]~33_combout\,
+	cout => \PWMtest|countactual1[0]~34\);
+
+-- Location: LCCOMB_X49_Y34_N16
+\PWMtest|Selector39~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector39~1_combout\ = (!\PWMtest|countactual1\(5) & (!\PWMtest|countactual1\(6) & !\PWMtest|countactual1\(7)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(5),
+	datac => \PWMtest|countactual1\(6),
+	datad => \PWMtest|countactual1\(7),
+	combout => \PWMtest|Selector39~1_combout\);
+
+-- Location: LCCOMB_X52_Y29_N18
+\PWMtest|LessThan3~7\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan3~7_combout\ = ((!\PWMtest|countactual1\(3) & ((!\PWMtest|countactual1\(2)) # (!\PWMtest|countactual1\(1))))) # (!\PWMtest|countactual1\(4))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011011100111111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(1),
+	datab => \PWMtest|countactual1\(4),
+	datac => \PWMtest|countactual1\(3),
+	datad => \PWMtest|countactual1\(2),
+	combout => \PWMtest|LessThan3~7_combout\);
+
+-- Location: LCCOMB_X52_Y33_N12
+\PWMtest|LessThan3~8\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan3~8_combout\ = (\PWMtest|countactual1\(8) & ((!\PWMtest|LessThan3~7_combout\) # (!\PWMtest|Selector39~1_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101000011110000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Selector39~1_combout\,
+	datac => \PWMtest|countactual1\(8),
+	datad => \PWMtest|LessThan3~7_combout\,
+	combout => \PWMtest|LessThan3~8_combout\);
+
+-- Location: LCCOMB_X49_Y30_N12
+\PWMtest|LessThan3~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan3~2_combout\ = (!\PWMtest|countactual1\(17) & (!\PWMtest|countactual1\(20) & (!\PWMtest|countactual1\(18) & !\PWMtest|countactual1\(19))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(17),
+	datab => \PWMtest|countactual1\(20),
+	datac => \PWMtest|countactual1\(18),
+	datad => \PWMtest|countactual1\(19),
+	combout => \PWMtest|LessThan3~2_combout\);
+
+-- Location: LCCOMB_X49_Y30_N24
+\PWMtest|LessThan3~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan3~0_combout\ = (!\PWMtest|countactual1\(11) & (!\PWMtest|countactual1\(12) & (!\PWMtest|countactual1\(9) & !\PWMtest|countactual1\(10))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(11),
+	datab => \PWMtest|countactual1\(12),
+	datac => \PWMtest|countactual1\(9),
+	datad => \PWMtest|countactual1\(10),
+	combout => \PWMtest|LessThan3~0_combout\);
+
+-- Location: LCCOMB_X49_Y30_N26
+\PWMtest|LessThan3~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan3~1_combout\ = (!\PWMtest|countactual1\(13) & (!\PWMtest|countactual1\(14) & (!\PWMtest|countactual1\(16) & !\PWMtest|countactual1\(15))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(13),
+	datab => \PWMtest|countactual1\(14),
+	datac => \PWMtest|countactual1\(16),
+	datad => \PWMtest|countactual1\(15),
+	combout => \PWMtest|LessThan3~1_combout\);
+
+-- Location: LCCOMB_X49_Y30_N6
+\PWMtest|LessThan3~3\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan3~3_combout\ = (!\PWMtest|countactual1\(22) & (!\PWMtest|countactual1\(23) & (!\PWMtest|countactual1\(24) & !\PWMtest|countactual1\(21))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(22),
+	datab => \PWMtest|countactual1\(23),
+	datac => \PWMtest|countactual1\(24),
+	datad => \PWMtest|countactual1\(21),
+	combout => \PWMtest|LessThan3~3_combout\);
+
+-- Location: LCCOMB_X49_Y30_N16
+\PWMtest|LessThan3~4\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan3~4_combout\ = (\PWMtest|LessThan3~2_combout\ & (\PWMtest|LessThan3~0_combout\ & (\PWMtest|LessThan3~1_combout\ & \PWMtest|LessThan3~3_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000000000000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|LessThan3~2_combout\,
+	datab => \PWMtest|LessThan3~0_combout\,
+	datac => \PWMtest|LessThan3~1_combout\,
+	datad => \PWMtest|LessThan3~3_combout\,
+	combout => \PWMtest|LessThan3~4_combout\);
+
+-- Location: LCCOMB_X49_Y31_N24
+\PWMtest|LessThan3~5\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan3~5_combout\ = (!\PWMtest|countactual1\(27) & (!\PWMtest|countactual1\(25) & (!\PWMtest|countactual1\(26) & !\PWMtest|countactual1\(28))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(27),
+	datab => \PWMtest|countactual1\(25),
+	datac => \PWMtest|countactual1\(26),
+	datad => \PWMtest|countactual1\(28),
+	combout => \PWMtest|LessThan3~5_combout\);
+
+-- Location: LCCOMB_X49_Y30_N10
+\PWMtest|LessThan3~6\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan3~6_combout\ = (!\PWMtest|countactual1\(29) & (\PWMtest|LessThan3~4_combout\ & (!\PWMtest|countactual1\(30) & \PWMtest|LessThan3~5_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000010000000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(29),
+	datab => \PWMtest|LessThan3~4_combout\,
+	datac => \PWMtest|countactual1\(30),
+	datad => \PWMtest|LessThan3~5_combout\,
+	combout => \PWMtest|LessThan3~6_combout\);
+
+-- Location: LCCOMB_X52_Y29_N16
+\PWMtest|LessThan2~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan2~0_combout\ = (((!\PWMtest|countactual1\(2)) # (!\PWMtest|countactual1\(1))) # (!\PWMtest|countactual1\(3))) # (!\PWMtest|countactual1\(0))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0111111111111111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(0),
+	datab => \PWMtest|countactual1\(3),
+	datac => \PWMtest|countactual1\(1),
+	datad => \PWMtest|countactual1\(2),
+	combout => \PWMtest|LessThan2~0_combout\);
+
+-- Location: LCCOMB_X52_Y33_N2
+\PWMtest|Selector39~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector39~2_combout\ = (\PWMtest|Selector39~1_combout\ & (!\PWMtest|countactual1\(4) & \PWMtest|LessThan2~0_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000101000000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Selector39~1_combout\,
+	datac => \PWMtest|countactual1\(4),
+	datad => \PWMtest|LessThan2~0_combout\,
+	combout => \PWMtest|Selector39~2_combout\);
+
+-- Location: LCCOMB_X52_Y33_N20
+\PWMtest|est_sig~7\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|est_sig~7_combout\ = (\PWMtest|countactual1\(31)) # ((\PWMtest|LessThan3~6_combout\ & ((\PWMtest|Selector39~2_combout\) # (!\PWMtest|LessThan3~8_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111110011011100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|LessThan3~8_combout\,
+	datab => \PWMtest|countactual1\(31),
+	datac => \PWMtest|LessThan3~6_combout\,
+	datad => \PWMtest|Selector39~2_combout\,
+	combout => \PWMtest|est_sig~7_combout\);
+
+-- Location: LCCOMB_X52_Y33_N16
+\PWMtest|LessThan3~9\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan3~9_combout\ = (\PWMtest|LessThan3~6_combout\ & (((\PWMtest|LessThan3~7_combout\ & \PWMtest|Selector39~1_combout\)) # (!\PWMtest|countactual1\(8))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1101000001010000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(8),
+	datab => \PWMtest|LessThan3~7_combout\,
+	datac => \PWMtest|LessThan3~6_combout\,
+	datad => \PWMtest|Selector39~1_combout\,
+	combout => \PWMtest|LessThan3~9_combout\);
+
+-- Location: LCCOMB_X52_Y33_N6
+\PWMtest|Selector39~3\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector39~3_combout\ = (\PWMtest|Selector39~1_combout\ & (((!\PWMtest|countactual1\(3) & !\PWMtest|countactual1\(2))) # (!\PWMtest|countactual1\(4))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0001111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(3),
+	datab => \PWMtest|countactual1\(2),
+	datac => \PWMtest|countactual1\(4),
+	datad => \PWMtest|Selector39~1_combout\,
+	combout => \PWMtest|Selector39~3_combout\);
+
+-- Location: LCCOMB_X52_Y33_N0
+\PWMtest|LessThan8~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan8~0_combout\ = (\PWMtest|LessThan3~6_combout\ & ((\PWMtest|Selector39~3_combout\) # (!\PWMtest|countactual1\(8))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111000001010000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(8),
+	datac => \PWMtest|LessThan3~6_combout\,
+	datad => \PWMtest|Selector39~3_combout\,
+	combout => \PWMtest|LessThan8~0_combout\);
+
+-- Location: LCCOMB_X52_Y33_N10
+\PWMtest|Selector41~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector41~1_combout\ = (\PWMtest|est_act.boost2~q\ & ((\PWMtest|LessThan3~9_combout\) # ((\PWMtest|LessThan8~0_combout\) # (\PWMtest|countactual1\(31)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111000000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|LessThan3~9_combout\,
+	datab => \PWMtest|LessThan8~0_combout\,
+	datac => \PWMtest|countactual1\(31),
+	datad => \PWMtest|est_act.boost2~q\,
+	combout => \PWMtest|Selector41~1_combout\);
+
+-- Location: LCCOMB_X52_Y31_N0
+\PWMtest|LessThan7~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~1_cout\ = CARRY((!\PWMtest|countactual1\(0) & !\PWMtest|softstart_duty_act\(0)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000010001",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(0),
+	datab => \PWMtest|softstart_duty_act\(0),
+	datad => VCC,
+	cout => \PWMtest|LessThan7~1_cout\);
+
+-- Location: LCCOMB_X52_Y31_N2
+\PWMtest|LessThan7~3\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~3_cout\ = CARRY((\PWMtest|softstart_duty_act\(1) & ((\PWMtest|countactual1\(1)) # (!\PWMtest|LessThan7~1_cout\))) # (!\PWMtest|softstart_duty_act\(1) & (\PWMtest|countactual1\(1) & !\PWMtest|LessThan7~1_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000010001110",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(1),
+	datab => \PWMtest|countactual1\(1),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~1_cout\,
+	cout => \PWMtest|LessThan7~3_cout\);
+
+-- Location: LCCOMB_X52_Y31_N4
+\PWMtest|LessThan7~5\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~5_cout\ = CARRY((\PWMtest|softstart_duty_act\(2) & (!\PWMtest|countactual1\(2) & !\PWMtest|LessThan7~3_cout\)) # (!\PWMtest|softstart_duty_act\(2) & ((!\PWMtest|LessThan7~3_cout\) # (!\PWMtest|countactual1\(2)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000010111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(2),
+	datab => \PWMtest|countactual1\(2),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~3_cout\,
+	cout => \PWMtest|LessThan7~5_cout\);
+
+-- Location: LCCOMB_X52_Y31_N6
+\PWMtest|LessThan7~7\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~7_cout\ = CARRY((\PWMtest|softstart_duty_act\(3) & ((\PWMtest|countactual1\(3)) # (!\PWMtest|LessThan7~5_cout\))) # (!\PWMtest|softstart_duty_act\(3) & (\PWMtest|countactual1\(3) & !\PWMtest|LessThan7~5_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000010001110",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(3),
+	datab => \PWMtest|countactual1\(3),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~5_cout\,
+	cout => \PWMtest|LessThan7~7_cout\);
+
+-- Location: LCCOMB_X52_Y31_N8
+\PWMtest|LessThan7~9\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~9_cout\ = CARRY((\PWMtest|countactual1\(4) & (\PWMtest|softstart_duty_act\(4) & !\PWMtest|LessThan7~7_cout\)) # (!\PWMtest|countactual1\(4) & ((\PWMtest|softstart_duty_act\(4)) # (!\PWMtest|LessThan7~7_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(4),
+	datab => \PWMtest|softstart_duty_act\(4),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~7_cout\,
+	cout => \PWMtest|LessThan7~9_cout\);
+
+-- Location: LCCOMB_X52_Y31_N10
+\PWMtest|LessThan7~11\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~11_cout\ = CARRY((\PWMtest|softstart_duty_act\(5) & (\PWMtest|countactual1\(5) & !\PWMtest|LessThan7~9_cout\)) # (!\PWMtest|softstart_duty_act\(5) & ((\PWMtest|countactual1\(5)) # (!\PWMtest|LessThan7~9_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(5),
+	datab => \PWMtest|countactual1\(5),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~9_cout\,
+	cout => \PWMtest|LessThan7~11_cout\);
+
+-- Location: LCCOMB_X52_Y31_N12
+\PWMtest|LessThan7~13\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~13_cout\ = CARRY((\PWMtest|countactual1\(6) & (\PWMtest|softstart_duty_act\(6) & !\PWMtest|LessThan7~11_cout\)) # (!\PWMtest|countactual1\(6) & ((\PWMtest|softstart_duty_act\(6)) # (!\PWMtest|LessThan7~11_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(6),
+	datab => \PWMtest|softstart_duty_act\(6),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~11_cout\,
+	cout => \PWMtest|LessThan7~13_cout\);
+
+-- Location: LCCOMB_X52_Y31_N14
+\PWMtest|LessThan7~15\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~15_cout\ = CARRY((\PWMtest|softstart_duty_act\(7) & (\PWMtest|countactual1\(7) & !\PWMtest|LessThan7~13_cout\)) # (!\PWMtest|softstart_duty_act\(7) & ((\PWMtest|countactual1\(7)) # (!\PWMtest|LessThan7~13_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(7),
+	datab => \PWMtest|countactual1\(7),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~13_cout\,
+	cout => \PWMtest|LessThan7~15_cout\);
+
+-- Location: LCCOMB_X52_Y31_N16
+\PWMtest|LessThan7~17\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~17_cout\ = CARRY((\PWMtest|softstart_duty_act\(8) & ((!\PWMtest|LessThan7~15_cout\) # (!\PWMtest|countactual1\(8)))) # (!\PWMtest|softstart_duty_act\(8) & (!\PWMtest|countactual1\(8) & !\PWMtest|LessThan7~15_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(8),
+	datab => \PWMtest|countactual1\(8),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~15_cout\,
+	cout => \PWMtest|LessThan7~17_cout\);
+
+-- Location: LCCOMB_X52_Y31_N18
+\PWMtest|LessThan7~19\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~19_cout\ = CARRY((\PWMtest|softstart_duty_act\(9) & (\PWMtest|countactual1\(9) & !\PWMtest|LessThan7~17_cout\)) # (!\PWMtest|softstart_duty_act\(9) & ((\PWMtest|countactual1\(9)) # (!\PWMtest|LessThan7~17_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(9),
+	datab => \PWMtest|countactual1\(9),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~17_cout\,
+	cout => \PWMtest|LessThan7~19_cout\);
+
+-- Location: LCCOMB_X52_Y31_N20
+\PWMtest|LessThan7~21\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~21_cout\ = CARRY((\PWMtest|countactual1\(10) & (\PWMtest|softstart_duty_act\(10) & !\PWMtest|LessThan7~19_cout\)) # (!\PWMtest|countactual1\(10) & ((\PWMtest|softstart_duty_act\(10)) # (!\PWMtest|LessThan7~19_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(10),
+	datab => \PWMtest|softstart_duty_act\(10),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~19_cout\,
+	cout => \PWMtest|LessThan7~21_cout\);
+
+-- Location: LCCOMB_X52_Y31_N22
+\PWMtest|LessThan7~23\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~23_cout\ = CARRY((\PWMtest|softstart_duty_act\(11) & (\PWMtest|countactual1\(11) & !\PWMtest|LessThan7~21_cout\)) # (!\PWMtest|softstart_duty_act\(11) & ((\PWMtest|countactual1\(11)) # (!\PWMtest|LessThan7~21_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(11),
+	datab => \PWMtest|countactual1\(11),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~21_cout\,
+	cout => \PWMtest|LessThan7~23_cout\);
+
+-- Location: LCCOMB_X52_Y31_N24
+\PWMtest|LessThan7~25\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~25_cout\ = CARRY((\PWMtest|softstart_duty_act\(12) & ((!\PWMtest|LessThan7~23_cout\) # (!\PWMtest|countactual1\(12)))) # (!\PWMtest|softstart_duty_act\(12) & (!\PWMtest|countactual1\(12) & !\PWMtest|LessThan7~23_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(12),
+	datab => \PWMtest|countactual1\(12),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~23_cout\,
+	cout => \PWMtest|LessThan7~25_cout\);
+
+-- Location: LCCOMB_X52_Y31_N26
+\PWMtest|LessThan7~27\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~27_cout\ = CARRY((\PWMtest|countactual1\(13) & ((!\PWMtest|LessThan7~25_cout\) # (!\PWMtest|softstart_duty_act\(13)))) # (!\PWMtest|countactual1\(13) & (!\PWMtest|softstart_duty_act\(13) & !\PWMtest|LessThan7~25_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(13),
+	datab => \PWMtest|softstart_duty_act\(13),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~25_cout\,
+	cout => \PWMtest|LessThan7~27_cout\);
+
+-- Location: LCCOMB_X52_Y31_N28
+\PWMtest|LessThan7~29\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~29_cout\ = CARRY((\PWMtest|countactual1\(14) & (\PWMtest|softstart_duty_act\(14) & !\PWMtest|LessThan7~27_cout\)) # (!\PWMtest|countactual1\(14) & ((\PWMtest|softstart_duty_act\(14)) # (!\PWMtest|LessThan7~27_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(14),
+	datab => \PWMtest|softstart_duty_act\(14),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~27_cout\,
+	cout => \PWMtest|LessThan7~29_cout\);
+
+-- Location: LCCOMB_X52_Y31_N30
+\PWMtest|LessThan7~31\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~31_cout\ = CARRY((\PWMtest|softstart_duty_act\(15) & (\PWMtest|countactual1\(15) & !\PWMtest|LessThan7~29_cout\)) # (!\PWMtest|softstart_duty_act\(15) & ((\PWMtest|countactual1\(15)) # (!\PWMtest|LessThan7~29_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(15),
+	datab => \PWMtest|countactual1\(15),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~29_cout\,
+	cout => \PWMtest|LessThan7~31_cout\);
+
+-- Location: LCCOMB_X52_Y30_N0
+\PWMtest|LessThan7~33\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~33_cout\ = CARRY((\PWMtest|softstart_duty_act\(16) & ((!\PWMtest|LessThan7~31_cout\) # (!\PWMtest|countactual1\(16)))) # (!\PWMtest|softstart_duty_act\(16) & (!\PWMtest|countactual1\(16) & !\PWMtest|LessThan7~31_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(16),
+	datab => \PWMtest|countactual1\(16),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~31_cout\,
+	cout => \PWMtest|LessThan7~33_cout\);
+
+-- Location: LCCOMB_X52_Y30_N2
+\PWMtest|LessThan7~35\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~35_cout\ = CARRY((\PWMtest|softstart_duty_act\(17) & (\PWMtest|countactual1\(17) & !\PWMtest|LessThan7~33_cout\)) # (!\PWMtest|softstart_duty_act\(17) & ((\PWMtest|countactual1\(17)) # (!\PWMtest|LessThan7~33_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(17),
+	datab => \PWMtest|countactual1\(17),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~33_cout\,
+	cout => \PWMtest|LessThan7~35_cout\);
+
+-- Location: LCCOMB_X52_Y30_N4
+\PWMtest|LessThan7~37\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~37_cout\ = CARRY((\PWMtest|softstart_duty_act\(18) & ((!\PWMtest|LessThan7~35_cout\) # (!\PWMtest|countactual1\(18)))) # (!\PWMtest|softstart_duty_act\(18) & (!\PWMtest|countactual1\(18) & !\PWMtest|LessThan7~35_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(18),
+	datab => \PWMtest|countactual1\(18),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~35_cout\,
+	cout => \PWMtest|LessThan7~37_cout\);
+
+-- Location: LCCOMB_X52_Y30_N6
+\PWMtest|LessThan7~39\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~39_cout\ = CARRY((\PWMtest|countactual1\(19) & ((!\PWMtest|LessThan7~37_cout\) # (!\PWMtest|softstart_duty_act\(19)))) # (!\PWMtest|countactual1\(19) & (!\PWMtest|softstart_duty_act\(19) & !\PWMtest|LessThan7~37_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(19),
+	datab => \PWMtest|softstart_duty_act\(19),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~37_cout\,
+	cout => \PWMtest|LessThan7~39_cout\);
+
+-- Location: LCCOMB_X52_Y30_N8
+\PWMtest|LessThan7~41\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~41_cout\ = CARRY((\PWMtest|softstart_duty_act\(20) & ((!\PWMtest|LessThan7~39_cout\) # (!\PWMtest|countactual1\(20)))) # (!\PWMtest|softstart_duty_act\(20) & (!\PWMtest|countactual1\(20) & !\PWMtest|LessThan7~39_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(20),
+	datab => \PWMtest|countactual1\(20),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~39_cout\,
+	cout => \PWMtest|LessThan7~41_cout\);
+
+-- Location: LCCOMB_X52_Y30_N10
+\PWMtest|LessThan7~43\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~43_cout\ = CARRY((\PWMtest|countactual1\(21) & ((!\PWMtest|LessThan7~41_cout\) # (!\PWMtest|softstart_duty_act\(21)))) # (!\PWMtest|countactual1\(21) & (!\PWMtest|softstart_duty_act\(21) & !\PWMtest|LessThan7~41_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(21),
+	datab => \PWMtest|softstart_duty_act\(21),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~41_cout\,
+	cout => \PWMtest|LessThan7~43_cout\);
+
+-- Location: LCCOMB_X52_Y30_N12
+\PWMtest|LessThan7~45\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~45_cout\ = CARRY((\PWMtest|softstart_duty_act\(22) & ((!\PWMtest|LessThan7~43_cout\) # (!\PWMtest|countactual1\(22)))) # (!\PWMtest|softstart_duty_act\(22) & (!\PWMtest|countactual1\(22) & !\PWMtest|LessThan7~43_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(22),
+	datab => \PWMtest|countactual1\(22),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~43_cout\,
+	cout => \PWMtest|LessThan7~45_cout\);
+
+-- Location: LCCOMB_X52_Y30_N14
+\PWMtest|LessThan7~47\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~47_cout\ = CARRY((\PWMtest|countactual1\(23) & ((!\PWMtest|LessThan7~45_cout\) # (!\PWMtest|softstart_duty_act\(23)))) # (!\PWMtest|countactual1\(23) & (!\PWMtest|softstart_duty_act\(23) & !\PWMtest|LessThan7~45_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(23),
+	datab => \PWMtest|softstart_duty_act\(23),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~45_cout\,
+	cout => \PWMtest|LessThan7~47_cout\);
+
+-- Location: LCCOMB_X52_Y30_N16
+\PWMtest|LessThan7~49\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~49_cout\ = CARRY((\PWMtest|softstart_duty_act\(24) & ((!\PWMtest|LessThan7~47_cout\) # (!\PWMtest|countactual1\(24)))) # (!\PWMtest|softstart_duty_act\(24) & (!\PWMtest|countactual1\(24) & !\PWMtest|LessThan7~47_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(24),
+	datab => \PWMtest|countactual1\(24),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~47_cout\,
+	cout => \PWMtest|LessThan7~49_cout\);
+
+-- Location: LCCOMB_X52_Y30_N18
+\PWMtest|LessThan7~51\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~51_cout\ = CARRY((\PWMtest|softstart_duty_act\(25) & (\PWMtest|countactual1\(25) & !\PWMtest|LessThan7~49_cout\)) # (!\PWMtest|softstart_duty_act\(25) & ((\PWMtest|countactual1\(25)) # (!\PWMtest|LessThan7~49_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(25),
+	datab => \PWMtest|countactual1\(25),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~49_cout\,
+	cout => \PWMtest|LessThan7~51_cout\);
+
+-- Location: LCCOMB_X52_Y30_N20
+\PWMtest|LessThan7~53\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~53_cout\ = CARRY((\PWMtest|softstart_duty_act\(26) & ((!\PWMtest|LessThan7~51_cout\) # (!\PWMtest|countactual1\(26)))) # (!\PWMtest|softstart_duty_act\(26) & (!\PWMtest|countactual1\(26) & !\PWMtest|LessThan7~51_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(26),
+	datab => \PWMtest|countactual1\(26),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~51_cout\,
+	cout => \PWMtest|LessThan7~53_cout\);
+
+-- Location: LCCOMB_X52_Y30_N22
+\PWMtest|LessThan7~55\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~55_cout\ = CARRY((\PWMtest|softstart_duty_act\(27) & (\PWMtest|countactual1\(27) & !\PWMtest|LessThan7~53_cout\)) # (!\PWMtest|softstart_duty_act\(27) & ((\PWMtest|countactual1\(27)) # (!\PWMtest|LessThan7~53_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(27),
+	datab => \PWMtest|countactual1\(27),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~53_cout\,
+	cout => \PWMtest|LessThan7~55_cout\);
+
+-- Location: LCCOMB_X52_Y30_N24
+\PWMtest|LessThan7~57\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~57_cout\ = CARRY((\PWMtest|countactual1\(28) & (\PWMtest|softstart_duty_act\(28) & !\PWMtest|LessThan7~55_cout\)) # (!\PWMtest|countactual1\(28) & ((\PWMtest|softstart_duty_act\(28)) # (!\PWMtest|LessThan7~55_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(28),
+	datab => \PWMtest|softstart_duty_act\(28),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~55_cout\,
+	cout => \PWMtest|LessThan7~57_cout\);
+
+-- Location: LCCOMB_X52_Y30_N26
+\PWMtest|LessThan7~59\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~59_cout\ = CARRY((\PWMtest|countactual1\(29) & ((!\PWMtest|LessThan7~57_cout\) # (!\PWMtest|softstart_duty_act\(29)))) # (!\PWMtest|countactual1\(29) & (!\PWMtest|softstart_duty_act\(29) & !\PWMtest|LessThan7~57_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(29),
+	datab => \PWMtest|softstart_duty_act\(29),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~57_cout\,
+	cout => \PWMtest|LessThan7~59_cout\);
+
+-- Location: LCCOMB_X52_Y30_N28
+\PWMtest|LessThan7~61\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~61_cout\ = CARRY((\PWMtest|countactual1\(30) & (\PWMtest|softstart_duty_act\(30) & !\PWMtest|LessThan7~59_cout\)) # (!\PWMtest|countactual1\(30) & ((\PWMtest|softstart_duty_act\(30)) # (!\PWMtest|LessThan7~59_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(30),
+	datab => \PWMtest|softstart_duty_act\(30),
+	datad => VCC,
+	cin => \PWMtest|LessThan7~59_cout\,
+	cout => \PWMtest|LessThan7~61_cout\);
+
+-- Location: LCCOMB_X52_Y30_N30
+\PWMtest|LessThan7~62\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan7~62_combout\ = (\PWMtest|countactual1\(31) & ((\PWMtest|LessThan7~61_cout\) # (!\PWMtest|softstart_duty_act\(31)))) # (!\PWMtest|countactual1\(31) & (\PWMtest|LessThan7~61_cout\ & !\PWMtest|softstart_duty_act\(31)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100000011111100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(31),
+	datad => \PWMtest|softstart_duty_act\(31),
+	cin => \PWMtest|LessThan7~61_cout\,
+	combout => \PWMtest|LessThan7~62_combout\);
+
+-- Location: LCCOMB_X56_Y34_N20
+\PWMtest|Selector41~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector41~0_combout\ = (!\PWMtest|LessThan7~62_combout\ & (!\PWMtest|LessThan6~62_combout\ & \PWMtest|est_act.boost1~q\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000010100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|LessThan7~62_combout\,
+	datac => \PWMtest|LessThan6~62_combout\,
+	datad => \PWMtest|est_act.boost1~q\,
+	combout => \PWMtest|Selector41~0_combout\);
+
+-- Location: LCCOMB_X52_Y34_N18
+\PWMtest|Selector41~3\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector41~3_combout\ = (\PWMtest|Selector41~1_combout\) # ((\PWMtest|Selector41~0_combout\) # ((!\PWMtest|est_sig~7_combout\ & \PWMtest|Selector41~2_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111111110100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|est_sig~7_combout\,
+	datab => \PWMtest|Selector41~2_combout\,
+	datac => \PWMtest|Selector41~1_combout\,
+	datad => \PWMtest|Selector41~0_combout\,
+	combout => \PWMtest|Selector41~3_combout\);
+
+-- Location: FF_X52_Y34_N19
+\PWMtest|est_act.boost2\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector41~3_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|est_act.boost2~q\);
+
+-- Location: LCCOMB_X52_Y34_N30
+\PWMtest|countactual1[10]~97\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[10]~97_combout\ = (!\PWMtest|est_act.boost2~q\ & (!\PWMtest|est_act.boost2softs~q\ & !\PWMtest|est_act.buck2~q\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000011",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|est_act.boost2~q\,
+	datac => \PWMtest|est_act.boost2softs~q\,
+	datad => \PWMtest|est_act.buck2~q\,
+	combout => \PWMtest|countactual1[10]~97_combout\);
+
+-- Location: LCCOMB_X52_Y33_N22
+\PWMtest|Selector39~4\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector39~4_combout\ = ((\PWMtest|est_act.boost2~q\ & (\PWMtest|Selector39~3_combout\)) # (!\PWMtest|est_act.boost2~q\ & ((\PWMtest|Selector39~2_combout\)))) # (!\PWMtest|countactual1\(8))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1011111110001111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Selector39~3_combout\,
+	datab => \PWMtest|est_act.boost2~q\,
+	datac => \PWMtest|countactual1\(8),
+	datad => \PWMtest|Selector39~2_combout\,
+	combout => \PWMtest|Selector39~4_combout\);
+
+-- Location: LCCOMB_X52_Y33_N8
+\PWMtest|Selector39~5\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector39~5_combout\ = (\PWMtest|countactual1\(31)) # ((\PWMtest|Selector39~4_combout\ & \PWMtest|LessThan3~6_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1110110011101100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Selector39~4_combout\,
+	datab => \PWMtest|countactual1\(31),
+	datac => \PWMtest|LessThan3~6_combout\,
+	combout => \PWMtest|Selector39~5_combout\);
+
+-- Location: LCCOMB_X52_Y33_N18
+\PWMtest|countactual1[10]~98\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[10]~98_combout\ = (!\PWMtest|countactual1[10]~97_combout\ & (!\PWMtest|countactual1\(31) & (!\PWMtest|Selector39~5_combout\ & !\PWMtest|LessThan3~9_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1[10]~97_combout\,
+	datab => \PWMtest|countactual1\(31),
+	datac => \PWMtest|Selector39~5_combout\,
+	datad => \PWMtest|LessThan3~9_combout\,
+	combout => \PWMtest|countactual1[10]~98_combout\);
+
+-- Location: FF_X49_Y33_N1
+\PWMtest|countactual1[0]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[0]~33_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(0));
+
+-- Location: LCCOMB_X49_Y33_N2
+\PWMtest|countactual1[1]~35\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[1]~35_combout\ = (\PWMtest|countactual1\(1) & (!\PWMtest|countactual1[0]~34\)) # (!\PWMtest|countactual1\(1) & ((\PWMtest|countactual1[0]~34\) # (GND)))
+-- \PWMtest|countactual1[1]~36\ = CARRY((!\PWMtest|countactual1[0]~34\) # (!\PWMtest|countactual1\(1)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(1),
+	datad => VCC,
+	cin => \PWMtest|countactual1[0]~34\,
+	combout => \PWMtest|countactual1[1]~35_combout\,
+	cout => \PWMtest|countactual1[1]~36\);
+
+-- Location: FF_X49_Y33_N3
+\PWMtest|countactual1[1]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[1]~35_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(1));
+
+-- Location: LCCOMB_X49_Y33_N4
+\PWMtest|countactual1[2]~37\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[2]~37_combout\ = (\PWMtest|countactual1\(2) & (\PWMtest|countactual1[1]~36\ $ (GND))) # (!\PWMtest|countactual1\(2) & (!\PWMtest|countactual1[1]~36\ & VCC))
+-- \PWMtest|countactual1[2]~38\ = CARRY((\PWMtest|countactual1\(2) & !\PWMtest|countactual1[1]~36\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(2),
+	datad => VCC,
+	cin => \PWMtest|countactual1[1]~36\,
+	combout => \PWMtest|countactual1[2]~37_combout\,
+	cout => \PWMtest|countactual1[2]~38\);
+
+-- Location: FF_X49_Y33_N5
+\PWMtest|countactual1[2]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[2]~37_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(2));
+
+-- Location: LCCOMB_X49_Y33_N6
+\PWMtest|countactual1[3]~39\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[3]~39_combout\ = (\PWMtest|countactual1\(3) & (!\PWMtest|countactual1[2]~38\)) # (!\PWMtest|countactual1\(3) & ((\PWMtest|countactual1[2]~38\) # (GND)))
+-- \PWMtest|countactual1[3]~40\ = CARRY((!\PWMtest|countactual1[2]~38\) # (!\PWMtest|countactual1\(3)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(3),
+	datad => VCC,
+	cin => \PWMtest|countactual1[2]~38\,
+	combout => \PWMtest|countactual1[3]~39_combout\,
+	cout => \PWMtest|countactual1[3]~40\);
+
+-- Location: FF_X49_Y33_N7
+\PWMtest|countactual1[3]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[3]~39_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(3));
+
+-- Location: LCCOMB_X49_Y33_N8
+\PWMtest|countactual1[4]~41\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[4]~41_combout\ = (\PWMtest|countactual1\(4) & (\PWMtest|countactual1[3]~40\ $ (GND))) # (!\PWMtest|countactual1\(4) & (!\PWMtest|countactual1[3]~40\ & VCC))
+-- \PWMtest|countactual1[4]~42\ = CARRY((\PWMtest|countactual1\(4) & !\PWMtest|countactual1[3]~40\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(4),
+	datad => VCC,
+	cin => \PWMtest|countactual1[3]~40\,
+	combout => \PWMtest|countactual1[4]~41_combout\,
+	cout => \PWMtest|countactual1[4]~42\);
+
+-- Location: FF_X49_Y33_N9
+\PWMtest|countactual1[4]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[4]~41_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(4));
+
+-- Location: LCCOMB_X49_Y33_N10
+\PWMtest|countactual1[5]~43\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[5]~43_combout\ = (\PWMtest|countactual1\(5) & (!\PWMtest|countactual1[4]~42\)) # (!\PWMtest|countactual1\(5) & ((\PWMtest|countactual1[4]~42\) # (GND)))
+-- \PWMtest|countactual1[5]~44\ = CARRY((!\PWMtest|countactual1[4]~42\) # (!\PWMtest|countactual1\(5)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(5),
+	datad => VCC,
+	cin => \PWMtest|countactual1[4]~42\,
+	combout => \PWMtest|countactual1[5]~43_combout\,
+	cout => \PWMtest|countactual1[5]~44\);
+
+-- Location: FF_X49_Y33_N11
+\PWMtest|countactual1[5]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[5]~43_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(5));
+
+-- Location: LCCOMB_X49_Y33_N12
+\PWMtest|countactual1[6]~45\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[6]~45_combout\ = (\PWMtest|countactual1\(6) & (\PWMtest|countactual1[5]~44\ $ (GND))) # (!\PWMtest|countactual1\(6) & (!\PWMtest|countactual1[5]~44\ & VCC))
+-- \PWMtest|countactual1[6]~46\ = CARRY((\PWMtest|countactual1\(6) & !\PWMtest|countactual1[5]~44\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(6),
+	datad => VCC,
+	cin => \PWMtest|countactual1[5]~44\,
+	combout => \PWMtest|countactual1[6]~45_combout\,
+	cout => \PWMtest|countactual1[6]~46\);
+
+-- Location: FF_X49_Y33_N13
+\PWMtest|countactual1[6]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[6]~45_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(6));
+
+-- Location: LCCOMB_X49_Y33_N14
+\PWMtest|countactual1[7]~47\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[7]~47_combout\ = (\PWMtest|countactual1\(7) & (!\PWMtest|countactual1[6]~46\)) # (!\PWMtest|countactual1\(7) & ((\PWMtest|countactual1[6]~46\) # (GND)))
+-- \PWMtest|countactual1[7]~48\ = CARRY((!\PWMtest|countactual1[6]~46\) # (!\PWMtest|countactual1\(7)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(7),
+	datad => VCC,
+	cin => \PWMtest|countactual1[6]~46\,
+	combout => \PWMtest|countactual1[7]~47_combout\,
+	cout => \PWMtest|countactual1[7]~48\);
+
+-- Location: FF_X49_Y33_N15
+\PWMtest|countactual1[7]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[7]~47_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(7));
+
+-- Location: LCCOMB_X49_Y33_N16
+\PWMtest|countactual1[8]~49\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[8]~49_combout\ = (\PWMtest|countactual1\(8) & (\PWMtest|countactual1[7]~48\ $ (GND))) # (!\PWMtest|countactual1\(8) & (!\PWMtest|countactual1[7]~48\ & VCC))
+-- \PWMtest|countactual1[8]~50\ = CARRY((\PWMtest|countactual1\(8) & !\PWMtest|countactual1[7]~48\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(8),
+	datad => VCC,
+	cin => \PWMtest|countactual1[7]~48\,
+	combout => \PWMtest|countactual1[8]~49_combout\,
+	cout => \PWMtest|countactual1[8]~50\);
+
+-- Location: FF_X49_Y33_N17
+\PWMtest|countactual1[8]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[8]~49_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(8));
+
+-- Location: LCCOMB_X49_Y33_N18
+\PWMtest|countactual1[9]~51\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[9]~51_combout\ = (\PWMtest|countactual1\(9) & (!\PWMtest|countactual1[8]~50\)) # (!\PWMtest|countactual1\(9) & ((\PWMtest|countactual1[8]~50\) # (GND)))
+-- \PWMtest|countactual1[9]~52\ = CARRY((!\PWMtest|countactual1[8]~50\) # (!\PWMtest|countactual1\(9)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(9),
+	datad => VCC,
+	cin => \PWMtest|countactual1[8]~50\,
+	combout => \PWMtest|countactual1[9]~51_combout\,
+	cout => \PWMtest|countactual1[9]~52\);
+
+-- Location: FF_X49_Y33_N19
+\PWMtest|countactual1[9]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[9]~51_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(9));
+
+-- Location: LCCOMB_X49_Y33_N20
+\PWMtest|countactual1[10]~53\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[10]~53_combout\ = (\PWMtest|countactual1\(10) & (\PWMtest|countactual1[9]~52\ $ (GND))) # (!\PWMtest|countactual1\(10) & (!\PWMtest|countactual1[9]~52\ & VCC))
+-- \PWMtest|countactual1[10]~54\ = CARRY((\PWMtest|countactual1\(10) & !\PWMtest|countactual1[9]~52\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(10),
+	datad => VCC,
+	cin => \PWMtest|countactual1[9]~52\,
+	combout => \PWMtest|countactual1[10]~53_combout\,
+	cout => \PWMtest|countactual1[10]~54\);
+
+-- Location: FF_X49_Y33_N21
+\PWMtest|countactual1[10]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[10]~53_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(10));
+
+-- Location: LCCOMB_X49_Y33_N22
+\PWMtest|countactual1[11]~55\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[11]~55_combout\ = (\PWMtest|countactual1\(11) & (!\PWMtest|countactual1[10]~54\)) # (!\PWMtest|countactual1\(11) & ((\PWMtest|countactual1[10]~54\) # (GND)))
+-- \PWMtest|countactual1[11]~56\ = CARRY((!\PWMtest|countactual1[10]~54\) # (!\PWMtest|countactual1\(11)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(11),
+	datad => VCC,
+	cin => \PWMtest|countactual1[10]~54\,
+	combout => \PWMtest|countactual1[11]~55_combout\,
+	cout => \PWMtest|countactual1[11]~56\);
+
+-- Location: FF_X49_Y33_N23
+\PWMtest|countactual1[11]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[11]~55_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(11));
+
+-- Location: LCCOMB_X49_Y33_N24
+\PWMtest|countactual1[12]~57\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[12]~57_combout\ = (\PWMtest|countactual1\(12) & (\PWMtest|countactual1[11]~56\ $ (GND))) # (!\PWMtest|countactual1\(12) & (!\PWMtest|countactual1[11]~56\ & VCC))
+-- \PWMtest|countactual1[12]~58\ = CARRY((\PWMtest|countactual1\(12) & !\PWMtest|countactual1[11]~56\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(12),
+	datad => VCC,
+	cin => \PWMtest|countactual1[11]~56\,
+	combout => \PWMtest|countactual1[12]~57_combout\,
+	cout => \PWMtest|countactual1[12]~58\);
+
+-- Location: FF_X49_Y33_N25
+\PWMtest|countactual1[12]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[12]~57_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(12));
+
+-- Location: LCCOMB_X49_Y33_N26
+\PWMtest|countactual1[13]~59\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[13]~59_combout\ = (\PWMtest|countactual1\(13) & (!\PWMtest|countactual1[12]~58\)) # (!\PWMtest|countactual1\(13) & ((\PWMtest|countactual1[12]~58\) # (GND)))
+-- \PWMtest|countactual1[13]~60\ = CARRY((!\PWMtest|countactual1[12]~58\) # (!\PWMtest|countactual1\(13)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(13),
+	datad => VCC,
+	cin => \PWMtest|countactual1[12]~58\,
+	combout => \PWMtest|countactual1[13]~59_combout\,
+	cout => \PWMtest|countactual1[13]~60\);
+
+-- Location: FF_X49_Y33_N27
+\PWMtest|countactual1[13]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[13]~59_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(13));
+
+-- Location: LCCOMB_X49_Y33_N28
+\PWMtest|countactual1[14]~61\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[14]~61_combout\ = (\PWMtest|countactual1\(14) & (\PWMtest|countactual1[13]~60\ $ (GND))) # (!\PWMtest|countactual1\(14) & (!\PWMtest|countactual1[13]~60\ & VCC))
+-- \PWMtest|countactual1[14]~62\ = CARRY((\PWMtest|countactual1\(14) & !\PWMtest|countactual1[13]~60\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(14),
+	datad => VCC,
+	cin => \PWMtest|countactual1[13]~60\,
+	combout => \PWMtest|countactual1[14]~61_combout\,
+	cout => \PWMtest|countactual1[14]~62\);
+
+-- Location: FF_X49_Y33_N29
+\PWMtest|countactual1[14]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[14]~61_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(14));
+
+-- Location: LCCOMB_X49_Y33_N30
+\PWMtest|countactual1[15]~63\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[15]~63_combout\ = (\PWMtest|countactual1\(15) & (!\PWMtest|countactual1[14]~62\)) # (!\PWMtest|countactual1\(15) & ((\PWMtest|countactual1[14]~62\) # (GND)))
+-- \PWMtest|countactual1[15]~64\ = CARRY((!\PWMtest|countactual1[14]~62\) # (!\PWMtest|countactual1\(15)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(15),
+	datad => VCC,
+	cin => \PWMtest|countactual1[14]~62\,
+	combout => \PWMtest|countactual1[15]~63_combout\,
+	cout => \PWMtest|countactual1[15]~64\);
+
+-- Location: FF_X49_Y33_N31
+\PWMtest|countactual1[15]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[15]~63_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(15));
+
+-- Location: LCCOMB_X49_Y32_N0
+\PWMtest|countactual1[16]~65\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[16]~65_combout\ = (\PWMtest|countactual1\(16) & (\PWMtest|countactual1[15]~64\ $ (GND))) # (!\PWMtest|countactual1\(16) & (!\PWMtest|countactual1[15]~64\ & VCC))
+-- \PWMtest|countactual1[16]~66\ = CARRY((\PWMtest|countactual1\(16) & !\PWMtest|countactual1[15]~64\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(16),
+	datad => VCC,
+	cin => \PWMtest|countactual1[15]~64\,
+	combout => \PWMtest|countactual1[16]~65_combout\,
+	cout => \PWMtest|countactual1[16]~66\);
+
+-- Location: FF_X49_Y32_N1
+\PWMtest|countactual1[16]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[16]~65_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(16));
+
+-- Location: LCCOMB_X49_Y32_N2
+\PWMtest|countactual1[17]~67\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[17]~67_combout\ = (\PWMtest|countactual1\(17) & (!\PWMtest|countactual1[16]~66\)) # (!\PWMtest|countactual1\(17) & ((\PWMtest|countactual1[16]~66\) # (GND)))
+-- \PWMtest|countactual1[17]~68\ = CARRY((!\PWMtest|countactual1[16]~66\) # (!\PWMtest|countactual1\(17)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(17),
+	datad => VCC,
+	cin => \PWMtest|countactual1[16]~66\,
+	combout => \PWMtest|countactual1[17]~67_combout\,
+	cout => \PWMtest|countactual1[17]~68\);
+
+-- Location: FF_X49_Y32_N3
+\PWMtest|countactual1[17]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[17]~67_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(17));
+
+-- Location: LCCOMB_X49_Y32_N4
+\PWMtest|countactual1[18]~69\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[18]~69_combout\ = (\PWMtest|countactual1\(18) & (\PWMtest|countactual1[17]~68\ $ (GND))) # (!\PWMtest|countactual1\(18) & (!\PWMtest|countactual1[17]~68\ & VCC))
+-- \PWMtest|countactual1[18]~70\ = CARRY((\PWMtest|countactual1\(18) & !\PWMtest|countactual1[17]~68\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(18),
+	datad => VCC,
+	cin => \PWMtest|countactual1[17]~68\,
+	combout => \PWMtest|countactual1[18]~69_combout\,
+	cout => \PWMtest|countactual1[18]~70\);
+
+-- Location: FF_X49_Y32_N5
+\PWMtest|countactual1[18]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[18]~69_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(18));
+
+-- Location: LCCOMB_X49_Y32_N6
+\PWMtest|countactual1[19]~71\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[19]~71_combout\ = (\PWMtest|countactual1\(19) & (!\PWMtest|countactual1[18]~70\)) # (!\PWMtest|countactual1\(19) & ((\PWMtest|countactual1[18]~70\) # (GND)))
+-- \PWMtest|countactual1[19]~72\ = CARRY((!\PWMtest|countactual1[18]~70\) # (!\PWMtest|countactual1\(19)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(19),
+	datad => VCC,
+	cin => \PWMtest|countactual1[18]~70\,
+	combout => \PWMtest|countactual1[19]~71_combout\,
+	cout => \PWMtest|countactual1[19]~72\);
+
+-- Location: FF_X49_Y32_N7
+\PWMtest|countactual1[19]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[19]~71_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(19));
+
+-- Location: LCCOMB_X49_Y32_N8
+\PWMtest|countactual1[20]~73\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[20]~73_combout\ = (\PWMtest|countactual1\(20) & (\PWMtest|countactual1[19]~72\ $ (GND))) # (!\PWMtest|countactual1\(20) & (!\PWMtest|countactual1[19]~72\ & VCC))
+-- \PWMtest|countactual1[20]~74\ = CARRY((\PWMtest|countactual1\(20) & !\PWMtest|countactual1[19]~72\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(20),
+	datad => VCC,
+	cin => \PWMtest|countactual1[19]~72\,
+	combout => \PWMtest|countactual1[20]~73_combout\,
+	cout => \PWMtest|countactual1[20]~74\);
+
+-- Location: FF_X49_Y32_N9
+\PWMtest|countactual1[20]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[20]~73_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(20));
+
+-- Location: LCCOMB_X49_Y32_N10
+\PWMtest|countactual1[21]~75\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[21]~75_combout\ = (\PWMtest|countactual1\(21) & (!\PWMtest|countactual1[20]~74\)) # (!\PWMtest|countactual1\(21) & ((\PWMtest|countactual1[20]~74\) # (GND)))
+-- \PWMtest|countactual1[21]~76\ = CARRY((!\PWMtest|countactual1[20]~74\) # (!\PWMtest|countactual1\(21)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(21),
+	datad => VCC,
+	cin => \PWMtest|countactual1[20]~74\,
+	combout => \PWMtest|countactual1[21]~75_combout\,
+	cout => \PWMtest|countactual1[21]~76\);
+
+-- Location: FF_X49_Y32_N11
+\PWMtest|countactual1[21]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[21]~75_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(21));
+
+-- Location: LCCOMB_X49_Y32_N12
+\PWMtest|countactual1[22]~77\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[22]~77_combout\ = (\PWMtest|countactual1\(22) & (\PWMtest|countactual1[21]~76\ $ (GND))) # (!\PWMtest|countactual1\(22) & (!\PWMtest|countactual1[21]~76\ & VCC))
+-- \PWMtest|countactual1[22]~78\ = CARRY((\PWMtest|countactual1\(22) & !\PWMtest|countactual1[21]~76\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(22),
+	datad => VCC,
+	cin => \PWMtest|countactual1[21]~76\,
+	combout => \PWMtest|countactual1[22]~77_combout\,
+	cout => \PWMtest|countactual1[22]~78\);
+
+-- Location: FF_X49_Y32_N13
+\PWMtest|countactual1[22]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[22]~77_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(22));
+
+-- Location: LCCOMB_X49_Y32_N14
+\PWMtest|countactual1[23]~79\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[23]~79_combout\ = (\PWMtest|countactual1\(23) & (!\PWMtest|countactual1[22]~78\)) # (!\PWMtest|countactual1\(23) & ((\PWMtest|countactual1[22]~78\) # (GND)))
+-- \PWMtest|countactual1[23]~80\ = CARRY((!\PWMtest|countactual1[22]~78\) # (!\PWMtest|countactual1\(23)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(23),
+	datad => VCC,
+	cin => \PWMtest|countactual1[22]~78\,
+	combout => \PWMtest|countactual1[23]~79_combout\,
+	cout => \PWMtest|countactual1[23]~80\);
+
+-- Location: FF_X49_Y32_N15
+\PWMtest|countactual1[23]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[23]~79_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(23));
+
+-- Location: LCCOMB_X49_Y32_N16
+\PWMtest|countactual1[24]~81\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[24]~81_combout\ = (\PWMtest|countactual1\(24) & (\PWMtest|countactual1[23]~80\ $ (GND))) # (!\PWMtest|countactual1\(24) & (!\PWMtest|countactual1[23]~80\ & VCC))
+-- \PWMtest|countactual1[24]~82\ = CARRY((\PWMtest|countactual1\(24) & !\PWMtest|countactual1[23]~80\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(24),
+	datad => VCC,
+	cin => \PWMtest|countactual1[23]~80\,
+	combout => \PWMtest|countactual1[24]~81_combout\,
+	cout => \PWMtest|countactual1[24]~82\);
+
+-- Location: FF_X49_Y32_N17
+\PWMtest|countactual1[24]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[24]~81_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(24));
+
+-- Location: LCCOMB_X49_Y32_N18
+\PWMtest|countactual1[25]~83\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[25]~83_combout\ = (\PWMtest|countactual1\(25) & (!\PWMtest|countactual1[24]~82\)) # (!\PWMtest|countactual1\(25) & ((\PWMtest|countactual1[24]~82\) # (GND)))
+-- \PWMtest|countactual1[25]~84\ = CARRY((!\PWMtest|countactual1[24]~82\) # (!\PWMtest|countactual1\(25)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(25),
+	datad => VCC,
+	cin => \PWMtest|countactual1[24]~82\,
+	combout => \PWMtest|countactual1[25]~83_combout\,
+	cout => \PWMtest|countactual1[25]~84\);
+
+-- Location: FF_X49_Y32_N19
+\PWMtest|countactual1[25]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[25]~83_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(25));
+
+-- Location: LCCOMB_X49_Y32_N20
+\PWMtest|countactual1[26]~85\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[26]~85_combout\ = (\PWMtest|countactual1\(26) & (\PWMtest|countactual1[25]~84\ $ (GND))) # (!\PWMtest|countactual1\(26) & (!\PWMtest|countactual1[25]~84\ & VCC))
+-- \PWMtest|countactual1[26]~86\ = CARRY((\PWMtest|countactual1\(26) & !\PWMtest|countactual1[25]~84\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(26),
+	datad => VCC,
+	cin => \PWMtest|countactual1[25]~84\,
+	combout => \PWMtest|countactual1[26]~85_combout\,
+	cout => \PWMtest|countactual1[26]~86\);
+
+-- Location: FF_X49_Y32_N21
+\PWMtest|countactual1[26]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[26]~85_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(26));
+
+-- Location: LCCOMB_X49_Y32_N22
+\PWMtest|countactual1[27]~87\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[27]~87_combout\ = (\PWMtest|countactual1\(27) & (!\PWMtest|countactual1[26]~86\)) # (!\PWMtest|countactual1\(27) & ((\PWMtest|countactual1[26]~86\) # (GND)))
+-- \PWMtest|countactual1[27]~88\ = CARRY((!\PWMtest|countactual1[26]~86\) # (!\PWMtest|countactual1\(27)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(27),
+	datad => VCC,
+	cin => \PWMtest|countactual1[26]~86\,
+	combout => \PWMtest|countactual1[27]~87_combout\,
+	cout => \PWMtest|countactual1[27]~88\);
+
+-- Location: FF_X49_Y32_N23
+\PWMtest|countactual1[27]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[27]~87_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(27));
+
+-- Location: LCCOMB_X49_Y32_N24
+\PWMtest|countactual1[28]~89\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[28]~89_combout\ = (\PWMtest|countactual1\(28) & (\PWMtest|countactual1[27]~88\ $ (GND))) # (!\PWMtest|countactual1\(28) & (!\PWMtest|countactual1[27]~88\ & VCC))
+-- \PWMtest|countactual1[28]~90\ = CARRY((\PWMtest|countactual1\(28) & !\PWMtest|countactual1[27]~88\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(28),
+	datad => VCC,
+	cin => \PWMtest|countactual1[27]~88\,
+	combout => \PWMtest|countactual1[28]~89_combout\,
+	cout => \PWMtest|countactual1[28]~90\);
+
+-- Location: FF_X49_Y32_N25
+\PWMtest|countactual1[28]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[28]~89_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(28));
+
+-- Location: LCCOMB_X49_Y32_N26
+\PWMtest|countactual1[29]~91\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[29]~91_combout\ = (\PWMtest|countactual1\(29) & (!\PWMtest|countactual1[28]~90\)) # (!\PWMtest|countactual1\(29) & ((\PWMtest|countactual1[28]~90\) # (GND)))
+-- \PWMtest|countactual1[29]~92\ = CARRY((!\PWMtest|countactual1[28]~90\) # (!\PWMtest|countactual1\(29)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(29),
+	datad => VCC,
+	cin => \PWMtest|countactual1[28]~90\,
+	combout => \PWMtest|countactual1[29]~91_combout\,
+	cout => \PWMtest|countactual1[29]~92\);
+
+-- Location: FF_X49_Y32_N27
+\PWMtest|countactual1[29]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[29]~91_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(29));
+
+-- Location: LCCOMB_X49_Y32_N28
+\PWMtest|countactual1[30]~93\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[30]~93_combout\ = (\PWMtest|countactual1\(30) & (\PWMtest|countactual1[29]~92\ $ (GND))) # (!\PWMtest|countactual1\(30) & (!\PWMtest|countactual1[29]~92\ & VCC))
+-- \PWMtest|countactual1[30]~94\ = CARRY((\PWMtest|countactual1\(30) & !\PWMtest|countactual1[29]~92\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|countactual1\(30),
+	datad => VCC,
+	cin => \PWMtest|countactual1[29]~92\,
+	combout => \PWMtest|countactual1[30]~93_combout\,
+	cout => \PWMtest|countactual1[30]~94\);
+
+-- Location: FF_X49_Y32_N29
+\PWMtest|countactual1[30]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[30]~93_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(30));
+
+-- Location: LCCOMB_X49_Y32_N30
+\PWMtest|countactual1[31]~95\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[31]~95_combout\ = \PWMtest|countactual1\(31) $ (\PWMtest|countactual1[30]~94\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(31),
+	cin => \PWMtest|countactual1[30]~94\,
+	combout => \PWMtest|countactual1[31]~95_combout\);
+
+-- Location: FF_X49_Y32_N31
+\PWMtest|countactual1[31]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|countactual1[31]~95_combout\,
+	clrn => \reset~input_o\,
+	sclr => \PWMtest|countactual1[10]~98_combout\,
+	ena => \PWMtest|est_act.idle~q\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|countactual1\(31));
+
+-- Location: LCCOMB_X50_Y31_N0
+\PWMtest|LessThan0~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~1_cout\ = CARRY((!\PWMtest|countactual1\(0) & \PWMtest|softstart_duty_act\(0)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001000100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(0),
+	datab => \PWMtest|softstart_duty_act\(0),
+	datad => VCC,
+	cout => \PWMtest|LessThan0~1_cout\);
+
+-- Location: LCCOMB_X50_Y31_N2
+\PWMtest|LessThan0~3\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~3_cout\ = CARRY((\PWMtest|softstart_duty_act\(1) & ((\PWMtest|countactual1\(1)) # (!\PWMtest|LessThan0~1_cout\))) # (!\PWMtest|softstart_duty_act\(1) & (\PWMtest|countactual1\(1) & !\PWMtest|LessThan0~1_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000010001110",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(1),
+	datab => \PWMtest|countactual1\(1),
+	datad => VCC,
+	cin => \PWMtest|LessThan0~1_cout\,
+	cout => \PWMtest|LessThan0~3_cout\);
+
+-- Location: LCCOMB_X50_Y31_N4
+\PWMtest|LessThan0~5\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~5_cout\ = CARRY((\PWMtest|Add1~2_combout\ & ((!\PWMtest|LessThan0~3_cout\) # (!\PWMtest|countactual1\(2)))) # (!\PWMtest|Add1~2_combout\ & (!\PWMtest|countactual1\(2) & !\PWMtest|LessThan0~3_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add1~2_combout\,
+	datab => \PWMtest|countactual1\(2),
+	datad => VCC,
+	cin => \PWMtest|LessThan0~3_cout\,
+	cout => \PWMtest|LessThan0~5_cout\);
+
+-- Location: LCCOMB_X50_Y31_N6
+\PWMtest|LessThan0~7\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~7_cout\ = CARRY((\PWMtest|Add1~4_combout\ & (\PWMtest|countactual1\(3) & !\PWMtest|LessThan0~5_cout\)) # (!\PWMtest|Add1~4_combout\ & ((\PWMtest|countactual1\(3)) # (!\PWMtest|LessThan0~5_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add1~4_combout\,
+	datab => \PWMtest|countactual1\(3),
+	datad => VCC,
+	cin => \PWMtest|LessThan0~5_cout\,
+	cout => \PWMtest|LessThan0~7_cout\);
+
+-- Location: LCCOMB_X50_Y31_N8
+\PWMtest|LessThan0~9\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~9_cout\ = CARRY((\PWMtest|countactual1\(4) & (\PWMtest|Add1~6_combout\ & !\PWMtest|LessThan0~7_cout\)) # (!\PWMtest|countactual1\(4) & ((\PWMtest|Add1~6_combout\) # (!\PWMtest|LessThan0~7_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(4),
+	datab => \PWMtest|Add1~6_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~7_cout\,
+	cout => \PWMtest|LessThan0~9_cout\);
+
+-- Location: LCCOMB_X50_Y31_N10
+\PWMtest|LessThan0~11\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~11_cout\ = CARRY((\PWMtest|countactual1\(5) & ((!\PWMtest|LessThan0~9_cout\) # (!\PWMtest|Add1~8_combout\))) # (!\PWMtest|countactual1\(5) & (!\PWMtest|Add1~8_combout\ & !\PWMtest|LessThan0~9_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(5),
+	datab => \PWMtest|Add1~8_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~9_cout\,
+	cout => \PWMtest|LessThan0~11_cout\);
+
+-- Location: LCCOMB_X50_Y31_N12
+\PWMtest|LessThan0~13\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~13_cout\ = CARRY((\PWMtest|Add1~10_combout\ & ((!\PWMtest|LessThan0~11_cout\) # (!\PWMtest|countactual1\(6)))) # (!\PWMtest|Add1~10_combout\ & (!\PWMtest|countactual1\(6) & !\PWMtest|LessThan0~11_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add1~10_combout\,
+	datab => \PWMtest|countactual1\(6),
+	datad => VCC,
+	cin => \PWMtest|LessThan0~11_cout\,
+	cout => \PWMtest|LessThan0~13_cout\);
+
+-- Location: LCCOMB_X50_Y31_N14
+\PWMtest|LessThan0~15\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~15_cout\ = CARRY((\PWMtest|Add1~12_combout\ & (\PWMtest|countactual1\(7) & !\PWMtest|LessThan0~13_cout\)) # (!\PWMtest|Add1~12_combout\ & ((\PWMtest|countactual1\(7)) # (!\PWMtest|LessThan0~13_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add1~12_combout\,
+	datab => \PWMtest|countactual1\(7),
+	datad => VCC,
+	cin => \PWMtest|LessThan0~13_cout\,
+	cout => \PWMtest|LessThan0~15_cout\);
+
+-- Location: LCCOMB_X50_Y31_N16
+\PWMtest|LessThan0~17\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~17_cout\ = CARRY((\PWMtest|countactual1\(8) & (\PWMtest|Add1~14_combout\ & !\PWMtest|LessThan0~15_cout\)) # (!\PWMtest|countactual1\(8) & ((\PWMtest|Add1~14_combout\) # (!\PWMtest|LessThan0~15_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(8),
+	datab => \PWMtest|Add1~14_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~15_cout\,
+	cout => \PWMtest|LessThan0~17_cout\);
+
+-- Location: LCCOMB_X50_Y31_N18
+\PWMtest|LessThan0~19\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~19_cout\ = CARRY((\PWMtest|Add1~16_combout\ & (\PWMtest|countactual1\(9) & !\PWMtest|LessThan0~17_cout\)) # (!\PWMtest|Add1~16_combout\ & ((\PWMtest|countactual1\(9)) # (!\PWMtest|LessThan0~17_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add1~16_combout\,
+	datab => \PWMtest|countactual1\(9),
+	datad => VCC,
+	cin => \PWMtest|LessThan0~17_cout\,
+	cout => \PWMtest|LessThan0~19_cout\);
+
+-- Location: LCCOMB_X50_Y31_N20
+\PWMtest|LessThan0~21\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~21_cout\ = CARRY((\PWMtest|Add1~18_combout\ & ((!\PWMtest|LessThan0~19_cout\) # (!\PWMtest|countactual1\(10)))) # (!\PWMtest|Add1~18_combout\ & (!\PWMtest|countactual1\(10) & !\PWMtest|LessThan0~19_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add1~18_combout\,
+	datab => \PWMtest|countactual1\(10),
+	datad => VCC,
+	cin => \PWMtest|LessThan0~19_cout\,
+	cout => \PWMtest|LessThan0~21_cout\);
+
+-- Location: LCCOMB_X50_Y31_N22
+\PWMtest|LessThan0~23\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~23_cout\ = CARRY((\PWMtest|countactual1\(11) & ((!\PWMtest|LessThan0~21_cout\) # (!\PWMtest|Add1~20_combout\))) # (!\PWMtest|countactual1\(11) & (!\PWMtest|Add1~20_combout\ & !\PWMtest|LessThan0~21_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(11),
+	datab => \PWMtest|Add1~20_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~21_cout\,
+	cout => \PWMtest|LessThan0~23_cout\);
+
+-- Location: LCCOMB_X50_Y31_N24
+\PWMtest|LessThan0~25\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~25_cout\ = CARRY((\PWMtest|Add1~22_combout\ & ((!\PWMtest|LessThan0~23_cout\) # (!\PWMtest|countactual1\(12)))) # (!\PWMtest|Add1~22_combout\ & (!\PWMtest|countactual1\(12) & !\PWMtest|LessThan0~23_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add1~22_combout\,
+	datab => \PWMtest|countactual1\(12),
+	datad => VCC,
+	cin => \PWMtest|LessThan0~23_cout\,
+	cout => \PWMtest|LessThan0~25_cout\);
+
+-- Location: LCCOMB_X50_Y31_N26
+\PWMtest|LessThan0~27\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~27_cout\ = CARRY((\PWMtest|countactual1\(13) & ((!\PWMtest|LessThan0~25_cout\) # (!\PWMtest|Add1~24_combout\))) # (!\PWMtest|countactual1\(13) & (!\PWMtest|Add1~24_combout\ & !\PWMtest|LessThan0~25_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(13),
+	datab => \PWMtest|Add1~24_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~25_cout\,
+	cout => \PWMtest|LessThan0~27_cout\);
+
+-- Location: LCCOMB_X50_Y31_N28
+\PWMtest|LessThan0~29\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~29_cout\ = CARRY((\PWMtest|countactual1\(14) & (\PWMtest|Add1~26_combout\ & !\PWMtest|LessThan0~27_cout\)) # (!\PWMtest|countactual1\(14) & ((\PWMtest|Add1~26_combout\) # (!\PWMtest|LessThan0~27_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(14),
+	datab => \PWMtest|Add1~26_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~27_cout\,
+	cout => \PWMtest|LessThan0~29_cout\);
+
+-- Location: LCCOMB_X50_Y31_N30
+\PWMtest|LessThan0~31\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~31_cout\ = CARRY((\PWMtest|Add1~28_combout\ & (\PWMtest|countactual1\(15) & !\PWMtest|LessThan0~29_cout\)) # (!\PWMtest|Add1~28_combout\ & ((\PWMtest|countactual1\(15)) # (!\PWMtest|LessThan0~29_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add1~28_combout\,
+	datab => \PWMtest|countactual1\(15),
+	datad => VCC,
+	cin => \PWMtest|LessThan0~29_cout\,
+	cout => \PWMtest|LessThan0~31_cout\);
+
+-- Location: LCCOMB_X50_Y30_N0
+\PWMtest|LessThan0~33\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~33_cout\ = CARRY((\PWMtest|countactual1\(16) & (\PWMtest|Add1~30_combout\ & !\PWMtest|LessThan0~31_cout\)) # (!\PWMtest|countactual1\(16) & ((\PWMtest|Add1~30_combout\) # (!\PWMtest|LessThan0~31_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(16),
+	datab => \PWMtest|Add1~30_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~31_cout\,
+	cout => \PWMtest|LessThan0~33_cout\);
+
+-- Location: LCCOMB_X50_Y30_N2
+\PWMtest|LessThan0~35\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~35_cout\ = CARRY((\PWMtest|Add1~32_combout\ & (\PWMtest|countactual1\(17) & !\PWMtest|LessThan0~33_cout\)) # (!\PWMtest|Add1~32_combout\ & ((\PWMtest|countactual1\(17)) # (!\PWMtest|LessThan0~33_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add1~32_combout\,
+	datab => \PWMtest|countactual1\(17),
+	datad => VCC,
+	cin => \PWMtest|LessThan0~33_cout\,
+	cout => \PWMtest|LessThan0~35_cout\);
+
+-- Location: LCCOMB_X50_Y30_N4
+\PWMtest|LessThan0~37\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~37_cout\ = CARRY((\PWMtest|Add1~34_combout\ & ((!\PWMtest|LessThan0~35_cout\) # (!\PWMtest|countactual1\(18)))) # (!\PWMtest|Add1~34_combout\ & (!\PWMtest|countactual1\(18) & !\PWMtest|LessThan0~35_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add1~34_combout\,
+	datab => \PWMtest|countactual1\(18),
+	datad => VCC,
+	cin => \PWMtest|LessThan0~35_cout\,
+	cout => \PWMtest|LessThan0~37_cout\);
+
+-- Location: LCCOMB_X50_Y30_N6
+\PWMtest|LessThan0~39\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~39_cout\ = CARRY((\PWMtest|countactual1\(19) & ((!\PWMtest|LessThan0~37_cout\) # (!\PWMtest|Add1~36_combout\))) # (!\PWMtest|countactual1\(19) & (!\PWMtest|Add1~36_combout\ & !\PWMtest|LessThan0~37_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(19),
+	datab => \PWMtest|Add1~36_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~37_cout\,
+	cout => \PWMtest|LessThan0~39_cout\);
+
+-- Location: LCCOMB_X50_Y30_N8
+\PWMtest|LessThan0~41\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~41_cout\ = CARRY((\PWMtest|Add1~38_combout\ & ((!\PWMtest|LessThan0~39_cout\) # (!\PWMtest|countactual1\(20)))) # (!\PWMtest|Add1~38_combout\ & (!\PWMtest|countactual1\(20) & !\PWMtest|LessThan0~39_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add1~38_combout\,
+	datab => \PWMtest|countactual1\(20),
+	datad => VCC,
+	cin => \PWMtest|LessThan0~39_cout\,
+	cout => \PWMtest|LessThan0~41_cout\);
+
+-- Location: LCCOMB_X50_Y30_N10
+\PWMtest|LessThan0~43\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~43_cout\ = CARRY((\PWMtest|countactual1\(21) & ((!\PWMtest|LessThan0~41_cout\) # (!\PWMtest|Add1~40_combout\))) # (!\PWMtest|countactual1\(21) & (!\PWMtest|Add1~40_combout\ & !\PWMtest|LessThan0~41_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(21),
+	datab => \PWMtest|Add1~40_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~41_cout\,
+	cout => \PWMtest|LessThan0~43_cout\);
+
+-- Location: LCCOMB_X50_Y30_N12
+\PWMtest|LessThan0~45\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~45_cout\ = CARRY((\PWMtest|countactual1\(22) & (\PWMtest|Add1~42_combout\ & !\PWMtest|LessThan0~43_cout\)) # (!\PWMtest|countactual1\(22) & ((\PWMtest|Add1~42_combout\) # (!\PWMtest|LessThan0~43_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(22),
+	datab => \PWMtest|Add1~42_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~43_cout\,
+	cout => \PWMtest|LessThan0~45_cout\);
+
+-- Location: LCCOMB_X50_Y30_N14
+\PWMtest|LessThan0~47\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~47_cout\ = CARRY((\PWMtest|Add1~44_combout\ & (\PWMtest|countactual1\(23) & !\PWMtest|LessThan0~45_cout\)) # (!\PWMtest|Add1~44_combout\ & ((\PWMtest|countactual1\(23)) # (!\PWMtest|LessThan0~45_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add1~44_combout\,
+	datab => \PWMtest|countactual1\(23),
+	datad => VCC,
+	cin => \PWMtest|LessThan0~45_cout\,
+	cout => \PWMtest|LessThan0~47_cout\);
+
+-- Location: LCCOMB_X50_Y30_N16
+\PWMtest|LessThan0~49\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~49_cout\ = CARRY((\PWMtest|countactual1\(24) & (\PWMtest|Add1~46_combout\ & !\PWMtest|LessThan0~47_cout\)) # (!\PWMtest|countactual1\(24) & ((\PWMtest|Add1~46_combout\) # (!\PWMtest|LessThan0~47_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(24),
+	datab => \PWMtest|Add1~46_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~47_cout\,
+	cout => \PWMtest|LessThan0~49_cout\);
+
+-- Location: LCCOMB_X50_Y30_N18
+\PWMtest|LessThan0~51\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~51_cout\ = CARRY((\PWMtest|countactual1\(25) & ((!\PWMtest|LessThan0~49_cout\) # (!\PWMtest|Add1~48_combout\))) # (!\PWMtest|countactual1\(25) & (!\PWMtest|Add1~48_combout\ & !\PWMtest|LessThan0~49_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(25),
+	datab => \PWMtest|Add1~48_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~49_cout\,
+	cout => \PWMtest|LessThan0~51_cout\);
+
+-- Location: LCCOMB_X50_Y30_N20
+\PWMtest|LessThan0~53\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~53_cout\ = CARRY((\PWMtest|Add1~50_combout\ & ((!\PWMtest|LessThan0~51_cout\) # (!\PWMtest|countactual1\(26)))) # (!\PWMtest|Add1~50_combout\ & (!\PWMtest|countactual1\(26) & !\PWMtest|LessThan0~51_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add1~50_combout\,
+	datab => \PWMtest|countactual1\(26),
+	datad => VCC,
+	cin => \PWMtest|LessThan0~51_cout\,
+	cout => \PWMtest|LessThan0~53_cout\);
+
+-- Location: LCCOMB_X50_Y30_N22
+\PWMtest|LessThan0~55\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~55_cout\ = CARRY((\PWMtest|countactual1\(27) & ((!\PWMtest|LessThan0~53_cout\) # (!\PWMtest|Add1~52_combout\))) # (!\PWMtest|countactual1\(27) & (!\PWMtest|Add1~52_combout\ & !\PWMtest|LessThan0~53_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(27),
+	datab => \PWMtest|Add1~52_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~53_cout\,
+	cout => \PWMtest|LessThan0~55_cout\);
+
+-- Location: LCCOMB_X50_Y30_N24
+\PWMtest|LessThan0~57\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~57_cout\ = CARRY((\PWMtest|countactual1\(28) & (\PWMtest|Add1~54_combout\ & !\PWMtest|LessThan0~55_cout\)) # (!\PWMtest|countactual1\(28) & ((\PWMtest|Add1~54_combout\) # (!\PWMtest|LessThan0~55_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(28),
+	datab => \PWMtest|Add1~54_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~55_cout\,
+	cout => \PWMtest|LessThan0~57_cout\);
+
+-- Location: LCCOMB_X50_Y30_N26
+\PWMtest|LessThan0~59\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~59_cout\ = CARRY((\PWMtest|countactual1\(29) & ((!\PWMtest|LessThan0~57_cout\) # (!\PWMtest|Add1~56_combout\))) # (!\PWMtest|countactual1\(29) & (!\PWMtest|Add1~56_combout\ & !\PWMtest|LessThan0~57_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(29),
+	datab => \PWMtest|Add1~56_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~57_cout\,
+	cout => \PWMtest|LessThan0~59_cout\);
+
+-- Location: LCCOMB_X50_Y30_N28
+\PWMtest|LessThan0~61\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~61_cout\ = CARRY((\PWMtest|countactual1\(30) & (\PWMtest|Add1~58_combout\ & !\PWMtest|LessThan0~59_cout\)) # (!\PWMtest|countactual1\(30) & ((\PWMtest|Add1~58_combout\) # (!\PWMtest|LessThan0~59_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(30),
+	datab => \PWMtest|Add1~58_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan0~59_cout\,
+	cout => \PWMtest|LessThan0~61_cout\);
+
+-- Location: LCCOMB_X50_Y30_N30
+\PWMtest|LessThan0~62\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan0~62_combout\ = (\PWMtest|Add1~60_combout\ & (\PWMtest|LessThan0~61_cout\ & \PWMtest|countactual1\(31))) # (!\PWMtest|Add1~60_combout\ & ((\PWMtest|LessThan0~61_cout\) # (\PWMtest|countactual1\(31))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111010101010000",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add1~60_combout\,
+	datad => \PWMtest|countactual1\(31),
+	cin => \PWMtest|LessThan0~61_cout\,
+	combout => \PWMtest|LessThan0~62_combout\);
+
+-- Location: LCCOMB_X52_Y34_N12
+\PWMtest|Selector38~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector38~0_combout\ = (!\PWMtest|est_sig~7_combout\ & ((\PWMtest|softstart_duty_act\(31)) # ((\PWMtest|LessThan4~6_combout\ & \PWMtest|LessThan5~2_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|est_sig~7_combout\,
+	datab => \PWMtest|LessThan4~6_combout\,
+	datac => \PWMtest|LessThan5~2_combout\,
+	datad => \PWMtest|softstart_duty_act\(31),
+	combout => \PWMtest|Selector38~0_combout\);
+
+-- Location: LCCOMB_X52_Y34_N14
+\PWMtest|Selector38~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector38~1_combout\ = (\PWMtest|Selector38~0_combout\ & ((\PWMtest|est_act.boost2softs~q\) # ((!\PWMtest|est_act.idle~q\ & \sel~input_o\)))) # (!\PWMtest|Selector38~0_combout\ & (((!\PWMtest|est_act.idle~q\ & \sel~input_o\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000111110001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Selector38~0_combout\,
+	datab => \PWMtest|est_act.boost2softs~q\,
+	datac => \PWMtest|est_act.idle~q\,
+	datad => \sel~input_o\,
+	combout => \PWMtest|Selector38~1_combout\);
+
+-- Location: LCCOMB_X56_Y34_N8
+\PWMtest|Selector38~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector38~2_combout\ = (\PWMtest|Selector38~1_combout\) # ((\PWMtest|est_act.boost1softs~q\ & ((\PWMtest|LessThan1~62_combout\) # (\PWMtest|LessThan0~62_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111111100000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|LessThan1~62_combout\,
+	datab => \PWMtest|LessThan0~62_combout\,
+	datac => \PWMtest|est_act.boost1softs~q\,
+	datad => \PWMtest|Selector38~1_combout\,
+	combout => \PWMtest|Selector38~2_combout\);
+
+-- Location: FF_X56_Y34_N9
+\PWMtest|est_act.boost1softs\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector38~2_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|est_act.boost1softs~q\);
+
+-- Location: LCCOMB_X52_Y34_N10
+\PWMtest|Selector36~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector36~0_combout\ = (\PWMtest|est_sig~7_combout\ & (!\sel~input_o\ & (!\PWMtest|est_act.idle~q\))) # (!\PWMtest|est_sig~7_combout\ & ((\PWMtest|est_act.buck2~q\) # ((!\sel~input_o\ & !\PWMtest|est_act.idle~q\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101011100000011",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|est_sig~7_combout\,
+	datab => \sel~input_o\,
+	datac => \PWMtest|est_act.idle~q\,
+	datad => \PWMtest|est_act.buck2~q\,
+	combout => \PWMtest|Selector36~0_combout\);
+
+-- Location: LCCOMB_X56_Y34_N6
+\PWMtest|Selector36~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector36~1_combout\ = (\PWMtest|Selector36~0_combout\) # ((\PWMtest|est_act.buck1~q\ & ((\PWMtest|LessThan1~62_combout\) # (\PWMtest|LessThan0~62_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111111100000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|LessThan1~62_combout\,
+	datab => \PWMtest|LessThan0~62_combout\,
+	datac => \PWMtest|est_act.buck1~q\,
+	datad => \PWMtest|Selector36~0_combout\,
+	combout => \PWMtest|Selector36~1_combout\);
+
+-- Location: FF_X56_Y34_N7
+\PWMtest|est_act.buck1\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector36~1_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|est_act.buck1~q\);
+
+-- Location: LCCOMB_X56_Y34_N28
+\PWMtest|Selector37~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector37~1_combout\ = (\PWMtest|est_act.boost1softs~q\ & (\PWMtest|LessThan0~62_combout\)) # (!\PWMtest|est_act.boost1softs~q\ & (!\PWMtest|LessThan0~62_combout\ & \PWMtest|est_act.buck1~q\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001111000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|est_act.boost1softs~q\,
+	datac => \PWMtest|LessThan0~62_combout\,
+	datad => \PWMtest|est_act.buck1~q\,
+	combout => \PWMtest|Selector37~1_combout\);
+
+-- Location: LCCOMB_X52_Y33_N28
+\PWMtest|Selector39~6\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector39~6_combout\ = (\PWMtest|countactual1[10]~32_combout\ & (!\PWMtest|LessThan8~0_combout\ & ((\PWMtest|est_act.boost2~q\)))) # (!\PWMtest|countactual1[10]~32_combout\ & (((!\PWMtest|LessThan8~0_combout\ & \PWMtest|est_act.boost2~q\)) # 
+-- (!\PWMtest|Selector39~5_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011011100000101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1[10]~32_combout\,
+	datab => \PWMtest|LessThan8~0_combout\,
+	datac => \PWMtest|Selector39~5_combout\,
+	datad => \PWMtest|est_act.boost2~q\,
+	combout => \PWMtest|Selector39~6_combout\);
+
+-- Location: LCCOMB_X56_Y34_N14
+\PWMtest|Selector39~7\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector39~7_combout\ = (!\PWMtest|countactual1\(31) & (\PWMtest|Selector39~6_combout\ & ((\PWMtest|LessThan3~8_combout\) # (!\PWMtest|LessThan3~6_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0010001100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|LessThan3~8_combout\,
+	datab => \PWMtest|countactual1\(31),
+	datac => \PWMtest|LessThan3~6_combout\,
+	datad => \PWMtest|Selector39~6_combout\,
+	combout => \PWMtest|Selector39~7_combout\);
+
+-- Location: LCCOMB_X56_Y34_N24
+\PWMtest|Selector39~8\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector39~8_combout\ = (\PWMtest|est_act.boost1~q\ & (!\PWMtest|LessThan7~62_combout\ & ((!\PWMtest|LessThan6~62_combout\)))) # (!\PWMtest|est_act.boost1~q\ & (((\PWMtest|Selector39~7_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000010111001100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|LessThan7~62_combout\,
+	datab => \PWMtest|Selector39~7_combout\,
+	datac => \PWMtest|LessThan6~62_combout\,
+	datad => \PWMtest|est_act.boost1~q\,
+	combout => \PWMtest|Selector39~8_combout\);
+
+-- Location: LCCOMB_X56_Y34_N2
+\PWMtest|Selector37~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector37~0_combout\ = (\PWMtest|est_act.idle~q\ & (!\PWMtest|Selector39~8_combout\ & \PWMtest|est_act.buck2~q\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0010000000100000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|est_act.idle~q\,
+	datab => \PWMtest|Selector39~8_combout\,
+	datac => \PWMtest|est_act.buck2~q\,
+	combout => \PWMtest|Selector37~0_combout\);
+
+-- Location: LCCOMB_X56_Y34_N26
+\PWMtest|Selector37~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector37~2_combout\ = (\PWMtest|LessThan1~62_combout\ & (((\PWMtest|Selector37~0_combout\)))) # (!\PWMtest|LessThan1~62_combout\ & ((\PWMtest|Selector37~1_combout\ & ((\PWMtest|Selector37~0_combout\) # (!\PWMtest|est_act.boost1softs~q\))) # 
+-- (!\PWMtest|Selector37~1_combout\ & (!\PWMtest|est_act.boost1softs~q\ & \PWMtest|Selector37~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1110111100000100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|LessThan1~62_combout\,
+	datab => \PWMtest|Selector37~1_combout\,
+	datac => \PWMtest|est_act.boost1softs~q\,
+	datad => \PWMtest|Selector37~0_combout\,
+	combout => \PWMtest|Selector37~2_combout\);
+
+-- Location: FF_X56_Y34_N27
+\PWMtest|est_act.buck2\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector37~2_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|est_act.buck2~q\);
+
+-- Location: LCCOMB_X52_Y34_N6
+\PWMtest|softstart_duty_act[1]~8\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|softstart_duty_act[1]~8_combout\ = (\PWMtest|softstart_duty_act\(31)) # (((\PWMtest|LessThan4~6_combout\ & \PWMtest|LessThan4~23_combout\)) # (!\PWMtest|est_act.buck2~q\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1110101011111111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(31),
+	datab => \PWMtest|LessThan4~6_combout\,
+	datac => \PWMtest|LessThan4~23_combout\,
+	datad => \PWMtest|est_act.buck2~q\,
+	combout => \PWMtest|softstart_duty_act[1]~8_combout\);
+
+-- Location: LCCOMB_X54_Y34_N4
+\PWMtest|Add5~4\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~4_combout\ = (\PWMtest|softstart_duty_act\(2) & (!\PWMtest|Add5~3\ & VCC)) # (!\PWMtest|softstart_duty_act\(2) & (\PWMtest|Add5~3\ $ (GND)))
+-- \PWMtest|Add5~5\ = CARRY((!\PWMtest|softstart_duty_act\(2) & !\PWMtest|Add5~3\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(2),
+	datad => VCC,
+	cin => \PWMtest|Add5~3\,
+	combout => \PWMtest|Add5~4_combout\,
+	cout => \PWMtest|Add5~5\);
+
+-- Location: LCCOMB_X55_Y35_N14
+\PWMtest|Selector32~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector32~0_combout\ = (\PWMtest|Add5~4_combout\) # (!\PWMtest|est_act.idle~q\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100111111001111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|Add5~4_combout\,
+	datac => \PWMtest|est_act.idle~q\,
+	combout => \PWMtest|Selector32~0_combout\);
+
+-- Location: LCCOMB_X57_Y40_N12
+\incdecdutytest|duty[2]~15\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[2]~15_combout\ = \incdecdutytest|duty[7]~1_combout\ $ (((\incdecdutytest|Equal0~0_combout\ & (\incdecdutytest|Add0~19_combout\)) # (!\incdecdutytest|Equal0~0_combout\ & ((\incdecdutytest|Add1~32_combout\)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0110001101101100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Add0~19_combout\,
+	datab => \incdecdutytest|duty[7]~1_combout\,
+	datac => \incdecdutytest|Equal0~0_combout\,
+	datad => \incdecdutytest|Add1~32_combout\,
+	combout => \incdecdutytest|duty[2]~15_combout\);
+
+-- Location: FF_X57_Y40_N13
+\incdecdutytest|duty[2]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty[2]~15_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty[2]~_emulated_q\);
+
+-- Location: LCCOMB_X57_Y40_N30
+\incdecdutytest|duty[2]~14\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[2]~14_combout\ = (\reset~input_o\ & (\incdecdutytest|duty[2]~_emulated_q\ $ ((\incdecdutytest|duty[7]~1_combout\)))) # (!\reset~input_o\ & (((!\sel~input_o\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0110000001101111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty[2]~_emulated_q\,
+	datab => \incdecdutytest|duty[7]~1_combout\,
+	datac => \reset~input_o\,
+	datad => \sel~input_o\,
+	combout => \incdecdutytest|duty[2]~14_combout\);
+
+-- Location: LCCOMB_X55_Y35_N18
+\PWMtest|Selector32~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector32~1_combout\ = (!\PWMtest|Selector41~2_combout\ & ((\PWMtest|softstart_duty_act[1]~8_combout\ & (!\PWMtest|Selector32~0_combout\)) # (!\PWMtest|softstart_duty_act[1]~8_combout\ & ((!\incdecdutytest|duty[2]~14_combout\)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000001000000111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act[1]~8_combout\,
+	datab => \PWMtest|Selector32~0_combout\,
+	datac => \PWMtest|Selector41~2_combout\,
+	datad => \incdecdutytest|duty[2]~14_combout\,
+	combout => \PWMtest|Selector32~1_combout\);
+
+-- Location: FF_X55_Y35_N19
+\PWMtest|softstart_duty_act[2]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector32~1_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(2));
+
+-- Location: LCCOMB_X55_Y34_N4
+\PWMtest|LessThan5~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan5~0_combout\ = (\PWMtest|softstart_duty_act\(3)) # ((\PWMtest|softstart_duty_act\(2) & (\PWMtest|softstart_duty_act\(1) & \PWMtest|softstart_duty_act\(0))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1110110011001100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(2),
+	datab => \PWMtest|softstart_duty_act\(3),
+	datac => \PWMtest|softstart_duty_act\(1),
+	datad => \PWMtest|softstart_duty_act\(0),
+	combout => \PWMtest|LessThan5~0_combout\);
+
+-- Location: LCCOMB_X55_Y34_N6
+\PWMtest|LessThan5~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan5~2_combout\ = ((\PWMtest|LessThan5~1_combout\ & \PWMtest|LessThan5~0_combout\)) # (!\PWMtest|softstart_duty_act\(8))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100000011111111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|LessThan5~1_combout\,
+	datac => \PWMtest|LessThan5~0_combout\,
+	datad => \PWMtest|softstart_duty_act\(8),
+	combout => \PWMtest|LessThan5~2_combout\);
+
+-- Location: LCCOMB_X52_Y34_N4
+\PWMtest|Selector41~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector41~2_combout\ = (!\PWMtest|softstart_duty_act\(31) & (\PWMtest|est_act.boost2softs~q\ & ((!\PWMtest|LessThan4~6_combout\) # (!\PWMtest|LessThan5~2_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0001000001010000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(31),
+	datab => \PWMtest|LessThan5~2_combout\,
+	datac => \PWMtest|est_act.boost2softs~q\,
+	datad => \PWMtest|LessThan4~6_combout\,
+	combout => \PWMtest|Selector41~2_combout\);
+
+-- Location: LCCOMB_X58_Y41_N12
+\incdecdutytest|duty[3]~13\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[3]~13_combout\ = \incdecdutytest|duty[7]~1_combout\ $ (((\incdecdutytest|Add1~31_combout\) # ((\incdecdutytest|Add1~30_combout\ & !\incdecdutytest|Equal0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000110110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Add1~30_combout\,
+	datab => \incdecdutytest|duty[7]~1_combout\,
+	datac => \incdecdutytest|Add1~31_combout\,
+	datad => \incdecdutytest|Equal0~0_combout\,
+	combout => \incdecdutytest|duty[3]~13_combout\);
+
+-- Location: FF_X58_Y41_N13
+\incdecdutytest|duty[3]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty[3]~13_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty[3]~_emulated_q\);
+
+-- Location: LCCOMB_X58_Y41_N14
+\incdecdutytest|duty[3]~12\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[3]~12_combout\ = (\reset~input_o\ & (\incdecdutytest|duty[7]~1_combout\ $ (((\incdecdutytest|duty[3]~_emulated_q\))))) # (!\reset~input_o\ & (((!\sel~input_o\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0010011110001101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \reset~input_o\,
+	datab => \incdecdutytest|duty[7]~1_combout\,
+	datac => \sel~input_o\,
+	datad => \incdecdutytest|duty[3]~_emulated_q\,
+	combout => \incdecdutytest|duty[3]~12_combout\);
+
+-- Location: LCCOMB_X54_Y34_N6
+\PWMtest|Add5~6\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~6_combout\ = (\PWMtest|softstart_duty_act\(3) & ((\PWMtest|Add5~5\) # (GND))) # (!\PWMtest|softstart_duty_act\(3) & (!\PWMtest|Add5~5\))
+-- \PWMtest|Add5~7\ = CARRY((\PWMtest|softstart_duty_act\(3)) # (!\PWMtest|Add5~5\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001111001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(3),
+	datad => VCC,
+	cin => \PWMtest|Add5~5\,
+	combout => \PWMtest|Add5~6_combout\,
+	cout => \PWMtest|Add5~7\);
+
+-- Location: LCCOMB_X55_Y35_N12
+\PWMtest|Selector31~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector31~0_combout\ = (\PWMtest|Add5~6_combout\) # (!\PWMtest|est_act.idle~q\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100111111001111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|Add5~6_combout\,
+	datac => \PWMtest|est_act.idle~q\,
+	combout => \PWMtest|Selector31~0_combout\);
+
+-- Location: LCCOMB_X55_Y35_N24
+\PWMtest|Selector31~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector31~1_combout\ = (!\PWMtest|Selector41~2_combout\ & ((\PWMtest|softstart_duty_act[1]~8_combout\ & ((!\PWMtest|Selector31~0_combout\))) # (!\PWMtest|softstart_duty_act[1]~8_combout\ & (!\incdecdutytest|duty[3]~12_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000101010001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Selector41~2_combout\,
+	datab => \incdecdutytest|duty[3]~12_combout\,
+	datac => \PWMtest|softstart_duty_act[1]~8_combout\,
+	datad => \PWMtest|Selector31~0_combout\,
+	combout => \PWMtest|Selector31~1_combout\);
+
+-- Location: FF_X55_Y35_N25
+\PWMtest|softstart_duty_act[3]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector31~1_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(3));
+
+-- Location: LCCOMB_X54_Y34_N8
+\PWMtest|Add5~8\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~8_combout\ = (\PWMtest|softstart_duty_act\(4) & (\PWMtest|Add5~7\ $ (GND))) # (!\PWMtest|softstart_duty_act\(4) & (!\PWMtest|Add5~7\ & VCC))
+-- \PWMtest|Add5~9\ = CARRY((\PWMtest|softstart_duty_act\(4) & !\PWMtest|Add5~7\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(4),
+	datad => VCC,
+	cin => \PWMtest|Add5~7\,
+	combout => \PWMtest|Add5~8_combout\,
+	cout => \PWMtest|Add5~9\);
+
+-- Location: LCCOMB_X55_Y35_N26
+\PWMtest|Selector26~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector26~0_combout\ = (\PWMtest|softstart_duty_act[1]~8_combout\ & (\PWMtest|est_act.idle~q\ & !\PWMtest|Selector41~2_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000100000001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act[1]~8_combout\,
+	datab => \PWMtest|est_act.idle~q\,
+	datac => \PWMtest|Selector41~2_combout\,
+	combout => \PWMtest|Selector26~0_combout\);
+
+-- Location: LCCOMB_X56_Y38_N12
+\incdecdutytest|duty[4]~11\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[4]~11_combout\ = \incdecdutytest|duty[7]~1_combout\ $ (((\incdecdutytest|Equal0~0_combout\ & ((\incdecdutytest|Add0~18_combout\))) # (!\incdecdutytest|Equal0~0_combout\ & (\incdecdutytest|Add1~29_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101011010100110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty[7]~1_combout\,
+	datab => \incdecdutytest|Add1~29_combout\,
+	datac => \incdecdutytest|Equal0~0_combout\,
+	datad => \incdecdutytest|Add0~18_combout\,
+	combout => \incdecdutytest|duty[4]~11_combout\);
+
+-- Location: FF_X56_Y38_N13
+\incdecdutytest|duty[4]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty[4]~11_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty[4]~_emulated_q\);
+
+-- Location: LCCOMB_X56_Y38_N22
+\incdecdutytest|duty[4]~10\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[4]~10_combout\ = (\reset~input_o\ & ((\incdecdutytest|duty[4]~_emulated_q\ $ (\incdecdutytest|duty[7]~1_combout\)))) # (!\reset~input_o\ & (!\sel~input_o\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011010111000101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \sel~input_o\,
+	datab => \incdecdutytest|duty[4]~_emulated_q\,
+	datac => \reset~input_o\,
+	datad => \incdecdutytest|duty[7]~1_combout\,
+	combout => \incdecdutytest|duty[4]~10_combout\);
+
+-- Location: LCCOMB_X52_Y34_N8
+\PWMtest|Selector26~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector26~1_combout\ = (!\PWMtest|softstart_duty_act[1]~8_combout\ & (!\PWMtest|Selector41~2_combout\ & \PWMtest|est_act.idle~q\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0001000000010000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act[1]~8_combout\,
+	datab => \PWMtest|Selector41~2_combout\,
+	datac => \PWMtest|est_act.idle~q\,
+	combout => \PWMtest|Selector26~1_combout\);
+
+-- Location: LCCOMB_X55_Y34_N2
+\PWMtest|Selector30~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector30~0_combout\ = (\PWMtest|Add5~8_combout\ & ((\PWMtest|Selector26~0_combout\) # ((\incdecdutytest|duty[4]~10_combout\ & \PWMtest|Selector26~1_combout\)))) # (!\PWMtest|Add5~8_combout\ & (((\incdecdutytest|duty[4]~10_combout\ & 
+-- \PWMtest|Selector26~1_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add5~8_combout\,
+	datab => \PWMtest|Selector26~0_combout\,
+	datac => \incdecdutytest|duty[4]~10_combout\,
+	datad => \PWMtest|Selector26~1_combout\,
+	combout => \PWMtest|Selector30~0_combout\);
+
+-- Location: FF_X55_Y34_N3
+\PWMtest|softstart_duty_act[4]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector30~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(4));
+
+-- Location: LCCOMB_X54_Y34_N10
+\PWMtest|Add5~10\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~10_combout\ = (\PWMtest|softstart_duty_act\(5) & (!\PWMtest|Add5~9\)) # (!\PWMtest|softstart_duty_act\(5) & ((\PWMtest|Add5~9\) # (GND)))
+-- \PWMtest|Add5~11\ = CARRY((!\PWMtest|Add5~9\) # (!\PWMtest|softstart_duty_act\(5)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(5),
+	datad => VCC,
+	cin => \PWMtest|Add5~9\,
+	combout => \PWMtest|Add5~10_combout\,
+	cout => \PWMtest|Add5~11\);
+
+-- Location: LCCOMB_X57_Y40_N24
+\incdecdutytest|duty[5]~9\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[5]~9_combout\ = \incdecdutytest|duty[7]~1_combout\ $ (((\incdecdutytest|Add1~28_combout\) # ((\incdecdutytest|Add1~27_combout\ & !\incdecdutytest|Equal0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010110100110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty[7]~1_combout\,
+	datab => \incdecdutytest|Add1~27_combout\,
+	datac => \incdecdutytest|Equal0~0_combout\,
+	datad => \incdecdutytest|Add1~28_combout\,
+	combout => \incdecdutytest|duty[5]~9_combout\);
+
+-- Location: FF_X57_Y40_N25
+\incdecdutytest|duty[5]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty[5]~9_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty[5]~_emulated_q\);
+
+-- Location: LCCOMB_X57_Y40_N2
+\incdecdutytest|duty[5]~8\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[5]~8_combout\ = (\reset~input_o\ & (\incdecdutytest|duty[7]~1_combout\ $ (((\incdecdutytest|duty[5]~_emulated_q\))))) # (!\reset~input_o\ & (((!\sel~input_o\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0010011110001101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \reset~input_o\,
+	datab => \incdecdutytest|duty[7]~1_combout\,
+	datac => \sel~input_o\,
+	datad => \incdecdutytest|duty[5]~_emulated_q\,
+	combout => \incdecdutytest|duty[5]~8_combout\);
+
+-- Location: LCCOMB_X55_Y34_N30
+\PWMtest|Selector29~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector29~0_combout\ = (\PWMtest|Add5~10_combout\ & ((\PWMtest|Selector26~0_combout\) # ((\PWMtest|Selector26~1_combout\ & \incdecdutytest|duty[5]~8_combout\)))) # (!\PWMtest|Add5~10_combout\ & (((\PWMtest|Selector26~1_combout\ & 
+-- \incdecdutytest|duty[5]~8_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add5~10_combout\,
+	datab => \PWMtest|Selector26~0_combout\,
+	datac => \PWMtest|Selector26~1_combout\,
+	datad => \incdecdutytest|duty[5]~8_combout\,
+	combout => \PWMtest|Selector29~0_combout\);
+
+-- Location: FF_X55_Y34_N31
+\PWMtest|softstart_duty_act[5]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector29~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(5));
+
+-- Location: LCCOMB_X54_Y34_N12
+\PWMtest|Add5~12\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~12_combout\ = (\PWMtest|softstart_duty_act\(6) & (\PWMtest|Add5~11\ $ (GND))) # (!\PWMtest|softstart_duty_act\(6) & (!\PWMtest|Add5~11\ & VCC))
+-- \PWMtest|Add5~13\ = CARRY((\PWMtest|softstart_duty_act\(6) & !\PWMtest|Add5~11\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(6),
+	datad => VCC,
+	cin => \PWMtest|Add5~11\,
+	combout => \PWMtest|Add5~12_combout\,
+	cout => \PWMtest|Add5~13\);
+
+-- Location: LCCOMB_X57_Y38_N0
+\incdecdutytest|duty[6]~7\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[6]~7_combout\ = \incdecdutytest|duty[6]~5_combout\ $ (((\incdecdutytest|Add1~26_combout\) # ((!\incdecdutytest|Equal0~0_combout\ & \incdecdutytest|Add1~25_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000101111110100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|Equal0~0_combout\,
+	datab => \incdecdutytest|Add1~25_combout\,
+	datac => \incdecdutytest|Add1~26_combout\,
+	datad => \incdecdutytest|duty[6]~5_combout\,
+	combout => \incdecdutytest|duty[6]~7_combout\);
+
+-- Location: FF_X57_Y38_N1
+\incdecdutytest|duty[6]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty[6]~7_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty[6]~_emulated_q\);
+
+-- Location: LCCOMB_X57_Y38_N10
+\incdecdutytest|duty[6]~6\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[6]~6_combout\ = (\reset~input_o\ & ((\incdecdutytest|duty[6]~5_combout\ $ (\incdecdutytest|duty[6]~_emulated_q\)))) # (!\reset~input_o\ & (\sel~input_o\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011101011001010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \sel~input_o\,
+	datab => \incdecdutytest|duty[6]~5_combout\,
+	datac => \reset~input_o\,
+	datad => \incdecdutytest|duty[6]~_emulated_q\,
+	combout => \incdecdutytest|duty[6]~6_combout\);
+
+-- Location: LCCOMB_X55_Y34_N28
+\PWMtest|Selector28~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector28~0_combout\ = (\PWMtest|Add5~12_combout\ & ((\PWMtest|Selector26~0_combout\) # ((\incdecdutytest|duty[6]~6_combout\ & \PWMtest|Selector26~1_combout\)))) # (!\PWMtest|Add5~12_combout\ & (((\incdecdutytest|duty[6]~6_combout\ & 
+-- \PWMtest|Selector26~1_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add5~12_combout\,
+	datab => \PWMtest|Selector26~0_combout\,
+	datac => \incdecdutytest|duty[6]~6_combout\,
+	datad => \PWMtest|Selector26~1_combout\,
+	combout => \PWMtest|Selector28~0_combout\);
+
+-- Location: FF_X55_Y34_N29
+\PWMtest|softstart_duty_act[6]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector28~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(6));
+
+-- Location: LCCOMB_X54_Y34_N14
+\PWMtest|Add5~14\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~14_combout\ = (\PWMtest|softstart_duty_act\(7) & (!\PWMtest|Add5~13\)) # (!\PWMtest|softstart_duty_act\(7) & ((\PWMtest|Add5~13\) # (GND)))
+-- \PWMtest|Add5~15\ = CARRY((!\PWMtest|Add5~13\) # (!\PWMtest|softstart_duty_act\(7)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(7),
+	datad => VCC,
+	cin => \PWMtest|Add5~13\,
+	combout => \PWMtest|Add5~14_combout\,
+	cout => \PWMtest|Add5~15\);
+
+-- Location: LCCOMB_X56_Y38_N24
+\incdecdutytest|duty[7]~3\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[7]~3_combout\ = \incdecdutytest|duty[7]~1_combout\ $ (((\incdecdutytest|Add1~24_combout\) # ((\incdecdutytest|Add1~23_combout\ & !\incdecdutytest|Equal0~0_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010110100110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty[7]~1_combout\,
+	datab => \incdecdutytest|Add1~23_combout\,
+	datac => \incdecdutytest|Equal0~0_combout\,
+	datad => \incdecdutytest|Add1~24_combout\,
+	combout => \incdecdutytest|duty[7]~3_combout\);
+
+-- Location: FF_X56_Y38_N25
+\incdecdutytest|duty[7]~_emulated\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \incdecdutytest|duty[7]~3_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incdecdutytest|duty[7]~_emulated_q\);
+
+-- Location: LCCOMB_X56_Y38_N18
+\incdecdutytest|duty[7]~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \incdecdutytest|duty[7]~2_combout\ = (\reset~input_o\ & ((\incdecdutytest|duty[7]~_emulated_q\ $ (\incdecdutytest|duty[7]~1_combout\)))) # (!\reset~input_o\ & (!\sel~input_o\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011010111000101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \sel~input_o\,
+	datab => \incdecdutytest|duty[7]~_emulated_q\,
+	datac => \reset~input_o\,
+	datad => \incdecdutytest|duty[7]~1_combout\,
+	combout => \incdecdutytest|duty[7]~2_combout\);
+
+-- Location: LCCOMB_X55_Y34_N26
+\PWMtest|Selector27~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector27~0_combout\ = (\PWMtest|Add5~14_combout\ & ((\PWMtest|Selector26~0_combout\) # ((\PWMtest|Selector26~1_combout\ & \incdecdutytest|duty[7]~2_combout\)))) # (!\PWMtest|Add5~14_combout\ & (((\PWMtest|Selector26~1_combout\ & 
+-- \incdecdutytest|duty[7]~2_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add5~14_combout\,
+	datab => \PWMtest|Selector26~0_combout\,
+	datac => \PWMtest|Selector26~1_combout\,
+	datad => \incdecdutytest|duty[7]~2_combout\,
+	combout => \PWMtest|Selector27~0_combout\);
+
+-- Location: FF_X55_Y34_N27
+\PWMtest|softstart_duty_act[7]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector27~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(7));
+
+-- Location: LCCOMB_X55_Y34_N0
+\PWMtest|Selector26~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector26~2_combout\ = (\PWMtest|Add5~16_combout\ & ((\PWMtest|Selector26~0_combout\) # ((\incdecdutytest|duty\(8) & \PWMtest|Selector26~1_combout\)))) # (!\PWMtest|Add5~16_combout\ & (((\incdecdutytest|duty\(8) & 
+-- \PWMtest|Selector26~1_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111100010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add5~16_combout\,
+	datab => \PWMtest|Selector26~0_combout\,
+	datac => \incdecdutytest|duty\(8),
+	datad => \PWMtest|Selector26~1_combout\,
+	combout => \PWMtest|Selector26~2_combout\);
+
+-- Location: FF_X55_Y34_N1
+\PWMtest|softstart_duty_act[8]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector26~2_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(8));
+
+-- Location: LCCOMB_X55_Y34_N8
+\PWMtest|LessThan4~8\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~8_cout\ = CARRY((\PWMtest|softstart_duty_act\(0) & \incdecdutytest|duty[0]~18_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000010001000",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(0),
+	datab => \incdecdutytest|duty[0]~18_combout\,
+	datad => VCC,
+	cout => \PWMtest|LessThan4~8_cout\);
+
+-- Location: LCCOMB_X55_Y34_N10
+\PWMtest|LessThan4~10\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~10_cout\ = CARRY((\PWMtest|softstart_duty_act\(1) & (!\incdecdutytest|duty[1]~16_combout\ & !\PWMtest|LessThan4~8_cout\)) # (!\PWMtest|softstart_duty_act\(1) & ((!\PWMtest|LessThan4~8_cout\) # (!\incdecdutytest|duty[1]~16_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000010111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(1),
+	datab => \incdecdutytest|duty[1]~16_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan4~8_cout\,
+	cout => \PWMtest|LessThan4~10_cout\);
+
+-- Location: LCCOMB_X55_Y34_N12
+\PWMtest|LessThan4~12\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~12_cout\ = CARRY((\PWMtest|softstart_duty_act\(2) & ((\incdecdutytest|duty[2]~14_combout\) # (!\PWMtest|LessThan4~10_cout\))) # (!\PWMtest|softstart_duty_act\(2) & (\incdecdutytest|duty[2]~14_combout\ & !\PWMtest|LessThan4~10_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000010001110",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(2),
+	datab => \incdecdutytest|duty[2]~14_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan4~10_cout\,
+	cout => \PWMtest|LessThan4~12_cout\);
+
+-- Location: LCCOMB_X55_Y34_N14
+\PWMtest|LessThan4~14\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~14_cout\ = CARRY((\PWMtest|softstart_duty_act\(3) & (!\incdecdutytest|duty[3]~12_combout\ & !\PWMtest|LessThan4~12_cout\)) # (!\PWMtest|softstart_duty_act\(3) & ((!\PWMtest|LessThan4~12_cout\) # (!\incdecdutytest|duty[3]~12_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000010111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(3),
+	datab => \incdecdutytest|duty[3]~12_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan4~12_cout\,
+	cout => \PWMtest|LessThan4~14_cout\);
+
+-- Location: LCCOMB_X55_Y34_N16
+\PWMtest|LessThan4~16\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~16_cout\ = CARRY((\incdecdutytest|duty[4]~10_combout\ & ((!\PWMtest|LessThan4~14_cout\) # (!\PWMtest|softstart_duty_act\(4)))) # (!\incdecdutytest|duty[4]~10_combout\ & (!\PWMtest|softstart_duty_act\(4) & !\PWMtest|LessThan4~14_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty[4]~10_combout\,
+	datab => \PWMtest|softstart_duty_act\(4),
+	datad => VCC,
+	cin => \PWMtest|LessThan4~14_cout\,
+	cout => \PWMtest|LessThan4~16_cout\);
+
+-- Location: LCCOMB_X55_Y34_N18
+\PWMtest|LessThan4~18\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~18_cout\ = CARRY((\incdecdutytest|duty[5]~8_combout\ & (\PWMtest|softstart_duty_act\(5) & !\PWMtest|LessThan4~16_cout\)) # (!\incdecdutytest|duty[5]~8_combout\ & ((\PWMtest|softstart_duty_act\(5)) # (!\PWMtest|LessThan4~16_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incdecdutytest|duty[5]~8_combout\,
+	datab => \PWMtest|softstart_duty_act\(5),
+	datad => VCC,
+	cin => \PWMtest|LessThan4~16_cout\,
+	cout => \PWMtest|LessThan4~18_cout\);
+
+-- Location: LCCOMB_X55_Y34_N20
+\PWMtest|LessThan4~20\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~20_cout\ = CARRY((\PWMtest|softstart_duty_act\(6) & (\incdecdutytest|duty[6]~6_combout\ & !\PWMtest|LessThan4~18_cout\)) # (!\PWMtest|softstart_duty_act\(6) & ((\incdecdutytest|duty[6]~6_combout\) # (!\PWMtest|LessThan4~18_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(6),
+	datab => \incdecdutytest|duty[6]~6_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan4~18_cout\,
+	cout => \PWMtest|LessThan4~20_cout\);
+
+-- Location: LCCOMB_X55_Y34_N22
+\PWMtest|LessThan4~22\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~22_cout\ = CARRY((\PWMtest|softstart_duty_act\(7) & ((!\PWMtest|LessThan4~20_cout\) # (!\incdecdutytest|duty[7]~2_combout\))) # (!\PWMtest|softstart_duty_act\(7) & (!\incdecdutytest|duty[7]~2_combout\ & !\PWMtest|LessThan4~20_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(7),
+	datab => \incdecdutytest|duty[7]~2_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan4~20_cout\,
+	cout => \PWMtest|LessThan4~22_cout\);
+
+-- Location: LCCOMB_X55_Y34_N24
+\PWMtest|LessThan4~23\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan4~23_combout\ = (\incdecdutytest|duty\(8) & ((!\PWMtest|softstart_duty_act\(8)) # (!\PWMtest|LessThan4~22_cout\))) # (!\incdecdutytest|duty\(8) & (!\PWMtest|LessThan4~22_cout\ & !\PWMtest|softstart_duty_act\(8)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000110011001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \incdecdutytest|duty\(8),
+	datad => \PWMtest|softstart_duty_act\(8),
+	cin => \PWMtest|LessThan4~22_cout\,
+	combout => \PWMtest|LessThan4~23_combout\);
+
+-- Location: LCCOMB_X52_Y34_N26
+\PWMtest|softstart_duty_act[28]~5\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|softstart_duty_act[28]~5_combout\ = (\PWMtest|LessThan4~6_combout\ & ((\PWMtest|est_act.boost2softs~q\ & ((\PWMtest|LessThan5~2_combout\))) # (!\PWMtest|est_act.boost2softs~q\ & (\PWMtest|LessThan4~23_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100101000000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|LessThan4~23_combout\,
+	datab => \PWMtest|LessThan5~2_combout\,
+	datac => \PWMtest|est_act.boost2softs~q\,
+	datad => \PWMtest|LessThan4~6_combout\,
+	combout => \PWMtest|softstart_duty_act[28]~5_combout\);
+
+-- Location: LCCOMB_X52_Y34_N28
+\PWMtest|softstart_duty_act[28]~6\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|softstart_duty_act[28]~6_combout\ = ((!\PWMtest|softstart_duty_act[28]~5_combout\ & (!\PWMtest|countactual1[10]~32_combout\ & !\PWMtest|softstart_duty_act\(31)))) # (!\PWMtest|est_act.idle~q\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111100011111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act[28]~5_combout\,
+	datab => \PWMtest|countactual1[10]~32_combout\,
+	datac => \PWMtest|est_act.idle~q\,
+	datad => \PWMtest|softstart_duty_act\(31),
+	combout => \PWMtest|softstart_duty_act[28]~6_combout\);
+
+-- Location: LCCOMB_X54_Y33_N26
+\PWMtest|Add5~58\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~58_combout\ = (\PWMtest|softstart_duty_act\(29) & (!\PWMtest|Add5~57\)) # (!\PWMtest|softstart_duty_act\(29) & ((\PWMtest|Add5~57\) # (GND)))
+-- \PWMtest|Add5~59\ = CARRY((!\PWMtest|Add5~57\) # (!\PWMtest|softstart_duty_act\(29)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(29),
+	datad => VCC,
+	cin => \PWMtest|Add5~57\,
+	combout => \PWMtest|Add5~58_combout\,
+	cout => \PWMtest|Add5~59\);
+
+-- Location: LCCOMB_X55_Y33_N28
+\PWMtest|Selector5~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector5~0_combout\ = (!\PWMtest|softstart_duty_act[28]~6_combout\ & \PWMtest|Add5~58_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011000000110000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datac => \PWMtest|Add5~58_combout\,
+	combout => \PWMtest|Selector5~0_combout\);
+
+-- Location: FF_X55_Y33_N29
+\PWMtest|softstart_duty_act[29]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector5~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(29));
+
+-- Location: LCCOMB_X54_Y33_N28
+\PWMtest|Add5~60\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~60_combout\ = (\PWMtest|softstart_duty_act\(30) & (\PWMtest|Add5~59\ $ (GND))) # (!\PWMtest|softstart_duty_act\(30) & (!\PWMtest|Add5~59\ & VCC))
+-- \PWMtest|Add5~61\ = CARRY((\PWMtest|softstart_duty_act\(30) & !\PWMtest|Add5~59\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(30),
+	datad => VCC,
+	cin => \PWMtest|Add5~59\,
+	combout => \PWMtest|Add5~60_combout\,
+	cout => \PWMtest|Add5~61\);
+
+-- Location: LCCOMB_X55_Y33_N2
+\PWMtest|Selector4~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector4~0_combout\ = (\PWMtest|Add5~60_combout\ & !\PWMtest|softstart_duty_act[28]~6_combout\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000101000001010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add5~60_combout\,
+	datac => \PWMtest|softstart_duty_act[28]~6_combout\,
+	combout => \PWMtest|Selector4~0_combout\);
+
+-- Location: FF_X55_Y33_N3
+\PWMtest|softstart_duty_act[30]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector4~0_combout\,
+	clrn => \reset~input_o\,
+	ena => \PWMtest|softstart_duty_act[1]~4_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(30));
+
+-- Location: LCCOMB_X51_Y35_N4
+\PWMtest|Add3~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~1_cout\ = CARRY(!\PWMtest|softstart_duty_act\(4))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000110011",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(4),
+	datad => VCC,
+	cout => \PWMtest|Add3~1_cout\);
+
+-- Location: LCCOMB_X51_Y35_N6
+\PWMtest|Add3~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~2_combout\ = (\PWMtest|softstart_duty_act\(5) & ((\PWMtest|Add3~1_cout\) # (GND))) # (!\PWMtest|softstart_duty_act\(5) & (!\PWMtest|Add3~1_cout\))
+-- \PWMtest|Add3~3\ = CARRY((\PWMtest|softstart_duty_act\(5)) # (!\PWMtest|Add3~1_cout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001111001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(5),
+	datad => VCC,
+	cin => \PWMtest|Add3~1_cout\,
+	combout => \PWMtest|Add3~2_combout\,
+	cout => \PWMtest|Add3~3\);
+
+-- Location: LCCOMB_X51_Y35_N8
+\PWMtest|Add3~4\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~4_combout\ = (\PWMtest|softstart_duty_act\(6) & (!\PWMtest|Add3~3\ & VCC)) # (!\PWMtest|softstart_duty_act\(6) & (\PWMtest|Add3~3\ $ (GND)))
+-- \PWMtest|Add3~5\ = CARRY((!\PWMtest|softstart_duty_act\(6) & !\PWMtest|Add3~3\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(6),
+	datad => VCC,
+	cin => \PWMtest|Add3~3\,
+	combout => \PWMtest|Add3~4_combout\,
+	cout => \PWMtest|Add3~5\);
+
+-- Location: LCCOMB_X51_Y35_N10
+\PWMtest|Add3~6\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~6_combout\ = (\PWMtest|softstart_duty_act\(7) & ((\PWMtest|Add3~5\) # (GND))) # (!\PWMtest|softstart_duty_act\(7) & (!\PWMtest|Add3~5\))
+-- \PWMtest|Add3~7\ = CARRY((\PWMtest|softstart_duty_act\(7)) # (!\PWMtest|Add3~5\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001111001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(7),
+	datad => VCC,
+	cin => \PWMtest|Add3~5\,
+	combout => \PWMtest|Add3~6_combout\,
+	cout => \PWMtest|Add3~7\);
+
+-- Location: LCCOMB_X51_Y35_N12
+\PWMtest|Add3~8\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~8_combout\ = (\PWMtest|softstart_duty_act\(8) & (\PWMtest|Add3~7\ $ (GND))) # (!\PWMtest|softstart_duty_act\(8) & ((GND) # (!\PWMtest|Add3~7\)))
+-- \PWMtest|Add3~9\ = CARRY((!\PWMtest|Add3~7\) # (!\PWMtest|softstart_duty_act\(8)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010101011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(8),
+	datad => VCC,
+	cin => \PWMtest|Add3~7\,
+	combout => \PWMtest|Add3~8_combout\,
+	cout => \PWMtest|Add3~9\);
+
+-- Location: LCCOMB_X51_Y35_N14
+\PWMtest|Add3~10\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~10_combout\ = (\PWMtest|softstart_duty_act\(9) & ((\PWMtest|Add3~9\) # (GND))) # (!\PWMtest|softstart_duty_act\(9) & (!\PWMtest|Add3~9\))
+-- \PWMtest|Add3~11\ = CARRY((\PWMtest|softstart_duty_act\(9)) # (!\PWMtest|Add3~9\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001111001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(9),
+	datad => VCC,
+	cin => \PWMtest|Add3~9\,
+	combout => \PWMtest|Add3~10_combout\,
+	cout => \PWMtest|Add3~11\);
+
+-- Location: LCCOMB_X51_Y35_N16
+\PWMtest|Add3~12\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~12_combout\ = (\PWMtest|softstart_duty_act\(10) & (!\PWMtest|Add3~11\ & VCC)) # (!\PWMtest|softstart_duty_act\(10) & (\PWMtest|Add3~11\ $ (GND)))
+-- \PWMtest|Add3~13\ = CARRY((!\PWMtest|softstart_duty_act\(10) & !\PWMtest|Add3~11\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(10),
+	datad => VCC,
+	cin => \PWMtest|Add3~11\,
+	combout => \PWMtest|Add3~12_combout\,
+	cout => \PWMtest|Add3~13\);
+
+-- Location: LCCOMB_X51_Y35_N18
+\PWMtest|Add3~14\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~14_combout\ = (\PWMtest|softstart_duty_act\(11) & ((\PWMtest|Add3~13\) # (GND))) # (!\PWMtest|softstart_duty_act\(11) & (!\PWMtest|Add3~13\))
+-- \PWMtest|Add3~15\ = CARRY((\PWMtest|softstart_duty_act\(11)) # (!\PWMtest|Add3~13\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(11),
+	datad => VCC,
+	cin => \PWMtest|Add3~13\,
+	combout => \PWMtest|Add3~14_combout\,
+	cout => \PWMtest|Add3~15\);
+
+-- Location: LCCOMB_X51_Y35_N20
+\PWMtest|Add3~16\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~16_combout\ = (\PWMtest|softstart_duty_act\(12) & (!\PWMtest|Add3~15\ & VCC)) # (!\PWMtest|softstart_duty_act\(12) & (\PWMtest|Add3~15\ $ (GND)))
+-- \PWMtest|Add3~17\ = CARRY((!\PWMtest|softstart_duty_act\(12) & !\PWMtest|Add3~15\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101000000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(12),
+	datad => VCC,
+	cin => \PWMtest|Add3~15\,
+	combout => \PWMtest|Add3~16_combout\,
+	cout => \PWMtest|Add3~17\);
+
+-- Location: LCCOMB_X51_Y35_N22
+\PWMtest|Add3~18\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~18_combout\ = (\PWMtest|softstart_duty_act\(13) & ((\PWMtest|Add3~17\) # (GND))) # (!\PWMtest|softstart_duty_act\(13) & (!\PWMtest|Add3~17\))
+-- \PWMtest|Add3~19\ = CARRY((\PWMtest|softstart_duty_act\(13)) # (!\PWMtest|Add3~17\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(13),
+	datad => VCC,
+	cin => \PWMtest|Add3~17\,
+	combout => \PWMtest|Add3~18_combout\,
+	cout => \PWMtest|Add3~19\);
+
+-- Location: LCCOMB_X51_Y35_N24
+\PWMtest|Add3~20\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~20_combout\ = (\PWMtest|softstart_duty_act\(14) & (!\PWMtest|Add3~19\ & VCC)) # (!\PWMtest|softstart_duty_act\(14) & (\PWMtest|Add3~19\ $ (GND)))
+-- \PWMtest|Add3~21\ = CARRY((!\PWMtest|softstart_duty_act\(14) & !\PWMtest|Add3~19\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(14),
+	datad => VCC,
+	cin => \PWMtest|Add3~19\,
+	combout => \PWMtest|Add3~20_combout\,
+	cout => \PWMtest|Add3~21\);
+
+-- Location: LCCOMB_X51_Y35_N26
+\PWMtest|Add3~22\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~22_combout\ = (\PWMtest|softstart_duty_act\(15) & ((\PWMtest|Add3~21\) # (GND))) # (!\PWMtest|softstart_duty_act\(15) & (!\PWMtest|Add3~21\))
+-- \PWMtest|Add3~23\ = CARRY((\PWMtest|softstart_duty_act\(15)) # (!\PWMtest|Add3~21\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(15),
+	datad => VCC,
+	cin => \PWMtest|Add3~21\,
+	combout => \PWMtest|Add3~22_combout\,
+	cout => \PWMtest|Add3~23\);
+
+-- Location: LCCOMB_X51_Y35_N28
+\PWMtest|Add3~24\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~24_combout\ = (\PWMtest|softstart_duty_act\(16) & (!\PWMtest|Add3~23\ & VCC)) # (!\PWMtest|softstart_duty_act\(16) & (\PWMtest|Add3~23\ $ (GND)))
+-- \PWMtest|Add3~25\ = CARRY((!\PWMtest|softstart_duty_act\(16) & !\PWMtest|Add3~23\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101000000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(16),
+	datad => VCC,
+	cin => \PWMtest|Add3~23\,
+	combout => \PWMtest|Add3~24_combout\,
+	cout => \PWMtest|Add3~25\);
+
+-- Location: LCCOMB_X51_Y35_N30
+\PWMtest|Add3~26\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~26_combout\ = (\PWMtest|softstart_duty_act\(17) & ((\PWMtest|Add3~25\) # (GND))) # (!\PWMtest|softstart_duty_act\(17) & (!\PWMtest|Add3~25\))
+-- \PWMtest|Add3~27\ = CARRY((\PWMtest|softstart_duty_act\(17)) # (!\PWMtest|Add3~25\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(17),
+	datad => VCC,
+	cin => \PWMtest|Add3~25\,
+	combout => \PWMtest|Add3~26_combout\,
+	cout => \PWMtest|Add3~27\);
+
+-- Location: LCCOMB_X51_Y34_N0
+\PWMtest|Add3~28\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~28_combout\ = (\PWMtest|softstart_duty_act\(18) & (!\PWMtest|Add3~27\ & VCC)) # (!\PWMtest|softstart_duty_act\(18) & (\PWMtest|Add3~27\ $ (GND)))
+-- \PWMtest|Add3~29\ = CARRY((!\PWMtest|softstart_duty_act\(18) & !\PWMtest|Add3~27\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101000000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(18),
+	datad => VCC,
+	cin => \PWMtest|Add3~27\,
+	combout => \PWMtest|Add3~28_combout\,
+	cout => \PWMtest|Add3~29\);
+
+-- Location: LCCOMB_X51_Y34_N2
+\PWMtest|Add3~30\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~30_combout\ = (\PWMtest|softstart_duty_act\(19) & ((\PWMtest|Add3~29\) # (GND))) # (!\PWMtest|softstart_duty_act\(19) & (!\PWMtest|Add3~29\))
+-- \PWMtest|Add3~31\ = CARRY((\PWMtest|softstart_duty_act\(19)) # (!\PWMtest|Add3~29\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001111001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(19),
+	datad => VCC,
+	cin => \PWMtest|Add3~29\,
+	combout => \PWMtest|Add3~30_combout\,
+	cout => \PWMtest|Add3~31\);
+
+-- Location: LCCOMB_X51_Y34_N4
+\PWMtest|Add3~32\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~32_combout\ = (\PWMtest|softstart_duty_act\(20) & (!\PWMtest|Add3~31\ & VCC)) # (!\PWMtest|softstart_duty_act\(20) & (\PWMtest|Add3~31\ $ (GND)))
+-- \PWMtest|Add3~33\ = CARRY((!\PWMtest|softstart_duty_act\(20) & !\PWMtest|Add3~31\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(20),
+	datad => VCC,
+	cin => \PWMtest|Add3~31\,
+	combout => \PWMtest|Add3~32_combout\,
+	cout => \PWMtest|Add3~33\);
+
+-- Location: LCCOMB_X51_Y34_N6
+\PWMtest|Add3~34\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~34_combout\ = (\PWMtest|softstart_duty_act\(21) & ((\PWMtest|Add3~33\) # (GND))) # (!\PWMtest|softstart_duty_act\(21) & (!\PWMtest|Add3~33\))
+-- \PWMtest|Add3~35\ = CARRY((\PWMtest|softstart_duty_act\(21)) # (!\PWMtest|Add3~33\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001111001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(21),
+	datad => VCC,
+	cin => \PWMtest|Add3~33\,
+	combout => \PWMtest|Add3~34_combout\,
+	cout => \PWMtest|Add3~35\);
+
+-- Location: LCCOMB_X51_Y34_N8
+\PWMtest|Add3~36\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~36_combout\ = (\PWMtest|softstart_duty_act\(22) & (!\PWMtest|Add3~35\ & VCC)) # (!\PWMtest|softstart_duty_act\(22) & (\PWMtest|Add3~35\ $ (GND)))
+-- \PWMtest|Add3~37\ = CARRY((!\PWMtest|softstart_duty_act\(22) & !\PWMtest|Add3~35\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(22),
+	datad => VCC,
+	cin => \PWMtest|Add3~35\,
+	combout => \PWMtest|Add3~36_combout\,
+	cout => \PWMtest|Add3~37\);
+
+-- Location: LCCOMB_X51_Y34_N10
+\PWMtest|Add3~38\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~38_combout\ = (\PWMtest|softstart_duty_act\(23) & ((\PWMtest|Add3~37\) # (GND))) # (!\PWMtest|softstart_duty_act\(23) & (!\PWMtest|Add3~37\))
+-- \PWMtest|Add3~39\ = CARRY((\PWMtest|softstart_duty_act\(23)) # (!\PWMtest|Add3~37\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001111001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(23),
+	datad => VCC,
+	cin => \PWMtest|Add3~37\,
+	combout => \PWMtest|Add3~38_combout\,
+	cout => \PWMtest|Add3~39\);
+
+-- Location: LCCOMB_X51_Y34_N12
+\PWMtest|Add3~40\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~40_combout\ = (\PWMtest|softstart_duty_act\(24) & (!\PWMtest|Add3~39\ & VCC)) # (!\PWMtest|softstart_duty_act\(24) & (\PWMtest|Add3~39\ $ (GND)))
+-- \PWMtest|Add3~41\ = CARRY((!\PWMtest|softstart_duty_act\(24) & !\PWMtest|Add3~39\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(24),
+	datad => VCC,
+	cin => \PWMtest|Add3~39\,
+	combout => \PWMtest|Add3~40_combout\,
+	cout => \PWMtest|Add3~41\);
+
+-- Location: LCCOMB_X51_Y34_N14
+\PWMtest|Add3~42\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~42_combout\ = (\PWMtest|softstart_duty_act\(25) & ((\PWMtest|Add3~41\) # (GND))) # (!\PWMtest|softstart_duty_act\(25) & (!\PWMtest|Add3~41\))
+-- \PWMtest|Add3~43\ = CARRY((\PWMtest|softstart_duty_act\(25)) # (!\PWMtest|Add3~41\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(25),
+	datad => VCC,
+	cin => \PWMtest|Add3~41\,
+	combout => \PWMtest|Add3~42_combout\,
+	cout => \PWMtest|Add3~43\);
+
+-- Location: LCCOMB_X51_Y34_N16
+\PWMtest|Add3~44\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~44_combout\ = (\PWMtest|softstart_duty_act\(26) & (!\PWMtest|Add3~43\ & VCC)) # (!\PWMtest|softstart_duty_act\(26) & (\PWMtest|Add3~43\ $ (GND)))
+-- \PWMtest|Add3~45\ = CARRY((!\PWMtest|softstart_duty_act\(26) & !\PWMtest|Add3~43\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(26),
+	datad => VCC,
+	cin => \PWMtest|Add3~43\,
+	combout => \PWMtest|Add3~44_combout\,
+	cout => \PWMtest|Add3~45\);
+
+-- Location: LCCOMB_X51_Y34_N18
+\PWMtest|Add3~46\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~46_combout\ = (\PWMtest|softstart_duty_act\(27) & ((\PWMtest|Add3~45\) # (GND))) # (!\PWMtest|softstart_duty_act\(27) & (!\PWMtest|Add3~45\))
+-- \PWMtest|Add3~47\ = CARRY((\PWMtest|softstart_duty_act\(27)) # (!\PWMtest|Add3~45\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(27),
+	datad => VCC,
+	cin => \PWMtest|Add3~45\,
+	combout => \PWMtest|Add3~46_combout\,
+	cout => \PWMtest|Add3~47\);
+
+-- Location: LCCOMB_X51_Y34_N20
+\PWMtest|Add3~48\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~48_combout\ = (\PWMtest|softstart_duty_act\(28) & (!\PWMtest|Add3~47\ & VCC)) # (!\PWMtest|softstart_duty_act\(28) & (\PWMtest|Add3~47\ $ (GND)))
+-- \PWMtest|Add3~49\ = CARRY((!\PWMtest|softstart_duty_act\(28) & !\PWMtest|Add3~47\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101000000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(28),
+	datad => VCC,
+	cin => \PWMtest|Add3~47\,
+	combout => \PWMtest|Add3~48_combout\,
+	cout => \PWMtest|Add3~49\);
+
+-- Location: LCCOMB_X51_Y34_N22
+\PWMtest|Add3~50\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~50_combout\ = (\PWMtest|softstart_duty_act\(29) & ((\PWMtest|Add3~49\) # (GND))) # (!\PWMtest|softstart_duty_act\(29) & (!\PWMtest|Add3~49\))
+-- \PWMtest|Add3~51\ = CARRY((\PWMtest|softstart_duty_act\(29)) # (!\PWMtest|Add3~49\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(29),
+	datad => VCC,
+	cin => \PWMtest|Add3~49\,
+	combout => \PWMtest|Add3~50_combout\,
+	cout => \PWMtest|Add3~51\);
+
+-- Location: LCCOMB_X51_Y34_N24
+\PWMtest|Add3~52\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~52_combout\ = (\PWMtest|softstart_duty_act\(30) & (!\PWMtest|Add3~51\ & VCC)) # (!\PWMtest|softstart_duty_act\(30) & (\PWMtest|Add3~51\ $ (GND)))
+-- \PWMtest|Add3~53\ = CARRY((!\PWMtest|softstart_duty_act\(30) & !\PWMtest|Add3~51\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101000000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(30),
+	datad => VCC,
+	cin => \PWMtest|Add3~51\,
+	combout => \PWMtest|Add3~52_combout\,
+	cout => \PWMtest|Add3~53\);
+
+-- Location: LCCOMB_X51_Y34_N26
+\PWMtest|Add3~54\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add3~54_combout\ = \PWMtest|softstart_duty_act\(31) $ (!\PWMtest|Add3~53\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110100101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(31),
+	cin => \PWMtest|Add3~53\,
+	combout => \PWMtest|Add3~54_combout\);
+
+-- Location: LCCOMB_X50_Y35_N0
+\PWMtest|LessThan1~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~1_cout\ = CARRY((!\PWMtest|countactual1\(0) & \PWMtest|softstart_duty_act\(0)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001000100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(0),
+	datab => \PWMtest|softstart_duty_act\(0),
+	datad => VCC,
+	cout => \PWMtest|LessThan1~1_cout\);
+
+-- Location: LCCOMB_X50_Y35_N2
+\PWMtest|LessThan1~3\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~3_cout\ = CARRY((\PWMtest|softstart_duty_act\(1) & (\PWMtest|countactual1\(1) & !\PWMtest|LessThan1~1_cout\)) # (!\PWMtest|softstart_duty_act\(1) & ((\PWMtest|countactual1\(1)) # (!\PWMtest|LessThan1~1_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(1),
+	datab => \PWMtest|countactual1\(1),
+	datad => VCC,
+	cin => \PWMtest|LessThan1~1_cout\,
+	cout => \PWMtest|LessThan1~3_cout\);
+
+-- Location: LCCOMB_X50_Y35_N4
+\PWMtest|LessThan1~5\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~5_cout\ = CARRY((\PWMtest|countactual1\(2) & (\PWMtest|softstart_duty_act\(2) & !\PWMtest|LessThan1~3_cout\)) # (!\PWMtest|countactual1\(2) & ((\PWMtest|softstart_duty_act\(2)) # (!\PWMtest|LessThan1~3_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(2),
+	datab => \PWMtest|softstart_duty_act\(2),
+	datad => VCC,
+	cin => \PWMtest|LessThan1~3_cout\,
+	cout => \PWMtest|LessThan1~5_cout\);
+
+-- Location: LCCOMB_X50_Y35_N6
+\PWMtest|LessThan1~7\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~7_cout\ = CARRY((\PWMtest|softstart_duty_act\(3) & (\PWMtest|countactual1\(3) & !\PWMtest|LessThan1~5_cout\)) # (!\PWMtest|softstart_duty_act\(3) & ((\PWMtest|countactual1\(3)) # (!\PWMtest|LessThan1~5_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(3),
+	datab => \PWMtest|countactual1\(3),
+	datad => VCC,
+	cin => \PWMtest|LessThan1~5_cout\,
+	cout => \PWMtest|LessThan1~7_cout\);
+
+-- Location: LCCOMB_X50_Y35_N8
+\PWMtest|LessThan1~9\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~9_cout\ = CARRY((\PWMtest|countactual1\(4) & (\PWMtest|softstart_duty_act\(4) & !\PWMtest|LessThan1~7_cout\)) # (!\PWMtest|countactual1\(4) & ((\PWMtest|softstart_duty_act\(4)) # (!\PWMtest|LessThan1~7_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(4),
+	datab => \PWMtest|softstart_duty_act\(4),
+	datad => VCC,
+	cin => \PWMtest|LessThan1~7_cout\,
+	cout => \PWMtest|LessThan1~9_cout\);
+
+-- Location: LCCOMB_X50_Y35_N10
+\PWMtest|LessThan1~11\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~11_cout\ = CARRY((\PWMtest|Add3~2_combout\ & (\PWMtest|countactual1\(5) & !\PWMtest|LessThan1~9_cout\)) # (!\PWMtest|Add3~2_combout\ & ((\PWMtest|countactual1\(5)) # (!\PWMtest|LessThan1~9_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add3~2_combout\,
+	datab => \PWMtest|countactual1\(5),
+	datad => VCC,
+	cin => \PWMtest|LessThan1~9_cout\,
+	cout => \PWMtest|LessThan1~11_cout\);
+
+-- Location: LCCOMB_X50_Y35_N12
+\PWMtest|LessThan1~13\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~13_cout\ = CARRY((\PWMtest|Add3~4_combout\ & ((!\PWMtest|LessThan1~11_cout\) # (!\PWMtest|countactual1\(6)))) # (!\PWMtest|Add3~4_combout\ & (!\PWMtest|countactual1\(6) & !\PWMtest|LessThan1~11_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add3~4_combout\,
+	datab => \PWMtest|countactual1\(6),
+	datad => VCC,
+	cin => \PWMtest|LessThan1~11_cout\,
+	cout => \PWMtest|LessThan1~13_cout\);
+
+-- Location: LCCOMB_X50_Y35_N14
+\PWMtest|LessThan1~15\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~15_cout\ = CARRY((\PWMtest|countactual1\(7) & ((!\PWMtest|LessThan1~13_cout\) # (!\PWMtest|Add3~6_combout\))) # (!\PWMtest|countactual1\(7) & (!\PWMtest|Add3~6_combout\ & !\PWMtest|LessThan1~13_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(7),
+	datab => \PWMtest|Add3~6_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~13_cout\,
+	cout => \PWMtest|LessThan1~15_cout\);
+
+-- Location: LCCOMB_X50_Y35_N16
+\PWMtest|LessThan1~17\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~17_cout\ = CARRY((\PWMtest|Add3~8_combout\ & ((!\PWMtest|LessThan1~15_cout\) # (!\PWMtest|countactual1\(8)))) # (!\PWMtest|Add3~8_combout\ & (!\PWMtest|countactual1\(8) & !\PWMtest|LessThan1~15_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add3~8_combout\,
+	datab => \PWMtest|countactual1\(8),
+	datad => VCC,
+	cin => \PWMtest|LessThan1~15_cout\,
+	cout => \PWMtest|LessThan1~17_cout\);
+
+-- Location: LCCOMB_X50_Y35_N18
+\PWMtest|LessThan1~19\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~19_cout\ = CARRY((\PWMtest|countactual1\(9) & ((!\PWMtest|LessThan1~17_cout\) # (!\PWMtest|Add3~10_combout\))) # (!\PWMtest|countactual1\(9) & (!\PWMtest|Add3~10_combout\ & !\PWMtest|LessThan1~17_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(9),
+	datab => \PWMtest|Add3~10_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~17_cout\,
+	cout => \PWMtest|LessThan1~19_cout\);
+
+-- Location: LCCOMB_X50_Y35_N20
+\PWMtest|LessThan1~21\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~21_cout\ = CARRY((\PWMtest|countactual1\(10) & (\PWMtest|Add3~12_combout\ & !\PWMtest|LessThan1~19_cout\)) # (!\PWMtest|countactual1\(10) & ((\PWMtest|Add3~12_combout\) # (!\PWMtest|LessThan1~19_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(10),
+	datab => \PWMtest|Add3~12_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~19_cout\,
+	cout => \PWMtest|LessThan1~21_cout\);
+
+-- Location: LCCOMB_X50_Y35_N22
+\PWMtest|LessThan1~23\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~23_cout\ = CARRY((\PWMtest|countactual1\(11) & ((!\PWMtest|LessThan1~21_cout\) # (!\PWMtest|Add3~14_combout\))) # (!\PWMtest|countactual1\(11) & (!\PWMtest|Add3~14_combout\ & !\PWMtest|LessThan1~21_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(11),
+	datab => \PWMtest|Add3~14_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~21_cout\,
+	cout => \PWMtest|LessThan1~23_cout\);
+
+-- Location: LCCOMB_X50_Y35_N24
+\PWMtest|LessThan1~25\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~25_cout\ = CARRY((\PWMtest|Add3~16_combout\ & ((!\PWMtest|LessThan1~23_cout\) # (!\PWMtest|countactual1\(12)))) # (!\PWMtest|Add3~16_combout\ & (!\PWMtest|countactual1\(12) & !\PWMtest|LessThan1~23_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add3~16_combout\,
+	datab => \PWMtest|countactual1\(12),
+	datad => VCC,
+	cin => \PWMtest|LessThan1~23_cout\,
+	cout => \PWMtest|LessThan1~25_cout\);
+
+-- Location: LCCOMB_X50_Y35_N26
+\PWMtest|LessThan1~27\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~27_cout\ = CARRY((\PWMtest|countactual1\(13) & ((!\PWMtest|LessThan1~25_cout\) # (!\PWMtest|Add3~18_combout\))) # (!\PWMtest|countactual1\(13) & (!\PWMtest|Add3~18_combout\ & !\PWMtest|LessThan1~25_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(13),
+	datab => \PWMtest|Add3~18_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~25_cout\,
+	cout => \PWMtest|LessThan1~27_cout\);
+
+-- Location: LCCOMB_X50_Y35_N28
+\PWMtest|LessThan1~29\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~29_cout\ = CARRY((\PWMtest|Add3~20_combout\ & ((!\PWMtest|LessThan1~27_cout\) # (!\PWMtest|countactual1\(14)))) # (!\PWMtest|Add3~20_combout\ & (!\PWMtest|countactual1\(14) & !\PWMtest|LessThan1~27_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add3~20_combout\,
+	datab => \PWMtest|countactual1\(14),
+	datad => VCC,
+	cin => \PWMtest|LessThan1~27_cout\,
+	cout => \PWMtest|LessThan1~29_cout\);
+
+-- Location: LCCOMB_X50_Y35_N30
+\PWMtest|LessThan1~31\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~31_cout\ = CARRY((\PWMtest|countactual1\(15) & ((!\PWMtest|LessThan1~29_cout\) # (!\PWMtest|Add3~22_combout\))) # (!\PWMtest|countactual1\(15) & (!\PWMtest|Add3~22_combout\ & !\PWMtest|LessThan1~29_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(15),
+	datab => \PWMtest|Add3~22_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~29_cout\,
+	cout => \PWMtest|LessThan1~31_cout\);
+
+-- Location: LCCOMB_X50_Y34_N0
+\PWMtest|LessThan1~33\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~33_cout\ = CARRY((\PWMtest|countactual1\(16) & (\PWMtest|Add3~24_combout\ & !\PWMtest|LessThan1~31_cout\)) # (!\PWMtest|countactual1\(16) & ((\PWMtest|Add3~24_combout\) # (!\PWMtest|LessThan1~31_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(16),
+	datab => \PWMtest|Add3~24_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~31_cout\,
+	cout => \PWMtest|LessThan1~33_cout\);
+
+-- Location: LCCOMB_X50_Y34_N2
+\PWMtest|LessThan1~35\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~35_cout\ = CARRY((\PWMtest|countactual1\(17) & ((!\PWMtest|LessThan1~33_cout\) # (!\PWMtest|Add3~26_combout\))) # (!\PWMtest|countactual1\(17) & (!\PWMtest|Add3~26_combout\ & !\PWMtest|LessThan1~33_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(17),
+	datab => \PWMtest|Add3~26_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~33_cout\,
+	cout => \PWMtest|LessThan1~35_cout\);
+
+-- Location: LCCOMB_X50_Y34_N4
+\PWMtest|LessThan1~37\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~37_cout\ = CARRY((\PWMtest|countactual1\(18) & (\PWMtest|Add3~28_combout\ & !\PWMtest|LessThan1~35_cout\)) # (!\PWMtest|countactual1\(18) & ((\PWMtest|Add3~28_combout\) # (!\PWMtest|LessThan1~35_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(18),
+	datab => \PWMtest|Add3~28_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~35_cout\,
+	cout => \PWMtest|LessThan1~37_cout\);
+
+-- Location: LCCOMB_X50_Y34_N6
+\PWMtest|LessThan1~39\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~39_cout\ = CARRY((\PWMtest|Add3~30_combout\ & (\PWMtest|countactual1\(19) & !\PWMtest|LessThan1~37_cout\)) # (!\PWMtest|Add3~30_combout\ & ((\PWMtest|countactual1\(19)) # (!\PWMtest|LessThan1~37_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add3~30_combout\,
+	datab => \PWMtest|countactual1\(19),
+	datad => VCC,
+	cin => \PWMtest|LessThan1~37_cout\,
+	cout => \PWMtest|LessThan1~39_cout\);
+
+-- Location: LCCOMB_X50_Y34_N8
+\PWMtest|LessThan1~41\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~41_cout\ = CARRY((\PWMtest|Add3~32_combout\ & ((!\PWMtest|LessThan1~39_cout\) # (!\PWMtest|countactual1\(20)))) # (!\PWMtest|Add3~32_combout\ & (!\PWMtest|countactual1\(20) & !\PWMtest|LessThan1~39_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add3~32_combout\,
+	datab => \PWMtest|countactual1\(20),
+	datad => VCC,
+	cin => \PWMtest|LessThan1~39_cout\,
+	cout => \PWMtest|LessThan1~41_cout\);
+
+-- Location: LCCOMB_X50_Y34_N10
+\PWMtest|LessThan1~43\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~43_cout\ = CARRY((\PWMtest|Add3~34_combout\ & (\PWMtest|countactual1\(21) & !\PWMtest|LessThan1~41_cout\)) # (!\PWMtest|Add3~34_combout\ & ((\PWMtest|countactual1\(21)) # (!\PWMtest|LessThan1~41_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add3~34_combout\,
+	datab => \PWMtest|countactual1\(21),
+	datad => VCC,
+	cin => \PWMtest|LessThan1~41_cout\,
+	cout => \PWMtest|LessThan1~43_cout\);
+
+-- Location: LCCOMB_X50_Y34_N12
+\PWMtest|LessThan1~45\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~45_cout\ = CARRY((\PWMtest|countactual1\(22) & (\PWMtest|Add3~36_combout\ & !\PWMtest|LessThan1~43_cout\)) # (!\PWMtest|countactual1\(22) & ((\PWMtest|Add3~36_combout\) # (!\PWMtest|LessThan1~43_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(22),
+	datab => \PWMtest|Add3~36_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~43_cout\,
+	cout => \PWMtest|LessThan1~45_cout\);
+
+-- Location: LCCOMB_X50_Y34_N14
+\PWMtest|LessThan1~47\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~47_cout\ = CARRY((\PWMtest|countactual1\(23) & ((!\PWMtest|LessThan1~45_cout\) # (!\PWMtest|Add3~38_combout\))) # (!\PWMtest|countactual1\(23) & (!\PWMtest|Add3~38_combout\ & !\PWMtest|LessThan1~45_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(23),
+	datab => \PWMtest|Add3~38_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~45_cout\,
+	cout => \PWMtest|LessThan1~47_cout\);
+
+-- Location: LCCOMB_X50_Y34_N16
+\PWMtest|LessThan1~49\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~49_cout\ = CARRY((\PWMtest|countactual1\(24) & (\PWMtest|Add3~40_combout\ & !\PWMtest|LessThan1~47_cout\)) # (!\PWMtest|countactual1\(24) & ((\PWMtest|Add3~40_combout\) # (!\PWMtest|LessThan1~47_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(24),
+	datab => \PWMtest|Add3~40_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~47_cout\,
+	cout => \PWMtest|LessThan1~49_cout\);
+
+-- Location: LCCOMB_X50_Y34_N18
+\PWMtest|LessThan1~51\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~51_cout\ = CARRY((\PWMtest|countactual1\(25) & ((!\PWMtest|LessThan1~49_cout\) # (!\PWMtest|Add3~42_combout\))) # (!\PWMtest|countactual1\(25) & (!\PWMtest|Add3~42_combout\ & !\PWMtest|LessThan1~49_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(25),
+	datab => \PWMtest|Add3~42_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~49_cout\,
+	cout => \PWMtest|LessThan1~51_cout\);
+
+-- Location: LCCOMB_X50_Y34_N20
+\PWMtest|LessThan1~53\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~53_cout\ = CARRY((\PWMtest|countactual1\(26) & (\PWMtest|Add3~44_combout\ & !\PWMtest|LessThan1~51_cout\)) # (!\PWMtest|countactual1\(26) & ((\PWMtest|Add3~44_combout\) # (!\PWMtest|LessThan1~51_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(26),
+	datab => \PWMtest|Add3~44_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~51_cout\,
+	cout => \PWMtest|LessThan1~53_cout\);
+
+-- Location: LCCOMB_X50_Y34_N22
+\PWMtest|LessThan1~55\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~55_cout\ = CARRY((\PWMtest|countactual1\(27) & ((!\PWMtest|LessThan1~53_cout\) # (!\PWMtest|Add3~46_combout\))) # (!\PWMtest|countactual1\(27) & (!\PWMtest|Add3~46_combout\ & !\PWMtest|LessThan1~53_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(27),
+	datab => \PWMtest|Add3~46_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~53_cout\,
+	cout => \PWMtest|LessThan1~55_cout\);
+
+-- Location: LCCOMB_X50_Y34_N24
+\PWMtest|LessThan1~57\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~57_cout\ = CARRY((\PWMtest|Add3~48_combout\ & ((!\PWMtest|LessThan1~55_cout\) # (!\PWMtest|countactual1\(28)))) # (!\PWMtest|Add3~48_combout\ & (!\PWMtest|countactual1\(28) & !\PWMtest|LessThan1~55_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add3~48_combout\,
+	datab => \PWMtest|countactual1\(28),
+	datad => VCC,
+	cin => \PWMtest|LessThan1~55_cout\,
+	cout => \PWMtest|LessThan1~57_cout\);
+
+-- Location: LCCOMB_X50_Y34_N26
+\PWMtest|LessThan1~59\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~59_cout\ = CARRY((\PWMtest|countactual1\(29) & ((!\PWMtest|LessThan1~57_cout\) # (!\PWMtest|Add3~50_combout\))) # (!\PWMtest|countactual1\(29) & (!\PWMtest|Add3~50_combout\ & !\PWMtest|LessThan1~57_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(29),
+	datab => \PWMtest|Add3~50_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~57_cout\,
+	cout => \PWMtest|LessThan1~59_cout\);
+
+-- Location: LCCOMB_X50_Y34_N28
+\PWMtest|LessThan1~61\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~61_cout\ = CARRY((\PWMtest|countactual1\(30) & (\PWMtest|Add3~52_combout\ & !\PWMtest|LessThan1~59_cout\)) # (!\PWMtest|countactual1\(30) & ((\PWMtest|Add3~52_combout\) # (!\PWMtest|LessThan1~59_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(30),
+	datab => \PWMtest|Add3~52_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan1~59_cout\,
+	cout => \PWMtest|LessThan1~61_cout\);
+
+-- Location: LCCOMB_X50_Y34_N30
+\PWMtest|LessThan1~62\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan1~62_combout\ = (\PWMtest|Add3~54_combout\ & (\PWMtest|countactual1\(31) & \PWMtest|LessThan1~61_cout\)) # (!\PWMtest|Add3~54_combout\ & ((\PWMtest|countactual1\(31)) # (\PWMtest|LessThan1~61_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1101010011010100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add3~54_combout\,
+	datab => \PWMtest|countactual1\(31),
+	cin => \PWMtest|LessThan1~61_cout\,
+	combout => \PWMtest|LessThan1~62_combout\);
+
+-- Location: LCCOMB_X56_Y34_N10
+\PWMtest|Selector39~11\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector39~11_combout\ = (\PWMtest|LessThan1~62_combout\ & (((\PWMtest|est_act.boost1softs~q\)))) # (!\PWMtest|LessThan1~62_combout\ & ((\PWMtest|LessThan0~62_combout\ & (\PWMtest|est_act.boost1softs~q\)) # (!\PWMtest|LessThan0~62_combout\ & 
+-- (!\PWMtest|est_act.boost1softs~q\ & \PWMtest|est_act.buck1~q\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1110000111100000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|LessThan1~62_combout\,
+	datab => \PWMtest|LessThan0~62_combout\,
+	datac => \PWMtest|est_act.boost1softs~q\,
+	datad => \PWMtest|est_act.buck1~q\,
+	combout => \PWMtest|Selector39~11_combout\);
+
+-- Location: LCCOMB_X56_Y34_N22
+\PWMtest|Selector39~9\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector39~9_combout\ = (!\PWMtest|countactual1\(31) & (!\PWMtest|est_act.boost1~q\ & ((\PWMtest|LessThan3~8_combout\) # (!\PWMtest|LessThan3~6_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000100011",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|LessThan3~8_combout\,
+	datab => \PWMtest|countactual1\(31),
+	datac => \PWMtest|LessThan3~6_combout\,
+	datad => \PWMtest|est_act.boost1~q\,
+	combout => \PWMtest|Selector39~9_combout\);
+
+-- Location: LCCOMB_X56_Y34_N0
+\PWMtest|Selector39~10\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector39~10_combout\ = (\PWMtest|est_act.idle~q\ & (!\PWMtest|Selector41~0_combout\ & ((!\PWMtest|Selector39~9_combout\) # (!\PWMtest|Selector39~6_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|est_act.idle~q\,
+	datab => \PWMtest|Selector39~6_combout\,
+	datac => \PWMtest|Selector39~9_combout\,
+	datad => \PWMtest|Selector41~0_combout\,
+	combout => \PWMtest|Selector39~10_combout\);
+
+-- Location: LCCOMB_X56_Y34_N12
+\PWMtest|Selector39~12\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector39~12_combout\ = (\PWMtest|Selector39~11_combout\ & (\PWMtest|est_act.boost1softs~q\ & (\PWMtest|est_act.boost2softs~q\ & \PWMtest|Selector39~10_combout\))) # (!\PWMtest|Selector39~11_combout\ & ((\PWMtest|est_act.boost1softs~q\) # 
+-- ((\PWMtest|est_act.boost2softs~q\ & \PWMtest|Selector39~10_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1101010001000100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Selector39~11_combout\,
+	datab => \PWMtest|est_act.boost1softs~q\,
+	datac => \PWMtest|est_act.boost2softs~q\,
+	datad => \PWMtest|Selector39~10_combout\,
+	combout => \PWMtest|Selector39~12_combout\);
+
+-- Location: FF_X56_Y34_N13
+\PWMtest|est_act.boost2softs\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector39~12_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|est_act.boost2softs~q\);
+
+-- Location: LCCOMB_X52_Y34_N20
+\PWMtest|countactual1[10]~32\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|countactual1[10]~32_combout\ = (!\PWMtest|est_act.boost2softs~q\ & !\PWMtest|est_act.buck2~q\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000001111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \PWMtest|est_act.boost2softs~q\,
+	datad => \PWMtest|est_act.buck2~q\,
+	combout => \PWMtest|countactual1[10]~32_combout\);
+
+-- Location: LCCOMB_X52_Y33_N14
+\PWMtest|softstart_duty_act[1]~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|softstart_duty_act[1]~0_combout\ = (\PWMtest|countactual1[10]~32_combout\ & (\PWMtest|LessThan8~0_combout\ & ((\PWMtest|est_act.boost2~q\)))) # (!\PWMtest|countactual1[10]~32_combout\ & ((\PWMtest|est_sig~7_combout\) # 
+-- ((\PWMtest|LessThan8~0_combout\ & \PWMtest|est_act.boost2~q\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1101110001010000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1[10]~32_combout\,
+	datab => \PWMtest|LessThan8~0_combout\,
+	datac => \PWMtest|est_sig~7_combout\,
+	datad => \PWMtest|est_act.boost2~q\,
+	combout => \PWMtest|softstart_duty_act[1]~0_combout\);
+
+-- Location: LCCOMB_X56_Y34_N4
+\PWMtest|softstart_duty_act[1]~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|softstart_duty_act[1]~2_combout\ = (\PWMtest|est_act.buck1~q\) # ((\PWMtest|est_act.boost1softs~q\) # ((\PWMtest|est_act.boost2~q\ & \PWMtest|countactual1\(31))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111011111010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|est_act.buck1~q\,
+	datab => \PWMtest|est_act.boost2~q\,
+	datac => \PWMtest|est_act.boost1softs~q\,
+	datad => \PWMtest|countactual1\(31),
+	combout => \PWMtest|softstart_duty_act[1]~2_combout\);
+
+-- Location: LCCOMB_X56_Y34_N30
+\PWMtest|softstart_duty_act[1]~3\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|softstart_duty_act[1]~3_combout\ = (\PWMtest|est_act.boost1~q\) # ((\PWMtest|softstart_duty_act[1]~2_combout\) # ((\PWMtest|est_act.boost2~q\ & \PWMtest|LessThan3~9_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111011111010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|est_act.boost1~q\,
+	datab => \PWMtest|est_act.boost2~q\,
+	datac => \PWMtest|softstart_duty_act[1]~2_combout\,
+	datad => \PWMtest|LessThan3~9_combout\,
+	combout => \PWMtest|softstart_duty_act[1]~3_combout\);
+
+-- Location: LCCOMB_X52_Y34_N0
+\PWMtest|softstart_duty_act[1]~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|softstart_duty_act[1]~1_combout\ = (!\PWMtest|softstart_duty_act\(31) & (\PWMtest|est_act.boost2~q\ & ((!\PWMtest|LessThan4~23_combout\) # (!\PWMtest|LessThan4~6_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0001010100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(31),
+	datab => \PWMtest|LessThan4~6_combout\,
+	datac => \PWMtest|LessThan4~23_combout\,
+	datad => \PWMtest|est_act.boost2~q\,
+	combout => \PWMtest|softstart_duty_act[1]~1_combout\);
+
+-- Location: LCCOMB_X55_Y33_N4
+\PWMtest|softstart_duty_act[1]~4\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|softstart_duty_act[1]~4_combout\ = (!\PWMtest|softstart_duty_act[1]~0_combout\ & (!\PWMtest|softstart_duty_act[1]~3_combout\ & !\PWMtest|softstart_duty_act[1]~1_combout\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000100000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act[1]~0_combout\,
+	datab => \PWMtest|softstart_duty_act[1]~3_combout\,
+	datac => \PWMtest|softstart_duty_act[1]~1_combout\,
+	combout => \PWMtest|softstart_duty_act[1]~4_combout\);
+
+-- Location: LCCOMB_X54_Y33_N30
+\PWMtest|Add5~62\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add5~62_combout\ = \PWMtest|softstart_duty_act\(31) $ (\PWMtest|Add5~61\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(31),
+	cin => \PWMtest|Add5~61\,
+	combout => \PWMtest|Add5~62_combout\);
+
+-- Location: LCCOMB_X55_Y33_N24
+\PWMtest|softstart_duty_act[31]~7\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|softstart_duty_act[31]~7_combout\ = (\PWMtest|softstart_duty_act[1]~4_combout\ & (!\PWMtest|softstart_duty_act[28]~6_combout\ & ((\PWMtest|Add5~62_combout\)))) # (!\PWMtest|softstart_duty_act[1]~4_combout\ & 
+-- (((\PWMtest|softstart_duty_act\(31)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0111001001010000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act[1]~4_combout\,
+	datab => \PWMtest|softstart_duty_act[28]~6_combout\,
+	datac => \PWMtest|softstart_duty_act\(31),
+	datad => \PWMtest|Add5~62_combout\,
+	combout => \PWMtest|softstart_duty_act[31]~7_combout\);
+
+-- Location: FF_X55_Y33_N25
+\PWMtest|softstart_duty_act[31]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|softstart_duty_act[31]~7_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|softstart_duty_act\(31));
+
+-- Location: LCCOMB_X51_Y33_N2
+\PWMtest|Add6~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~0_combout\ = (\PWMtest|softstart_duty_act\(1) & (!\PWMtest|softstart_duty_act\(0) & VCC)) # (!\PWMtest|softstart_duty_act\(1) & (\PWMtest|softstart_duty_act\(0) $ (GND)))
+-- \PWMtest|Add6~1\ = CARRY((!\PWMtest|softstart_duty_act\(1) & !\PWMtest|softstart_duty_act\(0)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0110011000010001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(1),
+	datab => \PWMtest|softstart_duty_act\(0),
+	datad => VCC,
+	combout => \PWMtest|Add6~0_combout\,
+	cout => \PWMtest|Add6~1\);
+
+-- Location: LCCOMB_X51_Y33_N4
+\PWMtest|Add6~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~2_combout\ = (\PWMtest|softstart_duty_act\(2) & ((\PWMtest|Add6~1\) # (GND))) # (!\PWMtest|softstart_duty_act\(2) & (!\PWMtest|Add6~1\))
+-- \PWMtest|Add6~3\ = CARRY((\PWMtest|softstart_duty_act\(2)) # (!\PWMtest|Add6~1\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(2),
+	datad => VCC,
+	cin => \PWMtest|Add6~1\,
+	combout => \PWMtest|Add6~2_combout\,
+	cout => \PWMtest|Add6~3\);
+
+-- Location: LCCOMB_X51_Y33_N6
+\PWMtest|Add6~4\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~4_combout\ = (\PWMtest|softstart_duty_act\(3) & (\PWMtest|Add6~3\ $ (GND))) # (!\PWMtest|softstart_duty_act\(3) & ((GND) # (!\PWMtest|Add6~3\)))
+-- \PWMtest|Add6~5\ = CARRY((!\PWMtest|Add6~3\) # (!\PWMtest|softstart_duty_act\(3)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010101011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(3),
+	datad => VCC,
+	cin => \PWMtest|Add6~3\,
+	combout => \PWMtest|Add6~4_combout\,
+	cout => \PWMtest|Add6~5\);
+
+-- Location: LCCOMB_X51_Y33_N8
+\PWMtest|Add6~6\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~6_combout\ = (\PWMtest|softstart_duty_act\(4) & (\PWMtest|Add6~5\ & VCC)) # (!\PWMtest|softstart_duty_act\(4) & (!\PWMtest|Add6~5\))
+-- \PWMtest|Add6~7\ = CARRY((!\PWMtest|softstart_duty_act\(4) & !\PWMtest|Add6~5\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(4),
+	datad => VCC,
+	cin => \PWMtest|Add6~5\,
+	combout => \PWMtest|Add6~6_combout\,
+	cout => \PWMtest|Add6~7\);
+
+-- Location: LCCOMB_X51_Y33_N10
+\PWMtest|Add6~8\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~8_combout\ = (\PWMtest|softstart_duty_act\(5) & ((GND) # (!\PWMtest|Add6~7\))) # (!\PWMtest|softstart_duty_act\(5) & (\PWMtest|Add6~7\ $ (GND)))
+-- \PWMtest|Add6~9\ = CARRY((\PWMtest|softstart_duty_act\(5)) # (!\PWMtest|Add6~7\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110011001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(5),
+	datad => VCC,
+	cin => \PWMtest|Add6~7\,
+	combout => \PWMtest|Add6~8_combout\,
+	cout => \PWMtest|Add6~9\);
+
+-- Location: LCCOMB_X51_Y33_N12
+\PWMtest|Add6~10\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~10_combout\ = (\PWMtest|softstart_duty_act\(6) & (\PWMtest|Add6~9\ & VCC)) # (!\PWMtest|softstart_duty_act\(6) & (!\PWMtest|Add6~9\))
+-- \PWMtest|Add6~11\ = CARRY((!\PWMtest|softstart_duty_act\(6) & !\PWMtest|Add6~9\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(6),
+	datad => VCC,
+	cin => \PWMtest|Add6~9\,
+	combout => \PWMtest|Add6~10_combout\,
+	cout => \PWMtest|Add6~11\);
+
+-- Location: LCCOMB_X51_Y33_N14
+\PWMtest|Add6~12\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~12_combout\ = (\PWMtest|softstart_duty_act\(7) & ((GND) # (!\PWMtest|Add6~11\))) # (!\PWMtest|softstart_duty_act\(7) & (\PWMtest|Add6~11\ $ (GND)))
+-- \PWMtest|Add6~13\ = CARRY((\PWMtest|softstart_duty_act\(7)) # (!\PWMtest|Add6~11\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110011001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(7),
+	datad => VCC,
+	cin => \PWMtest|Add6~11\,
+	combout => \PWMtest|Add6~12_combout\,
+	cout => \PWMtest|Add6~13\);
+
+-- Location: LCCOMB_X51_Y33_N16
+\PWMtest|Add6~14\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~14_combout\ = (\PWMtest|softstart_duty_act\(8) & (\PWMtest|Add6~13\ & VCC)) # (!\PWMtest|softstart_duty_act\(8) & (!\PWMtest|Add6~13\))
+-- \PWMtest|Add6~15\ = CARRY((!\PWMtest|softstart_duty_act\(8) & !\PWMtest|Add6~13\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(8),
+	datad => VCC,
+	cin => \PWMtest|Add6~13\,
+	combout => \PWMtest|Add6~14_combout\,
+	cout => \PWMtest|Add6~15\);
+
+-- Location: LCCOMB_X51_Y33_N18
+\PWMtest|Add6~16\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~16_combout\ = (\PWMtest|softstart_duty_act\(9) & ((GND) # (!\PWMtest|Add6~15\))) # (!\PWMtest|softstart_duty_act\(9) & (\PWMtest|Add6~15\ $ (GND)))
+-- \PWMtest|Add6~17\ = CARRY((\PWMtest|softstart_duty_act\(9)) # (!\PWMtest|Add6~15\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110011001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(9),
+	datad => VCC,
+	cin => \PWMtest|Add6~15\,
+	combout => \PWMtest|Add6~16_combout\,
+	cout => \PWMtest|Add6~17\);
+
+-- Location: LCCOMB_X51_Y33_N20
+\PWMtest|Add6~18\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~18_combout\ = (\PWMtest|softstart_duty_act\(10) & (\PWMtest|Add6~17\ & VCC)) # (!\PWMtest|softstart_duty_act\(10) & (!\PWMtest|Add6~17\))
+-- \PWMtest|Add6~19\ = CARRY((!\PWMtest|softstart_duty_act\(10) & !\PWMtest|Add6~17\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(10),
+	datad => VCC,
+	cin => \PWMtest|Add6~17\,
+	combout => \PWMtest|Add6~18_combout\,
+	cout => \PWMtest|Add6~19\);
+
+-- Location: LCCOMB_X51_Y33_N22
+\PWMtest|Add6~20\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~20_combout\ = (\PWMtest|softstart_duty_act\(11) & ((GND) # (!\PWMtest|Add6~19\))) # (!\PWMtest|softstart_duty_act\(11) & (\PWMtest|Add6~19\ $ (GND)))
+-- \PWMtest|Add6~21\ = CARRY((\PWMtest|softstart_duty_act\(11)) # (!\PWMtest|Add6~19\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101010101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(11),
+	datad => VCC,
+	cin => \PWMtest|Add6~19\,
+	combout => \PWMtest|Add6~20_combout\,
+	cout => \PWMtest|Add6~21\);
+
+-- Location: LCCOMB_X51_Y33_N24
+\PWMtest|Add6~22\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~22_combout\ = (\PWMtest|softstart_duty_act\(12) & (\PWMtest|Add6~21\ & VCC)) # (!\PWMtest|softstart_duty_act\(12) & (!\PWMtest|Add6~21\))
+-- \PWMtest|Add6~23\ = CARRY((!\PWMtest|softstart_duty_act\(12) & !\PWMtest|Add6~21\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(12),
+	datad => VCC,
+	cin => \PWMtest|Add6~21\,
+	combout => \PWMtest|Add6~22_combout\,
+	cout => \PWMtest|Add6~23\);
+
+-- Location: LCCOMB_X51_Y33_N26
+\PWMtest|Add6~24\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~24_combout\ = (\PWMtest|softstart_duty_act\(13) & ((GND) # (!\PWMtest|Add6~23\))) # (!\PWMtest|softstart_duty_act\(13) & (\PWMtest|Add6~23\ $ (GND)))
+-- \PWMtest|Add6~25\ = CARRY((\PWMtest|softstart_duty_act\(13)) # (!\PWMtest|Add6~23\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101010101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(13),
+	datad => VCC,
+	cin => \PWMtest|Add6~23\,
+	combout => \PWMtest|Add6~24_combout\,
+	cout => \PWMtest|Add6~25\);
+
+-- Location: LCCOMB_X51_Y33_N28
+\PWMtest|Add6~26\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~26_combout\ = (\PWMtest|softstart_duty_act\(14) & (\PWMtest|Add6~25\ & VCC)) # (!\PWMtest|softstart_duty_act\(14) & (!\PWMtest|Add6~25\))
+-- \PWMtest|Add6~27\ = CARRY((!\PWMtest|softstart_duty_act\(14) & !\PWMtest|Add6~25\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(14),
+	datad => VCC,
+	cin => \PWMtest|Add6~25\,
+	combout => \PWMtest|Add6~26_combout\,
+	cout => \PWMtest|Add6~27\);
+
+-- Location: LCCOMB_X51_Y33_N30
+\PWMtest|Add6~28\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~28_combout\ = (\PWMtest|softstart_duty_act\(15) & ((GND) # (!\PWMtest|Add6~27\))) # (!\PWMtest|softstart_duty_act\(15) & (\PWMtest|Add6~27\ $ (GND)))
+-- \PWMtest|Add6~29\ = CARRY((\PWMtest|softstart_duty_act\(15)) # (!\PWMtest|Add6~27\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110011001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(15),
+	datad => VCC,
+	cin => \PWMtest|Add6~27\,
+	combout => \PWMtest|Add6~28_combout\,
+	cout => \PWMtest|Add6~29\);
+
+-- Location: LCCOMB_X51_Y32_N0
+\PWMtest|Add6~30\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~30_combout\ = (\PWMtest|softstart_duty_act\(16) & (\PWMtest|Add6~29\ & VCC)) # (!\PWMtest|softstart_duty_act\(16) & (!\PWMtest|Add6~29\))
+-- \PWMtest|Add6~31\ = CARRY((!\PWMtest|softstart_duty_act\(16) & !\PWMtest|Add6~29\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(16),
+	datad => VCC,
+	cin => \PWMtest|Add6~29\,
+	combout => \PWMtest|Add6~30_combout\,
+	cout => \PWMtest|Add6~31\);
+
+-- Location: LCCOMB_X51_Y32_N2
+\PWMtest|Add6~32\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~32_combout\ = (\PWMtest|softstart_duty_act\(17) & ((GND) # (!\PWMtest|Add6~31\))) # (!\PWMtest|softstart_duty_act\(17) & (\PWMtest|Add6~31\ $ (GND)))
+-- \PWMtest|Add6~33\ = CARRY((\PWMtest|softstart_duty_act\(17)) # (!\PWMtest|Add6~31\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101010101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(17),
+	datad => VCC,
+	cin => \PWMtest|Add6~31\,
+	combout => \PWMtest|Add6~32_combout\,
+	cout => \PWMtest|Add6~33\);
+
+-- Location: LCCOMB_X51_Y32_N4
+\PWMtest|Add6~34\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~34_combout\ = (\PWMtest|softstart_duty_act\(18) & (\PWMtest|Add6~33\ & VCC)) # (!\PWMtest|softstart_duty_act\(18) & (!\PWMtest|Add6~33\))
+-- \PWMtest|Add6~35\ = CARRY((!\PWMtest|softstart_duty_act\(18) & !\PWMtest|Add6~33\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(18),
+	datad => VCC,
+	cin => \PWMtest|Add6~33\,
+	combout => \PWMtest|Add6~34_combout\,
+	cout => \PWMtest|Add6~35\);
+
+-- Location: LCCOMB_X51_Y32_N6
+\PWMtest|Add6~36\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~36_combout\ = (\PWMtest|softstart_duty_act\(19) & ((GND) # (!\PWMtest|Add6~35\))) # (!\PWMtest|softstart_duty_act\(19) & (\PWMtest|Add6~35\ $ (GND)))
+-- \PWMtest|Add6~37\ = CARRY((\PWMtest|softstart_duty_act\(19)) # (!\PWMtest|Add6~35\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110011001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(19),
+	datad => VCC,
+	cin => \PWMtest|Add6~35\,
+	combout => \PWMtest|Add6~36_combout\,
+	cout => \PWMtest|Add6~37\);
+
+-- Location: LCCOMB_X51_Y32_N8
+\PWMtest|Add6~38\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~38_combout\ = (\PWMtest|softstart_duty_act\(20) & (\PWMtest|Add6~37\ & VCC)) # (!\PWMtest|softstart_duty_act\(20) & (!\PWMtest|Add6~37\))
+-- \PWMtest|Add6~39\ = CARRY((!\PWMtest|softstart_duty_act\(20) & !\PWMtest|Add6~37\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(20),
+	datad => VCC,
+	cin => \PWMtest|Add6~37\,
+	combout => \PWMtest|Add6~38_combout\,
+	cout => \PWMtest|Add6~39\);
+
+-- Location: LCCOMB_X51_Y32_N10
+\PWMtest|Add6~40\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~40_combout\ = (\PWMtest|softstart_duty_act\(21) & ((GND) # (!\PWMtest|Add6~39\))) # (!\PWMtest|softstart_duty_act\(21) & (\PWMtest|Add6~39\ $ (GND)))
+-- \PWMtest|Add6~41\ = CARRY((\PWMtest|softstart_duty_act\(21)) # (!\PWMtest|Add6~39\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101010101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(21),
+	datad => VCC,
+	cin => \PWMtest|Add6~39\,
+	combout => \PWMtest|Add6~40_combout\,
+	cout => \PWMtest|Add6~41\);
+
+-- Location: LCCOMB_X51_Y32_N12
+\PWMtest|Add6~42\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~42_combout\ = (\PWMtest|softstart_duty_act\(22) & (\PWMtest|Add6~41\ & VCC)) # (!\PWMtest|softstart_duty_act\(22) & (!\PWMtest|Add6~41\))
+-- \PWMtest|Add6~43\ = CARRY((!\PWMtest|softstart_duty_act\(22) & !\PWMtest|Add6~41\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(22),
+	datad => VCC,
+	cin => \PWMtest|Add6~41\,
+	combout => \PWMtest|Add6~42_combout\,
+	cout => \PWMtest|Add6~43\);
+
+-- Location: LCCOMB_X51_Y32_N14
+\PWMtest|Add6~44\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~44_combout\ = (\PWMtest|softstart_duty_act\(23) & ((GND) # (!\PWMtest|Add6~43\))) # (!\PWMtest|softstart_duty_act\(23) & (\PWMtest|Add6~43\ $ (GND)))
+-- \PWMtest|Add6~45\ = CARRY((\PWMtest|softstart_duty_act\(23)) # (!\PWMtest|Add6~43\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110011001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(23),
+	datad => VCC,
+	cin => \PWMtest|Add6~43\,
+	combout => \PWMtest|Add6~44_combout\,
+	cout => \PWMtest|Add6~45\);
+
+-- Location: LCCOMB_X51_Y32_N16
+\PWMtest|Add6~46\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~46_combout\ = (\PWMtest|softstart_duty_act\(24) & (\PWMtest|Add6~45\ & VCC)) # (!\PWMtest|softstart_duty_act\(24) & (!\PWMtest|Add6~45\))
+-- \PWMtest|Add6~47\ = CARRY((!\PWMtest|softstart_duty_act\(24) & !\PWMtest|Add6~45\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(24),
+	datad => VCC,
+	cin => \PWMtest|Add6~45\,
+	combout => \PWMtest|Add6~46_combout\,
+	cout => \PWMtest|Add6~47\);
+
+-- Location: LCCOMB_X51_Y32_N18
+\PWMtest|Add6~48\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~48_combout\ = (\PWMtest|softstart_duty_act\(25) & ((GND) # (!\PWMtest|Add6~47\))) # (!\PWMtest|softstart_duty_act\(25) & (\PWMtest|Add6~47\ $ (GND)))
+-- \PWMtest|Add6~49\ = CARRY((\PWMtest|softstart_duty_act\(25)) # (!\PWMtest|Add6~47\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110011001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(25),
+	datad => VCC,
+	cin => \PWMtest|Add6~47\,
+	combout => \PWMtest|Add6~48_combout\,
+	cout => \PWMtest|Add6~49\);
+
+-- Location: LCCOMB_X51_Y32_N20
+\PWMtest|Add6~50\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~50_combout\ = (\PWMtest|softstart_duty_act\(26) & (\PWMtest|Add6~49\ & VCC)) # (!\PWMtest|softstart_duty_act\(26) & (!\PWMtest|Add6~49\))
+-- \PWMtest|Add6~51\ = CARRY((!\PWMtest|softstart_duty_act\(26) & !\PWMtest|Add6~49\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(26),
+	datad => VCC,
+	cin => \PWMtest|Add6~49\,
+	combout => \PWMtest|Add6~50_combout\,
+	cout => \PWMtest|Add6~51\);
+
+-- Location: LCCOMB_X51_Y32_N22
+\PWMtest|Add6~52\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~52_combout\ = (\PWMtest|softstart_duty_act\(27) & ((GND) # (!\PWMtest|Add6~51\))) # (!\PWMtest|softstart_duty_act\(27) & (\PWMtest|Add6~51\ $ (GND)))
+-- \PWMtest|Add6~53\ = CARRY((\PWMtest|softstart_duty_act\(27)) # (!\PWMtest|Add6~51\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101010101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(27),
+	datad => VCC,
+	cin => \PWMtest|Add6~51\,
+	combout => \PWMtest|Add6~52_combout\,
+	cout => \PWMtest|Add6~53\);
+
+-- Location: LCCOMB_X51_Y32_N24
+\PWMtest|Add6~54\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~54_combout\ = (\PWMtest|softstart_duty_act\(28) & (\PWMtest|Add6~53\ & VCC)) # (!\PWMtest|softstart_duty_act\(28) & (!\PWMtest|Add6~53\))
+-- \PWMtest|Add6~55\ = CARRY((!\PWMtest|softstart_duty_act\(28) & !\PWMtest|Add6~53\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100000011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|softstart_duty_act\(28),
+	datad => VCC,
+	cin => \PWMtest|Add6~53\,
+	combout => \PWMtest|Add6~54_combout\,
+	cout => \PWMtest|Add6~55\);
+
+-- Location: LCCOMB_X51_Y32_N26
+\PWMtest|Add6~56\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~56_combout\ = (\PWMtest|softstart_duty_act\(29) & ((GND) # (!\PWMtest|Add6~55\))) # (!\PWMtest|softstart_duty_act\(29) & (\PWMtest|Add6~55\ $ (GND)))
+-- \PWMtest|Add6~57\ = CARRY((\PWMtest|softstart_duty_act\(29)) # (!\PWMtest|Add6~55\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101010101111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(29),
+	datad => VCC,
+	cin => \PWMtest|Add6~55\,
+	combout => \PWMtest|Add6~56_combout\,
+	cout => \PWMtest|Add6~57\);
+
+-- Location: LCCOMB_X51_Y32_N28
+\PWMtest|Add6~58\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~58_combout\ = (\PWMtest|softstart_duty_act\(30) & (\PWMtest|Add6~57\ & VCC)) # (!\PWMtest|softstart_duty_act\(30) & (!\PWMtest|Add6~57\))
+-- \PWMtest|Add6~59\ = CARRY((!\PWMtest|softstart_duty_act\(30) & !\PWMtest|Add6~57\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100000101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|softstart_duty_act\(30),
+	datad => VCC,
+	cin => \PWMtest|Add6~57\,
+	combout => \PWMtest|Add6~58_combout\,
+	cout => \PWMtest|Add6~59\);
+
+-- Location: LCCOMB_X51_Y32_N30
+\PWMtest|Add6~60\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Add6~60_combout\ = \PWMtest|Add6~59\ $ (\PWMtest|softstart_duty_act\(31))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111111110000",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datad => \PWMtest|softstart_duty_act\(31),
+	cin => \PWMtest|Add6~59\,
+	combout => \PWMtest|Add6~60_combout\);
+
+-- Location: LCCOMB_X50_Y33_N0
+\PWMtest|LessThan6~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~1_cout\ = CARRY((!\PWMtest|countactual1\(0) & \PWMtest|softstart_duty_act\(0)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001000100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(0),
+	datab => \PWMtest|softstart_duty_act\(0),
+	datad => VCC,
+	cout => \PWMtest|LessThan6~1_cout\);
+
+-- Location: LCCOMB_X50_Y33_N2
+\PWMtest|LessThan6~3\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~3_cout\ = CARRY((\PWMtest|countactual1\(1) & ((!\PWMtest|LessThan6~1_cout\) # (!\PWMtest|Add6~0_combout\))) # (!\PWMtest|countactual1\(1) & (!\PWMtest|Add6~0_combout\ & !\PWMtest|LessThan6~1_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(1),
+	datab => \PWMtest|Add6~0_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~1_cout\,
+	cout => \PWMtest|LessThan6~3_cout\);
+
+-- Location: LCCOMB_X50_Y33_N4
+\PWMtest|LessThan6~5\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~5_cout\ = CARRY((\PWMtest|Add6~2_combout\ & ((!\PWMtest|LessThan6~3_cout\) # (!\PWMtest|countactual1\(2)))) # (!\PWMtest|Add6~2_combout\ & (!\PWMtest|countactual1\(2) & !\PWMtest|LessThan6~3_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add6~2_combout\,
+	datab => \PWMtest|countactual1\(2),
+	datad => VCC,
+	cin => \PWMtest|LessThan6~3_cout\,
+	cout => \PWMtest|LessThan6~5_cout\);
+
+-- Location: LCCOMB_X50_Y33_N6
+\PWMtest|LessThan6~7\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~7_cout\ = CARRY((\PWMtest|Add6~4_combout\ & (\PWMtest|countactual1\(3) & !\PWMtest|LessThan6~5_cout\)) # (!\PWMtest|Add6~4_combout\ & ((\PWMtest|countactual1\(3)) # (!\PWMtest|LessThan6~5_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add6~4_combout\,
+	datab => \PWMtest|countactual1\(3),
+	datad => VCC,
+	cin => \PWMtest|LessThan6~5_cout\,
+	cout => \PWMtest|LessThan6~7_cout\);
+
+-- Location: LCCOMB_X50_Y33_N8
+\PWMtest|LessThan6~9\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~9_cout\ = CARRY((\PWMtest|countactual1\(4) & (\PWMtest|Add6~6_combout\ & !\PWMtest|LessThan6~7_cout\)) # (!\PWMtest|countactual1\(4) & ((\PWMtest|Add6~6_combout\) # (!\PWMtest|LessThan6~7_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(4),
+	datab => \PWMtest|Add6~6_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~7_cout\,
+	cout => \PWMtest|LessThan6~9_cout\);
+
+-- Location: LCCOMB_X50_Y33_N10
+\PWMtest|LessThan6~11\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~11_cout\ = CARRY((\PWMtest|countactual1\(5) & ((!\PWMtest|LessThan6~9_cout\) # (!\PWMtest|Add6~8_combout\))) # (!\PWMtest|countactual1\(5) & (!\PWMtest|Add6~8_combout\ & !\PWMtest|LessThan6~9_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(5),
+	datab => \PWMtest|Add6~8_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~9_cout\,
+	cout => \PWMtest|LessThan6~11_cout\);
+
+-- Location: LCCOMB_X50_Y33_N12
+\PWMtest|LessThan6~13\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~13_cout\ = CARRY((\PWMtest|countactual1\(6) & (\PWMtest|Add6~10_combout\ & !\PWMtest|LessThan6~11_cout\)) # (!\PWMtest|countactual1\(6) & ((\PWMtest|Add6~10_combout\) # (!\PWMtest|LessThan6~11_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(6),
+	datab => \PWMtest|Add6~10_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~11_cout\,
+	cout => \PWMtest|LessThan6~13_cout\);
+
+-- Location: LCCOMB_X50_Y33_N14
+\PWMtest|LessThan6~15\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~15_cout\ = CARRY((\PWMtest|countactual1\(7) & ((!\PWMtest|LessThan6~13_cout\) # (!\PWMtest|Add6~12_combout\))) # (!\PWMtest|countactual1\(7) & (!\PWMtest|Add6~12_combout\ & !\PWMtest|LessThan6~13_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(7),
+	datab => \PWMtest|Add6~12_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~13_cout\,
+	cout => \PWMtest|LessThan6~15_cout\);
+
+-- Location: LCCOMB_X50_Y33_N16
+\PWMtest|LessThan6~17\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~17_cout\ = CARRY((\PWMtest|countactual1\(8) & (\PWMtest|Add6~14_combout\ & !\PWMtest|LessThan6~15_cout\)) # (!\PWMtest|countactual1\(8) & ((\PWMtest|Add6~14_combout\) # (!\PWMtest|LessThan6~15_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(8),
+	datab => \PWMtest|Add6~14_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~15_cout\,
+	cout => \PWMtest|LessThan6~17_cout\);
+
+-- Location: LCCOMB_X50_Y33_N18
+\PWMtest|LessThan6~19\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~19_cout\ = CARRY((\PWMtest|countactual1\(9) & ((!\PWMtest|LessThan6~17_cout\) # (!\PWMtest|Add6~16_combout\))) # (!\PWMtest|countactual1\(9) & (!\PWMtest|Add6~16_combout\ & !\PWMtest|LessThan6~17_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(9),
+	datab => \PWMtest|Add6~16_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~17_cout\,
+	cout => \PWMtest|LessThan6~19_cout\);
+
+-- Location: LCCOMB_X50_Y33_N20
+\PWMtest|LessThan6~21\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~21_cout\ = CARRY((\PWMtest|Add6~18_combout\ & ((!\PWMtest|LessThan6~19_cout\) # (!\PWMtest|countactual1\(10)))) # (!\PWMtest|Add6~18_combout\ & (!\PWMtest|countactual1\(10) & !\PWMtest|LessThan6~19_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add6~18_combout\,
+	datab => \PWMtest|countactual1\(10),
+	datad => VCC,
+	cin => \PWMtest|LessThan6~19_cout\,
+	cout => \PWMtest|LessThan6~21_cout\);
+
+-- Location: LCCOMB_X50_Y33_N22
+\PWMtest|LessThan6~23\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~23_cout\ = CARRY((\PWMtest|countactual1\(11) & ((!\PWMtest|LessThan6~21_cout\) # (!\PWMtest|Add6~20_combout\))) # (!\PWMtest|countactual1\(11) & (!\PWMtest|Add6~20_combout\ & !\PWMtest|LessThan6~21_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(11),
+	datab => \PWMtest|Add6~20_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~21_cout\,
+	cout => \PWMtest|LessThan6~23_cout\);
+
+-- Location: LCCOMB_X50_Y33_N24
+\PWMtest|LessThan6~25\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~25_cout\ = CARRY((\PWMtest|Add6~22_combout\ & ((!\PWMtest|LessThan6~23_cout\) # (!\PWMtest|countactual1\(12)))) # (!\PWMtest|Add6~22_combout\ & (!\PWMtest|countactual1\(12) & !\PWMtest|LessThan6~23_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add6~22_combout\,
+	datab => \PWMtest|countactual1\(12),
+	datad => VCC,
+	cin => \PWMtest|LessThan6~23_cout\,
+	cout => \PWMtest|LessThan6~25_cout\);
+
+-- Location: LCCOMB_X50_Y33_N26
+\PWMtest|LessThan6~27\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~27_cout\ = CARRY((\PWMtest|countactual1\(13) & ((!\PWMtest|LessThan6~25_cout\) # (!\PWMtest|Add6~24_combout\))) # (!\PWMtest|countactual1\(13) & (!\PWMtest|Add6~24_combout\ & !\PWMtest|LessThan6~25_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(13),
+	datab => \PWMtest|Add6~24_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~25_cout\,
+	cout => \PWMtest|LessThan6~27_cout\);
+
+-- Location: LCCOMB_X50_Y33_N28
+\PWMtest|LessThan6~29\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~29_cout\ = CARRY((\PWMtest|countactual1\(14) & (\PWMtest|Add6~26_combout\ & !\PWMtest|LessThan6~27_cout\)) # (!\PWMtest|countactual1\(14) & ((\PWMtest|Add6~26_combout\) # (!\PWMtest|LessThan6~27_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(14),
+	datab => \PWMtest|Add6~26_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~27_cout\,
+	cout => \PWMtest|LessThan6~29_cout\);
+
+-- Location: LCCOMB_X50_Y33_N30
+\PWMtest|LessThan6~31\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~31_cout\ = CARRY((\PWMtest|Add6~28_combout\ & (\PWMtest|countactual1\(15) & !\PWMtest|LessThan6~29_cout\)) # (!\PWMtest|Add6~28_combout\ & ((\PWMtest|countactual1\(15)) # (!\PWMtest|LessThan6~29_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add6~28_combout\,
+	datab => \PWMtest|countactual1\(15),
+	datad => VCC,
+	cin => \PWMtest|LessThan6~29_cout\,
+	cout => \PWMtest|LessThan6~31_cout\);
+
+-- Location: LCCOMB_X50_Y32_N0
+\PWMtest|LessThan6~33\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~33_cout\ = CARRY((\PWMtest|countactual1\(16) & (\PWMtest|Add6~30_combout\ & !\PWMtest|LessThan6~31_cout\)) # (!\PWMtest|countactual1\(16) & ((\PWMtest|Add6~30_combout\) # (!\PWMtest|LessThan6~31_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(16),
+	datab => \PWMtest|Add6~30_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~31_cout\,
+	cout => \PWMtest|LessThan6~33_cout\);
+
+-- Location: LCCOMB_X50_Y32_N2
+\PWMtest|LessThan6~35\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~35_cout\ = CARRY((\PWMtest|countactual1\(17) & ((!\PWMtest|LessThan6~33_cout\) # (!\PWMtest|Add6~32_combout\))) # (!\PWMtest|countactual1\(17) & (!\PWMtest|Add6~32_combout\ & !\PWMtest|LessThan6~33_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(17),
+	datab => \PWMtest|Add6~32_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~33_cout\,
+	cout => \PWMtest|LessThan6~35_cout\);
+
+-- Location: LCCOMB_X50_Y32_N4
+\PWMtest|LessThan6~37\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~37_cout\ = CARRY((\PWMtest|Add6~34_combout\ & ((!\PWMtest|LessThan6~35_cout\) # (!\PWMtest|countactual1\(18)))) # (!\PWMtest|Add6~34_combout\ & (!\PWMtest|countactual1\(18) & !\PWMtest|LessThan6~35_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add6~34_combout\,
+	datab => \PWMtest|countactual1\(18),
+	datad => VCC,
+	cin => \PWMtest|LessThan6~35_cout\,
+	cout => \PWMtest|LessThan6~37_cout\);
+
+-- Location: LCCOMB_X50_Y32_N6
+\PWMtest|LessThan6~39\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~39_cout\ = CARRY((\PWMtest|Add6~36_combout\ & (\PWMtest|countactual1\(19) & !\PWMtest|LessThan6~37_cout\)) # (!\PWMtest|Add6~36_combout\ & ((\PWMtest|countactual1\(19)) # (!\PWMtest|LessThan6~37_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add6~36_combout\,
+	datab => \PWMtest|countactual1\(19),
+	datad => VCC,
+	cin => \PWMtest|LessThan6~37_cout\,
+	cout => \PWMtest|LessThan6~39_cout\);
+
+-- Location: LCCOMB_X50_Y32_N8
+\PWMtest|LessThan6~41\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~41_cout\ = CARRY((\PWMtest|countactual1\(20) & (\PWMtest|Add6~38_combout\ & !\PWMtest|LessThan6~39_cout\)) # (!\PWMtest|countactual1\(20) & ((\PWMtest|Add6~38_combout\) # (!\PWMtest|LessThan6~39_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(20),
+	datab => \PWMtest|Add6~38_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~39_cout\,
+	cout => \PWMtest|LessThan6~41_cout\);
+
+-- Location: LCCOMB_X50_Y32_N10
+\PWMtest|LessThan6~43\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~43_cout\ = CARRY((\PWMtest|countactual1\(21) & ((!\PWMtest|LessThan6~41_cout\) # (!\PWMtest|Add6~40_combout\))) # (!\PWMtest|countactual1\(21) & (!\PWMtest|Add6~40_combout\ & !\PWMtest|LessThan6~41_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(21),
+	datab => \PWMtest|Add6~40_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~41_cout\,
+	cout => \PWMtest|LessThan6~43_cout\);
+
+-- Location: LCCOMB_X50_Y32_N12
+\PWMtest|LessThan6~45\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~45_cout\ = CARRY((\PWMtest|countactual1\(22) & (\PWMtest|Add6~42_combout\ & !\PWMtest|LessThan6~43_cout\)) # (!\PWMtest|countactual1\(22) & ((\PWMtest|Add6~42_combout\) # (!\PWMtest|LessThan6~43_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(22),
+	datab => \PWMtest|Add6~42_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~43_cout\,
+	cout => \PWMtest|LessThan6~45_cout\);
+
+-- Location: LCCOMB_X50_Y32_N14
+\PWMtest|LessThan6~47\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~47_cout\ = CARRY((\PWMtest|countactual1\(23) & ((!\PWMtest|LessThan6~45_cout\) # (!\PWMtest|Add6~44_combout\))) # (!\PWMtest|countactual1\(23) & (!\PWMtest|Add6~44_combout\ & !\PWMtest|LessThan6~45_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(23),
+	datab => \PWMtest|Add6~44_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~45_cout\,
+	cout => \PWMtest|LessThan6~47_cout\);
+
+-- Location: LCCOMB_X50_Y32_N16
+\PWMtest|LessThan6~49\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~49_cout\ = CARRY((\PWMtest|countactual1\(24) & (\PWMtest|Add6~46_combout\ & !\PWMtest|LessThan6~47_cout\)) # (!\PWMtest|countactual1\(24) & ((\PWMtest|Add6~46_combout\) # (!\PWMtest|LessThan6~47_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(24),
+	datab => \PWMtest|Add6~46_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~47_cout\,
+	cout => \PWMtest|LessThan6~49_cout\);
+
+-- Location: LCCOMB_X50_Y32_N18
+\PWMtest|LessThan6~51\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~51_cout\ = CARRY((\PWMtest|countactual1\(25) & ((!\PWMtest|LessThan6~49_cout\) # (!\PWMtest|Add6~48_combout\))) # (!\PWMtest|countactual1\(25) & (!\PWMtest|Add6~48_combout\ & !\PWMtest|LessThan6~49_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(25),
+	datab => \PWMtest|Add6~48_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~49_cout\,
+	cout => \PWMtest|LessThan6~51_cout\);
+
+-- Location: LCCOMB_X50_Y32_N20
+\PWMtest|LessThan6~53\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~53_cout\ = CARRY((\PWMtest|Add6~50_combout\ & ((!\PWMtest|LessThan6~51_cout\) # (!\PWMtest|countactual1\(26)))) # (!\PWMtest|Add6~50_combout\ & (!\PWMtest|countactual1\(26) & !\PWMtest|LessThan6~51_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add6~50_combout\,
+	datab => \PWMtest|countactual1\(26),
+	datad => VCC,
+	cin => \PWMtest|LessThan6~51_cout\,
+	cout => \PWMtest|LessThan6~53_cout\);
+
+-- Location: LCCOMB_X50_Y32_N22
+\PWMtest|LessThan6~55\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~55_cout\ = CARRY((\PWMtest|Add6~52_combout\ & (\PWMtest|countactual1\(27) & !\PWMtest|LessThan6~53_cout\)) # (!\PWMtest|Add6~52_combout\ & ((\PWMtest|countactual1\(27)) # (!\PWMtest|LessThan6~53_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add6~52_combout\,
+	datab => \PWMtest|countactual1\(27),
+	datad => VCC,
+	cin => \PWMtest|LessThan6~53_cout\,
+	cout => \PWMtest|LessThan6~55_cout\);
+
+-- Location: LCCOMB_X50_Y32_N24
+\PWMtest|LessThan6~57\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~57_cout\ = CARRY((\PWMtest|countactual1\(28) & (\PWMtest|Add6~54_combout\ & !\PWMtest|LessThan6~55_cout\)) # (!\PWMtest|countactual1\(28) & ((\PWMtest|Add6~54_combout\) # (!\PWMtest|LessThan6~55_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(28),
+	datab => \PWMtest|Add6~54_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~55_cout\,
+	cout => \PWMtest|LessThan6~57_cout\);
+
+-- Location: LCCOMB_X50_Y32_N26
+\PWMtest|LessThan6~59\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~59_cout\ = CARRY((\PWMtest|countactual1\(29) & ((!\PWMtest|LessThan6~57_cout\) # (!\PWMtest|Add6~56_combout\))) # (!\PWMtest|countactual1\(29) & (!\PWMtest|Add6~56_combout\ & !\PWMtest|LessThan6~57_cout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000101011",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(29),
+	datab => \PWMtest|Add6~56_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~57_cout\,
+	cout => \PWMtest|LessThan6~59_cout\);
+
+-- Location: LCCOMB_X50_Y32_N28
+\PWMtest|LessThan6~61\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~61_cout\ = CARRY((\PWMtest|countactual1\(30) & (\PWMtest|Add6~58_combout\ & !\PWMtest|LessThan6~59_cout\)) # (!\PWMtest|countactual1\(30) & ((\PWMtest|Add6~58_combout\) # (!\PWMtest|LessThan6~59_cout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000001001101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(30),
+	datab => \PWMtest|Add6~58_combout\,
+	datad => VCC,
+	cin => \PWMtest|LessThan6~59_cout\,
+	cout => \PWMtest|LessThan6~61_cout\);
+
+-- Location: LCCOMB_X50_Y32_N30
+\PWMtest|LessThan6~62\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan6~62_combout\ = (\PWMtest|Add6~60_combout\ & (\PWMtest|LessThan6~61_cout\ & \PWMtest|countactual1\(31))) # (!\PWMtest|Add6~60_combout\ & ((\PWMtest|LessThan6~61_cout\) # (\PWMtest|countactual1\(31))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111010101010000",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Add6~60_combout\,
+	datad => \PWMtest|countactual1\(31),
+	cin => \PWMtest|LessThan6~61_cout\,
+	combout => \PWMtest|LessThan6~62_combout\);
+
+-- Location: LCCOMB_X52_Y33_N26
+\PWMtest|Selector40~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector40~0_combout\ = (!\PWMtest|countactual1\(31) & \PWMtest|est_act.boost2~q\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \PWMtest|countactual1\(31),
+	datad => \PWMtest|est_act.boost2~q\,
+	combout => \PWMtest|Selector40~0_combout\);
+
+-- Location: LCCOMB_X52_Y33_N30
+\PWMtest|Selector40~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector40~1_combout\ = (\PWMtest|Selector40~0_combout\ & (((!\PWMtest|Selector39~3_combout\ & \PWMtest|LessThan3~8_combout\)) # (!\PWMtest|LessThan3~6_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0111000000110000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|Selector39~3_combout\,
+	datab => \PWMtest|LessThan3~6_combout\,
+	datac => \PWMtest|Selector40~0_combout\,
+	datad => \PWMtest|LessThan3~8_combout\,
+	combout => \PWMtest|Selector40~1_combout\);
+
+-- Location: LCCOMB_X54_Y32_N18
+\PWMtest|Selector40~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector40~2_combout\ = (\PWMtest|Selector40~1_combout\) # ((\PWMtest|est_act.boost1~q\ & ((\PWMtest|LessThan6~62_combout\) # (\PWMtest|LessThan7~62_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111111100000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|LessThan6~62_combout\,
+	datab => \PWMtest|LessThan7~62_combout\,
+	datac => \PWMtest|est_act.boost1~q\,
+	datad => \PWMtest|Selector40~1_combout\,
+	combout => \PWMtest|Selector40~2_combout\);
+
+-- Location: FF_X54_Y32_N19
+\PWMtest|est_act.boost1\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector40~2_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|est_act.boost1~q\);
+
+-- Location: LCCOMB_X52_Y33_N4
+\PWMtest|LessThan2~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|LessThan2~1_combout\ = (\PWMtest|countactual1\(31)) # ((\PWMtest|LessThan3~6_combout\ & ((\PWMtest|Selector39~2_combout\) # (!\PWMtest|countactual1\(8)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111110011011100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|countactual1\(8),
+	datab => \PWMtest|countactual1\(31),
+	datac => \PWMtest|LessThan3~6_combout\,
+	datad => \PWMtest|Selector39~2_combout\,
+	combout => \PWMtest|LessThan2~1_combout\);
+
+-- Location: LCCOMB_X52_Y33_N24
+\PWMtest|Selector0~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector0~0_combout\ = (\PWMtest|est_act.boost1~q\) # ((\PWMtest|est_act.boost2~q\) # ((!\PWMtest|countactual1[10]~32_combout\ & \PWMtest|LessThan2~1_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111110111010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|est_act.boost1~q\,
+	datab => \PWMtest|countactual1[10]~32_combout\,
+	datac => \PWMtest|LessThan2~1_combout\,
+	datad => \PWMtest|est_act.boost2~q\,
+	combout => \PWMtest|Selector0~0_combout\);
+
+-- Location: FF_X52_Y33_N25
+\PWMtest|PWM_H1\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector0~0_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|PWM_H1~q\);
+
+-- Location: LCCOMB_X56_Y34_N16
+\PWMtest|Selector1~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector1~0_combout\ = (\PWMtest|LessThan0~62_combout\ & ((\PWMtest|est_act.boost1softs~q\) # (\PWMtest|est_act.buck1~q\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111000011000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \PWMtest|est_act.boost1softs~q\,
+	datac => \PWMtest|LessThan0~62_combout\,
+	datad => \PWMtest|est_act.buck1~q\,
+	combout => \PWMtest|Selector1~0_combout\);
+
+-- Location: FF_X56_Y34_N17
+\PWMtest|PWM_L1\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector1~0_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|PWM_L1~q\);
+
+-- Location: LCCOMB_X56_Y34_N18
+\PWMtest|WideOr2~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|WideOr2~0_combout\ = (!\PWMtest|est_act.boost1~q\ & (!\PWMtest|est_act.boost2~q\ & \PWMtest|est_act.idle~q\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0001000100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|est_act.boost1~q\,
+	datab => \PWMtest|est_act.boost2~q\,
+	datad => \PWMtest|est_act.idle~q\,
+	combout => \PWMtest|WideOr2~0_combout\);
+
+-- Location: LCCOMB_X52_Y34_N16
+\PWMtest|Selector2~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|Selector2~0_combout\ = (\PWMtest|WideOr2~0_combout\) # ((\PWMtest|est_act.boost2~q\ & ((\PWMtest|LessThan8~0_combout\) # (\PWMtest|countactual1\(31)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111010101010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \PWMtest|WideOr2~0_combout\,
+	datab => \PWMtest|LessThan8~0_combout\,
+	datac => \PWMtest|countactual1\(31),
+	datad => \PWMtest|est_act.boost2~q\,
+	combout => \PWMtest|Selector2~0_combout\);
+
+-- Location: FF_X52_Y34_N17
+\PWMtest|PWM_H2\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|Selector2~0_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|PWM_H2~q\);
+
+-- Location: LCCOMB_X54_Y32_N8
+\PWMtest|PWM_L2_sig~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \PWMtest|PWM_L2_sig~0_combout\ = (\PWMtest|LessThan6~62_combout\ & \PWMtest|est_act.boost1~q\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111000000000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \PWMtest|LessThan6~62_combout\,
+	datad => \PWMtest|est_act.boost1~q\,
+	combout => \PWMtest|PWM_L2_sig~0_combout\);
+
+-- Location: FF_X54_Y32_N9
+\PWMtest|PWM_L2\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \PWMtest|PWM_L2_sig~0_combout\,
+	clrn => \reset~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \PWMtest|PWM_L2~q\);
+
+-- Location: LCCOMB_X50_Y38_N0
+\watchdog_test|countwdg_act[0]~32\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[0]~32_combout\ = \watchdog_test|countwdg_act\(0) $ (VCC)
+-- \watchdog_test|countwdg_act[0]~33\ = CARRY(\watchdog_test|countwdg_act\(0))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011001111001100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \watchdog_test|countwdg_act\(0),
+	datad => VCC,
+	combout => \watchdog_test|countwdg_act[0]~32_combout\,
+	cout => \watchdog_test|countwdg_act[0]~33\);
 
 -- Location: IOIBUF_X56_Y54_N1
 \wdg_reset~input\ : fiftyfivenm_io_ibuf
@@ -8913,28 +11293,505 @@ PORT MAP (
 	i => ww_wdg_reset,
 	o => \wdg_reset~input_o\);
 
--- Location: LCCOMB_X51_Y52_N26
-\LessThan11~0\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y38_N14
+\watchdog_test|countwdg_act[7]~46\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \LessThan11~0_combout\ = ((!countwdg_act(3) & ((!countwdg_act(2)) # (!countwdg_act(1))))) # (!countwdg_act(4))
+-- \watchdog_test|countwdg_act[7]~46_combout\ = (\watchdog_test|countwdg_act\(7) & (!\watchdog_test|countwdg_act[6]~45\)) # (!\watchdog_test|countwdg_act\(7) & ((\watchdog_test|countwdg_act[6]~45\) # (GND)))
+-- \watchdog_test|countwdg_act[7]~47\ = CARRY((!\watchdog_test|countwdg_act[6]~45\) # (!\watchdog_test|countwdg_act\(7)))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0001111101011111",
-	sum_lutc_input => "datac")
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	dataa => countwdg_act(3),
-	datab => countwdg_act(1),
-	datac => countwdg_act(4),
-	datad => countwdg_act(2),
-	combout => \LessThan11~0_combout\);
+	datab => \watchdog_test|countwdg_act\(7),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[6]~45\,
+	combout => \watchdog_test|countwdg_act[7]~46_combout\,
+	cout => \watchdog_test|countwdg_act[7]~47\);
 
--- Location: LCCOMB_X52_Y52_N12
-\countwdg_act[6]~44\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y38_N16
+\watchdog_test|countwdg_act[8]~48\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[6]~44_combout\ = (countwdg_act(6) & (\countwdg_act[5]~43\ $ (GND))) # (!countwdg_act(6) & (!\countwdg_act[5]~43\ & VCC))
--- \countwdg_act[6]~45\ = CARRY((countwdg_act(6) & !\countwdg_act[5]~43\))
+-- \watchdog_test|countwdg_act[8]~48_combout\ = (\watchdog_test|countwdg_act\(8) & (\watchdog_test|countwdg_act[7]~47\ $ (GND))) # (!\watchdog_test|countwdg_act\(8) & (!\watchdog_test|countwdg_act[7]~47\ & VCC))
+-- \watchdog_test|countwdg_act[8]~49\ = CARRY((\watchdog_test|countwdg_act\(8) & !\watchdog_test|countwdg_act[7]~47\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \watchdog_test|countwdg_act\(8),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[7]~47\,
+	combout => \watchdog_test|countwdg_act[8]~48_combout\,
+	cout => \watchdog_test|countwdg_act[8]~49\);
+
+-- Location: FF_X50_Y38_N17
+\watchdog_test|countwdg_act[8]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[8]~48_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(8));
+
+-- Location: LCCOMB_X50_Y38_N18
+\watchdog_test|countwdg_act[9]~50\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[9]~50_combout\ = (\watchdog_test|countwdg_act\(9) & (!\watchdog_test|countwdg_act[8]~49\)) # (!\watchdog_test|countwdg_act\(9) & ((\watchdog_test|countwdg_act[8]~49\) # (GND)))
+-- \watchdog_test|countwdg_act[9]~51\ = CARRY((!\watchdog_test|countwdg_act[8]~49\) # (!\watchdog_test|countwdg_act\(9)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \watchdog_test|countwdg_act\(9),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[8]~49\,
+	combout => \watchdog_test|countwdg_act[9]~50_combout\,
+	cout => \watchdog_test|countwdg_act[9]~51\);
+
+-- Location: FF_X50_Y38_N19
+\watchdog_test|countwdg_act[9]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[9]~50_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(9));
+
+-- Location: LCCOMB_X50_Y38_N20
+\watchdog_test|countwdg_act[10]~52\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[10]~52_combout\ = (\watchdog_test|countwdg_act\(10) & (\watchdog_test|countwdg_act[9]~51\ $ (GND))) # (!\watchdog_test|countwdg_act\(10) & (!\watchdog_test|countwdg_act[9]~51\ & VCC))
+-- \watchdog_test|countwdg_act[10]~53\ = CARRY((\watchdog_test|countwdg_act\(10) & !\watchdog_test|countwdg_act[9]~51\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \watchdog_test|countwdg_act\(10),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[9]~51\,
+	combout => \watchdog_test|countwdg_act[10]~52_combout\,
+	cout => \watchdog_test|countwdg_act[10]~53\);
+
+-- Location: FF_X50_Y38_N21
+\watchdog_test|countwdg_act[10]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[10]~52_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(10));
+
+-- Location: LCCOMB_X50_Y38_N22
+\watchdog_test|countwdg_act[11]~54\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[11]~54_combout\ = (\watchdog_test|countwdg_act\(11) & (!\watchdog_test|countwdg_act[10]~53\)) # (!\watchdog_test|countwdg_act\(11) & ((\watchdog_test|countwdg_act[10]~53\) # (GND)))
+-- \watchdog_test|countwdg_act[11]~55\ = CARRY((!\watchdog_test|countwdg_act[10]~53\) # (!\watchdog_test|countwdg_act\(11)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \watchdog_test|countwdg_act\(11),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[10]~53\,
+	combout => \watchdog_test|countwdg_act[11]~54_combout\,
+	cout => \watchdog_test|countwdg_act[11]~55\);
+
+-- Location: FF_X50_Y38_N23
+\watchdog_test|countwdg_act[11]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[11]~54_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(11));
+
+-- Location: LCCOMB_X50_Y38_N24
+\watchdog_test|countwdg_act[12]~56\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[12]~56_combout\ = (\watchdog_test|countwdg_act\(12) & (\watchdog_test|countwdg_act[11]~55\ $ (GND))) # (!\watchdog_test|countwdg_act\(12) & (!\watchdog_test|countwdg_act[11]~55\ & VCC))
+-- \watchdog_test|countwdg_act[12]~57\ = CARRY((\watchdog_test|countwdg_act\(12) & !\watchdog_test|countwdg_act[11]~55\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \watchdog_test|countwdg_act\(12),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[11]~55\,
+	combout => \watchdog_test|countwdg_act[12]~56_combout\,
+	cout => \watchdog_test|countwdg_act[12]~57\);
+
+-- Location: FF_X50_Y38_N25
+\watchdog_test|countwdg_act[12]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[12]~56_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(12));
+
+-- Location: LCCOMB_X50_Y38_N26
+\watchdog_test|countwdg_act[13]~58\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[13]~58_combout\ = (\watchdog_test|countwdg_act\(13) & (!\watchdog_test|countwdg_act[12]~57\)) # (!\watchdog_test|countwdg_act\(13) & ((\watchdog_test|countwdg_act[12]~57\) # (GND)))
+-- \watchdog_test|countwdg_act[13]~59\ = CARRY((!\watchdog_test|countwdg_act[12]~57\) # (!\watchdog_test|countwdg_act\(13)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \watchdog_test|countwdg_act\(13),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[12]~57\,
+	combout => \watchdog_test|countwdg_act[13]~58_combout\,
+	cout => \watchdog_test|countwdg_act[13]~59\);
+
+-- Location: FF_X50_Y38_N27
+\watchdog_test|countwdg_act[13]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[13]~58_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(13));
+
+-- Location: LCCOMB_X50_Y38_N28
+\watchdog_test|countwdg_act[14]~60\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[14]~60_combout\ = (\watchdog_test|countwdg_act\(14) & (\watchdog_test|countwdg_act[13]~59\ $ (GND))) # (!\watchdog_test|countwdg_act\(14) & (!\watchdog_test|countwdg_act[13]~59\ & VCC))
+-- \watchdog_test|countwdg_act[14]~61\ = CARRY((\watchdog_test|countwdg_act\(14) & !\watchdog_test|countwdg_act[13]~59\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \watchdog_test|countwdg_act\(14),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[13]~59\,
+	combout => \watchdog_test|countwdg_act[14]~60_combout\,
+	cout => \watchdog_test|countwdg_act[14]~61\);
+
+-- Location: FF_X50_Y38_N29
+\watchdog_test|countwdg_act[14]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[14]~60_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(14));
+
+-- Location: LCCOMB_X50_Y38_N30
+\watchdog_test|countwdg_act[15]~62\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[15]~62_combout\ = (\watchdog_test|countwdg_act\(15) & (!\watchdog_test|countwdg_act[14]~61\)) # (!\watchdog_test|countwdg_act\(15) & ((\watchdog_test|countwdg_act[14]~61\) # (GND)))
+-- \watchdog_test|countwdg_act[15]~63\ = CARRY((!\watchdog_test|countwdg_act[14]~61\) # (!\watchdog_test|countwdg_act\(15)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \watchdog_test|countwdg_act\(15),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[14]~61\,
+	combout => \watchdog_test|countwdg_act[15]~62_combout\,
+	cout => \watchdog_test|countwdg_act[15]~63\);
+
+-- Location: FF_X50_Y38_N31
+\watchdog_test|countwdg_act[15]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[15]~62_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(15));
+
+-- Location: LCCOMB_X50_Y37_N0
+\watchdog_test|countwdg_act[16]~64\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[16]~64_combout\ = (\watchdog_test|countwdg_act\(16) & (\watchdog_test|countwdg_act[15]~63\ $ (GND))) # (!\watchdog_test|countwdg_act\(16) & (!\watchdog_test|countwdg_act[15]~63\ & VCC))
+-- \watchdog_test|countwdg_act[16]~65\ = CARRY((\watchdog_test|countwdg_act\(16) & !\watchdog_test|countwdg_act[15]~63\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \watchdog_test|countwdg_act\(16),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[15]~63\,
+	combout => \watchdog_test|countwdg_act[16]~64_combout\,
+	cout => \watchdog_test|countwdg_act[16]~65\);
+
+-- Location: FF_X50_Y37_N1
+\watchdog_test|countwdg_act[16]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[16]~64_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(16));
+
+-- Location: LCCOMB_X50_Y37_N2
+\watchdog_test|countwdg_act[17]~66\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[17]~66_combout\ = (\watchdog_test|countwdg_act\(17) & (!\watchdog_test|countwdg_act[16]~65\)) # (!\watchdog_test|countwdg_act\(17) & ((\watchdog_test|countwdg_act[16]~65\) # (GND)))
+-- \watchdog_test|countwdg_act[17]~67\ = CARRY((!\watchdog_test|countwdg_act[16]~65\) # (!\watchdog_test|countwdg_act\(17)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \watchdog_test|countwdg_act\(17),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[16]~65\,
+	combout => \watchdog_test|countwdg_act[17]~66_combout\,
+	cout => \watchdog_test|countwdg_act[17]~67\);
+
+-- Location: FF_X50_Y37_N3
+\watchdog_test|countwdg_act[17]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[17]~66_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(17));
+
+-- Location: LCCOMB_X50_Y37_N4
+\watchdog_test|countwdg_act[18]~68\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[18]~68_combout\ = (\watchdog_test|countwdg_act\(18) & (\watchdog_test|countwdg_act[17]~67\ $ (GND))) # (!\watchdog_test|countwdg_act\(18) & (!\watchdog_test|countwdg_act[17]~67\ & VCC))
+-- \watchdog_test|countwdg_act[18]~69\ = CARRY((\watchdog_test|countwdg_act\(18) & !\watchdog_test|countwdg_act[17]~67\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \watchdog_test|countwdg_act\(18),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[17]~67\,
+	combout => \watchdog_test|countwdg_act[18]~68_combout\,
+	cout => \watchdog_test|countwdg_act[18]~69\);
+
+-- Location: FF_X50_Y37_N5
+\watchdog_test|countwdg_act[18]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[18]~68_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(18));
+
+-- Location: LCCOMB_X50_Y37_N6
+\watchdog_test|countwdg_act[19]~70\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[19]~70_combout\ = (\watchdog_test|countwdg_act\(19) & (!\watchdog_test|countwdg_act[18]~69\)) # (!\watchdog_test|countwdg_act\(19) & ((\watchdog_test|countwdg_act[18]~69\) # (GND)))
+-- \watchdog_test|countwdg_act[19]~71\ = CARRY((!\watchdog_test|countwdg_act[18]~69\) # (!\watchdog_test|countwdg_act\(19)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \watchdog_test|countwdg_act\(19),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[18]~69\,
+	combout => \watchdog_test|countwdg_act[19]~70_combout\,
+	cout => \watchdog_test|countwdg_act[19]~71\);
+
+-- Location: FF_X50_Y37_N7
+\watchdog_test|countwdg_act[19]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[19]~70_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(19));
+
+-- Location: LCCOMB_X50_Y37_N8
+\watchdog_test|countwdg_act[20]~72\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[20]~72_combout\ = (\watchdog_test|countwdg_act\(20) & (\watchdog_test|countwdg_act[19]~71\ $ (GND))) # (!\watchdog_test|countwdg_act\(20) & (!\watchdog_test|countwdg_act[19]~71\ & VCC))
+-- \watchdog_test|countwdg_act[20]~73\ = CARRY((\watchdog_test|countwdg_act\(20) & !\watchdog_test|countwdg_act[19]~71\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \watchdog_test|countwdg_act\(20),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[19]~71\,
+	combout => \watchdog_test|countwdg_act[20]~72_combout\,
+	cout => \watchdog_test|countwdg_act[20]~73\);
+
+-- Location: FF_X50_Y37_N9
+\watchdog_test|countwdg_act[20]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[20]~72_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(20));
+
+-- Location: LCCOMB_X50_Y37_N10
+\watchdog_test|countwdg_act[21]~74\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[21]~74_combout\ = (\watchdog_test|countwdg_act\(21) & (!\watchdog_test|countwdg_act[20]~73\)) # (!\watchdog_test|countwdg_act\(21) & ((\watchdog_test|countwdg_act[20]~73\) # (GND)))
+-- \watchdog_test|countwdg_act[21]~75\ = CARRY((!\watchdog_test|countwdg_act[20]~73\) # (!\watchdog_test|countwdg_act\(21)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \watchdog_test|countwdg_act\(21),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[20]~73\,
+	combout => \watchdog_test|countwdg_act[21]~74_combout\,
+	cout => \watchdog_test|countwdg_act[21]~75\);
+
+-- Location: FF_X50_Y37_N11
+\watchdog_test|countwdg_act[21]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[21]~74_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(21));
+
+-- Location: LCCOMB_X50_Y37_N12
+\watchdog_test|countwdg_act[22]~76\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[22]~76_combout\ = (\watchdog_test|countwdg_act\(22) & (\watchdog_test|countwdg_act[21]~75\ $ (GND))) # (!\watchdog_test|countwdg_act\(22) & (!\watchdog_test|countwdg_act[21]~75\ & VCC))
+-- \watchdog_test|countwdg_act[22]~77\ = CARRY((\watchdog_test|countwdg_act\(22) & !\watchdog_test|countwdg_act[21]~75\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -8942,17 +11799,33 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	dataa => countwdg_act(6),
+	dataa => \watchdog_test|countwdg_act\(22),
 	datad => VCC,
-	cin => \countwdg_act[5]~43\,
-	combout => \countwdg_act[6]~44_combout\,
-	cout => \countwdg_act[6]~45\);
+	cin => \watchdog_test|countwdg_act[21]~75\,
+	combout => \watchdog_test|countwdg_act[22]~76_combout\,
+	cout => \watchdog_test|countwdg_act[22]~77\);
 
--- Location: LCCOMB_X52_Y52_N14
-\countwdg_act[7]~46\ : fiftyfivenm_lcell_comb
+-- Location: FF_X50_Y37_N13
+\watchdog_test|countwdg_act[22]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[22]~76_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(22));
+
+-- Location: LCCOMB_X50_Y37_N14
+\watchdog_test|countwdg_act[23]~78\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[7]~46_combout\ = (countwdg_act(7) & (!\countwdg_act[6]~45\)) # (!countwdg_act(7) & ((\countwdg_act[6]~45\) # (GND)))
--- \countwdg_act[7]~47\ = CARRY((!\countwdg_act[6]~45\) # (!countwdg_act(7)))
+-- \watchdog_test|countwdg_act[23]~78_combout\ = (\watchdog_test|countwdg_act\(23) & (!\watchdog_test|countwdg_act[22]~77\)) # (!\watchdog_test|countwdg_act\(23) & ((\watchdog_test|countwdg_act[22]~77\) # (GND)))
+-- \watchdog_test|countwdg_act[23]~79\ = CARRY((!\watchdog_test|countwdg_act[22]~77\) # (!\watchdog_test|countwdg_act\(23)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -8960,14 +11833,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countwdg_act(7),
+	datab => \watchdog_test|countwdg_act\(23),
 	datad => VCC,
-	cin => \countwdg_act[6]~45\,
-	combout => \countwdg_act[7]~46_combout\,
-	cout => \countwdg_act[7]~47\);
+	cin => \watchdog_test|countwdg_act[22]~77\,
+	combout => \watchdog_test|countwdg_act[23]~78_combout\,
+	cout => \watchdog_test|countwdg_act[23]~79\);
 
--- Location: FF_X52_Y52_N15
-\countwdg_act[7]\ : dffeas
+-- Location: FF_X50_Y37_N15
+\watchdog_test|countwdg_act[23]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -8975,35 +11848,18 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[7]~46_combout\,
+	d => \watchdog_test|countwdg_act[23]~78_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(7));
+	q => \watchdog_test|countwdg_act\(23));
 
--- Location: LCCOMB_X51_Y52_N12
-\LessThan11~1\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y37_N16
+\watchdog_test|countwdg_act[24]~80\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \LessThan11~1_combout\ = (\LessThan11~0_combout\ & (!countwdg_act(6) & (!countwdg_act(7) & !countwdg_act(5))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000000010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \LessThan11~0_combout\,
-	datab => countwdg_act(6),
-	datac => countwdg_act(7),
-	datad => countwdg_act(5),
-	combout => \LessThan11~1_combout\);
-
--- Location: LCCOMB_X52_Y52_N16
-\countwdg_act[8]~48\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[8]~48_combout\ = (countwdg_act(8) & (\countwdg_act[7]~47\ $ (GND))) # (!countwdg_act(8) & (!\countwdg_act[7]~47\ & VCC))
--- \countwdg_act[8]~49\ = CARRY((countwdg_act(8) & !\countwdg_act[7]~47\))
+-- \watchdog_test|countwdg_act[24]~80_combout\ = (\watchdog_test|countwdg_act\(24) & (\watchdog_test|countwdg_act[23]~79\ $ (GND))) # (!\watchdog_test|countwdg_act\(24) & (!\watchdog_test|countwdg_act[23]~79\ & VCC))
+-- \watchdog_test|countwdg_act[24]~81\ = CARRY((\watchdog_test|countwdg_act\(24) & !\watchdog_test|countwdg_act[23]~79\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9011,14 +11867,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countwdg_act(8),
+	datab => \watchdog_test|countwdg_act\(24),
 	datad => VCC,
-	cin => \countwdg_act[7]~47\,
-	combout => \countwdg_act[8]~48_combout\,
-	cout => \countwdg_act[8]~49\);
+	cin => \watchdog_test|countwdg_act[23]~79\,
+	combout => \watchdog_test|countwdg_act[24]~80_combout\,
+	cout => \watchdog_test|countwdg_act[24]~81\);
 
--- Location: FF_X52_Y52_N17
-\countwdg_act[8]\ : dffeas
+-- Location: FF_X50_Y37_N17
+\watchdog_test|countwdg_act[24]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -9026,18 +11882,18 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[8]~48_combout\,
+	d => \watchdog_test|countwdg_act[24]~80_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(8));
+	q => \watchdog_test|countwdg_act\(24));
 
--- Location: LCCOMB_X52_Y52_N18
-\countwdg_act[9]~50\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y37_N18
+\watchdog_test|countwdg_act[25]~82\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[9]~50_combout\ = (countwdg_act(9) & (!\countwdg_act[8]~49\)) # (!countwdg_act(9) & ((\countwdg_act[8]~49\) # (GND)))
--- \countwdg_act[9]~51\ = CARRY((!\countwdg_act[8]~49\) # (!countwdg_act(9)))
+-- \watchdog_test|countwdg_act[25]~82_combout\ = (\watchdog_test|countwdg_act\(25) & (!\watchdog_test|countwdg_act[24]~81\)) # (!\watchdog_test|countwdg_act\(25) & ((\watchdog_test|countwdg_act[24]~81\) # (GND)))
+-- \watchdog_test|countwdg_act[25]~83\ = CARRY((!\watchdog_test|countwdg_act[24]~81\) # (!\watchdog_test|countwdg_act\(25)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9045,14 +11901,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countwdg_act(9),
+	datab => \watchdog_test|countwdg_act\(25),
 	datad => VCC,
-	cin => \countwdg_act[8]~49\,
-	combout => \countwdg_act[9]~50_combout\,
-	cout => \countwdg_act[9]~51\);
+	cin => \watchdog_test|countwdg_act[24]~81\,
+	combout => \watchdog_test|countwdg_act[25]~82_combout\,
+	cout => \watchdog_test|countwdg_act[25]~83\);
 
--- Location: FF_X52_Y52_N19
-\countwdg_act[9]\ : dffeas
+-- Location: FF_X50_Y37_N19
+\watchdog_test|countwdg_act[25]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -9060,18 +11916,18 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[9]~50_combout\,
+	d => \watchdog_test|countwdg_act[25]~82_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(9));
+	q => \watchdog_test|countwdg_act\(25));
 
--- Location: LCCOMB_X52_Y52_N20
-\countwdg_act[10]~52\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y37_N20
+\watchdog_test|countwdg_act[26]~84\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[10]~52_combout\ = (countwdg_act(10) & (\countwdg_act[9]~51\ $ (GND))) # (!countwdg_act(10) & (!\countwdg_act[9]~51\ & VCC))
--- \countwdg_act[10]~53\ = CARRY((countwdg_act(10) & !\countwdg_act[9]~51\))
+-- \watchdog_test|countwdg_act[26]~84_combout\ = (\watchdog_test|countwdg_act\(26) & (\watchdog_test|countwdg_act[25]~83\ $ (GND))) # (!\watchdog_test|countwdg_act\(26) & (!\watchdog_test|countwdg_act[25]~83\ & VCC))
+-- \watchdog_test|countwdg_act[26]~85\ = CARRY((\watchdog_test|countwdg_act\(26) & !\watchdog_test|countwdg_act[25]~83\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9079,14 +11935,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countwdg_act(10),
+	datab => \watchdog_test|countwdg_act\(26),
 	datad => VCC,
-	cin => \countwdg_act[9]~51\,
-	combout => \countwdg_act[10]~52_combout\,
-	cout => \countwdg_act[10]~53\);
+	cin => \watchdog_test|countwdg_act[25]~83\,
+	combout => \watchdog_test|countwdg_act[26]~84_combout\,
+	cout => \watchdog_test|countwdg_act[26]~85\);
 
--- Location: FF_X52_Y52_N21
-\countwdg_act[10]\ : dffeas
+-- Location: FF_X50_Y37_N21
+\watchdog_test|countwdg_act[26]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -9094,18 +11950,18 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[10]~52_combout\,
+	d => \watchdog_test|countwdg_act[26]~84_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(10));
+	q => \watchdog_test|countwdg_act\(26));
 
--- Location: LCCOMB_X52_Y52_N22
-\countwdg_act[11]~54\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y37_N22
+\watchdog_test|countwdg_act[27]~86\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[11]~54_combout\ = (countwdg_act(11) & (!\countwdg_act[10]~53\)) # (!countwdg_act(11) & ((\countwdg_act[10]~53\) # (GND)))
--- \countwdg_act[11]~55\ = CARRY((!\countwdg_act[10]~53\) # (!countwdg_act(11)))
+-- \watchdog_test|countwdg_act[27]~86_combout\ = (\watchdog_test|countwdg_act\(27) & (!\watchdog_test|countwdg_act[26]~85\)) # (!\watchdog_test|countwdg_act\(27) & ((\watchdog_test|countwdg_act[26]~85\) # (GND)))
+-- \watchdog_test|countwdg_act[27]~87\ = CARRY((!\watchdog_test|countwdg_act[26]~85\) # (!\watchdog_test|countwdg_act\(27)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9113,14 +11969,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	dataa => countwdg_act(11),
+	dataa => \watchdog_test|countwdg_act\(27),
 	datad => VCC,
-	cin => \countwdg_act[10]~53\,
-	combout => \countwdg_act[11]~54_combout\,
-	cout => \countwdg_act[11]~55\);
+	cin => \watchdog_test|countwdg_act[26]~85\,
+	combout => \watchdog_test|countwdg_act[27]~86_combout\,
+	cout => \watchdog_test|countwdg_act[27]~87\);
 
--- Location: FF_X52_Y52_N23
-\countwdg_act[11]\ : dffeas
+-- Location: FF_X50_Y37_N23
+\watchdog_test|countwdg_act[27]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -9128,18 +11984,18 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[11]~54_combout\,
+	d => \watchdog_test|countwdg_act[27]~86_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(11));
+	q => \watchdog_test|countwdg_act\(27));
 
--- Location: LCCOMB_X52_Y52_N24
-\countwdg_act[12]~56\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y37_N24
+\watchdog_test|countwdg_act[28]~88\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[12]~56_combout\ = (countwdg_act(12) & (\countwdg_act[11]~55\ $ (GND))) # (!countwdg_act(12) & (!\countwdg_act[11]~55\ & VCC))
--- \countwdg_act[12]~57\ = CARRY((countwdg_act(12) & !\countwdg_act[11]~55\))
+-- \watchdog_test|countwdg_act[28]~88_combout\ = (\watchdog_test|countwdg_act\(28) & (\watchdog_test|countwdg_act[27]~87\ $ (GND))) # (!\watchdog_test|countwdg_act\(28) & (!\watchdog_test|countwdg_act[27]~87\ & VCC))
+-- \watchdog_test|countwdg_act[28]~89\ = CARRY((\watchdog_test|countwdg_act\(28) & !\watchdog_test|countwdg_act[27]~87\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9147,14 +12003,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countwdg_act(12),
+	datab => \watchdog_test|countwdg_act\(28),
 	datad => VCC,
-	cin => \countwdg_act[11]~55\,
-	combout => \countwdg_act[12]~56_combout\,
-	cout => \countwdg_act[12]~57\);
+	cin => \watchdog_test|countwdg_act[27]~87\,
+	combout => \watchdog_test|countwdg_act[28]~88_combout\,
+	cout => \watchdog_test|countwdg_act[28]~89\);
 
--- Location: FF_X52_Y52_N25
-\countwdg_act[12]\ : dffeas
+-- Location: FF_X50_Y37_N25
+\watchdog_test|countwdg_act[28]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -9162,18 +12018,18 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[12]~56_combout\,
+	d => \watchdog_test|countwdg_act[28]~88_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(12));
+	q => \watchdog_test|countwdg_act\(28));
 
--- Location: LCCOMB_X52_Y52_N26
-\countwdg_act[13]~58\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y37_N26
+\watchdog_test|countwdg_act[29]~90\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[13]~58_combout\ = (countwdg_act(13) & (!\countwdg_act[12]~57\)) # (!countwdg_act(13) & ((\countwdg_act[12]~57\) # (GND)))
--- \countwdg_act[13]~59\ = CARRY((!\countwdg_act[12]~57\) # (!countwdg_act(13)))
+-- \watchdog_test|countwdg_act[29]~90_combout\ = (\watchdog_test|countwdg_act\(29) & (!\watchdog_test|countwdg_act[28]~89\)) # (!\watchdog_test|countwdg_act\(29) & ((\watchdog_test|countwdg_act[28]~89\) # (GND)))
+-- \watchdog_test|countwdg_act[29]~91\ = CARRY((!\watchdog_test|countwdg_act[28]~89\) # (!\watchdog_test|countwdg_act\(29)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9181,14 +12037,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	dataa => countwdg_act(13),
+	dataa => \watchdog_test|countwdg_act\(29),
 	datad => VCC,
-	cin => \countwdg_act[12]~57\,
-	combout => \countwdg_act[13]~58_combout\,
-	cout => \countwdg_act[13]~59\);
+	cin => \watchdog_test|countwdg_act[28]~89\,
+	combout => \watchdog_test|countwdg_act[29]~90_combout\,
+	cout => \watchdog_test|countwdg_act[29]~91\);
 
--- Location: FF_X52_Y52_N27
-\countwdg_act[13]\ : dffeas
+-- Location: FF_X50_Y37_N27
+\watchdog_test|countwdg_act[29]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -9196,119 +12052,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[13]~58_combout\,
+	d => \watchdog_test|countwdg_act[29]~90_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(13));
+	q => \watchdog_test|countwdg_act\(29));
 
--- Location: LCCOMB_X52_Y52_N28
-\countwdg_act[14]~60\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y41_N2
+\watchdog_test|LessThan0~5\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[14]~60_combout\ = (countwdg_act(14) & (\countwdg_act[13]~59\ $ (GND))) # (!countwdg_act(14) & (!\countwdg_act[13]~59\ & VCC))
--- \countwdg_act[14]~61\ = CARRY((countwdg_act(14) & !\countwdg_act[13]~59\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countwdg_act(14),
-	datad => VCC,
-	cin => \countwdg_act[13]~59\,
-	combout => \countwdg_act[14]~60_combout\,
-	cout => \countwdg_act[14]~61\);
-
--- Location: FF_X52_Y52_N29
-\countwdg_act[14]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[14]~60_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(14));
-
--- Location: LCCOMB_X52_Y52_N30
-\countwdg_act[15]~62\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[15]~62_combout\ = (countwdg_act(15) & (!\countwdg_act[14]~61\)) # (!countwdg_act(15) & ((\countwdg_act[14]~61\) # (GND)))
--- \countwdg_act[15]~63\ = CARRY((!\countwdg_act[14]~61\) # (!countwdg_act(15)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countwdg_act(15),
-	datad => VCC,
-	cin => \countwdg_act[14]~61\,
-	combout => \countwdg_act[15]~62_combout\,
-	cout => \countwdg_act[15]~63\);
-
--- Location: FF_X52_Y52_N31
-\countwdg_act[15]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[15]~62_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(15));
-
--- Location: LCCOMB_X52_Y51_N0
-\countwdg_act[16]~64\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[16]~64_combout\ = (countwdg_act(16) & (\countwdg_act[15]~63\ $ (GND))) # (!countwdg_act(16) & (!\countwdg_act[15]~63\ & VCC))
--- \countwdg_act[16]~65\ = CARRY((countwdg_act(16) & !\countwdg_act[15]~63\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countwdg_act(16),
-	datad => VCC,
-	cin => \countwdg_act[15]~63\,
-	combout => \countwdg_act[16]~64_combout\,
-	cout => \countwdg_act[16]~65\);
-
--- Location: FF_X52_Y51_N1
-\countwdg_act[16]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[16]~64_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(16));
-
--- Location: LCCOMB_X51_Y52_N10
-\LessThan10~1\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan10~1_combout\ = (!countwdg_act(13) & (!countwdg_act(16) & (!countwdg_act(15) & !countwdg_act(14))))
+-- \watchdog_test|LessThan0~5_combout\ = (!\watchdog_test|countwdg_act\(25) & (!\watchdog_test|countwdg_act\(28) & (!\watchdog_test|countwdg_act\(27) & !\watchdog_test|countwdg_act\(26))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9316,51 +12070,17 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => countwdg_act(13),
-	datab => countwdg_act(16),
-	datac => countwdg_act(15),
-	datad => countwdg_act(14),
-	combout => \LessThan10~1_combout\);
+	dataa => \watchdog_test|countwdg_act\(25),
+	datab => \watchdog_test|countwdg_act\(28),
+	datac => \watchdog_test|countwdg_act\(27),
+	datad => \watchdog_test|countwdg_act\(26),
+	combout => \watchdog_test|LessThan0~5_combout\);
 
--- Location: LCCOMB_X52_Y51_N2
-\countwdg_act[17]~66\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y37_N28
+\watchdog_test|countwdg_act[30]~92\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[17]~66_combout\ = (countwdg_act(17) & (!\countwdg_act[16]~65\)) # (!countwdg_act(17) & ((\countwdg_act[16]~65\) # (GND)))
--- \countwdg_act[17]~67\ = CARRY((!\countwdg_act[16]~65\) # (!countwdg_act(17)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countwdg_act(17),
-	datad => VCC,
-	cin => \countwdg_act[16]~65\,
-	combout => \countwdg_act[17]~66_combout\,
-	cout => \countwdg_act[17]~67\);
-
--- Location: FF_X52_Y51_N3
-\countwdg_act[17]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[17]~66_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(17));
-
--- Location: LCCOMB_X52_Y51_N4
-\countwdg_act[18]~68\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[18]~68_combout\ = (countwdg_act(18) & (\countwdg_act[17]~67\ $ (GND))) # (!countwdg_act(18) & (!\countwdg_act[17]~67\ & VCC))
--- \countwdg_act[18]~69\ = CARRY((countwdg_act(18) & !\countwdg_act[17]~67\))
+-- \watchdog_test|countwdg_act[30]~92_combout\ = (\watchdog_test|countwdg_act\(30) & (\watchdog_test|countwdg_act[29]~91\ $ (GND))) # (!\watchdog_test|countwdg_act\(30) & (!\watchdog_test|countwdg_act[29]~91\ & VCC))
+-- \watchdog_test|countwdg_act[30]~93\ = CARRY((\watchdog_test|countwdg_act\(30) & !\watchdog_test|countwdg_act[29]~91\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9368,14 +12088,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countwdg_act(18),
+	datab => \watchdog_test|countwdg_act\(30),
 	datad => VCC,
-	cin => \countwdg_act[17]~67\,
-	combout => \countwdg_act[18]~68_combout\,
-	cout => \countwdg_act[18]~69\);
+	cin => \watchdog_test|countwdg_act[29]~91\,
+	combout => \watchdog_test|countwdg_act[30]~92_combout\,
+	cout => \watchdog_test|countwdg_act[30]~93\);
 
--- Location: FF_X52_Y51_N5
-\countwdg_act[18]\ : dffeas
+-- Location: FF_X50_Y37_N29
+\watchdog_test|countwdg_act[30]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -9383,221 +12103,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[18]~68_combout\,
+	d => \watchdog_test|countwdg_act[30]~92_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(18));
+	q => \watchdog_test|countwdg_act\(30));
 
--- Location: LCCOMB_X52_Y51_N6
-\countwdg_act[19]~70\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y41_N30
+\watchdog_test|LessThan0~3\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[19]~70_combout\ = (countwdg_act(19) & (!\countwdg_act[18]~69\)) # (!countwdg_act(19) & ((\countwdg_act[18]~69\) # (GND)))
--- \countwdg_act[19]~71\ = CARRY((!\countwdg_act[18]~69\) # (!countwdg_act(19)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countwdg_act(19),
-	datad => VCC,
-	cin => \countwdg_act[18]~69\,
-	combout => \countwdg_act[19]~70_combout\,
-	cout => \countwdg_act[19]~71\);
-
--- Location: FF_X52_Y51_N7
-\countwdg_act[19]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[19]~70_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(19));
-
--- Location: LCCOMB_X52_Y51_N8
-\countwdg_act[20]~72\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[20]~72_combout\ = (countwdg_act(20) & (\countwdg_act[19]~71\ $ (GND))) # (!countwdg_act(20) & (!\countwdg_act[19]~71\ & VCC))
--- \countwdg_act[20]~73\ = CARRY((countwdg_act(20) & !\countwdg_act[19]~71\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countwdg_act(20),
-	datad => VCC,
-	cin => \countwdg_act[19]~71\,
-	combout => \countwdg_act[20]~72_combout\,
-	cout => \countwdg_act[20]~73\);
-
--- Location: FF_X52_Y51_N9
-\countwdg_act[20]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[20]~72_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(20));
-
--- Location: LCCOMB_X52_Y51_N10
-\countwdg_act[21]~74\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[21]~74_combout\ = (countwdg_act(21) & (!\countwdg_act[20]~73\)) # (!countwdg_act(21) & ((\countwdg_act[20]~73\) # (GND)))
--- \countwdg_act[21]~75\ = CARRY((!\countwdg_act[20]~73\) # (!countwdg_act(21)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countwdg_act(21),
-	datad => VCC,
-	cin => \countwdg_act[20]~73\,
-	combout => \countwdg_act[21]~74_combout\,
-	cout => \countwdg_act[21]~75\);
-
--- Location: FF_X52_Y51_N11
-\countwdg_act[21]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[21]~74_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(21));
-
--- Location: LCCOMB_X52_Y51_N12
-\countwdg_act[22]~76\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[22]~76_combout\ = (countwdg_act(22) & (\countwdg_act[21]~75\ $ (GND))) # (!countwdg_act(22) & (!\countwdg_act[21]~75\ & VCC))
--- \countwdg_act[22]~77\ = CARRY((countwdg_act(22) & !\countwdg_act[21]~75\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countwdg_act(22),
-	datad => VCC,
-	cin => \countwdg_act[21]~75\,
-	combout => \countwdg_act[22]~76_combout\,
-	cout => \countwdg_act[22]~77\);
-
--- Location: FF_X52_Y51_N13
-\countwdg_act[22]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[22]~76_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(22));
-
--- Location: LCCOMB_X52_Y51_N14
-\countwdg_act[23]~78\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[23]~78_combout\ = (countwdg_act(23) & (!\countwdg_act[22]~77\)) # (!countwdg_act(23) & ((\countwdg_act[22]~77\) # (GND)))
--- \countwdg_act[23]~79\ = CARRY((!\countwdg_act[22]~77\) # (!countwdg_act(23)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countwdg_act(23),
-	datad => VCC,
-	cin => \countwdg_act[22]~77\,
-	combout => \countwdg_act[23]~78_combout\,
-	cout => \countwdg_act[23]~79\);
-
--- Location: FF_X52_Y51_N15
-\countwdg_act[23]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[23]~78_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(23));
-
--- Location: LCCOMB_X52_Y51_N16
-\countwdg_act[24]~80\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[24]~80_combout\ = (countwdg_act(24) & (\countwdg_act[23]~79\ $ (GND))) # (!countwdg_act(24) & (!\countwdg_act[23]~79\ & VCC))
--- \countwdg_act[24]~81\ = CARRY((countwdg_act(24) & !\countwdg_act[23]~79\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countwdg_act(24),
-	datad => VCC,
-	cin => \countwdg_act[23]~79\,
-	combout => \countwdg_act[24]~80_combout\,
-	cout => \countwdg_act[24]~81\);
-
--- Location: FF_X52_Y51_N17
-\countwdg_act[24]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[24]~80_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(24));
-
--- Location: LCCOMB_X51_Y52_N4
-\LessThan10~3\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan10~3_combout\ = (!countwdg_act(23) & (!countwdg_act(21) & (!countwdg_act(22) & !countwdg_act(24))))
+-- \watchdog_test|LessThan0~3_combout\ = (!\watchdog_test|countwdg_act\(22) & (!\watchdog_test|countwdg_act\(23) & (!\watchdog_test|countwdg_act\(24) & !\watchdog_test|countwdg_act\(21))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9605,16 +12121,16 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => countwdg_act(23),
-	datab => countwdg_act(21),
-	datac => countwdg_act(22),
-	datad => countwdg_act(24),
-	combout => \LessThan10~3_combout\);
+	dataa => \watchdog_test|countwdg_act\(22),
+	datab => \watchdog_test|countwdg_act\(23),
+	datac => \watchdog_test|countwdg_act\(24),
+	datad => \watchdog_test|countwdg_act\(21),
+	combout => \watchdog_test|LessThan0~3_combout\);
 
--- Location: LCCOMB_X52_Y50_N24
-\LessThan10~2\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y41_N28
+\watchdog_test|LessThan0~2\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \LessThan10~2_combout\ = (!countwdg_act(19) & (!countwdg_act(18) & (!countwdg_act(17) & !countwdg_act(20))))
+-- \watchdog_test|LessThan0~2_combout\ = (!\watchdog_test|countwdg_act\(19) & (!\watchdog_test|countwdg_act\(20) & (!\watchdog_test|countwdg_act\(17) & !\watchdog_test|countwdg_act\(18))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9622,16 +12138,16 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => countwdg_act(19),
-	datab => countwdg_act(18),
-	datac => countwdg_act(17),
-	datad => countwdg_act(20),
-	combout => \LessThan10~2_combout\);
+	dataa => \watchdog_test|countwdg_act\(19),
+	datab => \watchdog_test|countwdg_act\(20),
+	datac => \watchdog_test|countwdg_act\(17),
+	datad => \watchdog_test|countwdg_act\(18),
+	combout => \watchdog_test|LessThan0~2_combout\);
 
--- Location: LCCOMB_X51_Y52_N16
-\LessThan10~0\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y41_N8
+\watchdog_test|LessThan0~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \LessThan10~0_combout\ = (!countwdg_act(12) & (!countwdg_act(11) & (!countwdg_act(10) & !countwdg_act(9))))
+-- \watchdog_test|LessThan0~0_combout\ = (!\watchdog_test|countwdg_act\(10) & (!\watchdog_test|countwdg_act\(12) & (!\watchdog_test|countwdg_act\(9) & !\watchdog_test|countwdg_act\(11))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9639,16 +12155,33 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => countwdg_act(12),
-	datab => countwdg_act(11),
-	datac => countwdg_act(10),
-	datad => countwdg_act(9),
-	combout => \LessThan10~0_combout\);
+	dataa => \watchdog_test|countwdg_act\(10),
+	datab => \watchdog_test|countwdg_act\(12),
+	datac => \watchdog_test|countwdg_act\(9),
+	datad => \watchdog_test|countwdg_act\(11),
+	combout => \watchdog_test|LessThan0~0_combout\);
 
--- Location: LCCOMB_X51_Y52_N6
-\LessThan10~4\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y41_N18
+\watchdog_test|LessThan0~1\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \LessThan10~4_combout\ = (\LessThan10~1_combout\ & (\LessThan10~3_combout\ & (\LessThan10~2_combout\ & \LessThan10~0_combout\)))
+-- \watchdog_test|LessThan0~1_combout\ = (!\watchdog_test|countwdg_act\(16) & (!\watchdog_test|countwdg_act\(15) & (!\watchdog_test|countwdg_act\(14) & !\watchdog_test|countwdg_act\(13))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000000000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \watchdog_test|countwdg_act\(16),
+	datab => \watchdog_test|countwdg_act\(15),
+	datac => \watchdog_test|countwdg_act\(14),
+	datad => \watchdog_test|countwdg_act\(13),
+	combout => \watchdog_test|LessThan0~1_combout\);
+
+-- Location: LCCOMB_X50_Y41_N24
+\watchdog_test|LessThan0~4\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|LessThan0~4_combout\ = (\watchdog_test|LessThan0~3_combout\ & (\watchdog_test|LessThan0~2_combout\ & (\watchdog_test|LessThan0~0_combout\ & \watchdog_test|LessThan0~1_combout\)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9656,254 +12189,33 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \LessThan10~1_combout\,
-	datab => \LessThan10~3_combout\,
-	datac => \LessThan10~2_combout\,
-	datad => \LessThan10~0_combout\,
-	combout => \LessThan10~4_combout\);
+	dataa => \watchdog_test|LessThan0~3_combout\,
+	datab => \watchdog_test|LessThan0~2_combout\,
+	datac => \watchdog_test|LessThan0~0_combout\,
+	datad => \watchdog_test|LessThan0~1_combout\,
+	combout => \watchdog_test|LessThan0~4_combout\);
 
--- Location: LCCOMB_X52_Y51_N18
-\countwdg_act[25]~82\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y41_N12
+\watchdog_test|LessThan0~6\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[25]~82_combout\ = (countwdg_act(25) & (!\countwdg_act[24]~81\)) # (!countwdg_act(25) & ((\countwdg_act[24]~81\) # (GND)))
--- \countwdg_act[25]~83\ = CARRY((!\countwdg_act[24]~81\) # (!countwdg_act(25)))
+-- \watchdog_test|LessThan0~6_combout\ = (!\watchdog_test|countwdg_act\(29) & (\watchdog_test|LessThan0~5_combout\ & (!\watchdog_test|countwdg_act\(30) & \watchdog_test|LessThan0~4_combout\)))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countwdg_act(25),
-	datad => VCC,
-	cin => \countwdg_act[24]~81\,
-	combout => \countwdg_act[25]~82_combout\,
-	cout => \countwdg_act[25]~83\);
-
--- Location: FF_X52_Y51_N19
-\countwdg_act[25]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[25]~82_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(25));
-
--- Location: LCCOMB_X52_Y51_N20
-\countwdg_act[26]~84\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[26]~84_combout\ = (countwdg_act(26) & (\countwdg_act[25]~83\ $ (GND))) # (!countwdg_act(26) & (!\countwdg_act[25]~83\ & VCC))
--- \countwdg_act[26]~85\ = CARRY((countwdg_act(26) & !\countwdg_act[25]~83\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countwdg_act(26),
-	datad => VCC,
-	cin => \countwdg_act[25]~83\,
-	combout => \countwdg_act[26]~84_combout\,
-	cout => \countwdg_act[26]~85\);
-
--- Location: FF_X52_Y51_N21
-\countwdg_act[26]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[26]~84_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(26));
-
--- Location: LCCOMB_X52_Y51_N22
-\countwdg_act[27]~86\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[27]~86_combout\ = (countwdg_act(27) & (!\countwdg_act[26]~85\)) # (!countwdg_act(27) & ((\countwdg_act[26]~85\) # (GND)))
--- \countwdg_act[27]~87\ = CARRY((!\countwdg_act[26]~85\) # (!countwdg_act(27)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countwdg_act(27),
-	datad => VCC,
-	cin => \countwdg_act[26]~85\,
-	combout => \countwdg_act[27]~86_combout\,
-	cout => \countwdg_act[27]~87\);
-
--- Location: FF_X52_Y51_N23
-\countwdg_act[27]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[27]~86_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(27));
-
--- Location: LCCOMB_X52_Y51_N24
-\countwdg_act[28]~88\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[28]~88_combout\ = (countwdg_act(28) & (\countwdg_act[27]~87\ $ (GND))) # (!countwdg_act(28) & (!\countwdg_act[27]~87\ & VCC))
--- \countwdg_act[28]~89\ = CARRY((countwdg_act(28) & !\countwdg_act[27]~87\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countwdg_act(28),
-	datad => VCC,
-	cin => \countwdg_act[27]~87\,
-	combout => \countwdg_act[28]~88_combout\,
-	cout => \countwdg_act[28]~89\);
-
--- Location: FF_X52_Y51_N25
-\countwdg_act[28]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[28]~88_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(28));
-
--- Location: LCCOMB_X52_Y51_N26
-\countwdg_act[29]~90\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[29]~90_combout\ = (countwdg_act(29) & (!\countwdg_act[28]~89\)) # (!countwdg_act(29) & ((\countwdg_act[28]~89\) # (GND)))
--- \countwdg_act[29]~91\ = CARRY((!\countwdg_act[28]~89\) # (!countwdg_act(29)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countwdg_act(29),
-	datad => VCC,
-	cin => \countwdg_act[28]~89\,
-	combout => \countwdg_act[29]~90_combout\,
-	cout => \countwdg_act[29]~91\);
-
--- Location: FF_X52_Y51_N27
-\countwdg_act[29]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[29]~90_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(29));
-
--- Location: LCCOMB_X52_Y51_N28
-\countwdg_act[30]~92\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[30]~92_combout\ = (countwdg_act(30) & (\countwdg_act[29]~91\ $ (GND))) # (!countwdg_act(30) & (!\countwdg_act[29]~91\ & VCC))
--- \countwdg_act[30]~93\ = CARRY((countwdg_act(30) & !\countwdg_act[29]~91\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countwdg_act(30),
-	datad => VCC,
-	cin => \countwdg_act[29]~91\,
-	combout => \countwdg_act[30]~92_combout\,
-	cout => \countwdg_act[30]~93\);
-
--- Location: FF_X52_Y51_N29
-\countwdg_act[30]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[30]~92_combout\,
-	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countwdg_act(30));
-
--- Location: LCCOMB_X52_Y50_N2
-\LessThan10~5\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan10~5_combout\ = (!countwdg_act(25) & (!countwdg_act(26) & (!countwdg_act(27) & !countwdg_act(28))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000000001",
+	lut_mask => "0000010000000000",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => countwdg_act(25),
-	datab => countwdg_act(26),
-	datac => countwdg_act(27),
-	datad => countwdg_act(28),
-	combout => \LessThan10~5_combout\);
+	dataa => \watchdog_test|countwdg_act\(29),
+	datab => \watchdog_test|LessThan0~5_combout\,
+	datac => \watchdog_test|countwdg_act\(30),
+	datad => \watchdog_test|LessThan0~4_combout\,
+	combout => \watchdog_test|LessThan0~6_combout\);
 
--- Location: LCCOMB_X51_Y52_N24
-\LessThan10~6\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y37_N30
+\watchdog_test|countwdg_act[31]~94\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \LessThan10~6_combout\ = (\LessThan10~4_combout\ & (!countwdg_act(30) & (!countwdg_act(29) & \LessThan10~5_combout\)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000001000000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \LessThan10~4_combout\,
-	datab => countwdg_act(30),
-	datac => countwdg_act(29),
-	datad => \LessThan10~5_combout\,
-	combout => \LessThan10~6_combout\);
-
--- Location: LCCOMB_X52_Y51_N30
-\countwdg_act[31]~94\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countwdg_act[31]~94_combout\ = countwdg_act(31) $ (\countwdg_act[30]~93\)
+-- \watchdog_test|countwdg_act[31]~94_combout\ = \watchdog_test|countwdg_act\(31) $ (\watchdog_test|countwdg_act[30]~93\)
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9911,12 +12223,12 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	dataa => countwdg_act(31),
-	cin => \countwdg_act[30]~93\,
-	combout => \countwdg_act[31]~94_combout\);
+	dataa => \watchdog_test|countwdg_act\(31),
+	cin => \watchdog_test|countwdg_act[30]~93\,
+	combout => \watchdog_test|countwdg_act[31]~94_combout\);
 
--- Location: FF_X52_Y51_N31
-\countwdg_act[31]\ : dffeas
+-- Location: FF_X50_Y37_N31
+\watchdog_test|countwdg_act[31]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -9924,32 +12236,66 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[31]~94_combout\,
+	d => \watchdog_test|countwdg_act[31]~94_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(31));
+	q => \watchdog_test|countwdg_act\(31));
 
--- Location: LCCOMB_X51_Y52_N30
-\LessThan11~2\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y41_N22
+\watchdog_test|LessThan1~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \LessThan11~2_combout\ = (!countwdg_act(31) & (((!\LessThan11~1_combout\ & countwdg_act(8))) # (!\LessThan10~6_combout\)))
+-- \watchdog_test|LessThan1~0_combout\ = ((!\watchdog_test|countwdg_act\(3) & ((!\watchdog_test|countwdg_act\(2)) # (!\watchdog_test|countwdg_act\(1))))) # (!\watchdog_test|countwdg_act\(4))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0000011100000011",
+	lut_mask => "0011011101110111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \LessThan11~1_combout\,
-	datab => \LessThan10~6_combout\,
-	datac => countwdg_act(31),
-	datad => countwdg_act(8),
-	combout => \LessThan11~2_combout\);
+	dataa => \watchdog_test|countwdg_act\(3),
+	datab => \watchdog_test|countwdg_act\(4),
+	datac => \watchdog_test|countwdg_act\(1),
+	datad => \watchdog_test|countwdg_act\(2),
+	combout => \watchdog_test|LessThan1~0_combout\);
 
--- Location: FF_X52_Y52_N1
-\countwdg_act[0]\ : dffeas
+-- Location: LCCOMB_X50_Y41_N16
+\watchdog_test|LessThan1~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|LessThan1~1_combout\ = (!\watchdog_test|countwdg_act\(7) & (!\watchdog_test|countwdg_act\(6) & (!\watchdog_test|countwdg_act\(5) & \watchdog_test|LessThan1~0_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \watchdog_test|countwdg_act\(7),
+	datab => \watchdog_test|countwdg_act\(6),
+	datac => \watchdog_test|countwdg_act\(5),
+	datad => \watchdog_test|LessThan1~0_combout\,
+	combout => \watchdog_test|LessThan1~1_combout\);
+
+-- Location: LCCOMB_X50_Y41_N10
+\watchdog_test|LessThan1~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|LessThan1~2_combout\ = (!\watchdog_test|countwdg_act\(31) & (((\watchdog_test|countwdg_act\(8) & !\watchdog_test|LessThan1~1_combout\)) # (!\watchdog_test|LessThan0~6_combout\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000010100001101",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \watchdog_test|LessThan0~6_combout\,
+	datab => \watchdog_test|countwdg_act\(8),
+	datac => \watchdog_test|countwdg_act\(31),
+	datad => \watchdog_test|LessThan1~1_combout\,
+	combout => \watchdog_test|LessThan1~2_combout\);
+
+-- Location: FF_X50_Y38_N1
+\watchdog_test|countwdg_act[0]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -9957,18 +12303,18 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[0]~32_combout\,
+	d => \watchdog_test|countwdg_act[0]~32_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(0));
+	q => \watchdog_test|countwdg_act\(0));
 
--- Location: LCCOMB_X52_Y52_N2
-\countwdg_act[1]~34\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y38_N2
+\watchdog_test|countwdg_act[1]~34\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[1]~34_combout\ = (countwdg_act(1) & (!\countwdg_act[0]~33\)) # (!countwdg_act(1) & ((\countwdg_act[0]~33\) # (GND)))
--- \countwdg_act[1]~35\ = CARRY((!\countwdg_act[0]~33\) # (!countwdg_act(1)))
+-- \watchdog_test|countwdg_act[1]~34_combout\ = (\watchdog_test|countwdg_act\(1) & (!\watchdog_test|countwdg_act[0]~33\)) # (!\watchdog_test|countwdg_act\(1) & ((\watchdog_test|countwdg_act[0]~33\) # (GND)))
+-- \watchdog_test|countwdg_act[1]~35\ = CARRY((!\watchdog_test|countwdg_act[0]~33\) # (!\watchdog_test|countwdg_act\(1)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -9976,14 +12322,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countwdg_act(1),
+	datab => \watchdog_test|countwdg_act\(1),
 	datad => VCC,
-	cin => \countwdg_act[0]~33\,
-	combout => \countwdg_act[1]~34_combout\,
-	cout => \countwdg_act[1]~35\);
+	cin => \watchdog_test|countwdg_act[0]~33\,
+	combout => \watchdog_test|countwdg_act[1]~34_combout\,
+	cout => \watchdog_test|countwdg_act[1]~35\);
 
--- Location: FF_X52_Y52_N3
-\countwdg_act[1]\ : dffeas
+-- Location: FF_X50_Y38_N3
+\watchdog_test|countwdg_act[1]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -9991,18 +12337,18 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[1]~34_combout\,
+	d => \watchdog_test|countwdg_act[1]~34_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(1));
+	q => \watchdog_test|countwdg_act\(1));
 
--- Location: LCCOMB_X52_Y52_N4
-\countwdg_act[2]~36\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y38_N4
+\watchdog_test|countwdg_act[2]~36\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[2]~36_combout\ = (countwdg_act(2) & (\countwdg_act[1]~35\ $ (GND))) # (!countwdg_act(2) & (!\countwdg_act[1]~35\ & VCC))
--- \countwdg_act[2]~37\ = CARRY((countwdg_act(2) & !\countwdg_act[1]~35\))
+-- \watchdog_test|countwdg_act[2]~36_combout\ = (\watchdog_test|countwdg_act\(2) & (\watchdog_test|countwdg_act[1]~35\ $ (GND))) # (!\watchdog_test|countwdg_act\(2) & (!\watchdog_test|countwdg_act[1]~35\ & VCC))
+-- \watchdog_test|countwdg_act[2]~37\ = CARRY((\watchdog_test|countwdg_act\(2) & !\watchdog_test|countwdg_act[1]~35\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -10010,14 +12356,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countwdg_act(2),
+	datab => \watchdog_test|countwdg_act\(2),
 	datad => VCC,
-	cin => \countwdg_act[1]~35\,
-	combout => \countwdg_act[2]~36_combout\,
-	cout => \countwdg_act[2]~37\);
+	cin => \watchdog_test|countwdg_act[1]~35\,
+	combout => \watchdog_test|countwdg_act[2]~36_combout\,
+	cout => \watchdog_test|countwdg_act[2]~37\);
 
--- Location: FF_X52_Y52_N5
-\countwdg_act[2]\ : dffeas
+-- Location: FF_X50_Y38_N5
+\watchdog_test|countwdg_act[2]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -10025,18 +12371,18 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[2]~36_combout\,
+	d => \watchdog_test|countwdg_act[2]~36_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(2));
+	q => \watchdog_test|countwdg_act\(2));
 
--- Location: LCCOMB_X52_Y52_N6
-\countwdg_act[3]~38\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y38_N6
+\watchdog_test|countwdg_act[3]~38\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[3]~38_combout\ = (countwdg_act(3) & (!\countwdg_act[2]~37\)) # (!countwdg_act(3) & ((\countwdg_act[2]~37\) # (GND)))
--- \countwdg_act[3]~39\ = CARRY((!\countwdg_act[2]~37\) # (!countwdg_act(3)))
+-- \watchdog_test|countwdg_act[3]~38_combout\ = (\watchdog_test|countwdg_act\(3) & (!\watchdog_test|countwdg_act[2]~37\)) # (!\watchdog_test|countwdg_act\(3) & ((\watchdog_test|countwdg_act[2]~37\) # (GND)))
+-- \watchdog_test|countwdg_act[3]~39\ = CARRY((!\watchdog_test|countwdg_act[2]~37\) # (!\watchdog_test|countwdg_act\(3)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -10044,14 +12390,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	dataa => countwdg_act(3),
+	dataa => \watchdog_test|countwdg_act\(3),
 	datad => VCC,
-	cin => \countwdg_act[2]~37\,
-	combout => \countwdg_act[3]~38_combout\,
-	cout => \countwdg_act[3]~39\);
+	cin => \watchdog_test|countwdg_act[2]~37\,
+	combout => \watchdog_test|countwdg_act[3]~38_combout\,
+	cout => \watchdog_test|countwdg_act[3]~39\);
 
--- Location: FF_X52_Y52_N7
-\countwdg_act[3]\ : dffeas
+-- Location: FF_X50_Y38_N7
+\watchdog_test|countwdg_act[3]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -10059,18 +12405,18 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[3]~38_combout\,
+	d => \watchdog_test|countwdg_act[3]~38_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(3));
+	q => \watchdog_test|countwdg_act\(3));
 
--- Location: LCCOMB_X52_Y52_N8
-\countwdg_act[4]~40\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y38_N8
+\watchdog_test|countwdg_act[4]~40\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[4]~40_combout\ = (countwdg_act(4) & (\countwdg_act[3]~39\ $ (GND))) # (!countwdg_act(4) & (!\countwdg_act[3]~39\ & VCC))
--- \countwdg_act[4]~41\ = CARRY((countwdg_act(4) & !\countwdg_act[3]~39\))
+-- \watchdog_test|countwdg_act[4]~40_combout\ = (\watchdog_test|countwdg_act\(4) & (\watchdog_test|countwdg_act[3]~39\ $ (GND))) # (!\watchdog_test|countwdg_act\(4) & (!\watchdog_test|countwdg_act[3]~39\ & VCC))
+-- \watchdog_test|countwdg_act[4]~41\ = CARRY((\watchdog_test|countwdg_act\(4) & !\watchdog_test|countwdg_act[3]~39\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -10078,14 +12424,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countwdg_act(4),
+	datab => \watchdog_test|countwdg_act\(4),
 	datad => VCC,
-	cin => \countwdg_act[3]~39\,
-	combout => \countwdg_act[4]~40_combout\,
-	cout => \countwdg_act[4]~41\);
+	cin => \watchdog_test|countwdg_act[3]~39\,
+	combout => \watchdog_test|countwdg_act[4]~40_combout\,
+	cout => \watchdog_test|countwdg_act[4]~41\);
 
--- Location: FF_X52_Y52_N9
-\countwdg_act[4]\ : dffeas
+-- Location: FF_X50_Y38_N9
+\watchdog_test|countwdg_act[4]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -10093,18 +12439,18 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[4]~40_combout\,
+	d => \watchdog_test|countwdg_act[4]~40_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(4));
+	q => \watchdog_test|countwdg_act\(4));
 
--- Location: LCCOMB_X52_Y52_N10
-\countwdg_act[5]~42\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y38_N10
+\watchdog_test|countwdg_act[5]~42\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countwdg_act[5]~42_combout\ = (countwdg_act(5) & (!\countwdg_act[4]~41\)) # (!countwdg_act(5) & ((\countwdg_act[4]~41\) # (GND)))
--- \countwdg_act[5]~43\ = CARRY((!\countwdg_act[4]~41\) # (!countwdg_act(5)))
+-- \watchdog_test|countwdg_act[5]~42_combout\ = (\watchdog_test|countwdg_act\(5) & (!\watchdog_test|countwdg_act[4]~41\)) # (!\watchdog_test|countwdg_act\(5) & ((\watchdog_test|countwdg_act[4]~41\) # (GND)))
+-- \watchdog_test|countwdg_act[5]~43\ = CARRY((!\watchdog_test|countwdg_act[4]~41\) # (!\watchdog_test|countwdg_act\(5)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -10112,14 +12458,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	dataa => countwdg_act(5),
+	dataa => \watchdog_test|countwdg_act\(5),
 	datad => VCC,
-	cin => \countwdg_act[4]~41\,
-	combout => \countwdg_act[5]~42_combout\,
-	cout => \countwdg_act[5]~43\);
+	cin => \watchdog_test|countwdg_act[4]~41\,
+	combout => \watchdog_test|countwdg_act[5]~42_combout\,
+	cout => \watchdog_test|countwdg_act[5]~43\);
 
--- Location: FF_X52_Y52_N11
-\countwdg_act[5]\ : dffeas
+-- Location: FF_X50_Y38_N11
+\watchdog_test|countwdg_act[5]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -10127,15 +12473,33 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[5]~42_combout\,
+	d => \watchdog_test|countwdg_act[5]~42_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(5));
+	q => \watchdog_test|countwdg_act\(5));
 
--- Location: FF_X52_Y52_N13
-\countwdg_act[6]\ : dffeas
+-- Location: LCCOMB_X50_Y38_N12
+\watchdog_test|countwdg_act[6]~44\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \watchdog_test|countwdg_act[6]~44_combout\ = (\watchdog_test|countwdg_act\(6) & (\watchdog_test|countwdg_act[5]~43\ $ (GND))) # (!\watchdog_test|countwdg_act\(6) & (!\watchdog_test|countwdg_act[5]~43\ & VCC))
+-- \watchdog_test|countwdg_act[6]~45\ = CARRY((\watchdog_test|countwdg_act\(6) & !\watchdog_test|countwdg_act[5]~43\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \watchdog_test|countwdg_act\(6),
+	datad => VCC,
+	cin => \watchdog_test|countwdg_act[5]~43\,
+	combout => \watchdog_test|countwdg_act[6]~44_combout\,
+	cout => \watchdog_test|countwdg_act[6]~45\);
+
+-- Location: FF_X50_Y38_N13
+\watchdog_test|countwdg_act[6]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -10143,33 +12507,33 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countwdg_act[6]~44_combout\,
+	d => \watchdog_test|countwdg_act[6]~44_combout\,
 	clrn => \wdg_reset~input_o\,
-	sclr => \LessThan11~2_combout\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countwdg_act(6));
+	q => \watchdog_test|countwdg_act\(6));
 
--- Location: LCCOMB_X51_Y52_N28
-\LessThan10~8\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \LessThan10~8_combout\ = (!countwdg_act(6) & (!countwdg_act(4) & !countwdg_act(5)))
-
+-- Location: FF_X50_Y38_N15
+\watchdog_test|countwdg_act[7]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0000000000000011",
-	sum_lutc_input => "datac")
+	is_wysiwyg => "true",
+	power_up => "low")
 -- pragma translate_on
 PORT MAP (
-	datab => countwdg_act(6),
-	datac => countwdg_act(4),
-	datad => countwdg_act(5),
-	combout => \LessThan10~8_combout\);
+	clk => \clk~inputclkctrl_outclk\,
+	d => \watchdog_test|countwdg_act[7]~46_combout\,
+	clrn => \wdg_reset~input_o\,
+	sclr => \watchdog_test|LessThan1~2_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \watchdog_test|countwdg_act\(7));
 
--- Location: LCCOMB_X51_Y52_N18
-\LessThan10~7\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y41_N14
+\watchdog_test|LessThan0~7\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \LessThan10~7_combout\ = ((!countwdg_act(2) & ((!countwdg_act(0)) # (!countwdg_act(1))))) # (!countwdg_act(3))
+-- \watchdog_test|LessThan0~7_combout\ = ((!\watchdog_test|countwdg_act\(2) & ((!\watchdog_test|countwdg_act\(1)) # (!\watchdog_test|countwdg_act\(0))))) # (!\watchdog_test|countwdg_act\(3))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -10177,684 +12541,60 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => countwdg_act(3),
-	datab => countwdg_act(1),
-	datac => countwdg_act(0),
-	datad => countwdg_act(2),
-	combout => \LessThan10~7_combout\);
+	dataa => \watchdog_test|countwdg_act\(3),
+	datab => \watchdog_test|countwdg_act\(0),
+	datac => \watchdog_test|countwdg_act\(1),
+	datad => \watchdog_test|countwdg_act\(2),
+	combout => \watchdog_test|LessThan0~7_combout\);
 
--- Location: LCCOMB_X51_Y52_N22
-\LessThan10~9\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y41_N0
+\watchdog_test|LessThan0~8\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \LessThan10~9_combout\ = ((\LessThan10~8_combout\ & \LessThan10~7_combout\)) # (!countwdg_act(7))
+-- \watchdog_test|LessThan0~8_combout\ = (!\watchdog_test|countwdg_act\(4) & (!\watchdog_test|countwdg_act\(6) & !\watchdog_test|countwdg_act\(5)))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "1100111100001111",
+	lut_mask => "0000000100000001",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	datab => \LessThan10~8_combout\,
-	datac => countwdg_act(7),
-	datad => \LessThan10~7_combout\,
-	combout => \LessThan10~9_combout\);
+	dataa => \watchdog_test|countwdg_act\(4),
+	datab => \watchdog_test|countwdg_act\(6),
+	datac => \watchdog_test|countwdg_act\(5),
+	combout => \watchdog_test|LessThan0~8_combout\);
 
--- Location: LCCOMB_X51_Y52_N8
-\LessThan10~10\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y41_N26
+\watchdog_test|LessThan0~9\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \LessThan10~10_combout\ = (countwdg_act(31)) # ((\LessThan10~9_combout\ & (\LessThan10~6_combout\ & !countwdg_act(8))))
+-- \watchdog_test|LessThan0~9_combout\ = ((\watchdog_test|LessThan0~7_combout\ & \watchdog_test|LessThan0~8_combout\)) # (!\watchdog_test|countwdg_act\(7))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "1111000011111000",
+	lut_mask => "1111010101010101",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \LessThan10~9_combout\,
-	datab => \LessThan10~6_combout\,
-	datac => countwdg_act(31),
-	datad => countwdg_act(8),
-	combout => \LessThan10~10_combout\);
+	dataa => \watchdog_test|countwdg_act\(7),
+	datac => \watchdog_test|LessThan0~7_combout\,
+	datad => \watchdog_test|LessThan0~8_combout\,
+	combout => \watchdog_test|LessThan0~9_combout\);
 
--- Location: LCCOMB_X44_Y37_N14
-\countset_act[0]~19\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X50_Y41_N4
+\watchdog_test|LessThan0~10\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countset_act[0]~19_combout\ = countset_act(0) $ (VCC)
--- \countset_act[0]~20\ = CARRY(countset_act(0))
+-- \watchdog_test|LessThan0~10_combout\ = (\watchdog_test|countwdg_act\(31)) # ((\watchdog_test|LessThan0~9_combout\ & (!\watchdog_test|countwdg_act\(8) & \watchdog_test|LessThan0~6_combout\)))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0011001111001100",
+	lut_mask => "1111001011110000",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	datab => countset_act(0),
-	datad => VCC,
-	combout => \countset_act[0]~19_combout\,
-	cout => \countset_act[0]~20\);
-
--- Location: FF_X44_Y37_N15
-\countset_act[0]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[0]~19_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(0));
-
--- Location: LCCOMB_X44_Y37_N16
-\countset_act[1]~21\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[1]~21_combout\ = (countset_act(1) & (!\countset_act[0]~20\)) # (!countset_act(1) & ((\countset_act[0]~20\) # (GND)))
--- \countset_act[1]~22\ = CARRY((!\countset_act[0]~20\) # (!countset_act(1)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countset_act(1),
-	datad => VCC,
-	cin => \countset_act[0]~20\,
-	combout => \countset_act[1]~21_combout\,
-	cout => \countset_act[1]~22\);
-
--- Location: FF_X44_Y37_N17
-\countset_act[1]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[1]~21_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(1));
-
--- Location: LCCOMB_X44_Y37_N18
-\countset_act[2]~23\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[2]~23_combout\ = (countset_act(2) & (\countset_act[1]~22\ $ (GND))) # (!countset_act(2) & (!\countset_act[1]~22\ & VCC))
--- \countset_act[2]~24\ = CARRY((countset_act(2) & !\countset_act[1]~22\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countset_act(2),
-	datad => VCC,
-	cin => \countset_act[1]~22\,
-	combout => \countset_act[2]~23_combout\,
-	cout => \countset_act[2]~24\);
-
--- Location: FF_X44_Y37_N19
-\countset_act[2]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[2]~23_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(2));
-
--- Location: LCCOMB_X44_Y37_N20
-\countset_act[3]~25\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[3]~25_combout\ = (countset_act(3) & (!\countset_act[2]~24\)) # (!countset_act(3) & ((\countset_act[2]~24\) # (GND)))
--- \countset_act[3]~26\ = CARRY((!\countset_act[2]~24\) # (!countset_act(3)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countset_act(3),
-	datad => VCC,
-	cin => \countset_act[2]~24\,
-	combout => \countset_act[3]~25_combout\,
-	cout => \countset_act[3]~26\);
-
--- Location: FF_X44_Y37_N21
-\countset_act[3]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[3]~25_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(3));
-
--- Location: LCCOMB_X44_Y37_N22
-\countset_act[4]~27\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[4]~27_combout\ = (countset_act(4) & (\countset_act[3]~26\ $ (GND))) # (!countset_act(4) & (!\countset_act[3]~26\ & VCC))
--- \countset_act[4]~28\ = CARRY((countset_act(4) & !\countset_act[3]~26\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countset_act(4),
-	datad => VCC,
-	cin => \countset_act[3]~26\,
-	combout => \countset_act[4]~27_combout\,
-	cout => \countset_act[4]~28\);
-
--- Location: FF_X44_Y37_N23
-\countset_act[4]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[4]~27_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(4));
-
--- Location: LCCOMB_X44_Y37_N24
-\countset_act[5]~29\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[5]~29_combout\ = (countset_act(5) & (!\countset_act[4]~28\)) # (!countset_act(5) & ((\countset_act[4]~28\) # (GND)))
--- \countset_act[5]~30\ = CARRY((!\countset_act[4]~28\) # (!countset_act(5)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countset_act(5),
-	datad => VCC,
-	cin => \countset_act[4]~28\,
-	combout => \countset_act[5]~29_combout\,
-	cout => \countset_act[5]~30\);
-
--- Location: FF_X44_Y37_N25
-\countset_act[5]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[5]~29_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(5));
-
--- Location: LCCOMB_X44_Y37_N26
-\countset_act[6]~31\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[6]~31_combout\ = (countset_act(6) & (\countset_act[5]~30\ $ (GND))) # (!countset_act(6) & (!\countset_act[5]~30\ & VCC))
--- \countset_act[6]~32\ = CARRY((countset_act(6) & !\countset_act[5]~30\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countset_act(6),
-	datad => VCC,
-	cin => \countset_act[5]~30\,
-	combout => \countset_act[6]~31_combout\,
-	cout => \countset_act[6]~32\);
-
--- Location: FF_X44_Y37_N27
-\countset_act[6]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[6]~31_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(6));
-
--- Location: LCCOMB_X44_Y37_N28
-\countset_act[7]~33\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[7]~33_combout\ = (countset_act(7) & (!\countset_act[6]~32\)) # (!countset_act(7) & ((\countset_act[6]~32\) # (GND)))
--- \countset_act[7]~34\ = CARRY((!\countset_act[6]~32\) # (!countset_act(7)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countset_act(7),
-	datad => VCC,
-	cin => \countset_act[6]~32\,
-	combout => \countset_act[7]~33_combout\,
-	cout => \countset_act[7]~34\);
-
--- Location: FF_X44_Y37_N29
-\countset_act[7]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[7]~33_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(7));
-
--- Location: LCCOMB_X44_Y37_N30
-\countset_act[8]~35\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[8]~35_combout\ = (countset_act(8) & (\countset_act[7]~34\ $ (GND))) # (!countset_act(8) & (!\countset_act[7]~34\ & VCC))
--- \countset_act[8]~36\ = CARRY((countset_act(8) & !\countset_act[7]~34\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countset_act(8),
-	datad => VCC,
-	cin => \countset_act[7]~34\,
-	combout => \countset_act[8]~35_combout\,
-	cout => \countset_act[8]~36\);
-
--- Location: FF_X44_Y37_N31
-\countset_act[8]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[8]~35_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(8));
-
--- Location: LCCOMB_X44_Y36_N0
-\countset_act[9]~37\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[9]~37_combout\ = (countset_act(9) & (!\countset_act[8]~36\)) # (!countset_act(9) & ((\countset_act[8]~36\) # (GND)))
--- \countset_act[9]~38\ = CARRY((!\countset_act[8]~36\) # (!countset_act(9)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countset_act(9),
-	datad => VCC,
-	cin => \countset_act[8]~36\,
-	combout => \countset_act[9]~37_combout\,
-	cout => \countset_act[9]~38\);
-
--- Location: FF_X44_Y36_N1
-\countset_act[9]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[9]~37_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(9));
-
--- Location: LCCOMB_X44_Y36_N2
-\countset_act[10]~39\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[10]~39_combout\ = (countset_act(10) & (\countset_act[9]~38\ $ (GND))) # (!countset_act(10) & (!\countset_act[9]~38\ & VCC))
--- \countset_act[10]~40\ = CARRY((countset_act(10) & !\countset_act[9]~38\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countset_act(10),
-	datad => VCC,
-	cin => \countset_act[9]~38\,
-	combout => \countset_act[10]~39_combout\,
-	cout => \countset_act[10]~40\);
-
--- Location: FF_X44_Y36_N3
-\countset_act[10]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[10]~39_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(10));
-
--- Location: LCCOMB_X44_Y36_N4
-\countset_act[11]~41\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[11]~41_combout\ = (countset_act(11) & (!\countset_act[10]~40\)) # (!countset_act(11) & ((\countset_act[10]~40\) # (GND)))
--- \countset_act[11]~42\ = CARRY((!\countset_act[10]~40\) # (!countset_act(11)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countset_act(11),
-	datad => VCC,
-	cin => \countset_act[10]~40\,
-	combout => \countset_act[11]~41_combout\,
-	cout => \countset_act[11]~42\);
-
--- Location: FF_X44_Y36_N5
-\countset_act[11]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[11]~41_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(11));
-
--- Location: LCCOMB_X44_Y36_N6
-\countset_act[12]~43\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[12]~43_combout\ = (countset_act(12) & (\countset_act[11]~42\ $ (GND))) # (!countset_act(12) & (!\countset_act[11]~42\ & VCC))
--- \countset_act[12]~44\ = CARRY((countset_act(12) & !\countset_act[11]~42\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countset_act(12),
-	datad => VCC,
-	cin => \countset_act[11]~42\,
-	combout => \countset_act[12]~43_combout\,
-	cout => \countset_act[12]~44\);
-
--- Location: FF_X44_Y36_N7
-\countset_act[12]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[12]~43_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(12));
-
--- Location: LCCOMB_X44_Y36_N8
-\countset_act[13]~45\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[13]~45_combout\ = (countset_act(13) & (!\countset_act[12]~44\)) # (!countset_act(13) & ((\countset_act[12]~44\) # (GND)))
--- \countset_act[13]~46\ = CARRY((!\countset_act[12]~44\) # (!countset_act(13)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countset_act(13),
-	datad => VCC,
-	cin => \countset_act[12]~44\,
-	combout => \countset_act[13]~45_combout\,
-	cout => \countset_act[13]~46\);
-
--- Location: FF_X44_Y36_N9
-\countset_act[13]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[13]~45_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(13));
-
--- Location: LCCOMB_X44_Y36_N10
-\countset_act[14]~47\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[14]~47_combout\ = (countset_act(14) & (\countset_act[13]~46\ $ (GND))) # (!countset_act(14) & (!\countset_act[13]~46\ & VCC))
--- \countset_act[14]~48\ = CARRY((countset_act(14) & !\countset_act[13]~46\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countset_act(14),
-	datad => VCC,
-	cin => \countset_act[13]~46\,
-	combout => \countset_act[14]~47_combout\,
-	cout => \countset_act[14]~48\);
-
--- Location: FF_X44_Y36_N11
-\countset_act[14]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[14]~47_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(14));
-
--- Location: LCCOMB_X44_Y36_N12
-\countset_act[15]~49\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[15]~49_combout\ = (countset_act(15) & (!\countset_act[14]~48\)) # (!countset_act(15) & ((\countset_act[14]~48\) # (GND)))
--- \countset_act[15]~50\ = CARRY((!\countset_act[14]~48\) # (!countset_act(15)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => countset_act(15),
-	datad => VCC,
-	cin => \countset_act[14]~48\,
-	combout => \countset_act[15]~49_combout\,
-	cout => \countset_act[15]~50\);
-
--- Location: FF_X44_Y36_N13
-\countset_act[15]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[15]~49_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(15));
-
--- Location: LCCOMB_X44_Y36_N14
-\countset_act[16]~51\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[16]~51_combout\ = (countset_act(16) & (\countset_act[15]~50\ $ (GND))) # (!countset_act(16) & (!\countset_act[15]~50\ & VCC))
--- \countset_act[16]~52\ = CARRY((countset_act(16) & !\countset_act[15]~50\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countset_act(16),
-	datad => VCC,
-	cin => \countset_act[15]~50\,
-	combout => \countset_act[16]~51_combout\,
-	cout => \countset_act[16]~52\);
-
--- Location: FF_X44_Y36_N15
-\countset_act[16]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[16]~51_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(16));
-
--- Location: LCCOMB_X44_Y36_N16
-\countset_act[17]~53\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[17]~53_combout\ = (countset_act(17) & (!\countset_act[16]~52\)) # (!countset_act(17) & ((\countset_act[16]~52\) # (GND)))
--- \countset_act[17]~54\ = CARRY((!\countset_act[16]~52\) # (!countset_act(17)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => countset_act(17),
-	datad => VCC,
-	cin => \countset_act[16]~52\,
-	combout => \countset_act[17]~53_combout\,
-	cout => \countset_act[17]~54\);
-
--- Location: FF_X44_Y36_N17
-\countset_act[17]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[17]~53_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(17));
-
--- Location: LCCOMB_X44_Y36_N18
-\countset_act[18]~55\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countset_act[18]~55_combout\ = \countset_act[17]~54\ $ (!countset_act(18))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111000000001111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datad => countset_act(18),
-	cin => \countset_act[17]~54\,
-	combout => \countset_act[18]~55_combout\);
-
--- Location: FF_X44_Y36_N19
-\countset_act[18]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputclkctrl_outclk\,
-	d => \countset_act[18]~55_combout\,
-	sclr => \ALT_INV_set_out~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => countset_act(18));
-
--- Location: LCCOMB_X44_Y36_N26
-\set_process~3\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \set_process~3_combout\ = (((!countset_act(17)) # (!countset_act(16))) # (!countset_act(18))) # (!countset_act(15))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0111111111111111",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => countset_act(15),
-	datab => countset_act(18),
-	datac => countset_act(16),
-	datad => countset_act(17),
-	combout => \set_process~3_combout\);
+	dataa => \watchdog_test|LessThan0~9_combout\,
+	datab => \watchdog_test|countwdg_act\(8),
+	datac => \watchdog_test|countwdg_act\(31),
+	datad => \watchdog_test|LessThan0~6_combout\,
+	combout => \watchdog_test|LessThan0~10_combout\);
 
 -- Location: IOIBUF_X46_Y54_N29
 \set_btn~input\ : fiftyfivenm_io_ibuf
@@ -10868,10 +12608,650 @@ PORT MAP (
 	i => ww_set_btn,
 	o => \set_btn~input_o\);
 
--- Location: LCCOMB_X44_Y36_N30
-\set_process~1\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X45_Y34_N14
+\set_reset_test|countset_act[0]~19\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \set_process~1_combout\ = (!countset_act(12) & (!countset_act(9) & (!countset_act(11) & !countset_act(10))))
+-- \set_reset_test|countset_act[0]~19_combout\ = \set_reset_test|countset_act\(0) $ (VCC)
+-- \set_reset_test|countset_act[0]~20\ = CARRY(\set_reset_test|countset_act\(0))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011001111001100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datab => \set_reset_test|countset_act\(0),
+	datad => VCC,
+	combout => \set_reset_test|countset_act[0]~19_combout\,
+	cout => \set_reset_test|countset_act[0]~20\);
+
+-- Location: FF_X45_Y34_N15
+\set_reset_test|countset_act[0]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[0]~19_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(0));
+
+-- Location: LCCOMB_X45_Y34_N16
+\set_reset_test|countset_act[1]~21\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[1]~21_combout\ = (\set_reset_test|countset_act\(1) & (!\set_reset_test|countset_act[0]~20\)) # (!\set_reset_test|countset_act\(1) & ((\set_reset_test|countset_act[0]~20\) # (GND)))
+-- \set_reset_test|countset_act[1]~22\ = CARRY((!\set_reset_test|countset_act[0]~20\) # (!\set_reset_test|countset_act\(1)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \set_reset_test|countset_act\(1),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[0]~20\,
+	combout => \set_reset_test|countset_act[1]~21_combout\,
+	cout => \set_reset_test|countset_act[1]~22\);
+
+-- Location: FF_X45_Y34_N17
+\set_reset_test|countset_act[1]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[1]~21_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(1));
+
+-- Location: LCCOMB_X45_Y34_N18
+\set_reset_test|countset_act[2]~23\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[2]~23_combout\ = (\set_reset_test|countset_act\(2) & (\set_reset_test|countset_act[1]~22\ $ (GND))) # (!\set_reset_test|countset_act\(2) & (!\set_reset_test|countset_act[1]~22\ & VCC))
+-- \set_reset_test|countset_act[2]~24\ = CARRY((\set_reset_test|countset_act\(2) & !\set_reset_test|countset_act[1]~22\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \set_reset_test|countset_act\(2),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[1]~22\,
+	combout => \set_reset_test|countset_act[2]~23_combout\,
+	cout => \set_reset_test|countset_act[2]~24\);
+
+-- Location: FF_X45_Y34_N19
+\set_reset_test|countset_act[2]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[2]~23_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(2));
+
+-- Location: LCCOMB_X45_Y34_N20
+\set_reset_test|countset_act[3]~25\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[3]~25_combout\ = (\set_reset_test|countset_act\(3) & (!\set_reset_test|countset_act[2]~24\)) # (!\set_reset_test|countset_act\(3) & ((\set_reset_test|countset_act[2]~24\) # (GND)))
+-- \set_reset_test|countset_act[3]~26\ = CARRY((!\set_reset_test|countset_act[2]~24\) # (!\set_reset_test|countset_act\(3)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \set_reset_test|countset_act\(3),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[2]~24\,
+	combout => \set_reset_test|countset_act[3]~25_combout\,
+	cout => \set_reset_test|countset_act[3]~26\);
+
+-- Location: FF_X45_Y34_N21
+\set_reset_test|countset_act[3]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[3]~25_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(3));
+
+-- Location: LCCOMB_X45_Y34_N22
+\set_reset_test|countset_act[4]~27\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[4]~27_combout\ = (\set_reset_test|countset_act\(4) & (\set_reset_test|countset_act[3]~26\ $ (GND))) # (!\set_reset_test|countset_act\(4) & (!\set_reset_test|countset_act[3]~26\ & VCC))
+-- \set_reset_test|countset_act[4]~28\ = CARRY((\set_reset_test|countset_act\(4) & !\set_reset_test|countset_act[3]~26\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \set_reset_test|countset_act\(4),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[3]~26\,
+	combout => \set_reset_test|countset_act[4]~27_combout\,
+	cout => \set_reset_test|countset_act[4]~28\);
+
+-- Location: FF_X45_Y34_N23
+\set_reset_test|countset_act[4]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[4]~27_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(4));
+
+-- Location: LCCOMB_X45_Y34_N24
+\set_reset_test|countset_act[5]~29\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[5]~29_combout\ = (\set_reset_test|countset_act\(5) & (!\set_reset_test|countset_act[4]~28\)) # (!\set_reset_test|countset_act\(5) & ((\set_reset_test|countset_act[4]~28\) # (GND)))
+-- \set_reset_test|countset_act[5]~30\ = CARRY((!\set_reset_test|countset_act[4]~28\) # (!\set_reset_test|countset_act\(5)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \set_reset_test|countset_act\(5),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[4]~28\,
+	combout => \set_reset_test|countset_act[5]~29_combout\,
+	cout => \set_reset_test|countset_act[5]~30\);
+
+-- Location: FF_X45_Y34_N25
+\set_reset_test|countset_act[5]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[5]~29_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(5));
+
+-- Location: LCCOMB_X45_Y34_N26
+\set_reset_test|countset_act[6]~31\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[6]~31_combout\ = (\set_reset_test|countset_act\(6) & (\set_reset_test|countset_act[5]~30\ $ (GND))) # (!\set_reset_test|countset_act\(6) & (!\set_reset_test|countset_act[5]~30\ & VCC))
+-- \set_reset_test|countset_act[6]~32\ = CARRY((\set_reset_test|countset_act\(6) & !\set_reset_test|countset_act[5]~30\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \set_reset_test|countset_act\(6),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[5]~30\,
+	combout => \set_reset_test|countset_act[6]~31_combout\,
+	cout => \set_reset_test|countset_act[6]~32\);
+
+-- Location: FF_X45_Y34_N27
+\set_reset_test|countset_act[6]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[6]~31_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(6));
+
+-- Location: LCCOMB_X45_Y34_N28
+\set_reset_test|countset_act[7]~33\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[7]~33_combout\ = (\set_reset_test|countset_act\(7) & (!\set_reset_test|countset_act[6]~32\)) # (!\set_reset_test|countset_act\(7) & ((\set_reset_test|countset_act[6]~32\) # (GND)))
+-- \set_reset_test|countset_act[7]~34\ = CARRY((!\set_reset_test|countset_act[6]~32\) # (!\set_reset_test|countset_act\(7)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \set_reset_test|countset_act\(7),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[6]~32\,
+	combout => \set_reset_test|countset_act[7]~33_combout\,
+	cout => \set_reset_test|countset_act[7]~34\);
+
+-- Location: FF_X45_Y34_N29
+\set_reset_test|countset_act[7]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[7]~33_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(7));
+
+-- Location: LCCOMB_X45_Y34_N30
+\set_reset_test|countset_act[8]~35\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[8]~35_combout\ = (\set_reset_test|countset_act\(8) & (\set_reset_test|countset_act[7]~34\ $ (GND))) # (!\set_reset_test|countset_act\(8) & (!\set_reset_test|countset_act[7]~34\ & VCC))
+-- \set_reset_test|countset_act[8]~36\ = CARRY((\set_reset_test|countset_act\(8) & !\set_reset_test|countset_act[7]~34\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \set_reset_test|countset_act\(8),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[7]~34\,
+	combout => \set_reset_test|countset_act[8]~35_combout\,
+	cout => \set_reset_test|countset_act[8]~36\);
+
+-- Location: FF_X45_Y34_N31
+\set_reset_test|countset_act[8]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[8]~35_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(8));
+
+-- Location: LCCOMB_X45_Y33_N0
+\set_reset_test|countset_act[9]~37\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[9]~37_combout\ = (\set_reset_test|countset_act\(9) & (!\set_reset_test|countset_act[8]~36\)) # (!\set_reset_test|countset_act\(9) & ((\set_reset_test|countset_act[8]~36\) # (GND)))
+-- \set_reset_test|countset_act[9]~38\ = CARRY((!\set_reset_test|countset_act[8]~36\) # (!\set_reset_test|countset_act\(9)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \set_reset_test|countset_act\(9),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[8]~36\,
+	combout => \set_reset_test|countset_act[9]~37_combout\,
+	cout => \set_reset_test|countset_act[9]~38\);
+
+-- Location: FF_X45_Y33_N1
+\set_reset_test|countset_act[9]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[9]~37_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(9));
+
+-- Location: LCCOMB_X45_Y33_N2
+\set_reset_test|countset_act[10]~39\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[10]~39_combout\ = (\set_reset_test|countset_act\(10) & (\set_reset_test|countset_act[9]~38\ $ (GND))) # (!\set_reset_test|countset_act\(10) & (!\set_reset_test|countset_act[9]~38\ & VCC))
+-- \set_reset_test|countset_act[10]~40\ = CARRY((\set_reset_test|countset_act\(10) & !\set_reset_test|countset_act[9]~38\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \set_reset_test|countset_act\(10),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[9]~38\,
+	combout => \set_reset_test|countset_act[10]~39_combout\,
+	cout => \set_reset_test|countset_act[10]~40\);
+
+-- Location: FF_X45_Y33_N3
+\set_reset_test|countset_act[10]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[10]~39_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(10));
+
+-- Location: LCCOMB_X45_Y33_N4
+\set_reset_test|countset_act[11]~41\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[11]~41_combout\ = (\set_reset_test|countset_act\(11) & (!\set_reset_test|countset_act[10]~40\)) # (!\set_reset_test|countset_act\(11) & ((\set_reset_test|countset_act[10]~40\) # (GND)))
+-- \set_reset_test|countset_act[11]~42\ = CARRY((!\set_reset_test|countset_act[10]~40\) # (!\set_reset_test|countset_act\(11)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \set_reset_test|countset_act\(11),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[10]~40\,
+	combout => \set_reset_test|countset_act[11]~41_combout\,
+	cout => \set_reset_test|countset_act[11]~42\);
+
+-- Location: FF_X45_Y33_N5
+\set_reset_test|countset_act[11]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[11]~41_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(11));
+
+-- Location: LCCOMB_X45_Y33_N6
+\set_reset_test|countset_act[12]~43\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[12]~43_combout\ = (\set_reset_test|countset_act\(12) & (\set_reset_test|countset_act[11]~42\ $ (GND))) # (!\set_reset_test|countset_act\(12) & (!\set_reset_test|countset_act[11]~42\ & VCC))
+-- \set_reset_test|countset_act[12]~44\ = CARRY((\set_reset_test|countset_act\(12) & !\set_reset_test|countset_act[11]~42\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \set_reset_test|countset_act\(12),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[11]~42\,
+	combout => \set_reset_test|countset_act[12]~43_combout\,
+	cout => \set_reset_test|countset_act[12]~44\);
+
+-- Location: FF_X45_Y33_N7
+\set_reset_test|countset_act[12]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[12]~43_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(12));
+
+-- Location: LCCOMB_X45_Y33_N8
+\set_reset_test|countset_act[13]~45\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[13]~45_combout\ = (\set_reset_test|countset_act\(13) & (!\set_reset_test|countset_act[12]~44\)) # (!\set_reset_test|countset_act\(13) & ((\set_reset_test|countset_act[12]~44\) # (GND)))
+-- \set_reset_test|countset_act[13]~46\ = CARRY((!\set_reset_test|countset_act[12]~44\) # (!\set_reset_test|countset_act\(13)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \set_reset_test|countset_act\(13),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[12]~44\,
+	combout => \set_reset_test|countset_act[13]~45_combout\,
+	cout => \set_reset_test|countset_act[13]~46\);
+
+-- Location: FF_X45_Y33_N9
+\set_reset_test|countset_act[13]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[13]~45_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(13));
+
+-- Location: LCCOMB_X45_Y33_N10
+\set_reset_test|countset_act[14]~47\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[14]~47_combout\ = (\set_reset_test|countset_act\(14) & (\set_reset_test|countset_act[13]~46\ $ (GND))) # (!\set_reset_test|countset_act\(14) & (!\set_reset_test|countset_act[13]~46\ & VCC))
+-- \set_reset_test|countset_act[14]~48\ = CARRY((\set_reset_test|countset_act\(14) & !\set_reset_test|countset_act[13]~46\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \set_reset_test|countset_act\(14),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[13]~46\,
+	combout => \set_reset_test|countset_act[14]~47_combout\,
+	cout => \set_reset_test|countset_act[14]~48\);
+
+-- Location: FF_X45_Y33_N11
+\set_reset_test|countset_act[14]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[14]~47_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(14));
+
+-- Location: LCCOMB_X45_Y33_N12
+\set_reset_test|countset_act[15]~49\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[15]~49_combout\ = (\set_reset_test|countset_act\(15) & (!\set_reset_test|countset_act[14]~48\)) # (!\set_reset_test|countset_act\(15) & ((\set_reset_test|countset_act[14]~48\) # (GND)))
+-- \set_reset_test|countset_act[15]~50\ = CARRY((!\set_reset_test|countset_act[14]~48\) # (!\set_reset_test|countset_act\(15)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \set_reset_test|countset_act\(15),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[14]~48\,
+	combout => \set_reset_test|countset_act[15]~49_combout\,
+	cout => \set_reset_test|countset_act[15]~50\);
+
+-- Location: FF_X45_Y33_N13
+\set_reset_test|countset_act[15]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[15]~49_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(15));
+
+-- Location: LCCOMB_X45_Y33_N14
+\set_reset_test|countset_act[16]~51\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[16]~51_combout\ = (\set_reset_test|countset_act\(16) & (\set_reset_test|countset_act[15]~50\ $ (GND))) # (!\set_reset_test|countset_act\(16) & (!\set_reset_test|countset_act[15]~50\ & VCC))
+-- \set_reset_test|countset_act[16]~52\ = CARRY((\set_reset_test|countset_act\(16) & !\set_reset_test|countset_act[15]~50\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \set_reset_test|countset_act\(16),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[15]~50\,
+	combout => \set_reset_test|countset_act[16]~51_combout\,
+	cout => \set_reset_test|countset_act[16]~52\);
+
+-- Location: FF_X45_Y33_N15
+\set_reset_test|countset_act[16]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[16]~51_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(16));
+
+-- Location: LCCOMB_X45_Y33_N16
+\set_reset_test|countset_act[17]~53\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[17]~53_combout\ = (\set_reset_test|countset_act\(17) & (!\set_reset_test|countset_act[16]~52\)) # (!\set_reset_test|countset_act\(17) & ((\set_reset_test|countset_act[16]~52\) # (GND)))
+-- \set_reset_test|countset_act[17]~54\ = CARRY((!\set_reset_test|countset_act[16]~52\) # (!\set_reset_test|countset_act\(17)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \set_reset_test|countset_act\(17),
+	datad => VCC,
+	cin => \set_reset_test|countset_act[16]~52\,
+	combout => \set_reset_test|countset_act[17]~53_combout\,
+	cout => \set_reset_test|countset_act[17]~54\);
+
+-- Location: FF_X45_Y33_N17
+\set_reset_test|countset_act[17]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[17]~53_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(17));
+
+-- Location: LCCOMB_X45_Y33_N18
+\set_reset_test|countset_act[18]~55\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|countset_act[18]~55_combout\ = \set_reset_test|countset_act[17]~54\ $ (!\set_reset_test|countset_act\(18))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111000000001111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datad => \set_reset_test|countset_act\(18),
+	cin => \set_reset_test|countset_act[17]~54\,
+	combout => \set_reset_test|countset_act[18]~55_combout\);
+
+-- Location: FF_X45_Y33_N19
+\set_reset_test|countset_act[18]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputclkctrl_outclk\,
+	d => \set_reset_test|countset_act[18]~55_combout\,
+	sclr => \set_reset_test|ALT_INV_set_out~0_combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \set_reset_test|countset_act\(18));
+
+-- Location: LCCOMB_X45_Y33_N26
+\set_reset_test|set_process~3\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|set_process~3_combout\ = (((!\set_reset_test|countset_act\(18)) # (!\set_reset_test|countset_act\(16))) # (!\set_reset_test|countset_act\(17))) # (!\set_reset_test|countset_act\(15))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0111111111111111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \set_reset_test|countset_act\(15),
+	datab => \set_reset_test|countset_act\(17),
+	datac => \set_reset_test|countset_act\(16),
+	datad => \set_reset_test|countset_act\(18),
+	combout => \set_reset_test|set_process~3_combout\);
+
+-- Location: LCCOMB_X45_Y33_N30
+\set_reset_test|set_process~1\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|set_process~1_combout\ = (!\set_reset_test|countset_act\(12) & (!\set_reset_test|countset_act\(10) & (!\set_reset_test|countset_act\(11) & !\set_reset_test|countset_act\(9))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -10879,16 +13259,16 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => countset_act(12),
-	datab => countset_act(9),
-	datac => countset_act(11),
-	datad => countset_act(10),
-	combout => \set_process~1_combout\);
+	dataa => \set_reset_test|countset_act\(12),
+	datab => \set_reset_test|countset_act\(10),
+	datac => \set_reset_test|countset_act\(11),
+	datad => \set_reset_test|countset_act\(9),
+	combout => \set_reset_test|set_process~1_combout\);
 
--- Location: LCCOMB_X44_Y37_N8
-\set_process~0\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X45_Y34_N8
+\set_reset_test|set_process~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \set_process~0_combout\ = ((!countset_act(6) & (!countset_act(7) & !countset_act(5)))) # (!countset_act(8))
+-- \set_reset_test|set_process~0_combout\ = ((!\set_reset_test|countset_act\(6) & (!\set_reset_test|countset_act\(5) & !\set_reset_test|countset_act\(7)))) # (!\set_reset_test|countset_act\(8))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -10896,16 +13276,16 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => countset_act(6),
-	datab => countset_act(7),
-	datac => countset_act(8),
-	datad => countset_act(5),
-	combout => \set_process~0_combout\);
+	dataa => \set_reset_test|countset_act\(6),
+	datab => \set_reset_test|countset_act\(5),
+	datac => \set_reset_test|countset_act\(8),
+	datad => \set_reset_test|countset_act\(7),
+	combout => \set_reset_test|set_process~0_combout\);
 
--- Location: LCCOMB_X44_Y36_N24
-\set_process~2\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X45_Y33_N24
+\set_reset_test|set_process~2\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \set_process~2_combout\ = (!countset_act(14) & (((\set_process~1_combout\ & \set_process~0_combout\)) # (!countset_act(13))))
+-- \set_reset_test|set_process~2_combout\ = (!\set_reset_test|countset_act\(14) & (((\set_reset_test|set_process~1_combout\ & \set_reset_test|set_process~0_combout\)) # (!\set_reset_test|countset_act\(13))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -10913,16 +13293,17 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => countset_act(14),
-	datab => countset_act(13),
-	datac => \set_process~1_combout\,
-	datad => \set_process~0_combout\,
-	combout => \set_process~2_combout\);
+	dataa => \set_reset_test|countset_act\(14),
+	datab => \set_reset_test|countset_act\(13),
+	datac => \set_reset_test|set_process~1_combout\,
+	datad => \set_reset_test|set_process~0_combout\,
+	combout => \set_reset_test|set_process~2_combout\);
 
--- Location: LCCOMB_X44_Y36_N28
-\set_process~4\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X45_Y33_N20
+\set_reset_test|set_process~4\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \set_process~4_combout\ = (\set_process~3_combout\ & ((\set_process~4_combout\) # ((!\set_btn~input_o\)))) # (!\set_process~3_combout\ & (\set_process~2_combout\ & ((\set_process~4_combout\) # (!\set_btn~input_o\))))
+-- \set_reset_test|set_process~4_combout\ = (\set_reset_test|set_process~3_combout\ & ((\set_reset_test|set_process~4_combout\) # ((!\set_btn~input_o\)))) # (!\set_reset_test|set_process~3_combout\ & (\set_reset_test|set_process~2_combout\ & 
+-- ((\set_reset_test|set_process~4_combout\) # (!\set_btn~input_o\))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -10930,26 +13311,26 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \set_process~3_combout\,
-	datab => \set_process~4_combout\,
+	dataa => \set_reset_test|set_process~3_combout\,
+	datab => \set_reset_test|set_process~4_combout\,
 	datac => \set_btn~input_o\,
-	datad => \set_process~2_combout\,
-	combout => \set_process~4_combout\);
+	datad => \set_reset_test|set_process~2_combout\,
+	combout => \set_reset_test|set_process~4_combout\);
 
--- Location: LCCOMB_X44_Y36_N20
-\set_out~0\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X45_Y33_N28
+\set_reset_test|set_out~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \set_out~0_combout\ = (\set_process~4_combout\) # (!\set_btn~input_o\)
+-- \set_reset_test|set_out~0_combout\ = (\set_reset_test|set_process~4_combout\) # (!\set_btn~input_o\)
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "1100111111001111",
+	lut_mask => "1111111100001111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	datab => \set_process~4_combout\,
 	datac => \set_btn~input_o\,
-	combout => \set_out~0_combout\);
+	datad => \set_reset_test|set_process~4_combout\,
+	combout => \set_reset_test|set_out~0_combout\);
 
 -- Location: IOIBUF_X49_Y54_N29
 \reset_btn~input\ : fiftyfivenm_io_ibuf
@@ -10963,11 +13344,11 @@ PORT MAP (
 	i => ww_reset_btn,
 	o => \reset_btn~input_o\);
 
--- Location: LCCOMB_X46_Y26_N14
-\countreset_act[0]~19\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y29_N14
+\set_reset_test|countreset_act[0]~19\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[0]~19_combout\ = countreset_act(0) $ (VCC)
--- \countreset_act[0]~20\ = CARRY(countreset_act(0))
+-- \set_reset_test|countreset_act[0]~19_combout\ = \set_reset_test|countreset_act\(0) $ (VCC)
+-- \set_reset_test|countreset_act[0]~20\ = CARRY(\set_reset_test|countreset_act\(0))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -10975,13 +13356,13 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	datab => countreset_act(0),
+	datab => \set_reset_test|countreset_act\(0),
 	datad => VCC,
-	combout => \countreset_act[0]~19_combout\,
-	cout => \countreset_act[0]~20\);
+	combout => \set_reset_test|countreset_act[0]~19_combout\,
+	cout => \set_reset_test|countreset_act[0]~20\);
 
--- Location: FF_X46_Y26_N15
-\countreset_act[0]\ : dffeas
+-- Location: FF_X47_Y29_N15
+\set_reset_test|countreset_act[0]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -10989,17 +13370,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[0]~19_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[0]~19_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(0));
+	q => \set_reset_test|countreset_act\(0));
 
--- Location: LCCOMB_X46_Y26_N16
-\countreset_act[1]~21\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y29_N16
+\set_reset_test|countreset_act[1]~21\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[1]~21_combout\ = (countreset_act(1) & (!\countreset_act[0]~20\)) # (!countreset_act(1) & ((\countreset_act[0]~20\) # (GND)))
--- \countreset_act[1]~22\ = CARRY((!\countreset_act[0]~20\) # (!countreset_act(1)))
+-- \set_reset_test|countreset_act[1]~21_combout\ = (\set_reset_test|countreset_act\(1) & (!\set_reset_test|countreset_act[0]~20\)) # (!\set_reset_test|countreset_act\(1) & ((\set_reset_test|countreset_act[0]~20\) # (GND)))
+-- \set_reset_test|countreset_act[1]~22\ = CARRY((!\set_reset_test|countreset_act[0]~20\) # (!\set_reset_test|countreset_act\(1)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11007,14 +13388,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countreset_act(1),
+	datab => \set_reset_test|countreset_act\(1),
 	datad => VCC,
-	cin => \countreset_act[0]~20\,
-	combout => \countreset_act[1]~21_combout\,
-	cout => \countreset_act[1]~22\);
+	cin => \set_reset_test|countreset_act[0]~20\,
+	combout => \set_reset_test|countreset_act[1]~21_combout\,
+	cout => \set_reset_test|countreset_act[1]~22\);
 
--- Location: FF_X46_Y26_N17
-\countreset_act[1]\ : dffeas
+-- Location: FF_X47_Y29_N17
+\set_reset_test|countreset_act[1]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11022,17 +13403,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[1]~21_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[1]~21_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(1));
+	q => \set_reset_test|countreset_act\(1));
 
--- Location: LCCOMB_X46_Y26_N18
-\countreset_act[2]~23\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y29_N18
+\set_reset_test|countreset_act[2]~23\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[2]~23_combout\ = (countreset_act(2) & (\countreset_act[1]~22\ $ (GND))) # (!countreset_act(2) & (!\countreset_act[1]~22\ & VCC))
--- \countreset_act[2]~24\ = CARRY((countreset_act(2) & !\countreset_act[1]~22\))
+-- \set_reset_test|countreset_act[2]~23_combout\ = (\set_reset_test|countreset_act\(2) & (\set_reset_test|countreset_act[1]~22\ $ (GND))) # (!\set_reset_test|countreset_act\(2) & (!\set_reset_test|countreset_act[1]~22\ & VCC))
+-- \set_reset_test|countreset_act[2]~24\ = CARRY((\set_reset_test|countreset_act\(2) & !\set_reset_test|countreset_act[1]~22\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11040,14 +13421,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countreset_act(2),
+	datab => \set_reset_test|countreset_act\(2),
 	datad => VCC,
-	cin => \countreset_act[1]~22\,
-	combout => \countreset_act[2]~23_combout\,
-	cout => \countreset_act[2]~24\);
+	cin => \set_reset_test|countreset_act[1]~22\,
+	combout => \set_reset_test|countreset_act[2]~23_combout\,
+	cout => \set_reset_test|countreset_act[2]~24\);
 
--- Location: FF_X46_Y26_N19
-\countreset_act[2]\ : dffeas
+-- Location: FF_X47_Y29_N19
+\set_reset_test|countreset_act[2]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11055,17 +13436,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[2]~23_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[2]~23_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(2));
+	q => \set_reset_test|countreset_act\(2));
 
--- Location: LCCOMB_X46_Y26_N20
-\countreset_act[3]~25\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y29_N20
+\set_reset_test|countreset_act[3]~25\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[3]~25_combout\ = (countreset_act(3) & (!\countreset_act[2]~24\)) # (!countreset_act(3) & ((\countreset_act[2]~24\) # (GND)))
--- \countreset_act[3]~26\ = CARRY((!\countreset_act[2]~24\) # (!countreset_act(3)))
+-- \set_reset_test|countreset_act[3]~25_combout\ = (\set_reset_test|countreset_act\(3) & (!\set_reset_test|countreset_act[2]~24\)) # (!\set_reset_test|countreset_act\(3) & ((\set_reset_test|countreset_act[2]~24\) # (GND)))
+-- \set_reset_test|countreset_act[3]~26\ = CARRY((!\set_reset_test|countreset_act[2]~24\) # (!\set_reset_test|countreset_act\(3)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11073,14 +13454,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countreset_act(3),
+	datab => \set_reset_test|countreset_act\(3),
 	datad => VCC,
-	cin => \countreset_act[2]~24\,
-	combout => \countreset_act[3]~25_combout\,
-	cout => \countreset_act[3]~26\);
+	cin => \set_reset_test|countreset_act[2]~24\,
+	combout => \set_reset_test|countreset_act[3]~25_combout\,
+	cout => \set_reset_test|countreset_act[3]~26\);
 
--- Location: FF_X46_Y26_N21
-\countreset_act[3]\ : dffeas
+-- Location: FF_X47_Y29_N21
+\set_reset_test|countreset_act[3]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11088,17 +13469,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[3]~25_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[3]~25_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(3));
+	q => \set_reset_test|countreset_act\(3));
 
--- Location: LCCOMB_X46_Y26_N22
-\countreset_act[4]~27\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y29_N22
+\set_reset_test|countreset_act[4]~27\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[4]~27_combout\ = (countreset_act(4) & (\countreset_act[3]~26\ $ (GND))) # (!countreset_act(4) & (!\countreset_act[3]~26\ & VCC))
--- \countreset_act[4]~28\ = CARRY((countreset_act(4) & !\countreset_act[3]~26\))
+-- \set_reset_test|countreset_act[4]~27_combout\ = (\set_reset_test|countreset_act\(4) & (\set_reset_test|countreset_act[3]~26\ $ (GND))) # (!\set_reset_test|countreset_act\(4) & (!\set_reset_test|countreset_act[3]~26\ & VCC))
+-- \set_reset_test|countreset_act[4]~28\ = CARRY((\set_reset_test|countreset_act\(4) & !\set_reset_test|countreset_act[3]~26\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11106,14 +13487,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	dataa => countreset_act(4),
+	dataa => \set_reset_test|countreset_act\(4),
 	datad => VCC,
-	cin => \countreset_act[3]~26\,
-	combout => \countreset_act[4]~27_combout\,
-	cout => \countreset_act[4]~28\);
+	cin => \set_reset_test|countreset_act[3]~26\,
+	combout => \set_reset_test|countreset_act[4]~27_combout\,
+	cout => \set_reset_test|countreset_act[4]~28\);
 
--- Location: FF_X46_Y26_N23
-\countreset_act[4]\ : dffeas
+-- Location: FF_X47_Y29_N23
+\set_reset_test|countreset_act[4]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11121,17 +13502,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[4]~27_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[4]~27_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(4));
+	q => \set_reset_test|countreset_act\(4));
 
--- Location: LCCOMB_X46_Y26_N24
-\countreset_act[5]~29\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y29_N24
+\set_reset_test|countreset_act[5]~29\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[5]~29_combout\ = (countreset_act(5) & (!\countreset_act[4]~28\)) # (!countreset_act(5) & ((\countreset_act[4]~28\) # (GND)))
--- \countreset_act[5]~30\ = CARRY((!\countreset_act[4]~28\) # (!countreset_act(5)))
+-- \set_reset_test|countreset_act[5]~29_combout\ = (\set_reset_test|countreset_act\(5) & (!\set_reset_test|countreset_act[4]~28\)) # (!\set_reset_test|countreset_act\(5) & ((\set_reset_test|countreset_act[4]~28\) # (GND)))
+-- \set_reset_test|countreset_act[5]~30\ = CARRY((!\set_reset_test|countreset_act[4]~28\) # (!\set_reset_test|countreset_act\(5)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11139,14 +13520,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countreset_act(5),
+	datab => \set_reset_test|countreset_act\(5),
 	datad => VCC,
-	cin => \countreset_act[4]~28\,
-	combout => \countreset_act[5]~29_combout\,
-	cout => \countreset_act[5]~30\);
+	cin => \set_reset_test|countreset_act[4]~28\,
+	combout => \set_reset_test|countreset_act[5]~29_combout\,
+	cout => \set_reset_test|countreset_act[5]~30\);
 
--- Location: FF_X46_Y26_N25
-\countreset_act[5]\ : dffeas
+-- Location: FF_X47_Y29_N25
+\set_reset_test|countreset_act[5]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11154,17 +13535,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[5]~29_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[5]~29_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(5));
+	q => \set_reset_test|countreset_act\(5));
 
--- Location: LCCOMB_X46_Y26_N26
-\countreset_act[6]~31\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y29_N26
+\set_reset_test|countreset_act[6]~31\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[6]~31_combout\ = (countreset_act(6) & (\countreset_act[5]~30\ $ (GND))) # (!countreset_act(6) & (!\countreset_act[5]~30\ & VCC))
--- \countreset_act[6]~32\ = CARRY((countreset_act(6) & !\countreset_act[5]~30\))
+-- \set_reset_test|countreset_act[6]~31_combout\ = (\set_reset_test|countreset_act\(6) & (\set_reset_test|countreset_act[5]~30\ $ (GND))) # (!\set_reset_test|countreset_act\(6) & (!\set_reset_test|countreset_act[5]~30\ & VCC))
+-- \set_reset_test|countreset_act[6]~32\ = CARRY((\set_reset_test|countreset_act\(6) & !\set_reset_test|countreset_act[5]~30\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11172,14 +13553,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	dataa => countreset_act(6),
+	dataa => \set_reset_test|countreset_act\(6),
 	datad => VCC,
-	cin => \countreset_act[5]~30\,
-	combout => \countreset_act[6]~31_combout\,
-	cout => \countreset_act[6]~32\);
+	cin => \set_reset_test|countreset_act[5]~30\,
+	combout => \set_reset_test|countreset_act[6]~31_combout\,
+	cout => \set_reset_test|countreset_act[6]~32\);
 
--- Location: FF_X46_Y26_N27
-\countreset_act[6]\ : dffeas
+-- Location: FF_X47_Y29_N27
+\set_reset_test|countreset_act[6]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11187,17 +13568,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[6]~31_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[6]~31_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(6));
+	q => \set_reset_test|countreset_act\(6));
 
--- Location: LCCOMB_X46_Y26_N28
-\countreset_act[7]~33\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y29_N28
+\set_reset_test|countreset_act[7]~33\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[7]~33_combout\ = (countreset_act(7) & (!\countreset_act[6]~32\)) # (!countreset_act(7) & ((\countreset_act[6]~32\) # (GND)))
--- \countreset_act[7]~34\ = CARRY((!\countreset_act[6]~32\) # (!countreset_act(7)))
+-- \set_reset_test|countreset_act[7]~33_combout\ = (\set_reset_test|countreset_act\(7) & (!\set_reset_test|countreset_act[6]~32\)) # (!\set_reset_test|countreset_act\(7) & ((\set_reset_test|countreset_act[6]~32\) # (GND)))
+-- \set_reset_test|countreset_act[7]~34\ = CARRY((!\set_reset_test|countreset_act[6]~32\) # (!\set_reset_test|countreset_act\(7)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11205,14 +13586,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countreset_act(7),
+	datab => \set_reset_test|countreset_act\(7),
 	datad => VCC,
-	cin => \countreset_act[6]~32\,
-	combout => \countreset_act[7]~33_combout\,
-	cout => \countreset_act[7]~34\);
+	cin => \set_reset_test|countreset_act[6]~32\,
+	combout => \set_reset_test|countreset_act[7]~33_combout\,
+	cout => \set_reset_test|countreset_act[7]~34\);
 
--- Location: FF_X46_Y26_N29
-\countreset_act[7]\ : dffeas
+-- Location: FF_X47_Y29_N29
+\set_reset_test|countreset_act[7]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11220,17 +13601,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[7]~33_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[7]~33_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(7));
+	q => \set_reset_test|countreset_act\(7));
 
--- Location: LCCOMB_X46_Y26_N30
-\countreset_act[8]~35\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y29_N30
+\set_reset_test|countreset_act[8]~35\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[8]~35_combout\ = (countreset_act(8) & (\countreset_act[7]~34\ $ (GND))) # (!countreset_act(8) & (!\countreset_act[7]~34\ & VCC))
--- \countreset_act[8]~36\ = CARRY((countreset_act(8) & !\countreset_act[7]~34\))
+-- \set_reset_test|countreset_act[8]~35_combout\ = (\set_reset_test|countreset_act\(8) & (\set_reset_test|countreset_act[7]~34\ $ (GND))) # (!\set_reset_test|countreset_act\(8) & (!\set_reset_test|countreset_act[7]~34\ & VCC))
+-- \set_reset_test|countreset_act[8]~36\ = CARRY((\set_reset_test|countreset_act\(8) & !\set_reset_test|countreset_act[7]~34\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11238,14 +13619,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	dataa => countreset_act(8),
+	dataa => \set_reset_test|countreset_act\(8),
 	datad => VCC,
-	cin => \countreset_act[7]~34\,
-	combout => \countreset_act[8]~35_combout\,
-	cout => \countreset_act[8]~36\);
+	cin => \set_reset_test|countreset_act[7]~34\,
+	combout => \set_reset_test|countreset_act[8]~35_combout\,
+	cout => \set_reset_test|countreset_act[8]~36\);
 
--- Location: FF_X46_Y26_N31
-\countreset_act[8]\ : dffeas
+-- Location: FF_X47_Y29_N31
+\set_reset_test|countreset_act[8]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11253,17 +13634,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[8]~35_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[8]~35_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(8));
+	q => \set_reset_test|countreset_act\(8));
 
--- Location: LCCOMB_X46_Y25_N0
-\countreset_act[9]~37\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y28_N0
+\set_reset_test|countreset_act[9]~37\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[9]~37_combout\ = (countreset_act(9) & (!\countreset_act[8]~36\)) # (!countreset_act(9) & ((\countreset_act[8]~36\) # (GND)))
--- \countreset_act[9]~38\ = CARRY((!\countreset_act[8]~36\) # (!countreset_act(9)))
+-- \set_reset_test|countreset_act[9]~37_combout\ = (\set_reset_test|countreset_act\(9) & (!\set_reset_test|countreset_act[8]~36\)) # (!\set_reset_test|countreset_act\(9) & ((\set_reset_test|countreset_act[8]~36\) # (GND)))
+-- \set_reset_test|countreset_act[9]~38\ = CARRY((!\set_reset_test|countreset_act[8]~36\) # (!\set_reset_test|countreset_act\(9)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11271,14 +13652,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countreset_act(9),
+	datab => \set_reset_test|countreset_act\(9),
 	datad => VCC,
-	cin => \countreset_act[8]~36\,
-	combout => \countreset_act[9]~37_combout\,
-	cout => \countreset_act[9]~38\);
+	cin => \set_reset_test|countreset_act[8]~36\,
+	combout => \set_reset_test|countreset_act[9]~37_combout\,
+	cout => \set_reset_test|countreset_act[9]~38\);
 
--- Location: FF_X46_Y25_N1
-\countreset_act[9]\ : dffeas
+-- Location: FF_X47_Y28_N1
+\set_reset_test|countreset_act[9]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11286,17 +13667,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[9]~37_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[9]~37_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(9));
+	q => \set_reset_test|countreset_act\(9));
 
--- Location: LCCOMB_X46_Y25_N2
-\countreset_act[10]~39\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y28_N2
+\set_reset_test|countreset_act[10]~39\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[10]~39_combout\ = (countreset_act(10) & (\countreset_act[9]~38\ $ (GND))) # (!countreset_act(10) & (!\countreset_act[9]~38\ & VCC))
--- \countreset_act[10]~40\ = CARRY((countreset_act(10) & !\countreset_act[9]~38\))
+-- \set_reset_test|countreset_act[10]~39_combout\ = (\set_reset_test|countreset_act\(10) & (\set_reset_test|countreset_act[9]~38\ $ (GND))) # (!\set_reset_test|countreset_act\(10) & (!\set_reset_test|countreset_act[9]~38\ & VCC))
+-- \set_reset_test|countreset_act[10]~40\ = CARRY((\set_reset_test|countreset_act\(10) & !\set_reset_test|countreset_act[9]~38\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11304,14 +13685,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countreset_act(10),
+	datab => \set_reset_test|countreset_act\(10),
 	datad => VCC,
-	cin => \countreset_act[9]~38\,
-	combout => \countreset_act[10]~39_combout\,
-	cout => \countreset_act[10]~40\);
+	cin => \set_reset_test|countreset_act[9]~38\,
+	combout => \set_reset_test|countreset_act[10]~39_combout\,
+	cout => \set_reset_test|countreset_act[10]~40\);
 
--- Location: FF_X46_Y25_N3
-\countreset_act[10]\ : dffeas
+-- Location: FF_X47_Y28_N3
+\set_reset_test|countreset_act[10]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11319,17 +13700,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[10]~39_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[10]~39_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(10));
+	q => \set_reset_test|countreset_act\(10));
 
--- Location: LCCOMB_X46_Y25_N4
-\countreset_act[11]~41\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y28_N4
+\set_reset_test|countreset_act[11]~41\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[11]~41_combout\ = (countreset_act(11) & (!\countreset_act[10]~40\)) # (!countreset_act(11) & ((\countreset_act[10]~40\) # (GND)))
--- \countreset_act[11]~42\ = CARRY((!\countreset_act[10]~40\) # (!countreset_act(11)))
+-- \set_reset_test|countreset_act[11]~41_combout\ = (\set_reset_test|countreset_act\(11) & (!\set_reset_test|countreset_act[10]~40\)) # (!\set_reset_test|countreset_act\(11) & ((\set_reset_test|countreset_act[10]~40\) # (GND)))
+-- \set_reset_test|countreset_act[11]~42\ = CARRY((!\set_reset_test|countreset_act[10]~40\) # (!\set_reset_test|countreset_act\(11)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11337,14 +13718,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countreset_act(11),
+	datab => \set_reset_test|countreset_act\(11),
 	datad => VCC,
-	cin => \countreset_act[10]~40\,
-	combout => \countreset_act[11]~41_combout\,
-	cout => \countreset_act[11]~42\);
+	cin => \set_reset_test|countreset_act[10]~40\,
+	combout => \set_reset_test|countreset_act[11]~41_combout\,
+	cout => \set_reset_test|countreset_act[11]~42\);
 
--- Location: FF_X46_Y25_N5
-\countreset_act[11]\ : dffeas
+-- Location: FF_X47_Y28_N5
+\set_reset_test|countreset_act[11]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11352,17 +13733,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[11]~41_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[11]~41_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(11));
+	q => \set_reset_test|countreset_act\(11));
 
--- Location: LCCOMB_X46_Y25_N6
-\countreset_act[12]~43\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y28_N6
+\set_reset_test|countreset_act[12]~43\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[12]~43_combout\ = (countreset_act(12) & (\countreset_act[11]~42\ $ (GND))) # (!countreset_act(12) & (!\countreset_act[11]~42\ & VCC))
--- \countreset_act[12]~44\ = CARRY((countreset_act(12) & !\countreset_act[11]~42\))
+-- \set_reset_test|countreset_act[12]~43_combout\ = (\set_reset_test|countreset_act\(12) & (\set_reset_test|countreset_act[11]~42\ $ (GND))) # (!\set_reset_test|countreset_act\(12) & (!\set_reset_test|countreset_act[11]~42\ & VCC))
+-- \set_reset_test|countreset_act[12]~44\ = CARRY((\set_reset_test|countreset_act\(12) & !\set_reset_test|countreset_act[11]~42\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11370,14 +13751,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	dataa => countreset_act(12),
+	dataa => \set_reset_test|countreset_act\(12),
 	datad => VCC,
-	cin => \countreset_act[11]~42\,
-	combout => \countreset_act[12]~43_combout\,
-	cout => \countreset_act[12]~44\);
+	cin => \set_reset_test|countreset_act[11]~42\,
+	combout => \set_reset_test|countreset_act[12]~43_combout\,
+	cout => \set_reset_test|countreset_act[12]~44\);
 
--- Location: FF_X46_Y25_N7
-\countreset_act[12]\ : dffeas
+-- Location: FF_X47_Y28_N7
+\set_reset_test|countreset_act[12]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11385,17 +13766,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[12]~43_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[12]~43_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(12));
+	q => \set_reset_test|countreset_act\(12));
 
--- Location: LCCOMB_X46_Y25_N8
-\countreset_act[13]~45\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y28_N8
+\set_reset_test|countreset_act[13]~45\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[13]~45_combout\ = (countreset_act(13) & (!\countreset_act[12]~44\)) # (!countreset_act(13) & ((\countreset_act[12]~44\) # (GND)))
--- \countreset_act[13]~46\ = CARRY((!\countreset_act[12]~44\) # (!countreset_act(13)))
+-- \set_reset_test|countreset_act[13]~45_combout\ = (\set_reset_test|countreset_act\(13) & (!\set_reset_test|countreset_act[12]~44\)) # (!\set_reset_test|countreset_act\(13) & ((\set_reset_test|countreset_act[12]~44\) # (GND)))
+-- \set_reset_test|countreset_act[13]~46\ = CARRY((!\set_reset_test|countreset_act[12]~44\) # (!\set_reset_test|countreset_act\(13)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11403,14 +13784,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countreset_act(13),
+	datab => \set_reset_test|countreset_act\(13),
 	datad => VCC,
-	cin => \countreset_act[12]~44\,
-	combout => \countreset_act[13]~45_combout\,
-	cout => \countreset_act[13]~46\);
+	cin => \set_reset_test|countreset_act[12]~44\,
+	combout => \set_reset_test|countreset_act[13]~45_combout\,
+	cout => \set_reset_test|countreset_act[13]~46\);
 
--- Location: FF_X46_Y25_N9
-\countreset_act[13]\ : dffeas
+-- Location: FF_X47_Y28_N9
+\set_reset_test|countreset_act[13]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11418,17 +13799,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[13]~45_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[13]~45_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(13));
+	q => \set_reset_test|countreset_act\(13));
 
--- Location: LCCOMB_X46_Y25_N10
-\countreset_act[14]~47\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y28_N10
+\set_reset_test|countreset_act[14]~47\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[14]~47_combout\ = (countreset_act(14) & (\countreset_act[13]~46\ $ (GND))) # (!countreset_act(14) & (!\countreset_act[13]~46\ & VCC))
--- \countreset_act[14]~48\ = CARRY((countreset_act(14) & !\countreset_act[13]~46\))
+-- \set_reset_test|countreset_act[14]~47_combout\ = (\set_reset_test|countreset_act\(14) & (\set_reset_test|countreset_act[13]~46\ $ (GND))) # (!\set_reset_test|countreset_act\(14) & (!\set_reset_test|countreset_act[13]~46\ & VCC))
+-- \set_reset_test|countreset_act[14]~48\ = CARRY((\set_reset_test|countreset_act\(14) & !\set_reset_test|countreset_act[13]~46\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11436,14 +13817,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	dataa => countreset_act(14),
+	dataa => \set_reset_test|countreset_act\(14),
 	datad => VCC,
-	cin => \countreset_act[13]~46\,
-	combout => \countreset_act[14]~47_combout\,
-	cout => \countreset_act[14]~48\);
+	cin => \set_reset_test|countreset_act[13]~46\,
+	combout => \set_reset_test|countreset_act[14]~47_combout\,
+	cout => \set_reset_test|countreset_act[14]~48\);
 
--- Location: FF_X46_Y25_N11
-\countreset_act[14]\ : dffeas
+-- Location: FF_X47_Y28_N11
+\set_reset_test|countreset_act[14]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11451,68 +13832,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[14]~47_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[14]~47_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(14));
+	q => \set_reset_test|countreset_act\(14));
 
--- Location: LCCOMB_X46_Y25_N30
-\reset_process~1\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y28_N12
+\set_reset_test|countreset_act[15]~49\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \reset_process~1_combout\ = (!countreset_act(12) & (!countreset_act(9) & (!countreset_act(11) & !countreset_act(10))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000000000000001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => countreset_act(12),
-	datab => countreset_act(9),
-	datac => countreset_act(11),
-	datad => countreset_act(10),
-	combout => \reset_process~1_combout\);
-
--- Location: LCCOMB_X46_Y26_N8
-\reset_process~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \reset_process~0_combout\ = ((!countreset_act(6) & (!countreset_act(7) & !countreset_act(5)))) # (!countreset_act(8))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000111100011111",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => countreset_act(6),
-	datab => countreset_act(7),
-	datac => countreset_act(8),
-	datad => countreset_act(5),
-	combout => \reset_process~0_combout\);
-
--- Location: LCCOMB_X46_Y25_N24
-\reset_process~2\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \reset_process~2_combout\ = (!countreset_act(14) & (((\reset_process~1_combout\ & \reset_process~0_combout\)) # (!countreset_act(13))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101000100010001",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => countreset_act(14),
-	datab => countreset_act(13),
-	datac => \reset_process~1_combout\,
-	datad => \reset_process~0_combout\,
-	combout => \reset_process~2_combout\);
-
--- Location: LCCOMB_X46_Y25_N12
-\countreset_act[15]~49\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \countreset_act[15]~49_combout\ = (countreset_act(15) & (!\countreset_act[14]~48\)) # (!countreset_act(15) & ((\countreset_act[14]~48\) # (GND)))
--- \countreset_act[15]~50\ = CARRY((!\countreset_act[14]~48\) # (!countreset_act(15)))
+-- \set_reset_test|countreset_act[15]~49_combout\ = (\set_reset_test|countreset_act\(15) & (!\set_reset_test|countreset_act[14]~48\)) # (!\set_reset_test|countreset_act\(15) & ((\set_reset_test|countreset_act[14]~48\) # (GND)))
+-- \set_reset_test|countreset_act[15]~50\ = CARRY((!\set_reset_test|countreset_act[14]~48\) # (!\set_reset_test|countreset_act\(15)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11520,14 +13850,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	dataa => countreset_act(15),
+	dataa => \set_reset_test|countreset_act\(15),
 	datad => VCC,
-	cin => \countreset_act[14]~48\,
-	combout => \countreset_act[15]~49_combout\,
-	cout => \countreset_act[15]~50\);
+	cin => \set_reset_test|countreset_act[14]~48\,
+	combout => \set_reset_test|countreset_act[15]~49_combout\,
+	cout => \set_reset_test|countreset_act[15]~50\);
 
--- Location: FF_X46_Y25_N13
-\countreset_act[15]\ : dffeas
+-- Location: FF_X47_Y28_N13
+\set_reset_test|countreset_act[15]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11535,17 +13865,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[15]~49_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[15]~49_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(15));
+	q => \set_reset_test|countreset_act\(15));
 
--- Location: LCCOMB_X46_Y25_N14
-\countreset_act[16]~51\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y28_N14
+\set_reset_test|countreset_act[16]~51\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[16]~51_combout\ = (countreset_act(16) & (\countreset_act[15]~50\ $ (GND))) # (!countreset_act(16) & (!\countreset_act[15]~50\ & VCC))
--- \countreset_act[16]~52\ = CARRY((countreset_act(16) & !\countreset_act[15]~50\))
+-- \set_reset_test|countreset_act[16]~51_combout\ = (\set_reset_test|countreset_act\(16) & (\set_reset_test|countreset_act[15]~50\ $ (GND))) # (!\set_reset_test|countreset_act\(16) & (!\set_reset_test|countreset_act[15]~50\ & VCC))
+-- \set_reset_test|countreset_act[16]~52\ = CARRY((\set_reset_test|countreset_act\(16) & !\set_reset_test|countreset_act[15]~50\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11553,14 +13883,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countreset_act(16),
+	datab => \set_reset_test|countreset_act\(16),
 	datad => VCC,
-	cin => \countreset_act[15]~50\,
-	combout => \countreset_act[16]~51_combout\,
-	cout => \countreset_act[16]~52\);
+	cin => \set_reset_test|countreset_act[15]~50\,
+	combout => \set_reset_test|countreset_act[16]~51_combout\,
+	cout => \set_reset_test|countreset_act[16]~52\);
 
--- Location: FF_X46_Y25_N15
-\countreset_act[16]\ : dffeas
+-- Location: FF_X47_Y28_N15
+\set_reset_test|countreset_act[16]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11568,17 +13898,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[16]~51_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[16]~51_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(16));
+	q => \set_reset_test|countreset_act\(16));
 
--- Location: LCCOMB_X46_Y25_N16
-\countreset_act[17]~53\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y28_N16
+\set_reset_test|countreset_act[17]~53\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[17]~53_combout\ = (countreset_act(17) & (!\countreset_act[16]~52\)) # (!countreset_act(17) & ((\countreset_act[16]~52\) # (GND)))
--- \countreset_act[17]~54\ = CARRY((!\countreset_act[16]~52\) # (!countreset_act(17)))
+-- \set_reset_test|countreset_act[17]~53_combout\ = (\set_reset_test|countreset_act\(17) & (!\set_reset_test|countreset_act[16]~52\)) # (!\set_reset_test|countreset_act\(17) & ((\set_reset_test|countreset_act[16]~52\) # (GND)))
+-- \set_reset_test|countreset_act[17]~54\ = CARRY((!\set_reset_test|countreset_act[16]~52\) # (!\set_reset_test|countreset_act\(17)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11586,14 +13916,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => countreset_act(17),
+	datab => \set_reset_test|countreset_act\(17),
 	datad => VCC,
-	cin => \countreset_act[16]~52\,
-	combout => \countreset_act[17]~53_combout\,
-	cout => \countreset_act[17]~54\);
+	cin => \set_reset_test|countreset_act[16]~52\,
+	combout => \set_reset_test|countreset_act[17]~53_combout\,
+	cout => \set_reset_test|countreset_act[17]~54\);
 
--- Location: FF_X46_Y25_N17
-\countreset_act[17]\ : dffeas
+-- Location: FF_X47_Y28_N17
+\set_reset_test|countreset_act[17]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11601,16 +13931,16 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[17]~53_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[17]~53_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(17));
+	q => \set_reset_test|countreset_act\(17));
 
--- Location: LCCOMB_X46_Y25_N18
-\countreset_act[18]~55\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y28_N18
+\set_reset_test|countreset_act[18]~55\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \countreset_act[18]~55_combout\ = \countreset_act[17]~54\ $ (!countreset_act(18))
+-- \set_reset_test|countreset_act[18]~55_combout\ = \set_reset_test|countreset_act[17]~54\ $ (!\set_reset_test|countreset_act\(18))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11618,12 +13948,12 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datad => countreset_act(18),
-	cin => \countreset_act[17]~54\,
-	combout => \countreset_act[18]~55_combout\);
+	datad => \set_reset_test|countreset_act\(18),
+	cin => \set_reset_test|countreset_act[17]~54\,
+	combout => \set_reset_test|countreset_act[18]~55_combout\);
 
--- Location: FF_X46_Y25_N19
-\countreset_act[18]\ : dffeas
+-- Location: FF_X47_Y28_N19
+\set_reset_test|countreset_act[18]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -11631,16 +13961,16 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \clk~inputclkctrl_outclk\,
-	d => \countreset_act[18]~55_combout\,
-	sclr => \ALT_INV_reset_out~0_combout\,
+	d => \set_reset_test|countreset_act[18]~55_combout\,
+	sclr => \set_reset_test|ALT_INV_reset_out~0_combout\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => countreset_act(18));
+	q => \set_reset_test|countreset_act\(18));
 
--- Location: LCCOMB_X46_Y25_N26
-\reset_process~3\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y28_N26
+\set_reset_test|reset_process~3\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \reset_process~3_combout\ = (((!countreset_act(18)) # (!countreset_act(16))) # (!countreset_act(17))) # (!countreset_act(15))
+-- \set_reset_test|reset_process~3_combout\ = (((!\set_reset_test|countreset_act\(18)) # (!\set_reset_test|countreset_act\(16))) # (!\set_reset_test|countreset_act\(17))) # (!\set_reset_test|countreset_act\(15))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -11648,43 +13978,95 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => countreset_act(15),
-	datab => countreset_act(17),
-	datac => countreset_act(16),
-	datad => countreset_act(18),
-	combout => \reset_process~3_combout\);
+	dataa => \set_reset_test|countreset_act\(15),
+	datab => \set_reset_test|countreset_act\(17),
+	datac => \set_reset_test|countreset_act\(16),
+	datad => \set_reset_test|countreset_act\(18),
+	combout => \set_reset_test|reset_process~3_combout\);
 
--- Location: LCCOMB_X46_Y25_N20
-\reset_process~4\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y28_N30
+\set_reset_test|reset_process~1\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \reset_process~4_combout\ = (\reset_btn~input_o\ & (\reset_process~4_combout\ & ((\reset_process~2_combout\) # (\reset_process~3_combout\)))) # (!\reset_btn~input_o\ & ((\reset_process~2_combout\) # ((\reset_process~3_combout\))))
+-- \set_reset_test|reset_process~1_combout\ = (!\set_reset_test|countreset_act\(12) & (!\set_reset_test|countreset_act\(9) & (!\set_reset_test|countreset_act\(11) & !\set_reset_test|countreset_act\(10))))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "1111110001010100",
+	lut_mask => "0000000000000001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \set_reset_test|countreset_act\(12),
+	datab => \set_reset_test|countreset_act\(9),
+	datac => \set_reset_test|countreset_act\(11),
+	datad => \set_reset_test|countreset_act\(10),
+	combout => \set_reset_test|reset_process~1_combout\);
+
+-- Location: LCCOMB_X47_Y29_N0
+\set_reset_test|reset_process~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|reset_process~0_combout\ = ((!\set_reset_test|countreset_act\(5) & (!\set_reset_test|countreset_act\(6) & !\set_reset_test|countreset_act\(7)))) # (!\set_reset_test|countreset_act\(8))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101010101010111",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \set_reset_test|countreset_act\(8),
+	datab => \set_reset_test|countreset_act\(5),
+	datac => \set_reset_test|countreset_act\(6),
+	datad => \set_reset_test|countreset_act\(7),
+	combout => \set_reset_test|reset_process~0_combout\);
+
+-- Location: LCCOMB_X47_Y28_N24
+\set_reset_test|reset_process~2\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|reset_process~2_combout\ = (!\set_reset_test|countreset_act\(14) & (((\set_reset_test|reset_process~1_combout\ & \set_reset_test|reset_process~0_combout\)) # (!\set_reset_test|countreset_act\(13))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101000100010001",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \set_reset_test|countreset_act\(14),
+	datab => \set_reset_test|countreset_act\(13),
+	datac => \set_reset_test|reset_process~1_combout\,
+	datad => \set_reset_test|reset_process~0_combout\,
+	combout => \set_reset_test|reset_process~2_combout\);
+
+-- Location: LCCOMB_X47_Y28_N20
+\set_reset_test|reset_process~4\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \set_reset_test|reset_process~4_combout\ = (\reset_btn~input_o\ & (\set_reset_test|reset_process~4_combout\ & ((\set_reset_test|reset_process~3_combout\) # (\set_reset_test|reset_process~2_combout\)))) # (!\reset_btn~input_o\ & 
+-- (((\set_reset_test|reset_process~3_combout\) # (\set_reset_test|reset_process~2_combout\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1101110111010000",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
 	dataa => \reset_btn~input_o\,
-	datab => \reset_process~2_combout\,
-	datac => \reset_process~3_combout\,
-	datad => \reset_process~4_combout\,
-	combout => \reset_process~4_combout\);
+	datab => \set_reset_test|reset_process~4_combout\,
+	datac => \set_reset_test|reset_process~3_combout\,
+	datad => \set_reset_test|reset_process~2_combout\,
+	combout => \set_reset_test|reset_process~4_combout\);
 
--- Location: LCCOMB_X46_Y25_N28
-\reset_out~0\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X47_Y28_N28
+\set_reset_test|reset_out~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \reset_out~0_combout\ = (\reset_process~4_combout\) # (!\reset_btn~input_o\)
+-- \set_reset_test|reset_out~0_combout\ = (\set_reset_test|reset_process~4_combout\) # (!\reset_btn~input_o\)
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "1100110011111111",
+	lut_mask => "1111111101010101",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	datab => \reset_process~4_combout\,
-	datad => \reset_btn~input_o\,
-	combout => \reset_out~0_combout\);
+	dataa => \reset_btn~input_o\,
+	datad => \set_reset_test|reset_process~4_combout\,
+	combout => \set_reset_test|reset_out~0_combout\);
 
 -- Location: UNVM_X0_Y40_N40
 \~QUARTUS_CREATED_UNVM~\ : fiftyfivenm_unvm
