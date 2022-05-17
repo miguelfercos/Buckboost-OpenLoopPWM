@@ -26,6 +26,9 @@ end PWMgeneration_top;
 architecture RTL of PWMgeneration_top is 
 
 signal duty_cycle : integer range 0 to 279:=65;
+signal reset_btn_inv : std_logic;
+signal set_btn_inv : std_logic;
+signal inc_not,dec_not : std_logic;
 
 component PWM
 port(
@@ -71,6 +74,12 @@ end component;
 
 
 begin
+
+reset_btn_inv<= not reset_btn; -- added so that set_btn and reset_btn work with the slide switches instead of
+set_btn_inv <= not set_btn; -- the push buttons. same with  inc and dec but the opposite.
+inc_not <= not inc;
+dec_not <= not dec;
+
 PWMtest: PWM
 port map(
 		reset=>reset,
@@ -86,8 +95,8 @@ port map(
 set_reset_test: set_reset
 port map(
 clk=>clk,
-set_btn=>set_btn,
-reset_btn=>reset_btn,
+set_btn=>set_btn_inv,
+reset_btn=>reset_btn_inv,
 set_out=>set_out,
 reset_out=>reset_out
 );
@@ -101,9 +110,9 @@ clk=>clk,
 
 incdecdutytest: incdec_duty
 port map(
-reset=>reset,
-inc=>inc,
-		dec=>dec,
+		reset=>reset,
+		inc=>inc_not,
+		dec=>dec_not,
 		sel=>sel,
 		clk=>clk,
 		duty=>duty_cycle

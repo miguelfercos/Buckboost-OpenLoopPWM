@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PWMgeneration_top
-Mon May 16 17:19:28 2022
+Tue May 17 13:28:51 2022
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -15,12 +15,13 @@ Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
   7. Analysis & Synthesis Resource Utilization by Entity
   8. State Machine - |PWMgeneration_top|PWM:PWMtest|est_act
   9. Logic Cells Representing Combinational Loops
- 10. General Register Statistics
- 11. Inverted Register Statistics
- 12. Multiplexer Restructuring Statistics (Restructuring Performed)
- 13. Post-Synthesis Netlist Statistics for Top Partition
- 14. Elapsed Time Per Partition
- 15. Analysis & Synthesis Messages
+ 10. Registers Removed During Synthesis
+ 11. General Register Statistics
+ 12. Inverted Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Post-Synthesis Netlist Statistics for Top Partition
+ 15. Elapsed Time Per Partition
+ 16. Analysis & Synthesis Messages
 
 
 
@@ -47,15 +48,15 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon May 16 17:19:28 2022       ;
+; Analysis & Synthesis Status        ; Successful - Tue May 17 13:28:51 2022       ;
 ; Quartus Prime Version              ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                      ; PWMgeneration_top                           ;
 ; Top-level Entity Name              ; PWMgeneration_top                           ;
 ; Family                             ; MAX 10                                      ;
-; Total logic elements               ; 595                                         ;
-;     Total combinational functions  ; 590                                         ;
-;     Dedicated logic registers      ; 167                                         ;
-; Total registers                    ; 167                                         ;
+; Total logic elements               ; 557                                         ;
+;     Total combinational functions  ; 554                                         ;
+;     Dedicated logic registers      ; 158                                         ;
+; Total registers                    ; 158                                         ;
 ; Total pins                         ; 15                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
@@ -187,20 +188,20 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 595       ;
+; Estimated Total logic elements              ; 557       ;
 ;                                             ;           ;
-; Total combinational functions               ; 590       ;
+; Total combinational functions               ; 554       ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 138       ;
-;     -- 3 input functions                    ; 164       ;
-;     -- <=2 input functions                  ; 288       ;
+;     -- 4 input functions                    ; 141       ;
+;     -- 3 input functions                    ; 155       ;
+;     -- <=2 input functions                  ; 258       ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 226       ;
+;     -- normal mode                          ; 190       ;
 ;     -- arithmetic mode                      ; 364       ;
 ;                                             ;           ;
-; Total registers                             ; 167       ;
-;     -- Dedicated logic registers            ; 167       ;
+; Total registers                             ; 158       ;
+;     -- Dedicated logic registers            ; 158       ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
 ; I/O pins                                    ; 15        ;
@@ -208,9 +209,9 @@ https://fpgasoftware.intel.com/eula.
 ; Embedded Multiplier 9-bit elements          ; 0         ;
 ;                                             ;           ;
 ; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 167       ;
-; Total fan-out                               ; 2259      ;
-; Average fan-out                             ; 2.87      ;
+; Maximum fan-out                             ; 158       ;
+; Total fan-out                               ; 2164      ;
+; Average fan-out                             ; 2.92      ;
 +---------------------------------------------+-----------+
 
 
@@ -219,9 +220,9 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-----------------------------------------------+-------------------+--------------+
 ; Compilation Hierarchy Node      ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                           ; Entity Name       ; Library Name ;
 +---------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-----------------------------------------------+-------------------+--------------+
-; |PWMgeneration_top              ; 590 (0)             ; 167 (0)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 15   ; 0            ; 0          ; |PWMgeneration_top                            ; PWMgeneration_top ; work         ;
-;    |PWM:PWMtest|                ; 396 (396)           ; 75 (75)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |PWMgeneration_top|PWM:PWMtest                ; PWM               ; work         ;
-;    |incdec_duty:incdecdutytest| ; 98 (98)             ; 22 (22)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |PWMgeneration_top|incdec_duty:incdecdutytest ; incdec_duty       ; work         ;
+; |PWMgeneration_top              ; 554 (0)             ; 158 (0)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 15   ; 0            ; 0          ; |PWMgeneration_top                            ; PWMgeneration_top ; work         ;
+;    |PWM:PWMtest|                ; 392 (392)           ; 75 (75)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |PWMgeneration_top|PWM:PWMtest                ; PWM               ; work         ;
+;    |incdec_duty:incdecdutytest| ; 66 (66)             ; 13 (13)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |PWMgeneration_top|incdec_duty:incdecdutytest ; incdec_duty       ; work         ;
 ;    |set_reset:set_reset_test|   ; 50 (50)             ; 38 (38)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |PWMgeneration_top|set_reset:set_reset_test   ; set_reset         ; work         ;
 ;    |watchdog:watchdog_test|     ; 46 (46)             ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |PWMgeneration_top|watchdog:watchdog_test     ; watchdog          ; work         ;
 +---------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-----------------------------------------------+-------------------+--------------+
@@ -256,17 +257,35 @@ Encoding Type:  One-Hot
 Note: All cells listed above may not be present at the end of synthesis due to various synthesis optimizations.
 
 
++-------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                          ;
++--------------------------------------------------+----------------------------------------------------------+
+; Register name                                    ; Reason for Removal                                       ;
++--------------------------------------------------+----------------------------------------------------------+
+; incdec_duty:incdecdutytest|duty_act[8]           ; Merged with incdec_duty:incdecdutytest|duty[8]           ;
+; incdec_duty:incdecdutytest|duty_act[7]           ; Merged with incdec_duty:incdecdutytest|duty[7]           ;
+; incdec_duty:incdecdutytest|duty_act[5]           ; Merged with incdec_duty:incdecdutytest|duty[5]           ;
+; incdec_duty:incdecdutytest|duty_act[4]           ; Merged with incdec_duty:incdecdutytest|duty[4]           ;
+; incdec_duty:incdecdutytest|duty_act[3]           ; Merged with incdec_duty:incdecdutytest|duty[3]           ;
+; incdec_duty:incdecdutytest|duty_act[2]           ; Merged with incdec_duty:incdecdutytest|duty[2]           ;
+; incdec_duty:incdecdutytest|duty_act[1]           ; Merged with incdec_duty:incdecdutytest|duty[1]           ;
+; incdec_duty:incdecdutytest|duty_act[6]~_emulated ; Merged with incdec_duty:incdecdutytest|duty[6]~_emulated ;
+; incdec_duty:incdecdutytest|duty_act[0]~_emulated ; Merged with incdec_duty:incdecdutytest|duty[0]~_emulated ;
+; Total Number of Removed Registers = 9            ;                                                          ;
++--------------------------------------------------+----------------------------------------------------------+
+
+
 +------------------------------------------------------+
 ; General Register Statistics                          ;
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 167   ;
+; Total registers                              ; 158   ;
 ; Number of registers using Synchronous Clear  ; 102   ;
-; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 129   ;
+; Number of registers using Synchronous Load   ; 1     ;
+; Number of registers using Asynchronous Clear ; 120   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 63    ;
+; Number of registers using Clock Enable       ; 70    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -289,12 +308,13 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
-; 10:1               ; 23 bits   ; 138 LEs       ; 23 LEs               ; 115 LEs                ; Yes        ; |PWMgeneration_top|PWM:PWMtest|softstart_duty_act[28]     ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |PWMgeneration_top|PWM:PWMtest|countactual1[24]           ;
+; 10:1               ; 23 bits   ; 138 LEs       ; 23 LEs               ; 115 LEs                ; Yes        ; |PWMgeneration_top|PWM:PWMtest|softstart_duty_act[11]     ;
 ; 10:1               ; 5 bits    ; 30 LEs        ; 10 LEs               ; 20 LEs                 ; Yes        ; |PWMgeneration_top|PWM:PWMtest|softstart_duty_act[8]      ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |PWMgeneration_top|PWM:PWMtest|countactual1[10]           ;
-; 10:1               ; 4 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |PWMgeneration_top|PWM:PWMtest|softstart_duty_act[1]      ;
-; 5:1                ; 9 bits    ; 27 LEs        ; 27 LEs               ; 0 LEs                  ; No         ; |PWMgeneration_top|incdec_duty:incdecdutytest|duty_sig[0] ;
-; 11:1               ; 2 bits    ; 14 LEs        ; 4 LEs                ; 10 LEs                 ; No         ; |PWMgeneration_top|PWM:PWMtest|Selector39                 ;
+; 5:1                ; 6 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; Yes        ; |PWMgeneration_top|incdec_duty:incdecdutytest|duty[1]     ;
+; 10:1               ; 4 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |PWMgeneration_top|PWM:PWMtest|softstart_duty_act[3]      ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |PWMgeneration_top|incdec_duty:incdecdutytest|duty_sig[0] ;
+; 11:1               ; 2 bits    ; 14 LEs        ; 4 LEs                ; 10 LEs                 ; No         ; |PWMgeneration_top|PWM:PWMtest|Selector37                 ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
 
 
@@ -304,24 +324,25 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 15                          ;
-; cycloneiii_ff         ; 167                         ;
-;     CLR               ; 34                          ;
+; cycloneiii_ff         ; 158                         ;
+;     CLR               ; 17                          ;
 ;     CLR SCLR          ; 32                          ;
-;     ENA CLR           ; 31                          ;
+;     CLR SLD           ; 1                           ;
+;     ENA CLR           ; 38                          ;
 ;     ENA CLR SCLR      ; 32                          ;
 ;     SCLR              ; 38                          ;
-; cycloneiii_lcell_comb ; 590                         ;
+; cycloneiii_lcell_comb ; 554                         ;
 ;     arith             ; 364                         ;
 ;         2 data inputs ; 231                         ;
 ;         3 data inputs ; 133                         ;
-;     normal            ; 226                         ;
-;         1 data inputs ; 10                          ;
-;         2 data inputs ; 47                          ;
-;         3 data inputs ; 31                          ;
-;         4 data inputs ; 138                         ;
+;     normal            ; 190                         ;
+;         1 data inputs ; 12                          ;
+;         2 data inputs ; 15                          ;
+;         3 data inputs ; 22                          ;
+;         4 data inputs ; 141                         ;
 ;                       ;                             ;
 ; Max LUT depth         ; 9.00                        ;
-; Average LUT depth     ; 5.03                        ;
+; Average LUT depth     ; 5.53                        ;
 +-----------------------+-----------------------------+
 
 
@@ -340,7 +361,7 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Mon May 16 17:19:14 2022
+    Info: Processing started: Tue May 17 13:28:38 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PWMgeneration -c PWMgeneration_top
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -363,47 +384,34 @@ Info (12021): Found 2 design units, including 1 entities, in source file incdec_
     Info (12022): Found design unit 1: incdec_duty-behavior File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 19
     Info (12023): Found entity 1: incdec_duty File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 8
 Info (12127): Elaborating entity "PWMgeneration_top" for the top level hierarchy
-Info (12128): Elaborating entity "PWM" for hierarchy "PWM:PWMtest" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 74
-Info (12128): Elaborating entity "set_reset" for hierarchy "set_reset:set_reset_test" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 86
-Warning (10492): VHDL Process Statement warning at set_reset.vhd(27): signal "set_flag" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/set_reset.vhd Line: 27
-Warning (10492): VHDL Process Statement warning at set_reset.vhd(47): signal "reset_flag" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/set_reset.vhd Line: 47
-Info (12128): Elaborating entity "watchdog" for hierarchy "watchdog:watchdog_test" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 95
-Warning (10492): VHDL Process Statement warning at watchdog.vhd(22): signal "wdg_reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/watchdog.vhd Line: 22
-Info (12128): Elaborating entity "incdec_duty" for hierarchy "incdec_duty:incdecdutytest" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 102
-Warning (10492): VHDL Process Statement warning at incdec_duty.vhd(46): signal "sel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 46
-Warning (10492): VHDL Process Statement warning at incdec_duty.vhd(74): signal "flag_inc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 74
-Warning (10631): VHDL Process Statement warning at incdec_duty.vhd(65): inferring latch(es) for signal or variable "flag_inc", which holds its previous value in one or more paths through the process File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 65
+Info (12128): Elaborating entity "PWM" for hierarchy "PWM:PWMtest" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 83
+Info (12128): Elaborating entity "set_reset" for hierarchy "set_reset:set_reset_test" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 95
+Info (12128): Elaborating entity "watchdog" for hierarchy "watchdog:watchdog_test" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 104
+Info (12128): Elaborating entity "incdec_duty" for hierarchy "incdec_duty:incdecdutytest" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 111
 Info (13000): Registers with preset signals will power-up high File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM.vhd Line: 43
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13004): Presettable and clearable registers converted to equivalent circuits with latches. Registers power-up to an undefined state, and DEVCLRn places the registers in an undefined state.
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty[7]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[7]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~1" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty[6]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[6]~_emulated" and latch "incdec_duty:incdecdutytest|duty[6]~5" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty[5]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[5]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~1" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty[4]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[4]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~1" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty[3]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[3]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~1" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty[2]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[2]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~1" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty[1]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[1]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~1" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty[0]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[0]~_emulated" and latch "incdec_duty:incdecdutytest|duty[6]~5" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[8]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[8]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[8]~1" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[7]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[7]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[7]~5" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[6]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[6]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[6]~9" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[5]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[5]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[5]~13" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[4]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[4]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[4]~17" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[3]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[3]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[3]~21" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[2]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[2]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[2]~25" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[1]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[1]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[1]~29" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[0]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[0]~_emulated" and latch "incdec_duty:incdecdutytest|duty_act[0]~33" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[7]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[7]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~2" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 44
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[6]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[6]~_emulated" and latch "incdec_duty:incdecdutytest|duty[6]~6" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 44
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[5]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[5]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~2" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 44
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[4]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[4]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~2" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 44
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[3]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[3]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~2" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 44
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[2]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[2]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~2" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 44
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[1]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[1]~_emulated" and latch "incdec_duty:incdecdutytest|duty[7]~2" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 44
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty[0]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty[0]~_emulated" and latch "incdec_duty:incdecdutytest|duty[6]~6" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 44
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[6]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[6]~_emulated" and latch "incdec_duty:incdecdutytest|duty[6]~6" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 44
+    Warning (13310): Register "incdec_duty:incdecdutytest|duty_act[0]" is converted into an equivalent circuit using register "incdec_duty:incdecdutytest|duty_act[0]~_emulated" and latch "incdec_duty:incdecdutytest|duty[6]~6" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 44
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 610 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 572 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 8 input pins
     Info (21059): Implemented 7 output pins
-    Info (21061): Implemented 595 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 25 warnings
-    Info: Peak virtual memory: 4785 megabytes
-    Info: Processing ended: Mon May 16 17:19:28 2022
-    Info: Elapsed time: 00:00:14
-    Info: Total CPU time (on all processors): 00:00:31
+    Info (21061): Implemented 557 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 12 warnings
+    Info: Peak virtual memory: 4783 megabytes
+    Info: Processing ended: Tue May 17 13:28:51 2022
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:29
 
 

@@ -82,10 +82,10 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to reset
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sel
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to wdg_out
 set_location_assignment PIN_W9 -to wdg_out
-set_location_assignment PIN_A7 -to reset_btn
+set_location_assignment PIN_B12 -to reset_btn
 set_location_assignment PIN_W10 -to set_out
 set_location_assignment PIN_W8 -to reset_out
-set_location_assignment PIN_B8 -to set_btn
+set_location_assignment PIN_A13 -to set_btn
 set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to set_btn
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to reset_out
 set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to reset_btn
@@ -99,4 +99,8 @@ set_global_assignment -name VHDL_FILE incdec_duty.vhd
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to dec
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to inc
+set_location_assignment PIN_B8 -to inc
+set_location_assignment PIN_A7 -to dec
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

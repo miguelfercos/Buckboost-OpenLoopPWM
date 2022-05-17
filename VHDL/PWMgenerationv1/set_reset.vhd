@@ -17,7 +17,7 @@ signal reset_flag,set_flag : std_logic:='0';
 begin
 
 
-	set_process: process(set_btn, countset_act)
+	set_process: process(set_btn, countset_act,set_flag)
 	begin
 		if ((set_btn)='0') then
 			set_flag <='1';
@@ -36,7 +36,7 @@ begin
 		end if;
 	end process;
 
-	reset_process: process(reset_btn,countreset_act)
+	reset_process: process(reset_btn,countreset_act,reset_flag)
 	begin
 		if ((reset_btn)='0') then
 

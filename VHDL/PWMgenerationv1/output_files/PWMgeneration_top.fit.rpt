@@ -1,5 +1,5 @@
 Fitter report for PWMgeneration_top
-Mon May 16 17:19:38 2022
+Tue May 17 13:29:01 2022
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -66,17 +66,17 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                   ;
 +------------------------------------+---------------------------------------------+
-; Fitter Status                      ; Successful - Mon May 16 17:19:38 2022       ;
+; Fitter Status                      ; Successful - Tue May 17 13:29:01 2022       ;
 ; Quartus Prime Version              ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                      ; PWMgeneration_top                           ;
 ; Top-level Entity Name              ; PWMgeneration_top                           ;
 ; Family                             ; MAX 10                                      ;
 ; Device                             ; 10M50DAF484C7G                              ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 594 / 49,760 ( 1 % )                        ;
-;     Total combinational functions  ; 592 / 49,760 ( 1 % )                        ;
-;     Dedicated logic registers      ; 167 / 49,760 ( < 1 % )                      ;
-; Total registers                    ; 167                                         ;
+; Total logic elements               ; 556 / 49,760 ( 1 % )                        ;
+;     Total combinational functions  ; 556 / 49,760 ( 1 % )                        ;
+;     Dedicated logic registers      ; 158 / 49,760 ( < 1 % )                      ;
+; Total registers                    ; 158                                         ;
 ; Total pins                         ; 15 / 360 ( 4 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0 / 1,677,312 ( 0 % )                       ;
@@ -152,14 +152,12 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 8           ;
 ; Maximum allowed            ; 4           ;
 ;                            ;             ;
-; Average used               ; 1.13        ;
+; Average used               ; 1.12        ;
 ; Maximum used               ; 4           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   4.3%      ;
-;     Processor 3            ;   4.3%      ;
-;     Processor 4            ;   4.3%      ;
+;     Processors 2-4         ;   4.0%      ;
 +----------------------------+-------------+
 
 
@@ -169,8 +167,8 @@ https://fpgasoftware.intel.com/eula.
 ; Type                ; Total [A + B]      ; From Design Partitions [A] ; From Rapid Recompile [B] ;
 +---------------------+--------------------+----------------------------+--------------------------+
 ; Placement (by node) ;                    ;                            ;                          ;
-;     -- Requested    ; 0.00 % ( 0 / 808 ) ; 0.00 % ( 0 / 808 )         ; 0.00 % ( 0 / 808 )       ;
-;     -- Achieved     ; 0.00 % ( 0 / 808 ) ; 0.00 % ( 0 / 808 )         ; 0.00 % ( 0 / 808 )       ;
+;     -- Requested    ; 0.00 % ( 0 / 763 ) ; 0.00 % ( 0 / 763 )         ; 0.00 % ( 0 / 763 )       ;
+;     -- Achieved     ; 0.00 % ( 0 / 763 ) ; 0.00 % ( 0 / 763 )         ; 0.00 % ( 0 / 763 )       ;
 ;                     ;                    ;                            ;                          ;
 ; Routing (by net)    ;                    ;                            ;                          ;
 ;     -- Requested    ; 0.00 % ( 0 / 0 )   ; 0.00 % ( 0 / 0 )           ; 0.00 % ( 0 / 0 )         ;
@@ -193,7 +191,7 @@ https://fpgasoftware.intel.com/eula.
 +--------------------------------+-----------------------+-------------------------+-------------------+---------------------+-------+
 ; Partition Name                 ; Preservation Achieved ; Preservation Level Used ; Netlist Type Used ; Preservation Method ; Notes ;
 +--------------------------------+-----------------------+-------------------------+-------------------+---------------------+-------+
-; Top                            ; 0.00 % ( 0 / 792 )    ; N/A                     ; Source File       ; N/A                 ;       ;
+; Top                            ; 0.00 % ( 0 / 747 )    ; N/A                     ; Source File       ; N/A                 ;       ;
 ; hard_block:auto_generated_inst ; 0.00 % ( 0 / 16 )     ; N/A                     ; Source File       ; N/A                 ;       ;
 +--------------------------------+-----------------------+-------------------------+-------------------+---------------------+-------+
 
@@ -209,29 +207,29 @@ The pin-out file can be found in C:/Users/PC/OneDrive - Universidad de Oviedo/Ph
 +---------------------------------------------+------------------------+
 ; Resource                                    ; Usage                  ;
 +---------------------------------------------+------------------------+
-; Total logic elements                        ; 594 / 49,760 ( 1 % )   ;
-;     -- Combinational with no register       ; 427                    ;
-;     -- Register only                        ; 2                      ;
-;     -- Combinational with a register        ; 165                    ;
+; Total logic elements                        ; 556 / 49,760 ( 1 % )   ;
+;     -- Combinational with no register       ; 398                    ;
+;     -- Register only                        ; 0                      ;
+;     -- Combinational with a register        ; 158                    ;
 ;                                             ;                        ;
 ; Logic element usage by number of LUT inputs ;                        ;
-;     -- 4 input functions                    ; 138                    ;
-;     -- 3 input functions                    ; 164                    ;
-;     -- <=2 input functions                  ; 290                    ;
-;     -- Register only                        ; 2                      ;
+;     -- 4 input functions                    ; 141                    ;
+;     -- 3 input functions                    ; 155                    ;
+;     -- <=2 input functions                  ; 260                    ;
+;     -- Register only                        ; 0                      ;
 ;                                             ;                        ;
 ; Logic elements by mode                      ;                        ;
-;     -- normal mode                          ; 228                    ;
+;     -- normal mode                          ; 192                    ;
 ;     -- arithmetic mode                      ; 364                    ;
 ;                                             ;                        ;
-; Total registers*                            ; 167 / 51,509 ( < 1 % ) ;
-;     -- Dedicated logic registers            ; 167 / 49,760 ( < 1 % ) ;
+; Total registers*                            ; 158 / 51,509 ( < 1 % ) ;
+;     -- Dedicated logic registers            ; 158 / 49,760 ( < 1 % ) ;
 ;     -- I/O registers                        ; 0 / 1,749 ( 0 % )      ;
 ;                                             ;                        ;
-; Total LABs:  partially or completely used   ; 45 / 3,110 ( 1 % )     ;
+; Total LABs:  partially or completely used   ; 42 / 3,110 ( 1 % )     ;
 ; Virtual pins                                ; 0                      ;
 ; I/O pins                                    ; 15 / 360 ( 4 % )       ;
-;     -- Clock pins                           ; 3 / 8 ( 38 % )         ;
+;     -- Clock pins                           ; 2 / 8 ( 25 % )         ;
 ;     -- Dedicated input pins                 ; 1 / 1 ( 100 % )        ;
 ;                                             ;                        ;
 ; M9Ks                                        ; 0 / 182 ( 0 % )        ;
@@ -248,12 +246,12 @@ The pin-out file can be found in C:/Users/PC/OneDrive - Universidad de Oviedo/Ph
 ; Remote update blocks                        ; 0 / 1 ( 0 % )          ;
 ; Oscillator blocks                           ; 0 / 1 ( 0 % )          ;
 ; Impedance control blocks                    ; 0 / 1 ( 0 % )          ;
-; Average interconnect usage (total/H/V)      ; 0.3% / 0.2% / 0.4%     ;
-; Peak interconnect usage (total/H/V)         ; 3.5% / 2.6% / 4.8%     ;
-; Maximum fan-out                             ; 167                    ;
-; Highest non-global fan-out                  ; 125                    ;
-; Total fan-out                               ; 2273                   ;
-; Average fan-out                             ; 2.81                   ;
+; Average interconnect usage (total/H/V)      ; 0.3% / 0.2% / 0.3%     ;
+; Peak interconnect usage (total/H/V)         ; 5.6% / 5.4% / 5.8%     ;
+; Maximum fan-out                             ; 158                    ;
+; Highest non-global fan-out                  ; 98                     ;
+; Total fan-out                               ; 2177                   ;
+; Average fan-out                             ; 2.85                   ;
 +---------------------------------------------+------------------------+
 *  Register count does not include registers inside RAM blocks or DSP blocks.
 
@@ -266,26 +264,26 @@ The pin-out file can be found in C:/Users/PC/OneDrive - Universidad de Oviedo/Ph
 +---------------------------------------------+-----------------------+--------------------------------+
 ; Difficulty Clustering Region                ; Low                   ; Low                            ;
 ;                                             ;                       ;                                ;
-; Total logic elements                        ; 594 / 49760 ( 1 % )   ; 0 / 49760 ( 0 % )              ;
-;     -- Combinational with no register       ; 427                   ; 0                              ;
-;     -- Register only                        ; 2                     ; 0                              ;
-;     -- Combinational with a register        ; 165                   ; 0                              ;
+; Total logic elements                        ; 556 / 49760 ( 1 % )   ; 0 / 49760 ( 0 % )              ;
+;     -- Combinational with no register       ; 398                   ; 0                              ;
+;     -- Register only                        ; 0                     ; 0                              ;
+;     -- Combinational with a register        ; 158                   ; 0                              ;
 ;                                             ;                       ;                                ;
 ; Logic element usage by number of LUT inputs ;                       ;                                ;
-;     -- 4 input functions                    ; 138                   ; 0                              ;
-;     -- 3 input functions                    ; 164                   ; 0                              ;
-;     -- <=2 input functions                  ; 290                   ; 0                              ;
-;     -- Register only                        ; 2                     ; 0                              ;
+;     -- 4 input functions                    ; 141                   ; 0                              ;
+;     -- 3 input functions                    ; 155                   ; 0                              ;
+;     -- <=2 input functions                  ; 260                   ; 0                              ;
+;     -- Register only                        ; 0                     ; 0                              ;
 ;                                             ;                       ;                                ;
 ; Logic elements by mode                      ;                       ;                                ;
-;     -- normal mode                          ; 228                   ; 0                              ;
+;     -- normal mode                          ; 192                   ; 0                              ;
 ;     -- arithmetic mode                      ; 364                   ; 0                              ;
 ;                                             ;                       ;                                ;
-; Total registers                             ; 167                   ; 0                              ;
-;     -- Dedicated logic registers            ; 167 / 49760 ( < 1 % ) ; 0 / 49760 ( 0 % )              ;
+; Total registers                             ; 158                   ; 0                              ;
+;     -- Dedicated logic registers            ; 158 / 49760 ( < 1 % ) ; 0 / 49760 ( 0 % )              ;
 ;     -- I/O registers                        ; 0                     ; 0                              ;
 ;                                             ;                       ;                                ;
-; Total LABs:  partially or completely used   ; 45 / 3110 ( 1 % )     ; 0 / 3110 ( 0 % )               ;
+; Total LABs:  partially or completely used   ; 42 / 3110 ( 1 % )     ; 0 / 3110 ( 0 % )               ;
 ;                                             ;                       ;                                ;
 ; Virtual pins                                ; 0                     ; 0                              ;
 ; I/O pins                                    ; 15                    ; 0                              ;
@@ -303,8 +301,8 @@ The pin-out file can be found in C:/Users/PC/OneDrive - Universidad de Oviedo/Ph
 ;     -- Registered Output Connections        ; 0                     ; 0                              ;
 ;                                             ;                       ;                                ;
 ; Internal Connections                        ;                       ;                                ;
-;     -- Total Connections                    ; 2279                  ; 8                              ;
-;     -- Registered Connections               ; 678                   ; 0                              ;
+;     -- Total Connections                    ; 2183                  ; 8                              ;
+;     -- Registered Connections               ; 738                   ; 0                              ;
 ;                                             ;                       ;                                ;
 ; External Connections                        ;                       ;                                ;
 ;     -- Top                                  ; 0                     ; 0                              ;
@@ -336,13 +334,13 @@ The pin-out file can be found in C:/Users/PC/OneDrive - Universidad de Oviedo/Ph
 +-----------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+-----------------------+---------------------------+----------------------+-----------+
 ; Name      ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Z coordinate ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Power Up High ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard          ; Termination Control Block ; Location assigned by ; Slew Rate ;
 +-----------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+-----------------------+---------------------------+----------------------+-----------+
-; clk       ; P11   ; 3        ; 34           ; 0            ; 28           ; 167                   ; 0                  ; yes    ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVTTL           ; --                        ; User                 ; 0         ;
-; dec       ; K15   ; 6        ; 78           ; 41           ; 14           ; 1                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V                 ; --                        ; Fitter               ; 0         ;
-; inc       ; E10   ; 8        ; 36           ; 39           ; 21           ; 1                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V                 ; --                        ; Fitter               ; 0         ;
-; reset     ; F15   ; 7        ; 69           ; 54           ; 0            ; 125                   ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVTTL           ; --                        ; User                 ; 0         ;
-; reset_btn ; A7    ; 7        ; 49           ; 54           ; 28           ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3 V Schmitt Trigger ; --                        ; User                 ; 0         ;
-; sel       ; C10   ; 7        ; 51           ; 54           ; 28           ; 21                    ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVTTL           ; --                        ; User                 ; 0         ;
-; set_btn   ; B8    ; 7        ; 46           ; 54           ; 28           ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3 V Schmitt Trigger ; --                        ; User                 ; 0         ;
+; clk       ; P11   ; 3        ; 34           ; 0            ; 28           ; 158                   ; 0                  ; yes    ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVTTL           ; --                        ; User                 ; 0         ;
+; dec       ; A7    ; 7        ; 49           ; 54           ; 28           ; 1                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVTTL           ; --                        ; User                 ; 0         ;
+; inc       ; B8    ; 7        ; 46           ; 54           ; 28           ; 1                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVTTL           ; --                        ; User                 ; 0         ;
+; reset     ; F15   ; 7        ; 69           ; 54           ; 0            ; 98                    ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVTTL           ; --                        ; User                 ; 0         ;
+; reset_btn ; B12   ; 7        ; 49           ; 54           ; 0            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3 V Schmitt Trigger ; --                        ; User                 ; 0         ;
+; sel       ; C10   ; 7        ; 51           ; 54           ; 28           ; 12                    ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVTTL           ; --                        ; User                 ; 0         ;
+; set_btn   ; A13   ; 7        ; 54           ; 54           ; 14           ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3 V Schmitt Trigger ; --                        ; User                 ; 0         ;
 ; wdg_reset ; B14   ; 7        ; 56           ; 54           ; 0            ; 32                    ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVTTL           ; --                        ; User                 ; 0         ;
 +-----------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+-----------------------+---------------------------+----------------------+-----------+
 
@@ -389,9 +387,9 @@ The pin-out file can be found in C:/Users/PC/OneDrive - Universidad de Oviedo/Ph
 ; 3        ; 8 / 48 ( 17 % ) ; 3.3V          ; --           ;
 ; 4        ; 0 / 48 ( 0 % )  ; 2.5V          ; --           ;
 ; 5        ; 0 / 40 ( 0 % )  ; 2.5V          ; --           ;
-; 6        ; 1 / 60 ( 2 % )  ; 2.5V          ; --           ;
-; 7        ; 5 / 52 ( 10 % ) ; 3.3V          ; --           ;
-; 8        ; 5 / 36 ( 14 % ) ; 2.5V          ; --           ;
+; 6        ; 0 / 60 ( 0 % )  ; 2.5V          ; --           ;
+; 7        ; 7 / 52 ( 13 % ) ; 3.3V          ; --           ;
+; 8        ; 4 / 36 ( 11 % ) ; 2.5V          ; --           ;
 +----------+-----------------+---------------+--------------+
 
 
@@ -406,13 +404,13 @@ The pin-out file can be found in C:/Users/PC/OneDrive - Universidad de Oviedo/Ph
 ; A4       ; 475        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; A5       ; 473        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; A6       ; 471        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; A7       ; 445        ; 7        ; reset_btn                                      ; input  ; 3.3 V Schmitt Trigger ;         ; Column I/O ; Y               ; no       ; Off          ;
+; A7       ; 445        ; 7        ; dec                                            ; input  ; 3.3-V LVTTL           ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; A8       ; 447        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; A9       ; 449        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; A10      ; 439        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; A11      ; 437        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; A12      ; 435        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; A13      ; 433        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
+; A13      ; 433        ; 7        ; set_btn                                        ; input  ; 3.3 V Schmitt Trigger ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; A14      ; 425        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; A15      ; 421        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; A16      ; 419        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
@@ -473,11 +471,11 @@ The pin-out file can be found in C:/Users/PC/OneDrive - Universidad de Oviedo/Ph
 ; B5       ; 485        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; B6       ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; B7       ; 469        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; B8       ; 451        ; 7        ; set_btn                                        ; input  ; 3.3 V Schmitt Trigger ;         ; Column I/O ; Y               ; no       ; Off          ;
+; B8       ; 451        ; 7        ; inc                                            ; input  ; 3.3-V LVTTL           ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; B9       ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; B10      ; 448        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; B11      ; 443        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; B12      ; 441        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
+; B12      ; 441        ; 7        ; reset_btn                                      ; input  ; 3.3 V Schmitt Trigger ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; B13      ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; B14      ; 427        ; 7        ; wdg_reset                                      ; input  ; 3.3-V LVTTL           ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; B15      ; 423        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; --       ; --           ;
@@ -541,7 +539,7 @@ The pin-out file can be found in C:/Users/PC/OneDrive - Universidad de Oviedo/Ph
 ; E7       ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; E8       ; 488        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; E9       ; 478        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; E10      ; 466        ; 8        ; inc                                            ; input  ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
+; E10      ; 466        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; E11      ; 464        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; E12      ; 429        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; E13      ; 430        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
@@ -656,7 +654,7 @@ The pin-out file can be found in C:/Users/PC/OneDrive - Universidad de Oviedo/Ph
 ; K12      ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; K13      ;            ; --       ; VCC                                            ; power  ;                       ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; K14      ; 356        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
-; K15      ; 358        ; 6        ; dec                                            ; input  ; 2.5 V                 ;         ; Row I/O    ; N               ; no       ; Off          ;
+; K15      ; 358        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; K16      ;            ; 6        ; VCCIO6                                         ; power  ;                       ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; K17      ;            ; 6        ; VCCIO6                                         ; power  ;                       ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; K18      ; 360        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
@@ -888,23 +886,19 @@ The pin-out file can be found in C:/Users/PC/OneDrive - Universidad de Oviedo/Ph
 Note: Pin directions (input, output or bidir) are based on device operating in user mode.
 
 
-+-------------------------------------------+
-; I/O Assignment Warnings                   ;
-+-----------+-------------------------------+
-; Pin Name  ; Reason                        ;
-+-----------+-------------------------------+
-; PWM_H1    ; Missing drive strength        ;
-; PWM_L1    ; Missing drive strength        ;
-; PWM_H2    ; Missing drive strength        ;
-; PWM_L2    ; Missing drive strength        ;
-; wdg_out   ; Missing drive strength        ;
-; set_out   ; Missing drive strength        ;
-; reset_out ; Missing drive strength        ;
-; inc       ; Incomplete set of assignments ;
-; dec       ; Incomplete set of assignments ;
-; inc       ; Missing location assignment   ;
-; dec       ; Missing location assignment   ;
-+-----------+-------------------------------+
++------------------------------------+
+; I/O Assignment Warnings            ;
++-----------+------------------------+
+; Pin Name  ; Reason                 ;
++-----------+------------------------+
+; PWM_H1    ; Missing drive strength ;
+; PWM_L1    ; Missing drive strength ;
+; PWM_H2    ; Missing drive strength ;
+; PWM_L2    ; Missing drive strength ;
+; wdg_out   ; Missing drive strength ;
+; set_out   ; Missing drive strength ;
+; reset_out ; Missing drive strength ;
++-----------+------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -912,9 +906,9 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 +---------------------------------+-------------+---------------------------+---------------+-------------+------+------------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------+-----------------------------------------------+-------------------+--------------+
 ; Compilation Hierarchy Node      ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M9Ks ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; ADC blocks ; Full Hierarchy Name                           ; Entity Name       ; Library Name ;
 +---------------------------------+-------------+---------------------------+---------------+-------------+------+------------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------+-----------------------------------------------+-------------------+--------------+
-; |PWMgeneration_top              ; 594 (1)     ; 167 (0)                   ; 0 (0)         ; 0           ; 0    ; 1          ; 0            ; 0       ; 0         ; 15   ; 0            ; 427 (1)      ; 2 (0)             ; 165 (0)          ; 0          ; |PWMgeneration_top                            ; PWMgeneration_top ; work         ;
-;    |PWM:PWMtest|                ; 397 (397)   ; 75 (75)                   ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 322 (322)    ; 0 (0)             ; 75 (75)          ; 0          ; |PWMgeneration_top|PWM:PWMtest                ; PWM               ; work         ;
-;    |incdec_duty:incdecdutytest| ; 100 (100)   ; 22 (22)                   ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 78 (78)      ; 2 (2)             ; 20 (20)          ; 0          ; |PWMgeneration_top|incdec_duty:incdecdutytest ; incdec_duty       ; work         ;
+; |PWMgeneration_top              ; 556 (1)     ; 158 (0)                   ; 0 (0)         ; 0           ; 0    ; 1          ; 0            ; 0       ; 0         ; 15   ; 0            ; 398 (1)      ; 0 (0)             ; 158 (0)          ; 0          ; |PWMgeneration_top                            ; PWMgeneration_top ; work         ;
+;    |PWM:PWMtest|                ; 393 (393)   ; 75 (75)                   ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 318 (318)    ; 0 (0)             ; 75 (75)          ; 0          ; |PWMgeneration_top|PWM:PWMtest                ; PWM               ; work         ;
+;    |incdec_duty:incdecdutytest| ; 66 (66)     ; 13 (13)                   ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 53 (53)      ; 0 (0)             ; 13 (13)          ; 0          ; |PWMgeneration_top|incdec_duty:incdecdutytest ; incdec_duty       ; work         ;
 ;    |set_reset:set_reset_test|   ; 50 (50)     ; 38 (38)                   ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 12 (12)      ; 0 (0)             ; 38 (38)          ; 0          ; |PWMgeneration_top|set_reset:set_reset_test   ; set_reset         ; work         ;
 ;    |watchdog:watchdog_test|     ; 46 (46)     ; 32 (32)                   ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 14 (14)      ; 0 (0)             ; 32 (32)          ; 0          ; |PWMgeneration_top|watchdog:watchdog_test     ; watchdog          ; work         ;
 +---------------------------------+-------------+---------------------------+---------------+-------------+------+------------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------+-----------------------------------------------+-------------------+--------------+
@@ -933,231 +927,199 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; wdg_out   ; Output   ; --            ; --            ; --                    ; --  ; --   ;
 ; set_out   ; Output   ; --            ; --            ; --                    ; --  ; --   ;
 ; reset_out ; Output   ; --            ; --            ; --                    ; --  ; --   ;
-; set_btn   ; Input    ; (6) 868 ps    ; --            ; --                    ; --  ; --   ;
-; reset_btn ; Input    ; (6) 868 ps    ; --            ; --                    ; --  ; --   ;
+; set_btn   ; Input    ; --            ; (6) 868 ps    ; --                    ; --  ; --   ;
+; reset_btn ; Input    ; --            ; (6) 868 ps    ; --                    ; --  ; --   ;
 ; clk       ; Input    ; (0) 0 ps      ; --            ; --                    ; --  ; --   ;
 ; reset     ; Input    ; (6) 868 ps    ; --            ; --                    ; --  ; --   ;
 ; wdg_reset ; Input    ; --            ; (6) 868 ps    ; --                    ; --  ; --   ;
-; sel       ; Input    ; (6) 868 ps    ; --            ; --                    ; --  ; --   ;
-; inc       ; Input    ; (0) 0 ps      ; --            ; --                    ; --  ; --   ;
-; dec       ; Input    ; --            ; (6) 873 ps    ; --                    ; --  ; --   ;
+; sel       ; Input    ; --            ; (6) 868 ps    ; --                    ; --  ; --   ;
+; dec       ; Input    ; --            ; (6) 868 ps    ; --                    ; --  ; --   ;
+; inc       ; Input    ; (6) 868 ps    ; --            ; --                    ; --  ; --   ;
 +-----------+----------+---------------+---------------+-----------------------+-----+------+
 
 
-+---------------------------------------------------------------------------------------+
-; Pad To Core Delay Chain Fanout                                                        ;
-+---------------------------------------------------------+-------------------+---------+
-; Source Pin / Fanout                                     ; Pad To Core Index ; Setting ;
-+---------------------------------------------------------+-------------------+---------+
-; set_btn                                                 ;                   ;         ;
-;      - set_reset:set_reset_test|set_out~0               ; 0                 ; 6       ;
-;      - set_reset:set_reset_test|set_process~4           ; 0                 ; 6       ;
-; reset_btn                                               ;                   ;         ;
-;      - set_reset:set_reset_test|reset_out~0             ; 0                 ; 6       ;
-;      - set_reset:set_reset_test|reset_process~4         ; 0                 ; 6       ;
-; clk                                                     ;                   ;         ;
-; reset                                                   ;                   ;         ;
-;      - PWM:PWMtest|PWM_L2                               ; 0                 ; 6       ;
-;      - PWM:PWMtest|PWM_H2                               ; 0                 ; 6       ;
-;      - PWM:PWMtest|PWM_L1                               ; 0                 ; 6       ;
-;      - PWM:PWMtest|PWM_H1                               ; 0                 ; 6       ;
-;      - PWM:PWMtest|est_act.buck2                        ; 0                 ; 6       ;
-;      - PWM:PWMtest|est_act.boost2softs                  ; 0                 ; 6       ;
-;      - PWM:PWMtest|est_act.boost1                       ; 0                 ; 6       ;
-;      - PWM:PWMtest|est_act.boost2                       ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[0]                      ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[1]                      ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[2]                      ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[3]                      ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[4]                      ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[5]                      ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[6]                      ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[7]                      ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[8]                      ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[9]                      ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[10]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[11]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[12]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[13]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[14]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[15]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[16]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[17]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[18]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[19]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[20]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[21]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[22]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[23]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[24]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[25]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[26]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[27]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[28]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[29]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[30]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|countactual1[31]                     ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[31]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[30]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[29]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[28]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[27]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[26]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[25]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[24]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[23]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[22]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[21]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[20]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[19]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[18]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[17]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[16]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[15]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[14]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[13]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[12]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[11]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[10]               ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[9]                ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[8]                ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[7]                ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[6]                ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[5]                ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[4]                ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[3]                ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[2]                ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[1]                ; 0                 ; 6       ;
-;      - PWM:PWMtest|softstart_duty_act[0]                ; 0                 ; 6       ;
-;      - PWM:PWMtest|est_act.buck1                        ; 0                 ; 6       ;
-;      - PWM:PWMtest|est_act.boost1softs                  ; 0                 ; 6       ;
-;      - PWM:PWMtest|est_act.idle                         ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[8]               ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|inc_prev[0]           ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|inc_prev[1]           ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|dec_prev[0]           ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|dec_prev[1]           ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[7]~_emulated     ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[7]~2             ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[6]~_emulated     ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[6]~6             ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[5]~_emulated     ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[5]~8             ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[4]~_emulated     ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[4]~10            ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[3]~_emulated     ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[3]~12            ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[2]~_emulated     ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[2]~14            ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[1]~_emulated     ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[1]~16            ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[0]~_emulated     ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[0]~18            ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[8]~_emulated ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[8]~2         ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[7]~_emulated ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[7]~6         ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[6]~_emulated ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[6]~10        ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[5]~_emulated ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[5]~14        ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[4]~_emulated ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[4]~18        ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[3]~_emulated ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[3]~22        ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[2]~_emulated ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[2]~26        ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[1]~_emulated ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[1]~30        ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[0]~_emulated ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[0]~34        ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[7]~1             ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[6]~5             ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[8]~1         ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[7]~5         ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[6]~9         ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[5]~13        ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[4]~17        ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[3]~21        ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[2]~25        ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[1]~29        ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act[0]~33        ; 0                 ; 6       ;
-; wdg_reset                                               ;                   ;         ;
-;      - watchdog:watchdog_test|countwdg_act[0]           ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[1]           ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[2]           ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[3]           ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[4]           ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[5]           ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[6]           ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[7]           ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[8]           ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[9]           ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[10]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[11]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[12]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[13]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[14]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[15]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[16]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[17]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[18]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[19]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[20]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[21]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[22]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[23]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[24]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[25]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[26]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[27]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[28]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[29]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[30]          ; 1                 ; 6       ;
-;      - watchdog:watchdog_test|countwdg_act[31]          ; 1                 ; 6       ;
-; sel                                                     ;                   ;         ;
-;      - PWM:PWMtest|Selector36~0                         ; 0                 ; 6       ;
-;      - PWM:PWMtest|Selector38~1                         ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[7]~2             ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[6]~6             ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[5]~8             ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[4]~10            ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[3]~12            ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[2]~14            ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[1]~16            ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[0]~18            ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act~54           ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act~55           ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act~56           ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act~57           ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act~58           ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act~59           ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act~60           ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act~61           ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty_act~62           ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[7]~1             ; 0                 ; 6       ;
-;      - incdec_duty:incdecdutytest|duty[6]~5             ; 0                 ; 6       ;
-; inc                                                     ;                   ;         ;
-; dec                                                     ;                   ;         ;
-;      - incdec_duty:incdecdutytest|dec_prev[0]~feeder    ; 1                 ; 6       ;
-+---------------------------------------------------------+-------------------+---------+
++-----------------------------------------------------------------------------------+
+; Pad To Core Delay Chain Fanout                                                    ;
++-----------------------------------------------------+-------------------+---------+
+; Source Pin / Fanout                                 ; Pad To Core Index ; Setting ;
++-----------------------------------------------------+-------------------+---------+
+; set_btn                                             ;                   ;         ;
+;      - set_reset:set_reset_test|set_out~0           ; 1                 ; 6       ;
+;      - set_reset:set_reset_test|set_process~4       ; 1                 ; 6       ;
+; reset_btn                                           ;                   ;         ;
+;      - set_reset:set_reset_test|reset_out~0         ; 1                 ; 6       ;
+;      - set_reset:set_reset_test|reset_process~4     ; 1                 ; 6       ;
+; clk                                                 ;                   ;         ;
+; reset                                               ;                   ;         ;
+;      - PWM:PWMtest|PWM_L2                           ; 0                 ; 6       ;
+;      - PWM:PWMtest|PWM_H2                           ; 0                 ; 6       ;
+;      - PWM:PWMtest|PWM_L1                           ; 0                 ; 6       ;
+;      - PWM:PWMtest|PWM_H1                           ; 0                 ; 6       ;
+;      - PWM:PWMtest|est_act.buck2                    ; 0                 ; 6       ;
+;      - PWM:PWMtest|est_act.boost2softs              ; 0                 ; 6       ;
+;      - PWM:PWMtest|est_act.boost1                   ; 0                 ; 6       ;
+;      - PWM:PWMtest|est_act.boost2                   ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[0]                  ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[1]                  ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[2]                  ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[3]                  ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[4]                  ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[5]                  ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[6]                  ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[7]                  ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[8]                  ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[9]                  ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[10]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[11]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[12]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[13]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[14]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[15]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[16]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[17]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[18]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[19]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[20]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[21]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[22]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[23]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[24]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[25]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[26]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[27]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[28]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[29]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[30]                 ; 0                 ; 6       ;
+;      - PWM:PWMtest|countactual1[31]                 ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[8]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[31]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[30]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[29]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[28]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[27]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[26]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[25]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[24]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[23]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[22]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[21]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[20]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[19]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[18]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[17]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[16]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[15]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[14]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[13]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[12]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[11]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[10]           ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[9]            ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[8]            ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[7]            ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[6]            ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[5]            ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[4]            ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[3]            ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[2]            ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[1]            ; 0                 ; 6       ;
+;      - PWM:PWMtest|softstart_duty_act[0]            ; 0                 ; 6       ;
+;      - PWM:PWMtest|est_act.buck1                    ; 0                 ; 6       ;
+;      - PWM:PWMtest|est_act.boost1softs              ; 0                 ; 6       ;
+;      - PWM:PWMtest|est_act.idle                     ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|dec_prev[1]       ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|dec_prev[0]       ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|inc_prev[0]       ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|inc_prev[1]       ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[7]~_emulated ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[7]~3         ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[6]~_emulated ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[6]~7         ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[5]~_emulated ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[5]~9         ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[4]~_emulated ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[4]~11        ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[3]~_emulated ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[3]~13        ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[2]~_emulated ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[2]~15        ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[1]~_emulated ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[1]~17        ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[0]~_emulated ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[0]~19        ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[7]~2         ; 0                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[6]~6         ; 0                 ; 6       ;
+; wdg_reset                                           ;                   ;         ;
+;      - watchdog:watchdog_test|countwdg_act[0]       ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[1]       ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[2]       ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[3]       ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[4]       ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[5]       ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[6]       ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[7]       ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[8]       ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[9]       ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[10]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[11]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[12]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[13]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[14]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[15]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[16]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[17]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[18]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[19]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[20]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[21]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[22]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[23]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[24]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[25]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[26]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[27]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[28]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[29]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[30]      ; 1                 ; 6       ;
+;      - watchdog:watchdog_test|countwdg_act[31]      ; 1                 ; 6       ;
+; sel                                                 ;                   ;         ;
+;      - PWM:PWMtest|Selector36~0                     ; 1                 ; 6       ;
+;      - PWM:PWMtest|Selector38~1                     ; 1                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[7]~3         ; 1                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[6]~7         ; 1                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[5]~9         ; 1                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[4]~11        ; 1                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[3]~13        ; 1                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[2]~15        ; 1                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[1]~17        ; 1                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[0]~19        ; 1                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[7]~2         ; 1                 ; 6       ;
+;      - incdec_duty:incdecdutytest|duty[6]~6         ; 1                 ; 6       ;
+; dec                                                 ;                   ;         ;
+;      - incdec_duty:incdecdutytest|dec_prev[0]~0     ; 1                 ; 6       ;
+; inc                                                 ;                   ;         ;
+;      - incdec_duty:incdecdutytest|inc_prev[0]~0     ; 0                 ; 6       ;
++-----------------------------------------------------+-------------------+---------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Control Signals                                                                                                                                                                 ;
-+--------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
-; Name                                 ; Location           ; Fan-Out ; Usage                      ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
-+--------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
-; PWM:PWMtest|countactual1[10]~98      ; LCCOMB_X52_Y33_N18 ; 32      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
-; PWM:PWMtest|est_act.idle             ; FF_X55_Y35_N9      ; 44      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; PWM:PWMtest|softstart_duty_act[1]~4  ; LCCOMB_X55_Y33_N4  ; 32      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; clk                                  ; PIN_P11            ; 167     ; Clock                      ; yes    ; Global Clock         ; GCLK19           ; --                        ;
-; reset                                ; PIN_F15            ; 125     ; Async. clear, Latch enable ; no     ; --                   ; --               ; --                        ;
-; set_reset:set_reset_test|reset_out~0 ; LCCOMB_X47_Y28_N28 ; 20      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
-; set_reset:set_reset_test|set_out~0   ; LCCOMB_X45_Y33_N28 ; 20      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
-; watchdog:watchdog_test|LessThan1~2   ; LCCOMB_X50_Y41_N10 ; 32      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
-; wdg_reset                            ; PIN_B14            ; 32      ; Async. clear               ; no     ; --                   ; --               ; --                        ;
-+--------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Control Signals                                                                                                                                                                  ;
++---------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
+; Name                                  ; Location           ; Fan-Out ; Usage                      ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
++---------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
+; PWM:PWMtest|countactual1[24]~53       ; LCCOMB_X36_Y26_N20 ; 32      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
+; PWM:PWMtest|est_act.idle              ; FF_X38_Y26_N3      ; 61      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; PWM:PWMtest|softstart_duty_act[11]~10 ; LCCOMB_X36_Y26_N30 ; 23      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; PWM:PWMtest|softstart_duty_act[3]~9   ; LCCOMB_X36_Y26_N4  ; 9       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; clk                                   ; PIN_P11            ; 158     ; Clock                      ; yes    ; Global Clock         ; GCLK19           ; --                        ;
+; incdec_duty:incdecdutytest|Equal0~0   ; LCCOMB_X39_Y26_N18 ; 8       ; Sync. load                 ; no     ; --                   ; --               ; --                        ;
+; incdec_duty:incdecdutytest|duty[1]~29 ; LCCOMB_X39_Y26_N28 ; 6       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; reset                                 ; PIN_F15            ; 98      ; Async. clear, Latch enable ; no     ; --                   ; --               ; --                        ;
+; set_reset:set_reset_test|reset_out~0  ; LCCOMB_X31_Y5_N16  ; 20      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
+; set_reset:set_reset_test|set_out~0    ; LCCOMB_X25_Y3_N20  ; 20      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
+; watchdog:watchdog_test|LessThan1~2    ; LCCOMB_X50_Y48_N18 ; 32      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
+; wdg_reset                             ; PIN_B14            ; 32      ; Async. clear               ; no     ; --                   ; --               ; --                        ;
++---------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------+
@@ -1165,7 +1127,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------+----------+---------+--------------------------------------+----------------------+------------------+---------------------------+
 ; Name ; Location ; Fan-Out ; Fan-Out Using Intentional Clock Skew ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +------+----------+---------+--------------------------------------+----------------------+------------------+---------------------------+
-; clk  ; PIN_P11  ; 167     ; 0                                    ; Global Clock         ; GCLK19           ; --                        ;
+; clk  ; PIN_P11  ; 158     ; 0                                    ; Global Clock         ; GCLK19           ; --                        ;
 +------+----------+---------+--------------------------------------+----------------------+------------------+---------------------------+
 
 
@@ -1174,90 +1136,91 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-------------------------+
 ; Routing Resource Type ; Usage                   ;
 +-----------------------+-------------------------+
-; Block interconnects   ; 699 / 148,641 ( < 1 % ) ;
-; C16 interconnects     ; 18 / 5,382 ( < 1 % )    ;
-; C4 interconnects      ; 398 / 106,704 ( < 1 % ) ;
-; Direct links          ; 146 / 148,641 ( < 1 % ) ;
+; Block interconnects   ; 701 / 148,641 ( < 1 % ) ;
+; C16 interconnects     ; 20 / 5,382 ( < 1 % )    ;
+; C4 interconnects      ; 283 / 106,704 ( < 1 % ) ;
+; Direct links          ; 160 / 148,641 ( < 1 % ) ;
 ; Global clocks         ; 1 / 20 ( 5 % )          ;
-; Local interconnects   ; 229 / 49,760 ( < 1 % )  ;
+; Local interconnects   ; 193 / 49,760 ( < 1 % )  ;
 ; NSLEEPs               ; 0 / 500 ( 0 % )         ;
-; R24 interconnects     ; 13 / 5,406 ( < 1 % )    ;
-; R4 interconnects      ; 284 / 147,764 ( < 1 % ) ;
+; R24 interconnects     ; 15 / 5,406 ( < 1 % )    ;
+; R4 interconnects      ; 301 / 147,764 ( < 1 % ) ;
 +-----------------------+-------------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Logic Elements                                                         ;
 +---------------------------------------------+------------------------------+
-; Number of Logic Elements  (Average = 13.20) ; Number of LABs  (Total = 45) ;
+; Number of Logic Elements  (Average = 13.24) ; Number of LABs  (Total = 42) ;
 +---------------------------------------------+------------------------------+
-; 1                                           ; 4                            ;
+; 1                                           ; 3                            ;
 ; 2                                           ; 1                            ;
 ; 3                                           ; 0                            ;
-; 4                                           ; 0                            ;
-; 5                                           ; 0                            ;
-; 6                                           ; 1                            ;
-; 7                                           ; 0                            ;
+; 4                                           ; 1                            ;
+; 5                                           ; 1                            ;
+; 6                                           ; 0                            ;
+; 7                                           ; 1                            ;
 ; 8                                           ; 0                            ;
-; 9                                           ; 0                            ;
-; 10                                          ; 3                            ;
+; 9                                           ; 1                            ;
+; 10                                          ; 2                            ;
 ; 11                                          ; 0                            ;
-; 12                                          ; 1                            ;
-; 13                                          ; 2                            ;
-; 14                                          ; 5                            ;
+; 12                                          ; 0                            ;
+; 13                                          ; 0                            ;
+; 14                                          ; 1                            ;
 ; 15                                          ; 4                            ;
-; 16                                          ; 24                           ;
+; 16                                          ; 27                           ;
 +---------------------------------------------+------------------------------+
 
 
 +-------------------------------------------------------------------+
 ; LAB-wide Signals                                                  ;
 +------------------------------------+------------------------------+
-; LAB-wide Signals  (Average = 0.98) ; Number of LABs  (Total = 45) ;
+; LAB-wide Signals  (Average = 1.00) ; Number of LABs  (Total = 42) ;
 +------------------------------------+------------------------------+
-; 1 Async. clear                     ; 12                           ;
-; 1 Clock                            ; 20                           ;
-; 1 Clock enable                     ; 6                            ;
-; 1 Sync. clear                      ; 6                            ;
+; 1 Async. clear                     ; 11                           ;
+; 1 Clock                            ; 16                           ;
+; 1 Clock enable                     ; 7                            ;
+; 1 Sync. clear                      ; 7                            ;
+; 1 Sync. load                       ; 1                            ;
 +------------------------------------+------------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Signals Sourced  (Average = 13.91) ; Number of LABs  (Total = 45) ;
+; Number of Signals Sourced  (Average = 13.81) ; Number of LABs  (Total = 42) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 4                            ;
-; 1                                            ; 8                            ;
-; 2                                            ; 1                            ;
+; 1                                            ; 7                            ;
+; 2                                            ; 0                            ;
 ; 3                                            ; 0                            ;
-; 4                                            ; 0                            ;
-; 5                                            ; 0                            ;
-; 6                                            ; 1                            ;
-; 7                                            ; 0                            ;
+; 4                                            ; 2                            ;
+; 5                                            ; 1                            ;
+; 6                                            ; 0                            ;
+; 7                                            ; 1                            ;
 ; 8                                            ; 0                            ;
-; 9                                            ; 0                            ;
+; 9                                            ; 1                            ;
 ; 10                                           ; 0                            ;
 ; 11                                           ; 0                            ;
 ; 12                                           ; 0                            ;
-; 13                                           ; 2                            ;
-; 14                                           ; 3                            ;
+; 13                                           ; 0                            ;
+; 14                                           ; 2                            ;
 ; 15                                           ; 1                            ;
-; 16                                           ; 8                            ;
-; 17                                           ; 3                            ;
-; 18                                           ; 0                            ;
-; 19                                           ; 4                            ;
+; 16                                           ; 9                            ;
+; 17                                           ; 0                            ;
+; 18                                           ; 1                            ;
+; 19                                           ; 1                            ;
 ; 20                                           ; 1                            ;
 ; 21                                           ; 1                            ;
-; 22                                           ; 0                            ;
+; 22                                           ; 2                            ;
 ; 23                                           ; 0                            ;
-; 24                                           ; 1                            ;
+; 24                                           ; 0                            ;
 ; 25                                           ; 2                            ;
 ; 26                                           ; 0                            ;
-; 27                                           ; 0                            ;
+; 27                                           ; 1                            ;
 ; 28                                           ; 0                            ;
-; 29                                           ; 1                            ;
-; 30                                           ; 0                            ;
+; 29                                           ; 0                            ;
+; 30                                           ; 1                            ;
 ; 31                                           ; 0                            ;
 ; 32                                           ; 4                            ;
 +----------------------------------------------+------------------------------+
@@ -1266,61 +1229,61 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                        ;
 +-------------------------------------------------+------------------------------+
-; Number of Signals Sourced Out  (Average = 7.11) ; Number of LABs  (Total = 45) ;
+; Number of Signals Sourced Out  (Average = 7.76) ; Number of LABs  (Total = 42) ;
 +-------------------------------------------------+------------------------------+
 ; 0                                               ; 4                            ;
-; 1                                               ; 13                           ;
+; 1                                               ; 11                           ;
 ; 2                                               ; 2                            ;
 ; 3                                               ; 0                            ;
 ; 4                                               ; 2                            ;
-; 5                                               ; 2                            ;
-; 6                                               ; 2                            ;
+; 5                                               ; 0                            ;
+; 6                                               ; 1                            ;
 ; 7                                               ; 1                            ;
 ; 8                                               ; 0                            ;
-; 9                                               ; 1                            ;
-; 10                                              ; 1                            ;
-; 11                                              ; 2                            ;
+; 9                                               ; 2                            ;
+; 10                                              ; 3                            ;
+; 11                                              ; 0                            ;
 ; 12                                              ; 1                            ;
-; 13                                              ; 2                            ;
-; 14                                              ; 2                            ;
+; 13                                              ; 1                            ;
+; 14                                              ; 3                            ;
 ; 15                                              ; 1                            ;
-; 16                                              ; 9                            ;
+; 16                                              ; 10                           ;
 +-------------------------------------------------+------------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Distinct Inputs  (Average = 15.36) ; Number of LABs  (Total = 45) ;
+; Number of Distinct Inputs  (Average = 16.52) ; Number of LABs  (Total = 42) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
 ; 1                                            ; 0                            ;
 ; 2                                            ; 2                            ;
 ; 3                                            ; 2                            ;
-; 4                                            ; 6                            ;
-; 5                                            ; 2                            ;
+; 4                                            ; 5                            ;
+; 5                                            ; 1                            ;
 ; 6                                            ; 0                            ;
 ; 7                                            ; 0                            ;
 ; 8                                            ; 2                            ;
 ; 9                                            ; 1                            ;
-; 10                                           ; 1                            ;
-; 11                                           ; 1                            ;
+; 10                                           ; 0                            ;
+; 11                                           ; 0                            ;
 ; 12                                           ; 1                            ;
-; 13                                           ; 1                            ;
-; 14                                           ; 1                            ;
+; 13                                           ; 0                            ;
+; 14                                           ; 2                            ;
 ; 15                                           ; 4                            ;
-; 16                                           ; 3                            ;
+; 16                                           ; 2                            ;
 ; 17                                           ; 3                            ;
 ; 18                                           ; 0                            ;
 ; 19                                           ; 1                            ;
-; 20                                           ; 1                            ;
+; 20                                           ; 2                            ;
 ; 21                                           ; 0                            ;
-; 22                                           ; 0                            ;
-; 23                                           ; 1                            ;
-; 24                                           ; 1                            ;
+; 22                                           ; 1                            ;
+; 23                                           ; 0                            ;
+; 24                                           ; 0                            ;
 ; 25                                           ; 1                            ;
-; 26                                           ; 0                            ;
-; 27                                           ; 0                            ;
+; 26                                           ; 1                            ;
+; 27                                           ; 1                            ;
 ; 28                                           ; 0                            ;
 ; 29                                           ; 0                            ;
 ; 30                                           ; 0                            ;
@@ -1381,31 +1344,31 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------+-----------+-----------------------------------+------------------------------------------------------------------------------------------------------+----------+--------------------------------------------------------------------------+------+-------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; I/O Rules Matrix                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
-+--------------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+-----------+-----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+
-; Pin/Rules          ; IO_000001    ; IO_000002    ; IO_000003    ; IO_000004    ; IO_000005    ; IO_000006 ; IO_000007    ; IO_000008    ; IO_000009 ; IO_000010 ; IO_000011    ; IO_000012    ; IO_000013    ; IO_000014    ; IO_000015    ; IO_000018    ; IO_000019    ; IO_000020    ; IO_000021    ; IO_000022    ; IO_000023    ; IO_000024    ; IO_000026    ; IO_000027    ; IO_000045    ; IO_000046    ; IO_000047    ; IO_000033 ; IO_000034    ; IO_000042    ;
-+--------------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+-----------+-----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+
-; Total Pass         ; 13           ; 0            ; 13           ; 0            ; 0            ; 15        ; 13           ; 0            ; 15        ; 15        ; 0            ; 0            ; 0            ; 0            ; 8            ; 0            ; 0            ; 8            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 15        ; 0            ; 0            ;
-; Total Unchecked    ; 0            ; 0            ; 0            ; 0            ; 0            ; 0         ; 0            ; 0            ; 0         ; 0         ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0         ; 0            ; 0            ;
-; Total Inapplicable ; 2            ; 15           ; 2            ; 15           ; 15           ; 0         ; 2            ; 15           ; 0         ; 0         ; 15           ; 15           ; 15           ; 15           ; 7            ; 15           ; 15           ; 7            ; 15           ; 15           ; 15           ; 15           ; 15           ; 15           ; 15           ; 15           ; 15           ; 0         ; 15           ; 15           ;
-; Total Fail         ; 0            ; 0            ; 0            ; 0            ; 0            ; 0         ; 0            ; 0            ; 0         ; 0         ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0         ; 0            ; 0            ;
-; PWM_H1             ; Pass         ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass      ; Pass         ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; PWM_L1             ; Pass         ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass      ; Pass         ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; PWM_H2             ; Pass         ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass      ; Pass         ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; PWM_L2             ; Pass         ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass      ; Pass         ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; wdg_out            ; Pass         ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass      ; Pass         ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; set_out            ; Pass         ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass      ; Pass         ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; reset_out          ; Pass         ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass      ; Pass         ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; set_btn            ; Pass         ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass      ; Pass         ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; reset_btn          ; Pass         ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass      ; Pass         ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; clk                ; Pass         ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass      ; Pass         ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; reset              ; Pass         ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass      ; Pass         ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; wdg_reset          ; Pass         ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass      ; Pass         ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; sel                ; Pass         ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass      ; Pass         ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; inc                ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; dec                ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-+--------------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+-----------+-----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; I/O Rules Matrix                                                                                                                                                                                                                                                                                                                                                                                                                                                ;
++--------------------+-----------+--------------+-----------+--------------+--------------+-----------+-----------+--------------+-----------+-----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+
+; Pin/Rules          ; IO_000001 ; IO_000002    ; IO_000003 ; IO_000004    ; IO_000005    ; IO_000006 ; IO_000007 ; IO_000008    ; IO_000009 ; IO_000010 ; IO_000011    ; IO_000012    ; IO_000013    ; IO_000014    ; IO_000015    ; IO_000018    ; IO_000019    ; IO_000020    ; IO_000021    ; IO_000022    ; IO_000023    ; IO_000024    ; IO_000026    ; IO_000027    ; IO_000045    ; IO_000046    ; IO_000047    ; IO_000033 ; IO_000034    ; IO_000042    ;
++--------------------+-----------+--------------+-----------+--------------+--------------+-----------+-----------+--------------+-----------+-----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+
+; Total Pass         ; 15        ; 0            ; 15        ; 0            ; 0            ; 15        ; 15        ; 0            ; 15        ; 15        ; 0            ; 0            ; 0            ; 0            ; 8            ; 0            ; 0            ; 8            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 15        ; 0            ; 0            ;
+; Total Unchecked    ; 0         ; 0            ; 0         ; 0            ; 0            ; 0         ; 0         ; 0            ; 0         ; 0         ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0         ; 0            ; 0            ;
+; Total Inapplicable ; 0         ; 15           ; 0         ; 15           ; 15           ; 0         ; 0         ; 15           ; 0         ; 0         ; 15           ; 15           ; 15           ; 15           ; 7            ; 15           ; 15           ; 7            ; 15           ; 15           ; 15           ; 15           ; 15           ; 15           ; 15           ; 15           ; 15           ; 0         ; 15           ; 15           ;
+; Total Fail         ; 0         ; 0            ; 0         ; 0            ; 0            ; 0         ; 0         ; 0            ; 0         ; 0         ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0         ; 0            ; 0            ;
+; PWM_H1             ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; PWM_L1             ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; PWM_H2             ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; PWM_L2             ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; wdg_out            ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; set_out            ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; reset_out          ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; set_btn            ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; reset_btn          ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; clk                ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; reset              ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; wdg_reset          ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; sel                ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; dec                ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; inc                ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
++--------------------+-----------+--------------+-----------+--------------+--------------+-----------+-----------+--------------+-----------+-----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+
 
 
 +-------------------------------------------------------------------------------------------+
@@ -1483,64 +1446,18 @@ Info (12825): Data[1]/ASDO dual-purpose pin not reserved
 Info (12825): nCSO dual-purpose pin not reserved
 Info (12825): DCLK dual-purpose pin not reserved
 Warning (15714): Some pins have incomplete I/O assignments. Refer to the I/O Assignment Warnings report for details
-Critical Warning (169085): No exact pin location assignment(s) for 2 pins of 15 total pins. For the list of pins please refer to the I/O Assignment Warnings table in the fitter report.
-Warning (335093): The Timing Analyzer is analyzing 11 combinational loops as latches. For more details, run the Check Timing command in the Timing Analyzer or view the "User-Specified and Inferred Latches" table in the Analysis & Synthesis report.
+Warning (335093): The Timing Analyzer is analyzing 2 combinational loops as latches. For more details, run the Check Timing command in the Timing Analyzer or view the "User-Specified and Inferred Latches" table in the Analysis & Synthesis report.
 Info (332104): Reading SDC File: 'PWMgeneration_top.sdc'
 Info (332104): Reading SDC File: '../constraint files/PWMgeneration_top.sdc'
 Warning (332043): Overwriting existing clock: clk
 Warning (332125): Found combinational loop of 2 nodes
     Warning (332126): Node "set_reset_test|reset_process~4|combout"
-    Warning (332126): Node "set_reset_test|reset_process~4|dataa"
+    Warning (332126): Node "set_reset_test|reset_process~4|datab"
 Warning (332125): Found combinational loop of 2 nodes
     Warning (332126): Node "set_reset_test|set_process~4|combout"
-    Warning (332126): Node "set_reset_test|set_process~4|dataa"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[3]~22|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~59|dataa"
-    Warning (332126): Node "incdecdutytest|duty_act~59|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[3]~22|datad"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[1]~30|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~61|dataa"
-    Warning (332126): Node "incdecdutytest|duty_act~61|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[1]~30|datad"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[2]~26|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~60|dataa"
-    Warning (332126): Node "incdecdutytest|duty_act~60|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[2]~26|datad"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[4]~18|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~58|dataa"
-    Warning (332126): Node "incdecdutytest|duty_act~58|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[4]~18|datad"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[5]~14|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~57|dataa"
-    Warning (332126): Node "incdecdutytest|duty_act~57|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[5]~14|datad"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[6]~10|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~56|datab"
-    Warning (332126): Node "incdecdutytest|duty_act~56|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[6]~10|datad"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[0]~34|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~62|datab"
-    Warning (332126): Node "incdecdutytest|duty_act~62|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[0]~34|datad"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 26
-    Warning (332126): Node "incdecdutytest|duty_act~55|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[7]~6|datad"
-    Warning (332126): Node "incdecdutytest|duty_act[7]~6|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~55|dataa"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 26
-    Warning (332126): Node "incdecdutytest|duty_act~54|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[8]~2|datad"
-    Warning (332126): Node "incdecdutytest|duty_act[8]~2|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~54|datab"
+    Warning (332126): Node "set_reset_test|set_process~4|datab"
 Warning (332060): Node: reset was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Latch incdec_duty:incdecdutytest|duty_act[8]~1 is being clocked by reset
+    Info (13166): Latch incdec_duty:incdecdutytest|duty[6]~6 is being clocked by reset
 Critical Warning (332168): The following clock transfers have no clock uncertainty assignment. For more accurate results, apply clock uncertainty assignments or use the derive_clock_uncertainty command.
     Critical Warning (332169): From clk (Rise) to clk (Rise) (setup and hold)
 Info (332129): Detected timing requirements -- optimizing circuit to achieve only the specified requirements
@@ -1553,21 +1470,7 @@ Info (176353): Automatically promoted node clk~input (placed in PIN P11 (CLK7p, 
 Info (176233): Starting register packing
 Info (176235): Finished register packing
     Extra Info (176219): No registers were packed into other blocks
-Info (176214): Statistics of I/O pins that need to be placed that use the same VCCIO and VREF, before I/O pin placement
-    Info (176211): Number of I/O pins in group: 2 (unused VREF, 2.5V VCCIO, 2 input, 0 output, 0 bidirectional)
-        Info (176212): I/O standards used: 2.5 V.
-Info (176215): I/O bank details before I/O pin placement
-    Info (176214): Statistics of I/O banks
-        Info (176213): I/O bank number 1A does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  16 pins available
-        Info (176213): I/O bank number 1B does not use VREF pins and has undetermined VCCIO pins. 4 total pin(s) used --  20 pins available
-        Info (176213): I/O bank number 2 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  36 pins available
-        Info (176213): I/O bank number 3 does not use VREF pins and has 3.3V VCCIO pins. 8 total pin(s) used --  40 pins available
-        Info (176213): I/O bank number 4 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  48 pins available
-        Info (176213): I/O bank number 5 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  40 pins available
-        Info (176213): I/O bank number 6 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  60 pins available
-        Info (176213): I/O bank number 7 does not use VREF pins and has undetermined VCCIO pins. 5 total pin(s) used --  47 pins available
-        Info (176213): I/O bank number 8 does not use VREF pins and has undetermined VCCIO pins. 4 total pin(s) used --  32 pins available
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:02
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
 Info (170189): Fitter placement preparation operations beginning
 Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
@@ -1576,30 +1479,32 @@ Info (170137): Fitter placement was successful
 Info (170192): Fitter placement operations ending: elapsed time is 00:00:01
 Info (170193): Fitter routing operations beginning
 Info (170195): Router estimated average interconnect usage is 0% of the available device resources
-    Info (170196): Router estimated peak interconnect usage is 3% of the available device resources in the region that extends from location X45_Y33 to location X55_Y43
+    Info (170196): Router estimated peak interconnect usage is 4% of the available device resources in the region that extends from location X33_Y22 to location X44_Y32
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
     Info (170200): Optimizations that may affect the design's timing were skipped
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
-Info (11888): Total time spent on timing analysis during the Fitter is 0.17 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.18 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
-Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:02
-Warning (169177): 6 pins must meet Intel FPGA requirements for 3.3-, 3.0-, and 2.5-V interfaces. For more information, refer to AN 447: Interfacing MAX 10 Devices with 3.3/3.0/2.5-V LVTTL/LVCMOS I/O Systems.
-    Info (169178): Pin set_btn uses I/O standard 3.3 V Schmitt Trigger at B8 File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 16
-    Info (169178): Pin reset_btn uses I/O standard 3.3 V Schmitt Trigger at A7 File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 17
+Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:01
+Warning (169177): 8 pins must meet Intel FPGA requirements for 3.3-, 3.0-, and 2.5-V interfaces. For more information, refer to AN 447: Interfacing MAX 10 Devices with 3.3/3.0/2.5-V LVTTL/LVCMOS I/O Systems.
+    Info (169178): Pin set_btn uses I/O standard 3.3 V Schmitt Trigger at A13 File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 16
+    Info (169178): Pin reset_btn uses I/O standard 3.3 V Schmitt Trigger at B12 File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 17
     Info (169178): Pin clk uses I/O standard 3.3-V LVTTL at P11 File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 9
     Info (169178): Pin reset uses I/O standard 3.3-V LVTTL at F15 File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 8
     Info (169178): Pin wdg_reset uses I/O standard 3.3-V LVTTL at B14 File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 20
     Info (169178): Pin sel uses I/O standard 3.3-V LVTTL at C10 File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 10
+    Info (169178): Pin dec uses I/O standard 3.3-V LVTTL at A7 File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 22
+    Info (169178): Pin inc uses I/O standard 3.3-V LVTTL at B8 File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 21
 Info (144001): Generated suppressed messages file C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/output_files/PWMgeneration_top.fit.smsg
-Info: Quartus Prime Fitter was successful. 0 errors, 61 warnings
-    Info: Peak virtual memory: 5650 megabytes
-    Info: Processing ended: Mon May 16 17:19:39 2022
-    Info: Elapsed time: 00:00:10
-    Info: Total CPU time (on all processors): 00:00:15
+Info: Quartus Prime Fitter was successful. 0 errors, 15 warnings
+    Info: Peak virtual memory: 5656 megabytes
+    Info: Processing ended: Tue May 17 13:29:01 2022
+    Info: Elapsed time: 00:00:09
+    Info: Total CPU time (on all processors): 00:00:13
 
 
 +----------------------------+

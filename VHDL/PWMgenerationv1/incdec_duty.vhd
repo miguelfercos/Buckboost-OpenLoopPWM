@@ -17,7 +17,9 @@ use IEEE.STD_logic_unsigned.all;
  end incdec_Duty;
  
  architecture behavior of incdec_duty is
-constant duty_start: integer:=20;
+constant duty_start: integer:=35;
+constant duty_max: integer:=265;
+constant duty_min: integer:=30;
 constant dutybuck: integer := 190; --190;   --235 for vinmax=120V, 190 for vinmax=150 referred to high side switch d= 0.85 approx
 constant dutyboost: integer := 65;--65;  --65 for vinmax=80V, 117 for vinmax=62V. referred to low side switch.
 
@@ -37,27 +39,27 @@ constant deadtime2_boost : integer:= 2;
  
  begin
  
- CLK_incdec_process: process(reset,clk)
+ CLK_incdec_process: process(reset,clk,sel)
  begin
 if (reset='0') then 
-inc_prev<="00";
-dec_prev<="00";
+	inc_prev<="00";
+	dec_prev<="00";
 
-if (sel='0') then --buck
-duty <=dutybuck;
-duty_act<=dutybuck;
-else --boost
-duty <= dutyboost;
-duty<=dutyboost;
-end if;
+	if (sel='0') then --buck
+		duty <=dutybuck;
+		duty_act<=dutybuck;
+	else --boost
+		duty <= dutyboost;
+		duty_act<=dutyboost;
+	end if;
 
 elsif(clk'event and clk='1') then
 -- dutyboost <= dutyboost_sig;
 -- dutybuck <= dutybuck_sig;
-duty <= duty_sig;
-duty_act<=duty_sig;
-inc_prev<=inc_prev(0)& inc;
-dec_prev<=dec_prev(0)& dec;
+	duty <= duty_sig;
+	duty_act<=duty_sig;
+	inc_prev<=inc_prev(0)& inc;
+	dec_prev<=dec_prev(0)& dec;
 
  end if;
  end process;
@@ -65,20 +67,20 @@ dec_prev<=dec_prev(0)& dec;
 Increase_duty : process (inc_prev,dec_prev,duty_act)
 begin
 if(inc_prev="01") then
-			if(duty_act > period-deadtime1_boost-deadtime2_boost) then --reached end. Restart count
-			duty_sig<=duty_start;
+			if(duty_act > duty_max) then --reached end. Restart count -- backup period-deadtime1_boost-deadtime2_boost
+			duty_sig<=duty_min;
 			
 
 			else --not reached end. Continue countin
 				duty_sig<=duty_act+5;
-				flag_inc<= flag_inc+1;
+				--flag_inc<= flag_inc+1;
 			end if;
 
 
 elsif (dec_prev="01") then
 		
-			if(duty_act < deadtime1_boost+deadtime2_boost) then --reached end. Restart count
-				duty_sig<=duty_start;
+			if(duty_act < duty_min) then --reached end. Restart count -- backup  deadtime1_boost+deadtime2_boost
+			duty_sig<=duty_max;
 			else --not reached end. Continue countin
 				duty_sig<=duty_act-5;
 			end if;

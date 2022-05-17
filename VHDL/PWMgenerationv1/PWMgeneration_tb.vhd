@@ -69,8 +69,14 @@ architecture TestBench of PWMgeneration_tb is
     clk <= '1', '0' after 10 ns;
     wait for 20 ns;
  END PROCESS;
+ 
+  inc_clk: process
+  BEGIN
+    inc <= '0', '1' after 100 us;
+    wait for 200 us;
+ END PROCESS;
 
-inc <= '0','1' after 1 ms, '0' after 1100us, '1' after 2 ms , '0' after 2100 us, '1' after 2200 us; 
+--inc <= '0','1' after 1 ms, '0' after 1100us, '1' after 2 ms , '0' after 2100 us, '1' after 2200 us; 
 dec <= '0','1'  after 3 ms,'0' after 4 ms,'1'  after 5 ms;--,'0' after 5 ms,'1'  after 6 ms,'0' after 7 ms;
 
 reset_btn <= '1';

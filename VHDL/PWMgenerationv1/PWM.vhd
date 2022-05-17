@@ -214,7 +214,7 @@ begin
 						est_sig<= boost1;
 						countsig1<=0;
 						if (softstart_duty_act>= duty) then
-						softstart_duty_sig<= softstart_duty_act;
+						softstart_duty_sig<= duty;
 						else
 						softstart_duty_sig<=softstart_duty_act+1;
 						end if;

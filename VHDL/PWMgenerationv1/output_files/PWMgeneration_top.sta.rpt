@@ -1,5 +1,5 @@
 Timing Analyzer report for PWMgeneration_top
-Mon May 16 17:19:48 2022
+Tue May 17 13:29:09 2022
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -93,13 +93,13 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 8           ;
 ; Maximum allowed            ; 4           ;
 ;                            ;             ;
-; Average used               ; 1.31        ;
+; Average used               ; 1.22        ;
 ; Maximum used               ; 4           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;  10.6%      ;
-;     Processors 3-4         ;  10.4%      ;
+;     Processor 2            ;   7.7%      ;
+;     Processors 3-4         ;   7.4%      ;
 +----------------------------+-------------+
 
 
@@ -108,8 +108,8 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------+--------+--------------------------+
 ; SDC File Path                             ; Status ; Read at                  ;
 +-------------------------------------------+--------+--------------------------+
-; PWMgeneration_top.sdc                     ; OK     ; Mon May 16 17:19:45 2022 ;
-; ../constraint files/PWMgeneration_top.sdc ; OK     ; Mon May 16 17:19:45 2022 ;
+; PWMgeneration_top.sdc                     ; OK     ; Tue May 17 13:29:07 2022 ;
+; ../constraint files/PWMgeneration_top.sdc ; OK     ; Tue May 17 13:29:07 2022 ;
 +-------------------------------------------+--------+--------------------------+
 
 
@@ -127,7 +127,7 @@ https://fpgasoftware.intel.com/eula.
 +------------+-----------------+------------+------+
 ; Fmax       ; Restricted Fmax ; Clock Name ; Note ;
 +------------+-----------------+------------+------+
-; 109.25 MHz ; 109.25 MHz      ; clk        ;      ;
+; 109.28 MHz ; 109.28 MHz      ; clk        ;      ;
 +------------+-----------------+------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -137,7 +137,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------+--------+--------------------+
 ; Clock ; Slack  ; End Point TNS      ;
 +-------+--------+--------------------+
-; clk   ; 10.847 ; 0.000              ;
+; clk   ; 10.849 ; 0.000              ;
 +-------+--------+--------------------+
 
 
@@ -167,7 +167,7 @@ No paths to report.
 +-------+-------+-----------------------------------+
 ; Clock ; Slack ; End Point TNS                     ;
 +-------+-------+-----------------------------------+
-; clk   ; 9.637 ; 0.000                             ;
+; clk   ; 9.639 ; 0.000                             ;
 +-------+-------+-----------------------------------+
 
 
@@ -182,7 +182,7 @@ No synchronizer chains to report.
 +------------+-----------------+------------+------+
 ; Fmax       ; Restricted Fmax ; Clock Name ; Note ;
 +------------+-----------------+------------+------+
-; 118.58 MHz ; 118.58 MHz      ; clk        ;      ;
+; 120.09 MHz ; 120.09 MHz      ; clk        ;      ;
 +------------+-----------------+------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -192,7 +192,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------+--------+-------------------+
 ; Clock ; Slack  ; End Point TNS     ;
 +-------+--------+-------------------+
-; clk   ; 11.567 ; 0.000             ;
+; clk   ; 11.673 ; 0.000             ;
 +-------+--------+-------------------+
 
 
@@ -201,7 +201,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------+-------+-------------------+
 ; Clock ; Slack ; End Point TNS     ;
 +-------+-------+-------------------+
-; clk   ; 0.306 ; 0.000             ;
+; clk   ; 0.307 ; 0.000             ;
 +-------+-------+-------------------+
 
 
@@ -237,7 +237,7 @@ No synchronizer chains to report.
 +-------+--------+-------------------+
 ; Clock ; Slack  ; End Point TNS     ;
 +-------+--------+-------------------+
-; clk   ; 16.010 ; 0.000             ;
+; clk   ; 16.223 ; 0.000             ;
 +-------+--------+-------------------+
 
 
@@ -267,7 +267,7 @@ No paths to report.
 +-------+-------+----------------------------------+
 ; Clock ; Slack ; End Point TNS                    ;
 +-------+-------+----------------------------------+
-; clk   ; 9.325 ; 0.000                            ;
+; clk   ; 9.329 ; 0.000                            ;
 +-------+-------+----------------------------------+
 
 
@@ -282,8 +282,8 @@ No synchronizer chains to report.
 +------------------+--------+-------+----------+---------+---------------------+
 ; Clock            ; Setup  ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
 +------------------+--------+-------+----------+---------+---------------------+
-; Worst-case Slack ; 10.847 ; 0.149 ; N/A      ; N/A     ; 9.325               ;
-;  clk             ; 10.847 ; 0.149 ; N/A      ; N/A     ; 9.325               ;
+; Worst-case Slack ; 10.849 ; 0.149 ; N/A      ; N/A     ; 9.329               ;
+;  clk             ; 10.849 ; 0.149 ; N/A      ; N/A     ; 9.329               ;
 ; Design-wide TNS  ; 0.0    ; 0.0   ; 0.0      ; 0.0     ; 0.0                 ;
 ;  clk             ; 0.000  ; 0.000 ; N/A      ; N/A     ; 0.000               ;
 +------------------+--------+-------+----------+---------+---------------------+
@@ -316,8 +316,8 @@ No synchronizer chains to report.
 ; reset               ; 3.3-V LVTTL           ; 2640 ps         ; 2640 ps         ;
 ; wdg_reset           ; 3.3-V LVTTL           ; 2640 ps         ; 2640 ps         ;
 ; sel                 ; 3.3-V LVTTL           ; 2640 ps         ; 2640 ps         ;
-; inc                 ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
-; dec                 ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; dec                 ; 3.3-V LVTTL           ; 2640 ps         ; 2640 ps         ;
+; inc                 ; 3.3-V LVTTL           ; 2640 ps         ; 2640 ps         ;
 ; ~ALTERA_TMS~        ; 2.5 V Schmitt Trigger ; 2000 ps         ; 2000 ps         ;
 ; ~ALTERA_TCK~        ; 2.5 V Schmitt Trigger ; 2000 ps         ; 2000 ps         ;
 ; ~ALTERA_TDI~        ; 2.5 V Schmitt Trigger ; 2000 ps         ; 2000 ps         ;
@@ -381,7 +381,7 @@ No synchronizer chains to report.
 +------------+----------+----------+----------+----------+----------+
 ; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 21622    ; 0        ; 0        ; 0        ;
+; clk        ; clk      ; 20891    ; 0        ; 0        ; 0        ;
 +------------+----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -391,7 +391,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +------------+----------+----------+----------+----------+----------+
 ; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 21622    ; 0        ; 0        ; 0        ;
+; clk        ; clk      ; 20891    ; 0        ; 0        ; 0        ;
 +------------+----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -416,7 +416,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 1     ; 1    ;
 ; Unconstrained Input Ports       ; 7     ; 7    ;
-; Unconstrained Input Port Paths  ; 243   ; 243  ;
+; Unconstrained Input Port Paths  ; 207   ; 207  ;
 ; Unconstrained Output Ports      ; 3     ; 3    ;
 ; Unconstrained Output Port Paths ; 62    ; 62   ;
 +---------------------------------+-------+------+
@@ -490,104 +490,59 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Mon May 16 17:19:44 2022
+    Info: Processing started: Tue May 17 13:29:06 2022
 Info: Command: quartus_sta PWMgeneration -c PWMgeneration_top
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
-Warning (335093): The Timing Analyzer is analyzing 11 combinational loops as latches. For more details, run the Check Timing command in the Timing Analyzer or view the "User-Specified and Inferred Latches" table in the Analysis & Synthesis report.
+Warning (335093): The Timing Analyzer is analyzing 2 combinational loops as latches. For more details, run the Check Timing command in the Timing Analyzer or view the "User-Specified and Inferred Latches" table in the Analysis & Synthesis report.
 Info (332104): Reading SDC File: 'PWMgeneration_top.sdc'
 Info (332104): Reading SDC File: '../constraint files/PWMgeneration_top.sdc'
 Warning (332043): Overwriting existing clock: clk
 Warning (332125): Found combinational loop of 2 nodes
     Warning (332126): Node "set_reset_test|reset_process~4|combout"
-    Warning (332126): Node "set_reset_test|reset_process~4|datab"
+    Warning (332126): Node "set_reset_test|reset_process~4|datad"
 Warning (332125): Found combinational loop of 2 nodes
     Warning (332126): Node "set_reset_test|set_process~4|combout"
     Warning (332126): Node "set_reset_test|set_process~4|datab"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[8]~2|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~54|datad"
-    Warning (332126): Node "incdecdutytest|duty_act~54|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[8]~2|datac"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[0]~34|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~62|datac"
-    Warning (332126): Node "incdecdutytest|duty_act~62|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[0]~34|datac"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[3]~22|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~59|datad"
-    Warning (332126): Node "incdecdutytest|duty_act~59|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[3]~22|datad"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[7]~6|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~55|datad"
-    Warning (332126): Node "incdecdutytest|duty_act~55|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[7]~6|datad"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[5]~14|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~57|datad"
-    Warning (332126): Node "incdecdutytest|duty_act~57|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[5]~14|datac"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[4]~18|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~58|datac"
-    Warning (332126): Node "incdecdutytest|duty_act~58|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[4]~18|datad"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[6]~10|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~56|datad"
-    Warning (332126): Node "incdecdutytest|duty_act~56|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[6]~10|datac"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[1]~30|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~61|datac"
-    Warning (332126): Node "incdecdutytest|duty_act~61|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[1]~30|datac"
-Warning (332125): Found combinational loop of 4 nodes File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 42
-    Warning (332126): Node "incdecdutytest|duty_act[2]~26|combout"
-    Warning (332126): Node "incdecdutytest|duty_act~60|datac"
-    Warning (332126): Node "incdecdutytest|duty_act~60|combout"
-    Warning (332126): Node "incdecdutytest|duty_act[2]~26|datac"
 Warning (332060): Node: reset was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Latch incdec_duty:incdecdutytest|duty_act[8]~1 is being clocked by reset
+    Info (13166): Latch incdec_duty:incdecdutytest|duty[6]~6 is being clocked by reset
 Critical Warning (332168): The following clock transfers have no clock uncertainty assignment. For more accurate results, apply clock uncertainty assignments or use the derive_clock_uncertainty command.
     Critical Warning (332169): From clk (Rise) to clk (Rise) (setup and hold)
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Analyzing Slow 1200mV 85C Model
 Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
-Info (332146): Worst-case setup slack is 10.847
+Info (332146): Worst-case setup slack is 10.849
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    10.847               0.000 clk 
+    Info (332119):    10.849               0.000 clk 
 Info (332146): Worst-case hold slack is 0.341
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     0.341               0.000 clk 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
-Info (332146): Worst-case minimum pulse width slack is 9.637
+Info (332146): Worst-case minimum pulse width slack is 9.639
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     9.637               0.000 clk 
+    Info (332119):     9.639               0.000 clk 
 Info: Analyzing Slow 1200mV 0C Model
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Warning (332060): Node: reset was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Latch incdec_duty:incdecdutytest|duty_act[8]~1 is being clocked by reset
+    Info (13166): Latch incdec_duty:incdecdutytest|duty[6]~6 is being clocked by reset
 Critical Warning (332168): The following clock transfers have no clock uncertainty assignment. For more accurate results, apply clock uncertainty assignments or use the derive_clock_uncertainty command.
     Critical Warning (332169): From clk (Rise) to clk (Rise) (setup and hold)
-Info (332146): Worst-case setup slack is 11.567
+Info (332146): Worst-case setup slack is 11.673
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    11.567               0.000 clk 
-Info (332146): Worst-case hold slack is 0.306
+    Info (332119):    11.673               0.000 clk 
+Info (332146): Worst-case hold slack is 0.307
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.306               0.000 clk 
+    Info (332119):     0.307               0.000 clk 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is 9.648
@@ -596,29 +551,29 @@ Info (332146): Worst-case minimum pulse width slack is 9.648
     Info (332119):     9.648               0.000 clk 
 Info: Analyzing Fast 1200mV 0C Model
 Warning (332060): Node: reset was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Latch incdec_duty:incdecdutytest|duty_act[8]~1 is being clocked by reset
+    Info (13166): Latch incdec_duty:incdecdutytest|duty[6]~6 is being clocked by reset
 Critical Warning (332168): The following clock transfers have no clock uncertainty assignment. For more accurate results, apply clock uncertainty assignments or use the derive_clock_uncertainty command.
     Critical Warning (332169): From clk (Rise) to clk (Rise) (setup and hold)
-Info (332146): Worst-case setup slack is 16.010
+Info (332146): Worst-case setup slack is 16.223
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    16.010               0.000 clk 
+    Info (332119):    16.223               0.000 clk 
 Info (332146): Worst-case hold slack is 0.149
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     0.149               0.000 clk 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
-Info (332146): Worst-case minimum pulse width slack is 9.325
+Info (332146): Worst-case minimum pulse width slack is 9.329
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     9.325               0.000 clk 
+    Info (332119):     9.329               0.000 clk 
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
-Info: Quartus Prime Timing Analyzer was successful. 0 errors, 63 warnings
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 18 warnings
     Info: Peak virtual memory: 4826 megabytes
-    Info: Processing ended: Mon May 16 17:19:48 2022
-    Info: Elapsed time: 00:00:04
-    Info: Total CPU time (on all processors): 00:00:04
+    Info: Processing ended: Tue May 17 13:29:09 2022
+    Info: Elapsed time: 00:00:03
+    Info: Total CPU time (on all processors): 00:00:03
 
 

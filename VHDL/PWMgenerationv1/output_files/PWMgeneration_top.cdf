@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(10M50DAF484) Path("C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/VHDL/PWMgenerationv1/output_files/") File("PWMgeneration_top.sof") MfrSpec(OpMask(1));
+		Device PartName(10M50DAF484) Path("C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/output_files/") File("PWMgeneration_top.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

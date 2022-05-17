@@ -17,7 +17,7 @@ constant period : integer := 278;
 constant half_period : integer:= period/2;
 begin 
 
-CLK_wdg_process : process (Clk)
+CLK_wdg_process : process (Clk,wdg_reset)
 begin
 if (wdg_reset ='0') then
 countwdg_act<=0;

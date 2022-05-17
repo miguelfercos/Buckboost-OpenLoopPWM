@@ -56,11 +56,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "inc",
+					"name" : "dec",
 					"strict" : false
 				},
 				{
-					"name" : "dec",
+					"name" : "inc",
 					"strict" : false
 				}
 			]
