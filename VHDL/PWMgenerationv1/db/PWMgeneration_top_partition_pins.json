@@ -8,7 +8,15 @@
 					"strict" : false
 				},
 				{
+					"name" : "PWM_H1_sens",
+					"strict" : false
+				},
+				{
 					"name" : "PWM_L1",
+					"strict" : false
+				},
+				{
+					"name" : "PWM_L1_sens",
 					"strict" : false
 				},
 				{
@@ -16,7 +24,15 @@
 					"strict" : false
 				},
 				{
+					"name" : "PWM_H2_sens",
+					"strict" : false
+				},
+				{
 					"name" : "PWM_L2",
+					"strict" : false
+				},
+				{
+					"name" : "PWM_L2_sens",
 					"strict" : false
 				},
 				{

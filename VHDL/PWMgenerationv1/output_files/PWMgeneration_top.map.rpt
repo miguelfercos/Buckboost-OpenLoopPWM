@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PWMgeneration_top
-Tue May 17 13:28:51 2022
+Wed May 18 00:15:48 2022
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -48,7 +48,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue May 17 13:28:51 2022       ;
+; Analysis & Synthesis Status        ; Successful - Wed May 18 00:15:48 2022       ;
 ; Quartus Prime Version              ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                      ; PWMgeneration_top                           ;
 ; Top-level Entity Name              ; PWMgeneration_top                           ;
@@ -57,7 +57,7 @@ https://fpgasoftware.intel.com/eula.
 ;     Total combinational functions  ; 554                                         ;
 ;     Dedicated logic registers      ; 158                                         ;
 ; Total registers                    ; 158                                         ;
-; Total pins                         ; 15                                          ;
+; Total pins                         ; 19                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
@@ -204,14 +204,14 @@ https://fpgasoftware.intel.com/eula.
 ;     -- Dedicated logic registers            ; 158       ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
-; I/O pins                                    ; 15        ;
+; I/O pins                                    ; 19        ;
 ;                                             ;           ;
 ; Embedded Multiplier 9-bit elements          ; 0         ;
 ;                                             ;           ;
 ; Maximum fan-out node                        ; clk~input ;
 ; Maximum fan-out                             ; 158       ;
-; Total fan-out                               ; 2164      ;
-; Average fan-out                             ; 2.92      ;
+; Total fan-out                               ; 2172      ;
+; Average fan-out                             ; 2.90      ;
 +---------------------------------------------+-----------+
 
 
@@ -220,7 +220,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-----------------------------------------------+-------------------+--------------+
 ; Compilation Hierarchy Node      ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                           ; Entity Name       ; Library Name ;
 +---------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-----------------------------------------------+-------------------+--------------+
-; |PWMgeneration_top              ; 554 (0)             ; 158 (0)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 15   ; 0            ; 0          ; |PWMgeneration_top                            ; PWMgeneration_top ; work         ;
+; |PWMgeneration_top              ; 554 (0)             ; 158 (0)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 19   ; 0            ; 0          ; |PWMgeneration_top                            ; PWMgeneration_top ; work         ;
 ;    |PWM:PWMtest|                ; 392 (392)           ; 75 (75)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |PWMgeneration_top|PWM:PWMtest                ; PWM               ; work         ;
 ;    |incdec_duty:incdecdutytest| ; 66 (66)             ; 13 (13)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |PWMgeneration_top|incdec_duty:incdecdutytest ; incdec_duty       ; work         ;
 ;    |set_reset:set_reset_test|   ; 50 (50)             ; 38 (38)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |PWMgeneration_top|set_reset:set_reset_test   ; set_reset         ; work         ;
@@ -323,7 +323,7 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 15                          ;
+; boundary_port         ; 19                          ;
 ; cycloneiii_ff         ; 158                         ;
 ;     CLR               ; 17                          ;
 ;     CLR SCLR          ; 32                          ;
@@ -361,7 +361,7 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Tue May 17 13:28:38 2022
+    Info: Processing started: Wed May 18 00:15:34 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PWMgeneration -c PWMgeneration_top
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -369,7 +369,7 @@ Info (12021): Found 2 design units, including 1 entities, in source file pwmgene
     Info (12022): Found design unit 1: PWMgeneration_tb-TestBench File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_tb.vhd Line: 9
     Info (12023): Found entity 1: PWMgeneration_tb File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_tb.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file pwmgeneration_top.vhd
-    Info (12022): Found design unit 1: PWMgeneration_top-RTL File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 26
+    Info (12022): Found design unit 1: PWMgeneration_top-RTL File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 30
     Info (12023): Found entity 1: PWMgeneration_top File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file watchdog.vhd
     Info (12022): Found design unit 1: watchdog-behavior File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/watchdog.vhd Line: 14
@@ -384,10 +384,10 @@ Info (12021): Found 2 design units, including 1 entities, in source file incdec_
     Info (12022): Found design unit 1: incdec_duty-behavior File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 19
     Info (12023): Found entity 1: incdec_duty File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 8
 Info (12127): Elaborating entity "PWMgeneration_top" for the top level hierarchy
-Info (12128): Elaborating entity "PWM" for hierarchy "PWM:PWMtest" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 83
-Info (12128): Elaborating entity "set_reset" for hierarchy "set_reset:set_reset_test" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 95
-Info (12128): Elaborating entity "watchdog" for hierarchy "watchdog:watchdog_test" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 104
-Info (12128): Elaborating entity "incdec_duty" for hierarchy "incdec_duty:incdecdutytest" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 111
+Info (12128): Elaborating entity "PWM" for hierarchy "PWM:PWMtest" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 89
+Info (12128): Elaborating entity "set_reset" for hierarchy "set_reset:set_reset_test" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 110
+Info (12128): Elaborating entity "watchdog" for hierarchy "watchdog:watchdog_test" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 119
+Info (12128): Elaborating entity "incdec_duty" for hierarchy "incdec_duty:incdecdutytest" File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWMgeneration_top.vhd Line: 126
 Info (13000): Registers with preset signals will power-up high File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM.vhd Line: 43
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13004): Presettable and clearable registers converted to equivalent circuits with latches. Registers power-up to an undefined state, and DEVCLRn places the registers in an undefined state.
@@ -404,14 +404,14 @@ Warning (13004): Presettable and clearable registers converted to equivalent cir
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 572 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 576 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 8 input pins
-    Info (21059): Implemented 7 output pins
+    Info (21059): Implemented 11 output pins
     Info (21061): Implemented 557 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 12 warnings
-    Info: Peak virtual memory: 4783 megabytes
-    Info: Processing ended: Tue May 17 13:28:51 2022
-    Info: Elapsed time: 00:00:13
+    Info: Peak virtual memory: 4786 megabytes
+    Info: Processing ended: Wed May 18 00:15:48 2022
+    Info: Elapsed time: 00:00:14
     Info: Total CPU time (on all processors): 00:00:29
 
 

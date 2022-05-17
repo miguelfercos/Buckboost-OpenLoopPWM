@@ -9,9 +9,13 @@ entity PWMgeneration_top is
 		clk: in std_logic;
 		sel: in std_logic;
 		PWM_H1: out std_logic;
+		PWM_H1_sens: out std_logic;
 		PWM_L1: out std_logic;
+		PWM_L1_sens: out std_logic;
 		PWM_H2: out std_logic;
+		PWM_H2_sens: out std_logic;
 		PWM_L2:out std_logic;
+		PWM_L2_sens:out std_logic;
 		wdg_out:out std_logic;
 		set_btn:in std_logic;
 		reset_btn:in std_logic;
@@ -29,6 +33,7 @@ signal duty_cycle : integer range 0 to 279:=65;
 signal reset_btn_inv : std_logic;
 signal set_btn_inv : std_logic;
 signal inc_not,dec_not : std_logic;
+signal H1sens,L1sens, H2sens,L2sens: std_logic;
 
 component PWM
 port(
@@ -80,17 +85,27 @@ set_btn_inv <= not set_btn; -- the push buttons. same with  inc and dec but the 
 inc_not <= not inc;
 dec_not <= not dec;
 
+
 PWMtest: PWM
 port map(
 		reset=>reset,
 		clk=>clk,
 		sel=>sel,
 		duty=>duty_cycle,
-		PWM_H1=>PWM_H1,
-		PWM_L1=>PWM_L1,
-		PWM_H2=>PWM_H2,
-		PWM_L2=>PWM_L2
+		PWM_H1=>H1sens,
+		PWM_L1=>L1sens,
+		PWM_H2=>H2sens,
+		PWM_L2=>L2sens
 );
+PWM_H1<=H1sens ; --duplicate output for the sake of measuring
+PWM_L1<=L1sens ;
+PWM_H2<=H2sens ;
+PWM_L2<=L2sens ;
+PWM_H1_sens<=H1sens ;
+PWM_L1_sens<=L1sens ;
+PWM_H2_sens<=H2sens ;
+PWM_L2_sens<=L2sens ;
+
 
 set_reset_test: set_reset
 port map(
