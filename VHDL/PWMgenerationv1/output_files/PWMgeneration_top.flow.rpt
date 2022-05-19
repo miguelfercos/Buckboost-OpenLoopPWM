@@ -1,5 +1,5 @@
 Flow report for PWMgeneration_top
-Wed May 18 00:16:15 2022
+Wed May 18 12:42:18 2022
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -41,7 +41,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Wed May 18 00:16:15 2022       ;
+; Flow Status                        ; Successful - Wed May 18 12:42:18 2022       ;
 ; Quartus Prime Version              ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                      ; PWMgeneration_top                           ;
 ; Top-level Entity Name              ; PWMgeneration_top                           ;
@@ -67,7 +67,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/18/2022 00:15:35 ;
+; Start date & time ; 05/18/2022 12:41:47 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; PWMgeneration_top   ;
 +-------------------+---------------------+
@@ -78,7 +78,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+--------------------------------------+-------------+-----------------------------------+
 ; Assignment Name                     ; Value                                  ; Default Value                        ; Entity Name ; Section Id                        ;
 +-------------------------------------+----------------------------------------+--------------------------------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID               ; 198642183470371.165282573525268        ; --                                   ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID               ; 198642183470371.165287050703216        ; --                                   ; --          ; --                                ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --                                   ; --          ; eda_board_design_timing           ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --                                   ; --          ; eda_board_design_boundary_scan    ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --                                   ; --          ; eda_board_design_signal_integrity ;
@@ -104,12 +104,12 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:14     ; 1.0                     ; 4786 MB             ; 00:00:29                           ;
-; Fitter               ; 00:00:13     ; 1.1                     ; 5657 MB             ; 00:00:15                           ;
-; Assembler            ; 00:00:04     ; 1.0                     ; 4687 MB             ; 00:00:03                           ;
+; Analysis & Synthesis ; 00:00:13     ; 1.0                     ; 4786 MB             ; 00:00:29                           ;
+; Fitter               ; 00:00:08     ; 1.1                     ; 5671 MB             ; 00:00:13                           ;
+; Assembler            ; 00:00:03     ; 1.0                     ; 4690 MB             ; 00:00:03                           ;
 ; Timing Analyzer      ; 00:00:03     ; 1.2                     ; 4826 MB             ; 00:00:03                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4644 MB             ; 00:00:01                           ;
-; Total                ; 00:00:35     ; --                      ; --                  ; 00:00:51                           ;
+; EDA Netlist Writer   ; 00:00:00     ; 1.0                     ; 4644 MB             ; 00:00:01                           ;
+; Total                ; 00:00:27     ; --                      ; --                  ; 00:00:49                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

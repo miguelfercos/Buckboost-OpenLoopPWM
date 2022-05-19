@@ -97,7 +97,7 @@ port map(
 		PWM_H2=>H2sens,
 		PWM_L2=>L2sens
 );
-PWM_H1<=H1sens ; --duplicate output for the sake of measuring
+PWM_H1<=H1sens ; --duplicate output for the sake of being able to measure them
 PWM_L1<=L1sens ;
 PWM_H2<=H2sens ;
 PWM_L2<=L2sens ;

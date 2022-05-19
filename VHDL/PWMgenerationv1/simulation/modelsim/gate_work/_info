@@ -10,7 +10,7 @@ z2
 cModel Technology
 Z0 dC:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/simulation/modelsim
 Ehard_block
-Z1 w1652825775
+Z1 w1652870538
 Z2 DPx4 ieee 16 vital_primitives 0 22 G>kiXP8Q9dRClKfK1Zn7j1
 Z3 DPx11 fiftyfivenm 21 fiftyfivenm_atom_pack 0 22 ]LY<>e3?`4Wb8dl1GV_X90
 Z4 DPx4 ieee 12 vital_timing 0 22 J>EBealN09f8GzldA[z2>3
@@ -27,9 +27,9 @@ VH73DDHU2ac^:D?]T;@N=M3
 !s100 3A]XnMhF<;9mKUe5mn3aM1
 Z10 OV;C;2020.1;71
 31
-Z11 !s110 1652825791
+Z11 !s110 1652870547
 !i10b 1
-Z12 !s108 1652825790.000000
+Z12 !s108 1652870547.000000
 Z13 !s90 -reportprogress|300|-93|-work|work|PWMgeneration_top.vho|
 !s107 PWMgeneration_top.vho|
 !i113 1
@@ -74,8 +74,8 @@ R8
 R9
 l0
 L91 1
-V0dTSgYAe5n^=@a:^44?OJ2
-!s100 B@W6NIc9Q`Ih6SgC^C1J^1
+VQbHeEIl2FBOdg]4hOn_TC0
+!s100 Yd3`cDHT:JeQ3JYJDTm9N0
 R10
 31
 R11
@@ -95,12 +95,12 @@ R4
 R5
 R6
 R18
-DEx4 work 17 pwmgeneration_top 0 22 0dTSgYAe5n^=@a:^44?OJ2
+DEx4 work 17 pwmgeneration_top 0 22 QbHeEIl2FBOdg]4hOn_TC0
 !i122 0
 l1015
 L137 13354
-Vdc=U=jQ:CLHlgE41<J2W<2
-!s100 ^WOj=oTEW5^95AW`Ld2<70
+Vn^EU0WeE`5eO^>EXJ]LUY1
+!s100 _jXI:?ZDdH8Vg8ek;ZL@E3
 R10
 31
 R11
