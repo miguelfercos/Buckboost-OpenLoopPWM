@@ -1,10 +1,12 @@
 
 State Machine - |PWMgeneration_top|PWM:PWMtest|est_act
-Name est_act.boost2 est_act.boost1 est_act.boost2softs est_act.boost1softs est_act.buck2 est_act.buck1 est_act.idle 
-est_act.idle 0 0 0 0 0 0 0 
-est_act.buck1 0 0 0 0 0 1 1 
-est_act.buck2 0 0 0 0 1 0 1 
-est_act.boost1softs 0 0 0 1 0 0 1 
-est_act.boost2softs 0 0 1 0 0 0 1 
-est_act.boost1 0 1 0 0 0 0 1 
-est_act.boost2 1 0 0 0 0 0 1 
+Name est_act.buckboost2 est_act.buckboost1 est_act.boost2 est_act.boost1 est_act.boost2softs est_act.boost1softs est_act.buck2 est_act.buck1 est_act.idle 
+est_act.idle 0 0 0 0 0 0 0 0 0 
+est_act.buck1 0 0 0 0 0 0 0 1 1 
+est_act.buck2 0 0 0 0 0 0 1 0 1 
+est_act.boost1softs 0 0 0 0 0 1 0 0 1 
+est_act.boost2softs 0 0 0 0 1 0 0 0 1 
+est_act.boost1 0 0 0 1 0 0 0 0 1 
+est_act.boost2 0 0 1 0 0 0 0 0 1 
+est_act.buckboost1 0 1 0 0 0 0 0 0 1 
+est_act.buckboost2 1 0 0 0 0 0 0 0 1 

@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "MAX 10"
 set_global_assignment -name DEVICE 10M50DAF484C7G
-set_global_assignment -name TOP_LEVEL_ENTITY PWMgeneration_top
+set_global_assignment -name TOP_LEVEL_ENTITY incdec_duty
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "14:20:45  DECEMBER 15, 2020"
 set_global_assignment -name LAST_QUARTUS_VERSION "20.1.0 Lite Edition"
@@ -65,7 +65,6 @@ set_location_assignment PIN_AB3 -to PWM_H2
 set_location_assignment PIN_V9 -to PWM_L1
 set_location_assignment PIN_F15 -to reset
 set_location_assignment PIN_AB2 -to PWM_L2
-set_location_assignment PIN_C10 -to sel
 set_global_assignment -name SDC_FILE PWMgeneration_top.sdc
 set_global_assignment -name PROJECT_IP_REGENERATION_POLICY ALWAYS_REGENERATE_IP
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
@@ -73,6 +72,31 @@ set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name POWER_USE_INPUT_FILES OFF
 set_global_assignment -name SDC_FILE "../constraint files/PWMgeneration_top.sdc"
 set_global_assignment -name VHDL_FILE PWMgeneration_top.vhd
+set_location_assignment PIN_W9 -to wdg_out
+set_location_assignment PIN_B12 -to reset_btn
+set_location_assignment PIN_W10 -to set_out
+set_location_assignment PIN_W8 -to reset_out
+set_location_assignment PIN_A13 -to set_btn
+set_location_assignment PIN_B14 -to wdg_reset
+set_global_assignment -name VHDL_FILE watchdog.vhd
+set_global_assignment -name VHDL_FILE set_reset.vhd
+set_global_assignment -name VHDL_FILE PWM.vhd
+set_global_assignment -name VHDL_FILE incdec_duty.vhd
+set_location_assignment PIN_W12 -to PWM_H1_sens
+set_location_assignment PIN_AB11 -to PWM_H2_sens
+set_location_assignment PIN_AB12 -to PWM_L1_sens
+set_location_assignment PIN_AB10 -to PWM_L2_sens
+set_global_assignment -name VHDL_FILE PWM_pkg.vhd
+set_location_assignment PIN_B8 -to incdec_btn
+set_location_assignment PIN_A7 -to delay_incdec_btn
+set_location_assignment PIN_C11 -to sel[1]
+set_location_assignment PIN_C10 -to sel[0]
+set_location_assignment PIN_C12 -to d1d2
+set_location_assignment PIN_D12 -to incdec
+set_global_assignment -name VHDL_FILE incdecduty_tb.vhd
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PWM_H1
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PWM_H2
@@ -81,31 +105,18 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PWM_L2
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to reset
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sel
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to wdg_out
-set_location_assignment PIN_W9 -to wdg_out
-set_location_assignment PIN_B12 -to reset_btn
-set_location_assignment PIN_W10 -to set_out
-set_location_assignment PIN_W8 -to reset_out
-set_location_assignment PIN_A13 -to set_btn
-set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to set_btn
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to set_btn
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to reset_out
-set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to reset_btn
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to reset_btn
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to set_out
-set_location_assignment PIN_B14 -to wdg_reset
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to wdg_reset
-set_global_assignment -name VHDL_FILE watchdog.vhd
-set_global_assignment -name VHDL_FILE set_reset.vhd
-set_global_assignment -name VHDL_FILE PWM.vhd
-set_global_assignment -name VHDL_FILE incdec_duty.vhd
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to dec
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to inc
-set_location_assignment PIN_B8 -to inc
-set_location_assignment PIN_A7 -to dec
-set_location_assignment PIN_W12 -to PWM_H1_sens
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to PWM_H1_sens
-set_location_assignment PIN_AB11 -to PWM_H2_sens
-set_location_assignment PIN_AB12 -to PWM_L1_sens
-set_location_assignment PIN_AB10 -to PWM_L2_sens
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to d1d2
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to delay_incdec_btn
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to incdec
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to incdec_btn
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PWM_H1_sens
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PWM_H2_sens
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PWM_L1_sens
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PWM_L2_sens
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

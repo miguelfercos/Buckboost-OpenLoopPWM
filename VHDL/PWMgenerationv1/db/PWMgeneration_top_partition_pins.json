@@ -4,59 +4,111 @@
 			"name" : "Top",
 			"pins" : [
 				{
-					"name" : "PWM_H1",
+					"name" : "delay_out[0]",
 					"strict" : false
 				},
 				{
-					"name" : "PWM_H1_sens",
+					"name" : "delay_out[1]",
 					"strict" : false
 				},
 				{
-					"name" : "PWM_L1",
+					"name" : "delay_out[2]",
 					"strict" : false
 				},
 				{
-					"name" : "PWM_L1_sens",
+					"name" : "delay_out[3]",
 					"strict" : false
 				},
 				{
-					"name" : "PWM_H2",
+					"name" : "delay_out[4]",
 					"strict" : false
 				},
 				{
-					"name" : "PWM_H2_sens",
+					"name" : "delay_out[5]",
 					"strict" : false
 				},
 				{
-					"name" : "PWM_L2",
+					"name" : "delay_out[6]",
 					"strict" : false
 				},
 				{
-					"name" : "PWM_L2_sens",
+					"name" : "delay_out[7]",
 					"strict" : false
 				},
 				{
-					"name" : "wdg_out",
+					"name" : "delay_out[8]",
 					"strict" : false
 				},
 				{
-					"name" : "set_out",
+					"name" : "d1[0]",
 					"strict" : false
 				},
 				{
-					"name" : "reset_out",
+					"name" : "d1[1]",
 					"strict" : false
 				},
 				{
-					"name" : "set_btn",
+					"name" : "d1[2]",
 					"strict" : false
 				},
 				{
-					"name" : "reset_btn",
+					"name" : "d1[3]",
 					"strict" : false
 				},
 				{
-					"name" : "clk",
+					"name" : "d1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "d1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "d1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "d1[7]",
+					"strict" : false
+				},
+				{
+					"name" : "d1[8]",
+					"strict" : false
+				},
+				{
+					"name" : "d2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "d2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "d2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "d2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "d2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "d2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "d2[6]",
+					"strict" : false
+				},
+				{
+					"name" : "d2[7]",
+					"strict" : false
+				},
+				{
+					"name" : "d2[8]",
 					"strict" : false
 				},
 				{
@@ -64,19 +116,31 @@
 					"strict" : false
 				},
 				{
-					"name" : "wdg_reset",
+					"name" : "incdec",
 					"strict" : false
 				},
 				{
-					"name" : "sel",
+					"name" : "clk",
 					"strict" : false
 				},
 				{
-					"name" : "dec",
+					"name" : "sel[0]",
 					"strict" : false
 				},
 				{
-					"name" : "inc",
+					"name" : "sel[1]",
+					"strict" : false
+				},
+				{
+					"name" : "d1d2",
+					"strict" : false
+				},
+				{
+					"name" : "delay_incdec_btn",
+					"strict" : false
+				},
+				{
+					"name" : "incdec_btn",
 					"strict" : false
 				}
 			]

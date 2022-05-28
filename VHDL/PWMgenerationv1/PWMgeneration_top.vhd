@@ -2,12 +2,14 @@ LIBRARY IEEE;
 USE IEEE.std_logic_1164.all;
 USE IEEE.numeric_std.all;
 use IEEE.STD_logic_unsigned.all;
+library PWM_pkg;
+use PWM_pkg.PWM_package.all;
 
 entity PWMgeneration_top is
 	port(
 		reset : in std_logic;
 		clk: in std_logic;
-		sel: in std_logic;
+	sel: in std_logic_vector(1 downto 0);
 		PWM_H1: out std_logic;
 		PWM_H1_sens: out std_logic;
 		PWM_L1: out std_logic;
@@ -22,29 +24,36 @@ entity PWMgeneration_top is
 		set_out: out std_logic;
 		reset_out: out std_logic;
 		wdg_reset:in std_logic;
-		inc:in std_logic;
-		dec:in std_logic
+   incdec: in std_logic; -- if '1' increments, if '0' decrements
+   incdec_btn: in std_logic; -- button. when pressed, increments/decrements depending on incdec
+   delay_incdec_btn: in std_logic; -- when pressed, increments/decrements delay
+	d1d2:in std_logic
 		);
 end PWMgeneration_top;
 
 architecture RTL of PWMgeneration_top is 
 
-signal duty_cycle : integer range 0 to 279:=65;
+signal d1 : integer range 0 to 279;
+signal d2 : integer range 0 to 279;
+signal desfase : integer range 0 to 260;
 signal reset_btn_inv : std_logic;
 signal set_btn_inv : std_logic;
 signal inc_not,dec_not : std_logic;
 signal H1sens,L1sens, H2sens,L2sens: std_logic;
+signal delay_incdec_btn_not,incdec_btn_not:std_logic;
 
 component PWM
 port(
 		reset : in std_logic;
 		clk: in std_logic;
-		sel: in std_logic;
+		sel: in std_logic_vector(1 downto 0);
 		PWM_H1: out std_logic;
 		PWM_L1: out std_logic;
 		PWM_H2: out std_logic;
 		PWM_L2:out std_logic;
-		duty: in integer range 0 to 279
+		desfase:in integer range 0 to 279;
+		d1: integer range 0 to 279;
+		d2:integer range 0 to 279
 );
 end component;
 
@@ -66,12 +75,17 @@ end component;
 
 component incdec_duty
  port(
- 		reset : in std_logic;
-		inc:in std_logic;
-		dec:in std_logic;
-		clk: in std_logic;
-		sel: in std_logic;
-		duty: out integer range 0 to 279
+   incdec: in std_logic; -- if '1' increments, if '0' decrements
+   incdec_btn: in std_logic; -- button. when pressed, increments/decrements depending on incdec
+   delay_incdec_btn: in std_logic; -- when pressed, increments/decrements delay
+   delay_out: out integer range 0 to 260; -- outputs delay value, sends it to PWM
+	d1d2:in std_logic;
+	clk: in std_logic;
+	reset: in std_logic;
+	sel: in std_logic_vector(1 downto 0);
+	d1: out integer range 0 to 279;
+   d2: out integer range 0 to 279
+
  );
 end component;
 
@@ -82,8 +96,8 @@ begin
 
 reset_btn_inv<= not reset_btn; -- added so that set_btn and reset_btn work with the slide switches instead of
 set_btn_inv <= not set_btn; -- the push buttons. same with  inc and dec but the opposite.
-inc_not <= not inc;
-dec_not <= not dec;
+delay_incdec_btn_not <= not delay_incdec_btn;
+incdec_btn_not <= not incdec_btn;
 
 
 PWMtest: PWM
@@ -91,7 +105,9 @@ port map(
 		reset=>reset,
 		clk=>clk,
 		sel=>sel,
-		duty=>duty_cycle,
+		d1=>d1,
+		d2=>d2,
+		desfase=>desfase,
 		PWM_H1=>H1sens,
 		PWM_L1=>L1sens,
 		PWM_H2=>H2sens,
@@ -126,11 +142,15 @@ clk=>clk,
 incdecdutytest: incdec_duty
 port map(
 		reset=>reset,
-		inc=>inc_not,
-		dec=>dec_not,
+		incdec_btn=>incdec_btn_not,
+		incdec=>incdec,
 		sel=>sel,
 		clk=>clk,
-		duty=>duty_cycle
+		d1=>d1,
+		d2=>d2,
+		delay_out=>desfase,
+		delay_incdec_btn=>delay_incdec_btn_not,
+		d1d2=>d1d2
 );
 
 end RTL;
