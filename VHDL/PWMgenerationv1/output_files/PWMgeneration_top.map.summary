@@ -1,12 +1,12 @@
-Analysis & Synthesis Status : Successful - Fri May 27 17:45:33 2022
+Analysis & Synthesis Status : Successful - Sat May 28 20:57:58 2022
 Quartus Prime Version : 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 Revision Name : PWMgeneration_top
 Top-level Entity Name : incdec_duty
 Family : MAX 10
-Total logic elements : 197
-    Total combinational functions : 176
-    Dedicated logic registers : 48
-Total registers : 48
+Total logic elements : 228
+    Total combinational functions : 207
+    Dedicated logic registers : 52
+Total registers : 52
 Total pins : 35
 Total virtual pins : 0
 Total memory bits : 0

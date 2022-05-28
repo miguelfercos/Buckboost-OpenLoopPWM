@@ -1,0 +1,76 @@
+# Current time Sat May 28 20:57:09 2022
+# ModelSim - Intel FPGA Edition Stack Trace
+# Program = vish
+# Id = "2020.1"
+# Version = "2020.02"
+# Date = "Feb 28 2020"
+# Platform = win32pe
+
+Exception c0000005 has occurred at address 7b930a07. Traceback:
+# 0    0x7b930a07: 'TkBTreeNumLines + 0xb67'
+# 1    0x7b927bc6: 'TkpTesttextCmd + 0x4f66'
+# 2    0x7b92b18e: 'TkpTesttextCmd + 0x852e'
+# 3    0x7b7239f1: 'TclNREvalObjv + 0x3e1'
+StackWalk failed 299
+# End of Stack Trace
+
+# Current time Sat May 28 20:57:09 2022
+# ModelSim - Intel FPGA Edition Stack Trace
+# Program = vish
+# Id = "2020.1"
+# Version = "2020.02"
+# Date = "Feb 28 2020"
+# Platform = win32pe
+
+Exception c0000005 has occurred at address 88ec377f. Traceback:
+# 0    0x88ec377f: '<unknown (@0x88ec377f)>'
+# 1    0x7b937da7: 'TkBTreeNumLines + 0x7f07'
+# 2    0x7b936b89: 'TkBTreeNumLines + 0x6ce9'
+# 3    0x7b932b90: 'TkBTreeNumLines + 0x2cf0'
+# 4    0x7b941372: 'TkTextSetMark + 0x1512'
+# 5    0x7b9347ea: 'TkBTreeNumLines + 0x494a'
+# 6    0x7b7e653b: 'TclServiceIdle + 0x4b'
+# 7    0x7b77efbe: 'TclInThreadExit + 0xce'
+StackWalk failed 299
+# End of Stack Trace
+
+# Current time Sat May 28 20:57:09 2022
+# ModelSim - Intel FPGA Edition Stack Trace
+# Program = vish
+# Id = "2020.1"
+# Version = "2020.02"
+# Date = "Feb 28 2020"
+# Platform = win32pe
+
+Exception c0000005 has occurred at address 88ec377f. Traceback:
+# 0    0x88ec377f: '<unknown (@0x88ec377f)>'
+# 1    0x7b937da7: 'TkBTreeNumLines + 0x7f07'
+# 2    0x7b936b89: 'TkBTreeNumLines + 0x6ce9'
+# 3    0x7b932b90: 'TkBTreeNumLines + 0x2cf0'
+# 4    0x7b941372: 'TkTextSetMark + 0x1512'
+# 5    0x7b9347ea: 'TkBTreeNumLines + 0x494a'
+# 6    0x7b7e653b: 'TclServiceIdle + 0x4b'
+# 7    0x7b77efbe: 'TclInThreadExit + 0xce'
+StackWalk failed 299
+# End of Stack Trace
+
+# Current time Sat May 28 20:57:09 2022
+# ModelSim - Intel FPGA Edition Stack Trace
+# Program = vish
+# Id = "2020.1"
+# Version = "2020.02"
+# Date = "Feb 28 2020"
+# Platform = win32pe
+
+Exception c0000005 has occurred at address 88ec377f. Traceback:
+# 0    0x88ec377f: '<unknown (@0x88ec377f)>'
+# 1    0x7b937da7: 'TkBTreeNumLines + 0x7f07'
+# 2    0x7b936b89: 'TkBTreeNumLines + 0x6ce9'
+# 3    0x7b932b90: 'TkBTreeNumLines + 0x2cf0'
+# 4    0x7b941372: 'TkTextSetMark + 0x1512'
+# 5    0x7b9347ea: 'TkBTreeNumLines + 0x494a'
+# 6    0x7b7e653b: 'TclServiceIdle + 0x4b'
+# 7    0x7b77efbe: 'TclInThreadExit + 0xce'
+StackWalk failed 299
+# End of Stack Trace
+

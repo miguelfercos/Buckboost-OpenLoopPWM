@@ -1,14 +1,14 @@
-Fitter Status : Successful - Fri May 27 17:45:45 2022
+Fitter Status : Successful - Sat May 28 20:58:13 2022
 Quartus Prime Version : 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 Revision Name : PWMgeneration_top
 Top-level Entity Name : incdec_duty
 Family : MAX 10
 Device : 10M50DAF484C7G
 Timing Models : Final
-Total logic elements : 187 / 49,760 ( < 1 % )
-    Total combinational functions : 177 / 49,760 ( < 1 % )
-    Dedicated logic registers : 48 / 49,760 ( < 1 % )
-Total registers : 48
+Total logic elements : 223 / 49,760 ( < 1 % )
+    Total combinational functions : 208 / 49,760 ( < 1 % )
+    Dedicated logic registers : 52 / 49,760 ( < 1 % )
+Total registers : 52
 Total pins : 35 / 360 ( 10 % )
 Total virtual pins : 0
 Total memory bits : 0 / 1,677,312 ( 0 % )

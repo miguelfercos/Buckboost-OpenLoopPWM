@@ -12,7 +12,7 @@
 # 
 # vcom -93 -work work {PWMgeneration_top.vho}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 17:46:06 on May 27,2022
+# Start time: 20:58:43 on May 28,2022
 # vcom -reportprogress 300 -93 -work work PWMgeneration_top.vho 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -28,22 +28,12 @@
 # -- Loading package std_logic_arith
 # -- Compiling entity incdec_duty
 # -- Compiling architecture structure of incdec_duty
-# End time: 17:46:07 on May 27,2022, Elapsed time: 0:00:01
+# End time: 20:58:44 on May 28,2022, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # 
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 17:47:11 on May 27,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd 
-# -- Loading package STANDARD
-# -- Compiling package PWM_package
-# -- Compiling package body PWM_package
-# -- Loading package PWM_package
-# End time: 17:47:11 on May 27,2022, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
 vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 17:47:18 on May 27,2022
+# Start time: 20:58:59 on May 28,2022
 # vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -51,125 +41,45 @@ vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Ovied
 # -- Loading package NUMERIC_STD
 # -- Loading package std_logic_arith
 # -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package PWM_package
-# -- Compiling entity incdec_duty
-# -- Compiling architecture behavior of incdec_duty
-# End time: 17:47:18 on May 27,2022, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 17:47:20 on May 27,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity incdecduty_tb
-# -- Compiling architecture TestBench of incdecduty_tb
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package PWM_package
-# -- Loading entity incdec_duty
-# ** Warning: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd(51): (vcom-1207) An abstract literal and an identifier must have a separator between them.
-# ** Warning: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd(51): (vcom-1207) An abstract literal and an identifier must have a separator between them.
-# ** Warning: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd(63): (vcom-1207) An abstract literal and an identifier must have a separator between them.
-# End time: 17:47:20 on May 27,2022, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 3
-vsim -gui -l msim_transcript work.incdecduty_tb
-# vsim -gui -l msim_transcript work.incdecduty_tb 
-# Start time: 17:48:46 on May 27,2022
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.pwm_package(body)
-# Loading work.incdecduty_tb(testbench)
-# Loading work.incdec_duty(behavior)
-add wave -r /*
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: PC  Hostname: LAPTOP-4BJ0KFSO  ProcessID: 19312
-#           Attempting to use alternate WLF file "./wlft4by4a8".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft4by4a8
-run
-run
-run
-# ** Fatal: (vsim-3421) Value 265 is out of range 0 to 260.
-#    Time: 20000090 ns  Iteration: 1  Process: /incdecduty_tb/UUTincdec/CLK_incdec_process File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 95
-# Fatal error in Process CLK_incdec_process at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd line 95
-# 
-# HDL call sequence:
-# Stopped at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 95 Process CLK_incdec_process
-# 
-vsim -gui -l msim_transcript work.incdecduty_tb
-# End time: 17:53:54 on May 27,2022, Elapsed time: 0:05:08
-# Errors: 1, Warnings: 2
-# vsim -gui -l msim_transcript work.incdecduty_tb 
-# Start time: 17:53:54 on May 27,2022
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.pwm_package(body)
-# Loading work.incdecduty_tb(testbench)
-# Loading work.incdec_duty(behavior)
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-add wave -position insertpoint  \
-sim:/incdecduty_tb/delay_out
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: PC  Hostname: LAPTOP-4BJ0KFSO  ProcessID: 19312
-#           Attempting to use alternate WLF file "./wlft4fqzk1".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft4fqzk1
-run
-run
-run
-# ** Fatal: (vsim-3421) Value 265 is out of range 0 to 260.
-#    Time: 20000090 ns  Iteration: 1  Process: /incdecduty_tb/UUTincdec/CLK_incdec_process File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 95
-# Fatal error in Process CLK_incdec_process at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd line 95
-# 
-# HDL call sequence:
-# Stopped at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 95 Process CLK_incdec_process
-# 
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 17:54:41 on May 27,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd 
-# -- Loading package STANDARD
-# -- Compiling package PWM_package
-# -- Compiling package body PWM_package
-# -- Loading package PWM_package
-# End time: 17:54:41 on May 27,2022, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-vsim -gui -l msim_transcript work.incdecduty_tb
-# End time: 17:54:52 on May 27,2022, Elapsed time: 0:00:58
-# Errors: 1, Warnings: 2
-# vsim -gui -l msim_transcript work.incdecduty_tb 
-# Start time: 17:54:53 on May 27,2022
-# Loading std.standard
-# ** Error: (vsim-13) Recompile work.incdec_duty because work.pwm_package has changed.
-# ** Error (suppressible): (vsim-12) Recompile work.incdecduty_tb(testbench) after work.incdec_duty is recompiled.
-# ** Error: (vsim-13) Recompile work.incdecduty_tb(testbench) because work.pwm_package has changed.
-# Error loading design
-# End time: 17:54:53 on May 27,2022, Elapsed time: 0:00:00
+# ** Error: (vcom-11) Could not find work.pwm_package.
+# ** Error (suppressible): C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd(8): (vcom-1195) Cannot find expanded name "work.PWM_package".
+# ** Error: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd(8): Unknown expanded name.
+# ** Note: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd(10): VHDL Compiler exiting
+# End time: 20:58:59 on May 28,2022, Elapsed time: 0:00:00
 # Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 20:58:59 on May 28,2022
+# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity incdecduty_tb
+# -- Compiling architecture TestBench of incdecduty_tb
+# -- Loading package VITAL_Timing
+# -- Loading package VITAL_Primitives
+# -- Loading package dffeas_pack
+# -- Loading package altera_primitives_components
+# -- Loading package fiftyfivenm_atom_pack
+# -- Loading package fiftyfivenm_components
+# -- Loading package std_logic_arith
+# -- Loading entity incdec_duty
+# End time: 20:58:59 on May 28,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 20:58:59 on May 28,2022
+# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd 
+# -- Loading package STANDARD
+# -- Compiling package PWM_package
+# -- Compiling package body PWM_package
+# -- Loading package PWM_package
+# End time: 20:59:00 on May 28,2022, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
 vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 17:55:16 on May 27,2022
+# Start time: 20:59:18 on May 28,2022
 # vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -180,11 +90,11 @@ vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Ovied
 # -- Loading package PWM_package
 # -- Compiling entity incdec_duty
 # -- Compiling architecture behavior of incdec_duty
-# End time: 17:55:16 on May 27,2022, Elapsed time: 0:00:00
+# End time: 20:59:18 on May 28,2022, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 17:55:19 on May 27,2022
+# Start time: 20:59:21 on May 28,2022
 # vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -196,14 +106,21 @@ vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Ovied
 # -- Loading package STD_LOGIC_UNSIGNED
 # -- Loading package PWM_package
 # -- Loading entity incdec_duty
-# ** Warning: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd(51): (vcom-1207) An abstract literal and an identifier must have a separator between them.
-# ** Warning: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd(51): (vcom-1207) An abstract literal and an identifier must have a separator between them.
-# ** Warning: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd(63): (vcom-1207) An abstract literal and an identifier must have a separator between them.
-# End time: 17:55:20 on May 27,2022, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 3
+# End time: 20:59:21 on May 28,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 20:59:24 on May 28,2022
+# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd 
+# -- Loading package STANDARD
+# -- Compiling package PWM_package
+# -- Compiling package body PWM_package
+# -- Loading package PWM_package
+# End time: 20:59:25 on May 28,2022, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
 vsim -gui -l msim_transcript work.incdecduty_tb
 # vsim -gui -l msim_transcript work.incdecduty_tb 
-# Start time: 17:55:29 on May 27,2022
+# Start time: 20:59:35 on May 28,2022
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -216,37 +133,13 @@ vsim -gui -l msim_transcript work.incdecduty_tb
 add wave -r /*
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: PC  Hostname: LAPTOP-4BJ0KFSO  ProcessID: 19312
-#           Attempting to use alternate WLF file "./wlftr1a5xi".
+#           Attempting to use alternate WLF file "./wlftwx23ta".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftr1a5xi
+#           Using alternate file: ./wlftwx23ta
 run
-run
-run
-# ** Fatal: (vsim-3421) Value 265 is out of range 0 to 260.
-#    Time: 20000090 ns  Iteration: 1  Process: /incdecduty_tb/UUTincdec/CLK_incdec_process File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 95
-# Fatal error in Process CLK_incdec_process at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd line 95
-# 
-# HDL call sequence:
-# Stopped at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 95 Process CLK_incdec_process
-# 
-run
-# Cannot continue because of fatal error.
-# HDL call sequence:
-# Stopped at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 95 Process CLK_incdec_process
-# 
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 18:00:32 on May 27,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd 
-# -- Loading package STANDARD
-# -- Compiling package PWM_package
-# -- Compiling package body PWM_package
-# -- Loading package PWM_package
-# End time: 18:00:32 on May 27,2022, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
 vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 18:00:37 on May 27,2022
+# Start time: 21:01:46 on May 28,2022
 # vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -257,11 +150,11 @@ vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Ovied
 # -- Loading package PWM_package
 # -- Compiling entity incdec_duty
 # -- Compiling architecture behavior of incdec_duty
-# End time: 18:00:37 on May 27,2022, Elapsed time: 0:00:00
+# End time: 21:01:46 on May 28,2022, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 18:00:39 on May 27,2022
+# Start time: 21:01:49 on May 28,2022
 # vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -273,208 +166,13 @@ vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Ovied
 # -- Loading package STD_LOGIC_UNSIGNED
 # -- Loading package PWM_package
 # -- Loading entity incdec_duty
-# ** Warning: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd(51): (vcom-1207) An abstract literal and an identifier must have a separator between them.
-# ** Warning: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd(51): (vcom-1207) An abstract literal and an identifier must have a separator between them.
-# ** Warning: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd(61): (vcom-1207) An abstract literal and an identifier must have a separator between them.
-# ** Warning: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd(63): (vcom-1207) An abstract literal and an identifier must have a separator between them.
-# End time: 18:00:39 on May 27,2022, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 4
-vsim -gui -l msim_transcript work.incdecduty_tb
-# End time: 18:00:54 on May 27,2022, Elapsed time: 0:05:25
-# Errors: 1, Warnings: 2
-# vsim -gui -l msim_transcript work.incdecduty_tb 
-# Start time: 18:00:54 on May 27,2022
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.pwm_package(body)
-# Loading work.incdecduty_tb(testbench)
-# Loading work.incdec_duty(behavior)
-add wave -position insertpoint sim:/incdecduty_tb/*
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: PC  Hostname: LAPTOP-4BJ0KFSO  ProcessID: 19312
-#           Attempting to use alternate WLF file "./wlft3e542a".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft3e542a
-run
-run
-run
-# ** Fatal: (vsim-3421) Value 265 is out of range 0 to 260.
-#    Time: 20000090 ns  Iteration: 1  Process: /incdecduty_tb/UUTincdec/CLK_incdec_process File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 95
-# Fatal error in Process CLK_incdec_process at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd line 95
-# 
-# HDL call sequence:
-# Stopped at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 95 Process CLK_incdec_process
-# 
-# Break key hit
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 18:12:34 on May 27,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd 
-# -- Loading package STANDARD
-# -- Compiling package PWM_package
-# -- Compiling package body PWM_package
-# -- Loading package PWM_package
-# End time: 18:12:34 on May 27,2022, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 18:12:37 on May 27,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package PWM_package
-# -- Compiling entity incdec_duty
-# -- Compiling architecture behavior of incdec_duty
-# End time: 18:12:37 on May 27,2022, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 18:12:39 on May 27,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity incdecduty_tb
-# -- Compiling architecture TestBench of incdecduty_tb
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package PWM_package
-# -- Loading entity incdec_duty
-# ** Warning: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd(51): (vcom-1207) An abstract literal and an identifier must have a separator between them.
-# ** Warning: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd(51): (vcom-1207) An abstract literal and an identifier must have a separator between them.
-# ** Warning: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd(61): (vcom-1207) An abstract literal and an identifier must have a separator between them.
-# ** Warning: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd(63): (vcom-1207) An abstract literal and an identifier must have a separator between them.
-# End time: 18:12:40 on May 27,2022, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 4
-vsim -gui -l msim_transcript work.incdecduty_tb
-# End time: 18:12:52 on May 27,2022, Elapsed time: 0:11:58
-# Errors: 1, Warnings: 2
-# vsim -gui -l msim_transcript work.incdecduty_tb 
-# Start time: 18:12:52 on May 27,2022
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.pwm_package(body)
-# Loading work.incdecduty_tb(testbench)
-# Loading work.incdec_duty(behavior)
-add wave -r /*
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: PC  Hostname: LAPTOP-4BJ0KFSO  ProcessID: 19312
-#           Attempting to use alternate WLF file "./wlft38wjtq".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft38wjtq
-run
-run
-run
-# ** Fatal: (vsim-3421) Value 278 is out of range 0 to 260.
-#    Time: 20000090 ns  Iteration: 1  Process: /incdecduty_tb/UUTincdec/CLK_incdec_process File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 95
-# Fatal error in Process CLK_incdec_process at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd line 95
-# 
-# HDL call sequence:
-# Stopped at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 95 Process CLK_incdec_process
-# 
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 22:58:44 on May 27,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd 
-# -- Loading package STANDARD
-# -- Compiling package PWM_package
-# -- Compiling package body PWM_package
-# -- Loading package PWM_package
-# End time: 22:58:45 on May 27,2022, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 22:58:48 on May 27,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package PWM_package
-# -- Compiling entity incdec_duty
-# -- Compiling architecture behavior of incdec_duty
-# End time: 22:58:48 on May 27,2022, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 22:58:51 on May 27,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity incdecduty_tb
-# -- Compiling architecture TestBench of incdecduty_tb
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package PWM_package
-# -- Loading entity incdec_duty
-# End time: 22:58:51 on May 27,2022, Elapsed time: 0:00:00
+# End time: 21:01:49 on May 28,2022, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 vsim -gui -l msim_transcript work.incdecduty_tb
-# End time: 22:59:20 on May 27,2022, Elapsed time: 4:46:28
-# Errors: 1, Warnings: 2
-# vsim -gui -l msim_transcript work.incdecduty_tb 
-# Start time: 22:59:20 on May 27,2022
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.pwm_package(body)
-# Loading work.incdecduty_tb(testbench)
-# Loading work.incdec_duty(behavior)
-add wave -r /*
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: PC  Hostname: LAPTOP-4BJ0KFSO  ProcessID: 19312
-#           Attempting to use alternate WLF file "./wlftib9yzr".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftib9yzr
-run
-run
-run
-run
-run
-run
-run
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 23:32:39 on May 27,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity incdecduty_tb
-# -- Compiling architecture TestBench of incdecduty_tb
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package PWM_package
-# -- Loading entity incdec_duty
-# End time: 23:32:40 on May 27,2022, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
-# Load canceled
-vsim -gui -l msim_transcript work.incdecduty_tb
-# End time: 23:33:36 on May 27,2022, Elapsed time: 0:34:16
+# End time: 21:02:00 on May 28,2022, Elapsed time: 0:02:25
 # Errors: 0, Warnings: 2
 # vsim -gui -l msim_transcript work.incdecduty_tb 
-# Start time: 23:33:36 on May 27,2022
+# Start time: 21:02:00 on May 28,2022
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -484,305 +182,15 @@ vsim -gui -l msim_transcript work.incdecduty_tb
 # Loading work.pwm_package(body)
 # Loading work.incdecduty_tb(testbench)
 # Loading work.incdec_duty(behavior)
+run
 add wave -r /*
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: PC  Hostname: LAPTOP-4BJ0KFSO  ProcessID: 19312
-#           Attempting to use alternate WLF file "./wlfts1v2fd".
+#           Attempting to use alternate WLF file "./wlftzb5c68".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlfts1v2fd
-run
-# ** Fatal: (vsim-3421) Value 278 is out of range 0 to 260.
-#    Time: 50000060 ns  Iteration: 1  Process: /incdecduty_tb/UUTincdec/CLK_incdec_process File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 95
-# Fatal error in Process CLK_incdec_process at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd line 95
-# 
-# HDL call sequence:
-# Stopped at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 95 Process CLK_incdec_process
-# 
-run
-# Cannot continue because of fatal error.
-# HDL call sequence:
-# Stopped at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 95 Process CLK_incdec_process
-# 
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 23:35:40 on May 27,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity incdecduty_tb
-# -- Compiling architecture TestBench of incdecduty_tb
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package PWM_package
-# -- Loading entity incdec_duty
-# End time: 23:35:40 on May 27,2022, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-vsim -gui -l msim_transcript work.incdecduty_tb
-# End time: 23:35:56 on May 27,2022, Elapsed time: 0:02:20
-# Errors: 1, Warnings: 2
-# vsim -gui -l msim_transcript work.incdecduty_tb 
-# Start time: 23:35:56 on May 27,2022
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.pwm_package(body)
-# Loading work.incdecduty_tb(testbench)
-# Loading work.incdec_duty(behavior)
-add wave -r /*
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: PC  Hostname: LAPTOP-4BJ0KFSO  ProcessID: 19312
-#           Attempting to use alternate WLF file "./wlftsq1hh3".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftsq1hh3
-run
-# ** Fatal: (vsim-3421) Value 278 is out of range 0 to 260.
-#    Time: 50000060 ns  Iteration: 1  Process: /incdecduty_tb/UUTincdec/CLK_incdec_process File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 95
-# Fatal error in Process CLK_incdec_process at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd line 95
-# 
-# HDL call sequence:
-# Stopped at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 95 Process CLK_incdec_process
-# 
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 23:37:27 on May 27,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity incdecduty_tb
-# -- Compiling architecture TestBench of incdecduty_tb
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package PWM_package
-# -- Loading entity incdec_duty
-# End time: 23:37:27 on May 27,2022, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-vsim -gui -l msim_transcript work.incdecduty_tb
-# End time: 23:37:46 on May 27,2022, Elapsed time: 0:01:50
-# Errors: 1, Warnings: 2
-# vsim -gui -l msim_transcript work.incdecduty_tb 
-# Start time: 23:37:46 on May 27,2022
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.pwm_package(body)
-# Loading work.incdecduty_tb(testbench)
-# Loading work.incdec_duty(behavior)
-add wave -position insertpoint sim:/incdecduty_tb/*
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: PC  Hostname: LAPTOP-4BJ0KFSO  ProcessID: 19312
-#           Attempting to use alternate WLF file "./wlftsj4bb3".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftsj4bb3
-run
-# ** Fatal: (vsim-3421) Value 278 is out of range 0 to 260.
-#    Time: 50000060 ns  Iteration: 1  Process: /incdecduty_tb/UUTincdec/CLK_incdec_process File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 95
-# Fatal error in Process CLK_incdec_process at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd line 95
-# 
-# HDL call sequence:
-# Stopped at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 95 Process CLK_incdec_process
-# 
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 23:38:55 on May 27,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity incdecduty_tb
-# -- Compiling architecture TestBench of incdecduty_tb
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package PWM_package
-# -- Loading entity incdec_duty
-# End time: 23:38:56 on May 27,2022, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
-vsim -gui -l msim_transcript work.incdecduty_tb
-# End time: 23:39:10 on May 27,2022, Elapsed time: 0:01:24
-# Errors: 1, Warnings: 2
-# vsim -gui -l msim_transcript work.incdecduty_tb 
-# Start time: 23:39:10 on May 27,2022
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.pwm_package(body)
-# Loading work.incdecduty_tb(testbench)
-# Loading work.incdec_duty(behavior)
-add wave -r /*
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: PC  Hostname: LAPTOP-4BJ0KFSO  ProcessID: 19312
-#           Attempting to use alternate WLF file "./wlftr89qq1".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftr89qq1
-run
-# ** Fatal: (vsim-3421) Value 278 is out of range 0 to 260.
-#    Time: 50000060 ns  Iteration: 1  Process: /incdecduty_tb/UUTincdec/CLK_incdec_process File: C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd Line: 95
-# Fatal error in Process CLK_incdec_process at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd line 95
-# 
-# HDL call sequence:
-# Stopped at C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 95 Process CLK_incdec_process
-# 
-# Can't move the Now cursor.
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 23:43:15 on May 27,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity incdecduty_tb
-# -- Compiling architecture TestBench of incdecduty_tb
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package PWM_package
-# -- Loading entity incdec_duty
-# End time: 23:43:15 on May 27,2022, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-vsim -gui -l msim_transcript work.incdecduty_tb
-# End time: 23:43:36 on May 27,2022, Elapsed time: 0:04:26
-# Errors: 1, Warnings: 2
-# vsim -gui -l msim_transcript work.incdecduty_tb 
-# Start time: 23:43:36 on May 27,2022
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.pwm_package(body)
-# Loading work.incdecduty_tb(testbench)
-# Loading work.incdec_duty(behavior)
-add wave -r /*
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: PC  Hostname: LAPTOP-4BJ0KFSO  ProcessID: 19312
-#           Attempting to use alternate WLF file "./wlftffnxfb".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftffnxfb
-run
-run
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 00:06:13 on May 28,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity incdecduty_tb
-# -- Compiling architecture TestBench of incdecduty_tb
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package PWM_package
-# -- Loading entity incdec_duty
-# End time: 00:06:14 on May 28,2022, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
-vsim -gui -l msim_transcript work.incdecduty_tb
-# End time: 00:06:41 on May 28,2022, Elapsed time: 0:23:05
-# Errors: 0, Warnings: 2
-# vsim -gui -l msim_transcript work.incdecduty_tb 
-# Start time: 00:06:41 on May 28,2022
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.pwm_package(body)
-# Loading work.incdecduty_tb(testbench)
-# Loading work.incdec_duty(behavior)
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 00:06:58 on May 28,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd 
-# -- Loading package STANDARD
-# -- Compiling package PWM_package
-# -- Compiling package body PWM_package
-# -- Loading package PWM_package
-# End time: 00:06:59 on May 28,2022, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 00:07:02 on May 28,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package PWM_package
-# -- Compiling entity incdec_duty
-# -- Compiling architecture behavior of incdec_duty
-# End time: 00:07:02 on May 28,2022, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-vcom -reportprogress 300 -work work {C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 00:07:05 on May 28,2022
-# vcom -reportprogress 300 -work work C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity incdecduty_tb
-# -- Compiling architecture TestBench of incdecduty_tb
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package PWM_package
-# -- Loading entity incdec_duty
-# End time: 00:07:05 on May 28,2022, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-vsim -gui -l msim_transcript work.incdecduty_tb
-# End time: 00:07:24 on May 28,2022, Elapsed time: 0:00:43
-# Errors: 0, Warnings: 0
-# vsim -gui -l msim_transcript work.incdecduty_tb 
-# Start time: 00:07:24 on May 28,2022
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.pwm_package(body)
-# Loading work.incdecduty_tb(testbench)
-# Loading work.incdec_duty(behavior)
-add wave -position insertpoint  \
-sim:/incdecduty_tb/Reset \
-sim:/incdecduty_tb/Clk \
-sim:/incdecduty_tb/incdec \
-sim:/incdecduty_tb/incdec_btn \
-sim:/incdecduty_tb/delay_incdec_btn \
-sim:/incdecduty_tb/d1d2 \
-sim:/incdecduty_tb/sel \
-sim:/incdecduty_tb/d1 \
-sim:/incdecduty_tb/d2 \
-sim:/incdecduty_tb/delay_out
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: PC  Hostname: LAPTOP-4BJ0KFSO  ProcessID: 19312
-#           Attempting to use alternate WLF file "./wlft09m9ce".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft09m9ce
-run
-run
-run
-add wave -position insertpoint  \
-sim:/incdecduty_tb/UUTincdec/d2_act
+#           Using alternate file: ./wlftzb5c68
 restart
 # ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
 run
-run
-# End time: 19:42:17 on May 28,2022, Elapsed time: 19:34:53
+# End time: 21:03:22 on May 28,2022, Elapsed time: 0:01:22
 # Errors: 0, Warnings: 0

@@ -28,7 +28,7 @@ architecture TestBench of incdecduty_tb is
  signal incdec,incdec_btn,delay_incdec_btn,d1d2	: std_logic;
  signal sel : std_logic_vector(1 downto 0);
  signal d1,d2:integer range 0 to 279;
- signal delay_out:integer range 0 to 260;
+ signal delay_out:integer range 0 to 278;
  begin  -- TestBench
 
  UUTincdec: entity work.incdec_duty
@@ -73,10 +73,10 @@ end process;
 
 process
 begin 
---delay_incdec_btn <= '0';
---wait for 30 ms;
+delay_incdec_btn <= '0';
+wait for 30 ms;
 delay_incdec_btn <= '0','1' after 50 ms, '0' after 50100 us, '1' after 51 ms; 
-wait for 33 ms;
+wait for 63 ms;
 end process;
 d1d2 <='0', '1' after 190 ms;  
 

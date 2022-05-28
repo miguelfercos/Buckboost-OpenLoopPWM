@@ -10,7 +10,7 @@ z2
 cModel Technology
 Z0 dC:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/simulation/modelsim
 Ehard_block
-Z1 w1653666356
+Z1 w1653764307
 Z2 DPx4 ieee 16 vital_primitives 0 22 G>kiXP8Q9dRClKfK1Zn7j1
 Z3 DPx11 fiftyfivenm 21 fiftyfivenm_atom_pack 0 22 ]LY<>e3?`4Wb8dl1GV_X90
 Z4 DPx4 ieee 12 vital_timing 0 22 J>EBealN09f8GzldA[z2>3
@@ -27,9 +27,9 @@ VH73DDHU2ac^:D?]T;@N=M3
 !s100 3A]XnMhF<;9mKUe5mn3aM1
 Z11 OV;C;2020.1;71
 31
-Z12 !s110 1653666367
+Z12 !s110 1653764324
 !i10b 1
-Z13 !s108 1653666366.000000
+Z13 !s108 1653764323.000000
 Z14 !s90 -reportprogress|300|-93|-work|work|PWMgeneration_top.vho|
 Z15 !s107 PWMgeneration_top.vho|
 !i113 1
@@ -59,26 +59,26 @@ R15
 R16
 R17
 Eincdec_duty
-Z18 w1653667947
-Z19 DPx4 work 11 pwm_package 0 22 ClVgN4Y8nDzC05I1ASeM22
+Z18 w1653764046
+Z19 DPx4 work 11 pwm_package 0 22 d6b5;a>IUnlIPgkV7QV8T1
 Z20 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
 Z21 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
 Z22 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
 R5
 R6
-!i122 23
+!i122 6
 R0
 Z23 8C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd
 Z24 FC:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd
 l0
 L10 1
-VHgjW0oag8W6oz[2z4Azfi0
-!s100 fRdaP=Fn?dRLCBzMGXl_j1
+VI;4JS3Z;eKI@5lOJ0^PDl0
+!s100 WTi3L3M`1e6D8_^gd5]hl2
 R11
 32
-Z25 !s110 1653689222
+Z25 !s110 1653764506
 !i10b 1
-Z26 !s108 1653689222.000000
+Z26 !s108 1653764506.000000
 Z27 !s90 -reportprogress|300|-work|work|C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd|
 Z28 !s107 C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdec_duty.vhd|
 !i113 1
@@ -91,12 +91,12 @@ R21
 R22
 R5
 R6
-Z30 DEx4 work 11 incdec_duty 0 22 HgjW0oag8W6oz[2z4Azfi0
-!i122 23
-l35
-L26 211
-VQLP6kFdgfO0XZU^]63cPl2
-!s100 mi5mU6F8;Eh3CgcJS4lgb0
+Z30 DEx4 work 11 incdec_duty 0 22 I;4JS3Z;eKI@5lOJ0^PDl0
+!i122 6
+l36
+L26 413
+VhA<Jh5:WzIW:?TD5mT;N[3
+!s100 gX[gYdO[=_>FWG`4dIS1U2
 R11
 32
 R25
@@ -117,12 +117,12 @@ R4
 R5
 R6
 DPx6 altera 28 altera_primitives_components 0 22 VSD=32;3391kSOd?PDZYj3
-DEx4 work 11 incdec_duty 0 22 cCBRKdSK^FLj8;Jz0zVW52
+DEx4 work 11 incdec_duty 0 22 S;N_@mnRUY4aAhXm6cF412
 !i122 0
-l487
-L147 4793
-VBz6SfIBo^XeLBeEQ2^e^91
-!s100 kU[h?>:VlZilUOl0[DSIF0
+l527
+L147 5463
+VI`7AzTm3Km_=;:Dhkio<G2
+!s100 Ka=O^aR9BJjGmBb>jA?`R2
 R11
 31
 R12
@@ -137,11 +137,11 @@ R9
 R1
 R8
 Eincdecduty_tb
-Z31 w1653689168
+Z31 w1653764497
 R22
 R5
 R6
-!i122 24
+!i122 7
 R0
 Z32 8C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd
 Z33 FC:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd
@@ -151,9 +151,9 @@ Va4gR:eR61>H>S>I:Nh6Dh1
 !s100 >hzN@fJ7=614^1g;O2c?f3
 R11
 32
-Z34 !s110 1653689225
+Z34 !s110 1653764509
 !i10b 1
-Z35 !s108 1653689225.000000
+Z35 !s108 1653764509.000000
 Z36 !s90 -reportprogress|300|-work|work|C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd|
 Z37 !s107 C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/incdecduty_tb.vhd|
 !i113 1
@@ -168,11 +168,11 @@ R22
 R5
 R6
 Z38 DEx4 work 13 incdecduty_tb 0 22 a4gR:eR61>H>S>I:Nh6Dh1
-!i122 24
+!i122 7
 l32
 Z39 L9 76
-Z40 V>`jZ]S1^1nHZ>>8KDU7`90
-Z41 !s100 AF7OVPZ12:hKSWgWRniP43
+VBYH`?o8HdJz38WWbPDZJU2
+!s100 <k]Gk_QQ3LRl?YWSD3OTi3
 R11
 32
 R34
@@ -184,39 +184,39 @@ R37
 R29
 R17
 Ppwm_package
-!i122 22
-Z42 w1653688476
+!i122 5
+Z40 w1653751653
 R0
-Z43 8C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd
-Z44 FC:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd
+Z41 8C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd
+Z42 FC:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd
 l0
 L2 1
-VClVgN4Y8nDzC05I1ASeM22
-!s100 @:F>^lCT^CEkag4<d@n[13
+Vd6b5;a>IUnlIPgkV7QV8T1
+!s100 ecEjU<J>i0:2M8JB44NMQ0
 R11
 32
-!s110 1653689218
+Z43 !s110 1653764365
 !i10b 1
-Z45 !s108 1653689218.000000
-Z46 !s90 -reportprogress|300|-work|work|C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd|
-Z47 !s107 C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd|
+Z44 !s108 1653764364.000000
+Z45 !s90 -reportprogress|300|-work|work|C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd|
+Z46 !s107 C:/Users/PC/OneDrive - Universidad de Oviedo/PhD/GitHub/Buckboost-OpenLoopPWM/VHDL/PWMgenerationv1/PWM_pkg.vhd|
 !i113 1
 R29
 R17
 Bbody
 R19
-!i122 22
+!i122 5
 l0
 R10
 VoQm2^CjXXAja>?_H<Jc:d2
 !s100 ^_:O1hK[RjcfFGD:DljCh0
 R11
 32
-!s110 1653689219
+R43
 !i10b 1
+R44
 R45
 R46
-R47
 !i113 1
 R29
 R17

@@ -2,8 +2,8 @@ LIBRARY IEEE;
 USE IEEE.std_logic_1164.all;
 USE IEEE.numeric_std.all;
 use IEEE.STD_logic_unsigned.all;
-library PWM_pkg;
-use PWM_pkg.PWM_package.all;
+--library PWM_pkg;
+use work.PWM_package.all;
 
 entity PWM is
 	port(
@@ -14,7 +14,7 @@ entity PWM is
 		PWM_L1: out std_logic;
 		PWM_H2: out std_logic;
 		PWM_L2:out std_logic;
-		desfase:in integer range 0 to 279;
+		desfase:in integer range 0 to 278;
 		d1: in integer range 0 to 279;
 		d2:in integer range 0 to 279
 		);
@@ -134,7 +134,7 @@ begin
 					if (countactual1 >= period) then
 						countsig1 <= 0;
 						est_sig<= buck1;
-						if (d1_act >= d1) then
+						if (d1_act >= d1) then --softstart section
 							d1_sig <= d1;
 						else
 							d1_sig <= d1_act + 1;
